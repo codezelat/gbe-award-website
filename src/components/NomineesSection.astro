@@ -1,5 +1,5 @@
 ---
-import { assetPaths, nominees } from "../data/home";
+import { FeaturedNomineeSlider, NomineeEntrySlider } from "./LoopSliders";
 ---
 
 <section class="nominees-section" aria-labelledby="nominees-title">
@@ -8,20 +8,9 @@ import { assetPaths, nominees } from "../data/home";
     <p>Celebrating outstanding talent and achievements across every category.</p>
   </div>
 
-  <div class="nominee-grid">
-    {nominees.map((nominee) => (
-      <article class="nominee-card reveal">
-        <div>
-          <h3>{nominee.title}</h3>
-          <p>{nominee.name}</p>
-        </div>
-        <div class={`portrait portrait--${nominee.portrait}`} aria-hidden="true"></div>
-        <div class="nominee-footer">
-          <span>Congratulations!</span>
-          <img src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
-        </div>
-      </article>
-    ))}
+  <div class="nominee-rows">
+    <FeaturedNomineeSlider client:load />
+    <NomineeEntrySlider client:load />
   </div>
 
   <a class="outline-button nominee-link" href="/nominees" aria-label="View all nominees"></a>

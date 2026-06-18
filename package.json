@@ -27,6 +27,7 @@
     "motion": "^12.40.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "swiper": "^12.2.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.1"
   },
