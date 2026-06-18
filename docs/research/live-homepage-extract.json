@@ -1,0 +1,938 @@
+{
+  "targetUrl": "https://gbeaward.com/",
+  "capturedAt": "2026-06-18T13:03:16.329Z",
+  "screenshots": {
+    "desktop": "docs/design-references/gbeaward-home-desktop-1440.png",
+    "mobile": "docs/design-references/gbeaward-home-mobile-390.png"
+  },
+  "headerBehavior": {
+    "topStyles": {
+      "scrollY": 0,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "boxShadow": "none",
+      "position": "static",
+      "transform": "none",
+      "height": "150px"
+    },
+    "scrolledStyles": {
+      "scrollY": 240,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "boxShadow": "none",
+      "position": "static",
+      "transform": "none",
+      "height": "150px"
+    }
+  },
+  "extracted": {
+    "title": "Global Business Excellence Awards 2025 | GBE – Recognizing Global Leaders",
+    "description": "Join the Global Business Excellence Awards 2025 (GBE Awards 2025) and celebrate outstanding achievements in business. Recognizing global innovation, leadership, and excellence. Nominate now!",
+    "canonical": "https://gbeaward.com/",
+    "htmlClasses": "",
+    "bodyClasses": "home wp-singular page-template page-template-elementor_header_footer page page-id-12 wp-custom-logo wp-embed-responsive wp-theme-hello-elementor hello-elementor-default elementor-default elementor-template-full-width elementor-kit-8 elementor-page elementor-page-12 e--ua-blink e--ua-mac e--ua-webkit",
+    "fonts": [
+      "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "Tajawal, sans-serif",
+      "Tangerine, sans-serif"
+    ],
+    "colors": [
+      "rgb(204, 51, 102)",
+      "rgba(255, 255, 255, 0)",
+      "rgb(51, 51, 51)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(6, 6, 6)",
+      "rgb(255, 176, 1)",
+      "rgb(255, 255, 255)",
+      "rgb(224, 176, 60)",
+      "rgb(0, 0, 0)",
+      "rgb(106, 76, 26)",
+      "rgb(10, 10, 10)"
+    ],
+    "links": [
+      {
+        "href": "https://gbeaward.com/#content",
+        "text": "Skip to content"
+      },
+      {
+        "href": "https://gbeaward.com/",
+        "text": "Home"
+      },
+      {
+        "href": "https://gbeaward.com/previous-winners/",
+        "text": "Previous Winners"
+      },
+      {
+        "href": "https://gbeaward.com/about/",
+        "text": "About"
+      },
+      {
+        "href": "https://gbeaward.com/contact/",
+        "text": "Contact"
+      },
+      {
+        "href": "https://gbeaward.com/",
+        "text": "<img fetchpriority=\"high\" width=\"195\" height=\"300\" src=\"https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png\" class=\"attachment-medium size-medium wp-image-348\" alt=\"\" srcset=\"https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png 195w, https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777.png 549w\" sizes=\"(max-width: 195px) 100vw, 195px\" />"
+      },
+      {
+        "href": "mailto:info@gbeaward.com",
+        "text": "Apply Now"
+      },
+      {
+        "href": "https://gbeaward.com/#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjMwMiIsInRvZ2dsZSI6ZmFsc2V9",
+        "text": ""
+      },
+      {
+        "href": "https://gbeaward.com/contact/",
+        "text": "Apply Now"
+      },
+      {
+        "href": "https://gbeaward.com/contact/",
+        "text": "Apply Now"
+      },
+      {
+        "href": "https://gbeaward.com/nominees/",
+        "text": "View All Nominees"
+      },
+      {
+        "href": "https://www.instagram.com/gbeaward/",
+        "text": "Instagram"
+      },
+      {
+        "href": "https://www.facebook.com/gbeaward/",
+        "text": "Facebook"
+      },
+      {
+        "href": "https://www.x.com/gbeaward/",
+        "text": "X-twitter"
+      },
+      {
+        "href": "https://www.linkedin.com/company/gbeaward/",
+        "text": "Linkedin"
+      },
+      {
+        "href": "https://wa.link/10p065",
+        "text": "Whatsapp"
+      },
+      {
+        "href": "https://gbeaward.com/",
+        "text": "Home"
+      },
+      {
+        "href": "https://gbeaward.com/nominees/",
+        "text": "Nominees"
+      },
+      {
+        "href": "https://gbeaward.com/previous-winners/",
+        "text": "Previous Winners"
+      },
+      {
+        "href": "https://gbeaward.com/about/",
+        "text": "About"
+      },
+      {
+        "href": "https://gbeaward.com/contact/",
+        "text": "Contact"
+      },
+      {
+        "href": "https://gbeaward.com/",
+        "text": "Home"
+      },
+      {
+        "href": "https://gbeaward.com/nominees/",
+        "text": "Nominees"
+      },
+      {
+        "href": "https://gbeaward.com/previous-winners/",
+        "text": "Previous Winners"
+      },
+      {
+        "href": "https://gbeaward.com/about/",
+        "text": "About"
+      },
+      {
+        "href": "https://gbeaward.com/contact/",
+        "text": "Contact"
+      },
+      {
+        "href": "https://www.instagram.com/gbeaward/",
+        "text": "Instagram"
+      },
+      {
+        "href": "https://www.facebook.com/gbeaward/",
+        "text": "Facebook"
+      },
+      {
+        "href": "https://www.x.com/gbeaward/",
+        "text": "X-twitter"
+      },
+      {
+        "href": "https://www.linkedin.com/company/gbeaward/",
+        "text": "Linkedin"
+      },
+      {
+        "href": "https://wa.link/10p065",
+        "text": "Whatsapp"
+      },
+      {
+        "href": "https://gbeaward.com/privacy-policy/",
+        "text": "Privacy Policy"
+      },
+      {
+        "href": "https://codezela.com/",
+        "text": "Codezela Technologies"
+      }
+    ],
+    "images": [
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png",
+        "alt": "",
+        "naturalWidth": 195,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/Trophy@4x-1.png.webp",
+        "alt": "Trophy@4X 1",
+        "naturalWidth": 177,
+        "naturalHeight": 550,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/Trophy@4x-1.png.webp",
+        "alt": "Trophy@4X 1",
+        "naturalWidth": 177,
+        "naturalHeight": 550,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTYyIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNzAyODQzIi8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgcj0iMSIgZmlsbD0iIzAwMTgwNCIgdHJhbnNmb3JtPSJtYXRyaXgoLTE4LjE1Nzc1IC04MS45MDQzMiAyNDguOTU1NDcgLTU1LjE5MjEgMTE0LjggNDkuMSkiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiM0NTVjNTkiIHRyYW5zZm9ybT0icm90YXRlKC02OC4xIDExOC40IC04Ny4yKXNjYWxlKDI2LjM5ODA2IDMwLjQ4NSkiLz48Y2lyY2xlIGN4PSIzNCIgY3k9IjU1IiByPSI4OSIgZmlsbD0iIzBhMWYxZCIvPjxjaXJjbGUgcj0iMSIgZmlsbD0iIzY1MDUyOCIgdHJhbnNmb3JtPSJtYXRyaXgoNDcuMTY4NzcgMjYuNjAxMDkgLTE3Ljc4MzU1IDMxLjUzMzYxIDE0MS4zIDEzOCkiLz48L2c+PC9zdmc+",
+        "alt": "Interview",
+        "naturalWidth": 300,
+        "naturalHeight": 162,
+        "loading": "lazy"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTYyIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOGM0YzY0Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE2NCIgY3k9IjEyNyIgcj0iMjI3IiBmaWxsPSIjNTAyMzExIi8+PGVsbGlwc2UgY3g9IjI1NSIgY3k9IjQwIiBmaWxsPSIjMDAwYTEyIiByeD0iNDkiIHJ5PSI2MiIvPjxjaXJjbGUgcj0iMSIgZmlsbD0iI2QwMjQwMCIgdHJhbnNmb3JtPSJtYXRyaXgoLTEzLjc3NTI0IDMzLjI5OTgyIC01OS45NTAwNCAtMjQuNzk5NzIgMjE0LjYgMTM4KSIvPjxjaXJjbGUgcj0iMSIgZmlsbD0iI2UwMmYwMCIgdHJhbnNmb3JtPSJtYXRyaXgoNDYuMDM3NjggLTI3LjAxMDE0IDE2LjMwOTQgMjcuNzk4NyAzNi4yIDEzOCkiLz48L2c+PC9zdmc+",
+        "alt": "Award In Hand 2",
+        "naturalWidth": 300,
+        "naturalHeight": 162,
+        "loading": "lazy"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTk5Ij48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOGM0YzY0Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgcj0iMSIgZmlsbD0iIzJlMjkwMCIgdHJhbnNmb3JtPSJtYXRyaXgoLTIyLjU1MzUyIC0xMzcuNTc5OTggMjI4Ljc0MDAzIC0zNy40OTc0MSAxNzcuMyA2NSkiLz48ZWxsaXBzZSBjeD0iODkiIGN5PSI2MyIgZmlsbD0iI2NkODEyZiIgcng9IjU1IiByeT0iNzYiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiMwMDEwMWQiIHRyYW5zZm9ybT0ibWF0cml4KDQ0LjU2MDMxIC0yLjU2MDMyIDkuNTA0MSAxNjUuNDExMjIgMjMwLjIgNzQuNSkiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiM0NTAwMTEiIHRyYW5zZm9ybT0ibWF0cml4KDY1LjAwNjUyIDI0LjY5MzY2IC0xMi40NDA1MyAzMi43NDk5MiAyMyAxNTAuNSkiLz48L2c+PC9zdmc+",
+        "alt": "Red Carpet Night City Red Carpet City",
+        "naturalWidth": 300,
+        "naturalHeight": 199,
+        "loading": "lazy"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTI4Ij48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOTM0NzA1Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgcj0iMSIgZmlsbD0iIzE5MGUwZCIgdHJhbnNmb3JtPSJtYXRyaXgoMTM1LjcxMDEzIDU2LjIyMTUzIC02Mi40MjUwNSAxNTAuNjg0NDcgMTIxLjQgODEuOSkiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiMwMDE1MmIiIHRyYW5zZm9ybT0icm90YXRlKC00NCAxMTAgMzEuNilzY2FsZSgyNi44NTQyNSAxMjYuNjY3NjUpIi8+PGVsbGlwc2UgY3g9Ijg2IiBjeT0iNiIgZmlsbD0iIzAyMTQxZSIgcng9Ijk4IiByeT0iMTUiLz48Y2lyY2xlIGN4PSIxMTIiIGN5PSI2NiIgcj0iNDciIGZpbGw9IiM4MTNjMDQiLz48L2c+PC9zdmc+",
+        "alt": "Ct Logo",
+        "naturalWidth": 300,
+        "naturalHeight": 128,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3MSIgY3k9IjExNSIgcj0iMjI5Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNjMuMDc5MTMgLTI0Ny4wNzQ5NCA2MC42MTg5OCAtMTUuNDc2MjQgMjMzLjkgMTI3LjYpIi8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTUuNjI2NTMgMjQ4Ljg1ODc3IC01NS41NzY2IC0xMi40MjI4NCAyNi4yIDEwOS40KSIvPjxlbGxpcHNlIGN4PSIxMTgiIGN5PSIyNDkiIHJ4PSIyNTUiIHJ5PSIzMSIvPjwvZz48L3N2Zz4=",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGFjNjQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhYzY0Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjggLjgpc2NhbGUoMS41NjI1KSI+PGNpcmNsZSBjeD0iOTciIGN5PSIyNTUiIHI9IjExOSIgZmlsbD0iIzE0MWY0NCIvPjxjaXJjbGUgcj0iMSIgZmlsbD0iI2RjZDJmMSIgdHJhbnNmb3JtPSJyb3RhdGUoLTg4IDEyMy4zIDIxLjcpc2NhbGUoNzAuMDgwNjcgNDAuNjUwNzMpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjNDczYzcxIiB0cmFuc2Zvcm09Im1hdHJpeCgzMy40NTk2OCAtMTQwLjQ0OTAzIDYzLjY2NyAxNS4xNjc2MiAyNC40IDM4LjkpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjMGYxNTAwIiB0cmFuc2Zvcm09Im1hdHJpeCgzNy42MDAxMiA3LjEwNDYyIC0yMC44OTU2OSAxMTAuNTg3MyAxODEuNiAxNzkuMykiLz48L2c+PC9nPjwvc3ZnPg==",
+        "alt": "405675188 676285417966699 8516845023254613228 N",
+        "naturalWidth": 300,
+        "naturalHeight": 400,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOTUwMzM0Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgcj0iMSIgZmlsbD0iI2ZmODZiNSIgdHJhbnNmb3JtPSJtYXRyaXgoLTkyLjY0NDA3IC43NTkzMiAtLjg4NjU4IC0xMDguMTcxODUgMTI0LjQgMTIxLjkpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjZjVhMGJhIiB0cmFuc2Zvcm09Im1hdHJpeCg0MS42OTk2NiA5LjU0MjE3IC0xMS4yMzQ1IDQ5LjA5NTIzIDEyMi41IDEyOC44KSIvPjxjaXJjbGUgY3g9IjExMyIgY3k9IjIwOSIgcj0iMjU1IiBmaWxsPSIjZTkxZDVjIi8+PGVsbGlwc2UgY3g9IjEyMyIgY3k9IjExOSIgZmlsbD0iI2RhODVhNCIgcng9IjY0IiByeT0iODAiLz48L2c+PC9zdmc+",
+        "alt": "386598295 719341140210924 8993629143531363977 N",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNzk0OTFmIi8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjEyMiIgY3k9IjcwIiByPSIyMzEiLz48Y2lyY2xlIGN4PSIyMDIiIGN5PSIxMDIiIHI9IjI1NSIvPjxlbGxpcHNlIGN4PSIxMTEiIGN5PSIxMzciIGZpbGw9IiNjNjYxMWMiIHJ4PSI0NiIgcnk9IjUzIi8+PGVsbGlwc2UgY3g9IjIyNSIgY3k9IjE3MiIgZmlsbD0iIzAwMDAwMSIgcng9IjY5IiByeT0iMjU1Ii8+PC9nPjwvc3ZnPg==",
+        "alt": "455245847 500933525816546 5718242030144361530 N",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3MSIgY3k9IjExNSIgcj0iMjI5Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNjMuMDc5MTMgLTI0Ny4wNzQ5NCA2MC42MTg5OCAtMTUuNDc2MjQgMjMzLjkgMTI3LjYpIi8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTUuNjI2NTMgMjQ4Ljg1ODc3IC01NS41NzY2IC0xMi40MjI4NCAyNi4yIDEwOS40KSIvPjxlbGxpcHNlIGN4PSIxMTgiIGN5PSIyNDkiIHJ4PSIyNTUiIHJ5PSIzMSIvPjwvZz48L3N2Zz4=",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYWM2Yzg0Ii8+PGNpcmNsZSByPSIxIiBmaWxsPSIjYzdmZmVjIiBmaWxsLW9wYWNpdHk9Ii41IiB0cmFuc2Zvcm09Im1hdHJpeCgtNjIuNDUyNDYgLTE2LjYxNzMxIDc2LjgzODUxIC0yODguNzgwMzcgMjQgMTA3LjMpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjZmZkNWUwIiBmaWxsLW9wYWNpdHk9Ii41IiB0cmFuc2Zvcm09InJvdGF0ZSgtNTAuOCAxNDcuMyAtMjMzLjYpc2NhbGUoOTYuODU2MDUgNjcuNDgyNDQpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjNzcyYjIzIiBmaWxsLW9wYWNpdHk9Ii41IiB0cmFuc2Zvcm09Im1hdHJpeCgtMTQ2Ljg4Nzg4IDExLjIyOTM4IC04LjA3NzA2IC0xMDUuNjUzNDMgMjM2LjcgMjIyLjUpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjODU1NzAwIiBmaWxsLW9wYWNpdHk9Ii41IiB0cmFuc2Zvcm09Im1hdHJpeCgzOS4zNjUzIC0xNi42Mjg0IDI4Ljk0NTMgNjguNTIzNzYgMjk5LjQgMTU5LjEpIi8+PC9zdmc+",
+        "alt": "472860999 1701282890466218 9148892402642118520 N",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTgxIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOTA1MjA4Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgcj0iMSIgZmlsbD0iI2Q3OWM3ZCIgdHJhbnNmb3JtPSJtYXRyaXgoNzUuNzQ1MDcgNzguNzkyNTIgLTU4LjY3NTA1IDU2LjQwNTY4IDkyLjkgNzAuMykiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiMzNDEyMDUiIHRyYW5zZm9ybT0ibWF0cml4KDE5Ljg3OTQ1IC0yNC45OTE5IDg0LjQ4MzE0IDY3LjIwMDkyIDIyNC41IDExLjkpIi8+PGVsbGlwc2UgY3g9Ijg0IiBjeT0iNzQiIGZpbGw9IiNlMWFjODciIHJ4PSI0NiIgcnk9IjM2Ii8+PGNpcmNsZSByPSIxIiBmaWxsPSIjZDk2ZDAwIiB0cmFuc2Zvcm09Im1hdHJpeCgxLjM0Mjk2IC00My42NDExIDYxLjkzMDEzIDEuOTA1NzcgNi41IDEyLjYpIi8+PC9nPjwvc3ZnPg==",
+        "alt": "352204755 6229089260515005 3656344635379458924 N",
+        "naturalWidth": 300,
+        "naturalHeight": 181,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTI4Ij48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOTM0NzA1Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgcj0iMSIgZmlsbD0iIzE5MGUwZCIgdHJhbnNmb3JtPSJtYXRyaXgoMTM1LjcxMDEzIDU2LjIyMTUzIC02Mi40MjUwNSAxNTAuNjg0NDcgMTIxLjQgODEuOSkiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiMwMDE1MmIiIHRyYW5zZm9ybT0icm90YXRlKC00NCAxMTAgMzEuNilzY2FsZSgyNi44NTQyNSAxMjYuNjY3NjUpIi8+PGVsbGlwc2UgY3g9Ijg2IiBjeT0iNiIgZmlsbD0iIzAyMTQxZSIgcng9Ijk4IiByeT0iMTUiLz48Y2lyY2xlIGN4PSIxMTIiIGN5PSI2NiIgcj0iNDciIGZpbGw9IiM4MTNjMDQiLz48L2c+PC9zdmc+",
+        "alt": "Ct Logo",
+        "naturalWidth": 300,
+        "naturalHeight": 128,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3MSIgY3k9IjExNSIgcj0iMjI5Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNjMuMDc5MTMgLTI0Ny4wNzQ5NCA2MC42MTg5OCAtMTUuNDc2MjQgMjMzLjkgMTI3LjYpIi8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTUuNjI2NTMgMjQ4Ljg1ODc3IC01NS41NzY2IC0xMi40MjI4NCAyNi4yIDEwOS40KSIvPjxlbGxpcHNlIGN4PSIxMTgiIGN5PSIyNDkiIHJ4PSIyNTUiIHJ5PSIzMSIvPjwvZz48L3N2Zz4=",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iNDAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGFjNjQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhYzY0Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjggLjgpc2NhbGUoMS41NjI1KSI+PGNpcmNsZSBjeD0iOTciIGN5PSIyNTUiIHI9IjExOSIgZmlsbD0iIzE0MWY0NCIvPjxjaXJjbGUgcj0iMSIgZmlsbD0iI2RjZDJmMSIgdHJhbnNmb3JtPSJyb3RhdGUoLTg4IDEyMy4zIDIxLjcpc2NhbGUoNzAuMDgwNjcgNDAuNjUwNzMpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjNDczYzcxIiB0cmFuc2Zvcm09Im1hdHJpeCgzMy40NTk2OCAtMTQwLjQ0OTAzIDYzLjY2NyAxNS4xNjc2MiAyNC40IDM4LjkpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjMGYxNTAwIiB0cmFuc2Zvcm09Im1hdHJpeCgzNy42MDAxMiA3LjEwNDYyIC0yMC44OTU2OSAxMTAuNTg3MyAxODEuNiAxNzkuMykiLz48L2c+PC9nPjwvc3ZnPg==",
+        "alt": "405675188 676285417966699 8516845023254613228 N",
+        "naturalWidth": 300,
+        "naturalHeight": 400,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjOTUwMzM0Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgcj0iMSIgZmlsbD0iI2ZmODZiNSIgdHJhbnNmb3JtPSJtYXRyaXgoLTkyLjY0NDA3IC43NTkzMiAtLjg4NjU4IC0xMDguMTcxODUgMTI0LjQgMTIxLjkpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjZjVhMGJhIiB0cmFuc2Zvcm09Im1hdHJpeCg0MS42OTk2NiA5LjU0MjE3IC0xMS4yMzQ1IDQ5LjA5NTIzIDEyMi41IDEyOC44KSIvPjxjaXJjbGUgY3g9IjExMyIgY3k9IjIwOSIgcj0iMjU1IiBmaWxsPSIjZTkxZDVjIi8+PGVsbGlwc2UgY3g9IjEyMyIgY3k9IjExOSIgZmlsbD0iI2RhODVhNCIgcng9IjY0IiByeT0iODAiLz48L2c+PC9zdmc+",
+        "alt": "386598295 719341140210924 8993629143531363977 N",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNzk0OTFmIi8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjEyMiIgY3k9IjcwIiByPSIyMzEiLz48Y2lyY2xlIGN4PSIyMDIiIGN5PSIxMDIiIHI9IjI1NSIvPjxlbGxpcHNlIGN4PSIxMTEiIGN5PSIxMzciIGZpbGw9IiNjNjYxMWMiIHJ4PSI0NiIgcnk9IjUzIi8+PGVsbGlwc2UgY3g9IjIyNSIgY3k9IjE3MiIgZmlsbD0iIzAwMDAwMSIgcng9IjY5IiByeT0iMjU1Ii8+PC9nPjwvc3ZnPg==",
+        "alt": "455245847 500933525816546 5718242030144361530 N",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3MSIgY3k9IjExNSIgcj0iMjI5Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNjMuMDc5MTMgLTI0Ny4wNzQ5NCA2MC42MTg5OCAtMTUuNDc2MjQgMjMzLjkgMTI3LjYpIi8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTUuNjI2NTMgMjQ4Ljg1ODc3IC01NS41NzY2IC0xMi40MjI4NCAyNi4yIDEwOS40KSIvPjxlbGxpcHNlIGN4PSIxMTgiIGN5PSIyNDkiIHJ4PSIyNTUiIHJ5PSIzMSIvPjwvZz48L3N2Zz4=",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGE0YTQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3OCIgY3k9IjEyOSIgcj0iMjI0Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTMuOTMxMDIgLTI0OS4yMzE3IDY2LjQxMjIyIC0xNC4zNzA4OCAyMzQuMiAxMTEuNykiLz48Y2lyY2xlIHI9IjEiIHRyYW5zZm9ybT0icm90YXRlKDEyLjkgLTUxOSAxNjQpc2NhbGUoNTcuMjAzMDYgMjU1LjAwMDAxKSIvPjxwYXRoIGQ9Ik0zLTE2IDI3MSAzLTE2IDc3eiIvPjwvZz48L2c+PC9zdmc+",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGE0YTQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3OCIgY3k9IjEyOSIgcj0iMjI0Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTMuOTMxMDIgLTI0OS4yMzE3IDY2LjQxMjIyIC0xNC4zNzA4OCAyMzQuMiAxMTEuNykiLz48Y2lyY2xlIHI9IjEiIHRyYW5zZm9ybT0icm90YXRlKDEyLjkgLTUxOSAxNjQpc2NhbGUoNTcuMjAzMDYgMjU1LjAwMDAxKSIvPjxwYXRoIGQ9Ik0zLTE2IDI3MSAzLTE2IDc3eiIvPjwvZz48L2c+PC9zdmc+",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGE0YTQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3OCIgY3k9IjEyOSIgcj0iMjI0Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTMuOTMxMDIgLTI0OS4yMzE3IDY2LjQxMjIyIC0xNC4zNzA4OCAyMzQuMiAxMTEuNykiLz48Y2lyY2xlIHI9IjEiIHRyYW5zZm9ybT0icm90YXRlKDEyLjkgLTUxOSAxNjQpc2NhbGUoNTcuMjAzMDYgMjU1LjAwMDAxKSIvPjxwYXRoIGQ9Ik0zLTE2IDI3MSAzLTE2IDc3eiIvPjwvZz48L2c+PC9zdmc+",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMjEwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhYmExYTUiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYWJhMWE1Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE0NCIgY3k9Ijc4IiByPSIxNzkiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0ibWF0cml4KDUyLjEzOTM0IC0yNDkuNjEyNjggNjMuMDgxNDUgMTMuMTc2NTEgMjA5LjcgMTEyLjMpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09Im1hdHJpeCgtNzEuOTk2NjggLTI0NC42MjUxOCA1Ni4wNzM0IC0xNi41MDMyIDQxLjQgMTEzLjUpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjOTM5MTkyIiB0cmFuc2Zvcm09Im1hdHJpeCgtNDQuOTYxNDggMTMuMTI0NjUgLTEwLjkwNjE2IC0zNy4zNjE1MyAxMjQgODUuMikiLz48L2c+PC9nPjwvc3ZnPg==",
+        "alt": "447771910 420314107490413 4311184715465234628 N",
+        "naturalWidth": 300,
+        "naturalHeight": 210,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGFjNjQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhYzY0Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjEyNCIgY3k9IjE4NSIgcj0iMjM0IiBmaWxsPSIjMDAzMDA1Ii8+PGNpcmNsZSByPSIxIiBmaWxsPSIjMDAxNDIyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTc5LjkgNjcuNCAxMDQuMilzY2FsZSgyNTUgNTMuODUyNTMpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjOWViNzVlIiB0cmFuc2Zvcm09Im1hdHJpeCgtMTIxLjMyODM4IDYuMzkyNDggLTIuODk4NyAtNTUuMDE3MTIgMTExIDg3LjMpIi8+PGVsbGlwc2UgY3g9IjE0MyIgY3k9IjE1IiBmaWxsPSIjMWY5ZjI2IiByeD0iMjU1IiByeT0iMzMiLz48L2c+PC9nPjwvc3ZnPg==",
+        "alt": "279763667 1028465911109740 2763943975644703878 N",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiM0YzRjNGMiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNGM0YzRjIi8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjEzNyIgY3k9IjEyNyIgcj0iMTkwIi8+PGNpcmNsZSBjeD0iMTE1IiBjeT0iNTEiIHI9IjI1NSIvPjxjaXJjbGUgY3g9Ijc3IiBjeT0iNzkiIHI9IjI1NSIvPjxjaXJjbGUgY3g9IjEyMyIgcj0iMTUzIi8+PC9nPjwvZz48L3N2Zz4=",
+        "alt": "411175861 859981076135968 8796758621214014077 N 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMjk3Ij48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiMyMzZhNzUiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjM2YTc1Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9Ijk3IiBjeT0iMTI0IiByPSIyMDciIGZpbGw9IiNmZmYiLz48ZWxsaXBzZSBjeD0iMTA2IiBjeT0iODUiIGZpbGw9IiNmZmYiIHJ4PSIyMDMiIHJ5PSIyNTMiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiM2YmNmY2QiIHRyYW5zZm9ybT0ibWF0cml4KC0yMi41MDQ1MSAtMjUuNTY1MjYgMTA0LjAwMDc4IC05MS41NDk1IDE1NiAyMTEuMykiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiM2N2NhZmQiIHRyYW5zZm9ybT0icm90YXRlKC0xMzEgNzcuNiA3NylzY2FsZSg0OS45NjI2NiAyOC43MTYxOCkiLz48L2c+PC9nPjwvc3ZnPg==",
+        "alt": "301678592 509915237802378 6501660839522904986 N",
+        "naturalWidth": 300,
+        "naturalHeight": 297,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiM0YzRjNGMiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNGM0YzRjIi8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjEzNyIgY3k9IjEyNyIgcj0iMTkwIi8+PGNpcmNsZSBjeD0iMTE1IiBjeT0iNTEiIHI9IjI1NSIvPjxjaXJjbGUgY3g9Ijc3IiBjeT0iNzkiIHI9IjI1NSIvPjxjaXJjbGUgY3g9IjEyMyIgcj0iMTUzIi8+PC9nPjwvZz48L3N2Zz4=",
+        "alt": "411175861 859981076135968 8796758621214014077 N 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGE0YTQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3OCIgY3k9IjEyOSIgcj0iMjI0Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTMuOTMxMDIgLTI0OS4yMzE3IDY2LjQxMjIyIC0xNC4zNzA4OCAyMzQuMiAxMTEuNykiLz48Y2lyY2xlIHI9IjEiIHRyYW5zZm9ybT0icm90YXRlKDEyLjkgLTUxOSAxNjQpc2NhbGUoNTcuMjAzMDYgMjU1LjAwMDAxKSIvPjxwYXRoIGQ9Ik0zLTE2IDI3MSAzLTE2IDc3eiIvPjwvZz48L2c+PC9zdmc+",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGE0YTQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3OCIgY3k9IjEyOSIgcj0iMjI0Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTMuOTMxMDIgLTI0OS4yMzE3IDY2LjQxMjIyIC0xNC4zNzA4OCAyMzQuMiAxMTEuNykiLz48Y2lyY2xlIHI9IjEiIHRyYW5zZm9ybT0icm90YXRlKDEyLjkgLTUxOSAxNjQpc2NhbGUoNTcuMjAzMDYgMjU1LjAwMDAxKSIvPjxwYXRoIGQ9Ik0zLTE2IDI3MSAzLTE2IDc3eiIvPjwvZz48L2c+PC9zdmc+",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGE0YTQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhNGE0Ii8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE3OCIgY3k9IjEyOSIgcj0iMjI0Ii8+PGNpcmNsZSByPSIxIiB0cmFuc2Zvcm09Im1hdHJpeCgtNTMuOTMxMDIgLTI0OS4yMzE3IDY2LjQxMjIyIC0xNC4zNzA4OCAyMzQuMiAxMTEuNykiLz48Y2lyY2xlIHI9IjEiIHRyYW5zZm9ybT0icm90YXRlKDEyLjkgLTUxOSAxNjQpc2NhbGUoNTcuMjAzMDYgMjU1LjAwMDAxKSIvPjxwYXRoIGQ9Ik0zLTE2IDI3MSAzLTE2IDc3eiIvPjwvZz48L2c+PC9zdmc+",
+        "alt": "Whatsapp Image 2025 02 05 At 11.08.34 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMjEwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhYmExYTUiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYWJhMWE1Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjE0NCIgY3k9Ijc4IiByPSIxNzkiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIHI9IjEiIGZpbGw9IiNmZmYiIHRyYW5zZm9ybT0ibWF0cml4KDUyLjEzOTM0IC0yNDkuNjEyNjggNjMuMDgxNDUgMTMuMTc2NTEgMjA5LjcgMTEyLjMpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09Im1hdHJpeCgtNzEuOTk2NjggLTI0NC42MjUxOCA1Ni4wNzM0IC0xNi41MDMyIDQxLjQgMTEzLjUpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjOTM5MTkyIiB0cmFuc2Zvcm09Im1hdHJpeCgtNDQuOTYxNDggMTMuMTI0NjUgLTEwLjkwNjE2IC0zNy4zNjE1MyAxMjQgODUuMikiLz48L2c+PC9nPjwvc3ZnPg==",
+        "alt": "447771910 420314107490413 4311184715465234628 N",
+        "naturalWidth": 300,
+        "naturalHeight": 210,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiNhNGFjNjQiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjYTRhYzY0Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjEyNCIgY3k9IjE4NSIgcj0iMjM0IiBmaWxsPSIjMDAzMDA1Ii8+PGNpcmNsZSByPSIxIiBmaWxsPSIjMDAxNDIyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTc5LjkgNjcuNCAxMDQuMilzY2FsZSgyNTUgNTMuODUyNTMpIi8+PGNpcmNsZSByPSIxIiBmaWxsPSIjOWViNzVlIiB0cmFuc2Zvcm09Im1hdHJpeCgtMTIxLjMyODM4IDYuMzkyNDggLTIuODk4NyAtNTUuMDE3MTIgMTExIDg3LjMpIi8+PGVsbGlwc2UgY3g9IjE0MyIgY3k9IjE1IiBmaWxsPSIjMWY5ZjI2IiByeD0iMjU1IiByeT0iMzMiLz48L2c+PC9nPjwvc3ZnPg==",
+        "alt": "279763667 1028465911109740 2763943975644703878 N",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      },
+      {
+        "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZyBmaWx0ZXI9ImJsdXIoMTJweCkiPjxyZWN0IHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbGw9IiM0YzRjNGMiLz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNGM0YzRjIi8+PGcgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLjYgLjYpc2NhbGUoMS4xNzE4OCkiPjxjaXJjbGUgY3g9IjEzNyIgY3k9IjEyNyIgcj0iMTkwIi8+PGNpcmNsZSBjeD0iMTE1IiBjeT0iNTEiIHI9IjI1NSIvPjxjaXJjbGUgY3g9Ijc3IiBjeT0iNzkiIHI9IjI1NSIvPjxjaXJjbGUgY3g9IjEyMyIgcj0iMTUzIi8+PC9nPjwvZz48L3N2Zz4=",
+        "alt": "411175861 859981076135968 8796758621214014077 N 1",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "lazy"
+      },
+      {
+        "src": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+        "alt": "Award Small Img",
+        "naturalWidth": 300,
+        "naturalHeight": 300,
+        "loading": "auto"
+      }
+    ],
+    "backgroundImages": [],
+    "favicons": [
+      {
+        "href": "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-32x32.png",
+        "rel": "icon",
+        "sizes": "32x32"
+      },
+      {
+        "href": "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-192x192.png",
+        "rel": "icon",
+        "sizes": "192x192"
+      },
+      {
+        "href": "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-180x180.png",
+        "rel": "apple-touch-icon",
+        "sizes": ""
+      }
+    ],
+    "scripts": [
+      "https://www.youtube.com/s/player/ac678d18/www-widgetapi.vflset/www-widgetapi.js",
+      "https://www.youtube.com/iframe_api",
+      "data:text/javascript;base64,IWZ1bmN0aW9uKGEpeyJ1c2Ugc3RyaWN0Ijt2YXIgYj1mdW5jdGlvbihiLGMsZCl7ZnVuY3Rpb24gZShhKXtyZXR1cm4gaC5ib2R5P2EoKTp2b2lkIHNldFRpbWVvdXQoZnVuY3Rpb24oKXtlKGEpfSl9ZnVuY3Rpb24gZigpe2kuYWRkRXZlbnRMaXN0ZW5lciYmaS5yZW1vdmVFdmVudExpc3RlbmVyKCJsb2FkIixmKSxpLm1lZGlhPWR8fCJhbGwifXZhciBnLGg9YS5kb2N1bWVudCxpPWguY3JlYXRlRWxlbWVudCgibGluayIpO2lmKGMpZz1jO2Vsc2V7dmFyIGo9KGguYm9keXx8aC5nZXRFbGVtZW50c0J5VGFnTmFtZSgiaGVhZCIpWzBdKS5jaGlsZE5vZGVzO2c9altqLmxlbmd0aC0xXX12YXIgaz1oLnN0eWxlU2hlZXRzO2kucmVsPSJzdHlsZXNoZWV0IixpLmhyZWY9YixpLm1lZGlhPSJvbmx5IHgiLGUoZnVuY3Rpb24oKXtnLnBhcmVudE5vZGUuaW5zZXJ0QmVmb3JlKGksYz9nOmcubmV4dFNpYmxpbmcpfSk7dmFyIGw9ZnVuY3Rpb24oYSl7Zm9yKHZhciBiPWkuaHJlZixjPWsubGVuZ3RoO2MtLTspaWYoa1tjXS5ocmVmPT09YilyZXR1cm4gYSgpO3NldFRpbWVvdXQoZnVuY3Rpb24oKXtsKGEpfSl9O3JldHVybiBpLmFkZEV2ZW50TGlzdGVuZXImJmkuYWRkRXZlbnRMaXN0ZW5lcigibG9hZCIsZiksaS5vbmxvYWRjc3NkZWZpbmVkPWwsbChmKSxpfTsidW5kZWZpbmVkIiE9dHlwZW9mIGV4cG9ydHM/ZXhwb3J0cy5sb2FkQ1NTPWI6YS5sb2FkQ1NTPWJ9KCJ1bmRlZmluZWQiIT10eXBlb2YgZ2xvYmFsP2dsb2JhbDp0aGlzKTshZnVuY3Rpb24oYSl7aWYoYS5sb2FkQ1NTKXt2YXIgYj1sb2FkQ1NTLnJlbHByZWxvYWQ9e307aWYoYi5zdXBwb3J0PWZ1bmN0aW9uKCl7dHJ5e3JldHVybiBhLmRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImxpbmsiKS5yZWxMaXN0LnN1cHBvcnRzKCJwcmVsb2FkIil9Y2F0Y2goYil7cmV0dXJuITF9fSxiLnBvbHk9ZnVuY3Rpb24oKXtmb3IodmFyIGI9YS5kb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSgibGluayIpLGM9MDtjPGIubGVuZ3RoO2MrKyl7dmFyIGQ9YltjXTsicHJlbG9hZCI9PT1kLnJlbCYmInN0eWxlIj09PWQuZ2V0QXR0cmlidXRlKCJhcyIpJiYoYS5sb2FkQ1NTKGQuaHJlZixkLGQuZ2V0QXR0cmlidXRlKCJtZWRpYSIpKSxkLnJlbD1udWxsKX19LCFiLnN1cHBvcnQoKSl7Yi5wb2x5KCk7dmFyIGM9YS5zZXRJbnRlcnZhbChiLnBvbHksMzAwKTthLmFkZEV2ZW50TGlzdGVuZXImJmEuYWRkRXZlbnRMaXN0ZW5lcigibG9hZCIsZnVuY3Rpb24oKXtiLnBvbHkoKSxhLmNsZWFySW50ZXJ2YWwoYyl9KSxhLmF0dGFjaEV2ZW50JiZhLmF0dGFjaEV2ZW50KCJvbmxvYWQiLGZ1bmN0aW9uKCl7YS5jbGVhckludGVydmFsKGMpfSl9fX0odGhpcyk7",
+      "https://gbeaward.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1",
+      "https://gbeaward.com/wp-content/litespeed/js/e3003aae5bbb250cd36efeea211afc6f.js?ver=9ce04",
+      "https://www.googletagmanager.com/gtag/js?id=GT-W6V9ZG59",
+      "data:text/javascript;base64,d2luZG93LmRhdGFMYXllcj13aW5kb3cuZGF0YUxheWVyfHxbXTtmdW5jdGlvbiBndGFnKCl7ZGF0YUxheWVyLnB1c2goYXJndW1lbnRzKX0KZ3RhZygic2V0IiwibGlua2VyIix7ImRvbWFpbnMiOlsiZ2JlYXdhcmQuY29tIl19KTtndGFnKCJqcyIsbmV3IERhdGUoKSk7Z3RhZygic2V0IiwiZGV2ZWxvcGVyX2lkLmRaVE5pTVQiLCEwKTtndGFnKCJjb25maWciLCJHVC1XNlY5Wkc1OSIp",
+      "data:text/javascript;base64,ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI3NlbGVjdGVkJykuYWRkRXZlbnRMaXN0ZW5lcignbW91c2Vtb3ZlJywoZSk9Pntjb25zdCByZWN0PWUudGFyZ2V0LmdldEJvdW5kaW5nQ2xpZW50UmVjdCgpO2NvbnN0IHg9ZS5jbGllbnRYLXJlY3QubGVmdDtjb25zdCB5PWUuY2xpZW50WS1yZWN0LnRvcDtjb25zdCBiZWZvcmVFbD1lLnRhcmdldC5xdWVyeVNlbGVjdG9yKCc6YmVmb3JlJyl8fGUudGFyZ2V0O2JlZm9yZUVsLnN0eWxlLmxlZnQ9YCR7eH1weGA7YmVmb3JlRWwuc3R5bGUudG9wPWAke3l9cHhgfSk=",
+      "data:text/javascript;base64,Y29uc3QgbGF6eWxvYWRSdW5PYnNlcnZlcj0oKT0+e2NvbnN0IGxhenlsb2FkQmFja2dyb3VuZHM9ZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChgLmUtY29uLmUtcGFyZW50Om5vdCguZS1sYXp5bG9hZGVkKWApO2NvbnN0IGxhenlsb2FkQmFja2dyb3VuZE9ic2VydmVyPW5ldyBJbnRlcnNlY3Rpb25PYnNlcnZlcigoZW50cmllcyk9PntlbnRyaWVzLmZvckVhY2goKGVudHJ5KT0+e2lmKGVudHJ5LmlzSW50ZXJzZWN0aW5nKXtsZXQgbGF6eWxvYWRCYWNrZ3JvdW5kPWVudHJ5LnRhcmdldDtpZihsYXp5bG9hZEJhY2tncm91bmQpe2xhenlsb2FkQmFja2dyb3VuZC5jbGFzc0xpc3QuYWRkKCdlLWxhenlsb2FkZWQnKX0KbGF6eWxvYWRCYWNrZ3JvdW5kT2JzZXJ2ZXIudW5vYnNlcnZlKGVudHJ5LnRhcmdldCl9fSl9LHtyb290TWFyZ2luOicyMDBweCAwcHggMjAwcHggMHB4J30pO2xhenlsb2FkQmFja2dyb3VuZHMuZm9yRWFjaCgobGF6eWxvYWRCYWNrZ3JvdW5kKT0+e2xhenlsb2FkQmFja2dyb3VuZE9ic2VydmVyLm9ic2VydmUobGF6eWxvYWRCYWNrZ3JvdW5kKX0pfTtjb25zdCBldmVudHM9WydET01Db250ZW50TG9hZGVkJywnZWxlbWVudG9yL2xhenlsb2FkL29ic2VydmUnLF07ZXZlbnRzLmZvckVhY2goKGV2ZW50KT0+e2RvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoZXZlbnQsbGF6eWxvYWRSdW5PYnNlcnZlcil9KQ==",
+      "https://gbeaward.com/wp-content/litespeed/js/a7de2bdbfb9ebd341141881e65f9e5d5.js?ver=0bf24",
+      "https://gbeaward.com/wp-content/litespeed/js/c284678797c9fbbf2b283eab6e299240.js?ver=17e26",
+      "https://gbeaward.com/wp-content/litespeed/js/4f96be3e41471d1d873d82242989c806.js?ver=5f942",
+      "https://gbeaward.com/wp-content/litespeed/js/4ba64277d4cd3763f51fa8bed8874bb8.js?ver=494f8",
+      "data:text/javascript;base64,dmFyIGVsZW1lbnRvckZyb250ZW5kQ29uZmlnPXsiZW52aXJvbm1lbnRNb2RlIjp7ImVkaXQiOiExLCJ3cFByZXZpZXciOiExLCJpc1NjcmlwdERlYnVnIjohMX0sImkxOG4iOnsic2hhcmVPbkZhY2Vib29rIjoiU2hhcmUgb24gRmFjZWJvb2siLCJzaGFyZU9uVHdpdHRlciI6IlNoYXJlIG9uIFR3aXR0ZXIiLCJwaW5JdCI6IlBpbiBpdCIsImRvd25sb2FkIjoiRG93bmxvYWQiLCJkb3dubG9hZEltYWdlIjoiRG93bmxvYWQgaW1hZ2UiLCJmdWxsc2NyZWVuIjoiRnVsbHNjcmVlbiIsInpvb20iOiJab29tIiwic2hhcmUiOiJTaGFyZSIsInBsYXlWaWRlbyI6IlBsYXkgVmlkZW8iLCJwcmV2aW91cyI6IlByZXZpb3VzIiwibmV4dCI6Ik5leHQiLCJjbG9zZSI6IkNsb3NlIiwiYTExeUNhcm91c2VsUHJldlNsaWRlTWVzc2FnZSI6IlByZXZpb3VzIHNsaWRlIiwiYTExeUNhcm91c2VsTmV4dFNsaWRlTWVzc2FnZSI6Ik5leHQgc2xpZGUiLCJhMTF5Q2Fyb3VzZWxGaXJzdFNsaWRlTWVzc2FnZSI6IlRoaXMgaXMgdGhlIGZpcnN0IHNsaWRlIiwiYTExeUNhcm91c2VsTGFzdFNsaWRlTWVzc2FnZSI6IlRoaXMgaXMgdGhlIGxhc3Qgc2xpZGUiLCJhMTF5Q2Fyb3VzZWxQYWdpbmF0aW9uQnVsbGV0TWVzc2FnZSI6IkdvIHRvIHNsaWRlIn0sImlzX3J0bCI6ITEsImJyZWFrcG9pbnRzIjp7InhzIjowLCJzbSI6NDgwLCJtZCI6NzY4LCJsZyI6MTAyNSwieGwiOjE0NDAsInh4bCI6MTYwMH0sInJlc3BvbnNpdmUiOnsiYnJlYWtwb2ludHMiOnsibW9iaWxlIjp7ImxhYmVsIjoiTW9iaWxlIFBvcnRyYWl0IiwidmFsdWUiOjc2NywiZGVmYXVsdF92YWx1ZSI6NzY3LCJkaXJlY3Rpb24iOiJtYXgiLCJpc19lbmFibGVkIjohMH0sIm1vYmlsZV9leHRyYSI6eyJsYWJlbCI6Ik1vYmlsZSBMYW5kc2NhcGUiLCJ2YWx1ZSI6ODgwLCJkZWZhdWx0X3ZhbHVlIjo4ODAsImRpcmVjdGlvbiI6Im1heCIsImlzX2VuYWJsZWQiOiExfSwidGFibGV0Ijp7ImxhYmVsIjoiVGFibGV0IFBvcnRyYWl0IiwidmFsdWUiOjEwMjQsImRlZmF1bHRfdmFsdWUiOjEwMjQsImRpcmVjdGlvbiI6Im1heCIsImlzX2VuYWJsZWQiOiEwfSwidGFibGV0X2V4dHJhIjp7ImxhYmVsIjoiVGFibGV0IExhbmRzY2FwZSIsInZhbHVlIjoxMjAwLCJkZWZhdWx0X3ZhbHVlIjoxMjAwLCJkaXJlY3Rpb24iOiJtYXgiLCJpc19lbmFibGVkIjohMX0sImxhcHRvcCI6eyJsYWJlbCI6IkxhcHRvcCIsInZhbHVlIjoxMzY2LCJkZWZhdWx0X3ZhbHVlIjoxMzY2LCJkaXJlY3Rpb24iOiJtYXgiLCJpc19lbmFibGVkIjohMX0sIndpZGVzY3JlZW4iOnsibGFiZWwiOiJXaWRlc2NyZWVuIiwidmFsdWUiOjI0MDAsImRlZmF1bHRfdmFsdWUiOjI0MDAsImRpcmVjdGlvbiI6Im1pbiIsImlzX2VuYWJsZWQiOiExfX0sImhhc0N1c3RvbUJyZWFrcG9pbnRzIjohMX0sInZlcnNpb24iOiIzLjMzLjIiLCJpc19zdGF0aWMiOiExLCJleHBlcmltZW50YWxGZWF0dXJlcyI6eyJlX2ZvbnRfaWNvbl9zdmciOiEwLCJhZGRpdGlvbmFsX2N1c3RvbV9icmVha3BvaW50cyI6ITAsImNvbnRhaW5lciI6ITAsInRoZW1lX2J1aWxkZXJfdjIiOiEwLCJoZWxsby10aGVtZS1oZWFkZXItZm9vdGVyIjohMCwibmVzdGVkLWVsZW1lbnRzIjohMCwiaG9tZV9zY3JlZW4iOiEwLCJnbG9iYWxfY2xhc3Nlc19zaG91bGRfZW5mb3JjZV9jYXBhYmlsaXRpZXMiOiEwLCJlX3ZhcmlhYmxlcyI6ITAsImNsb3VkLWxpYnJhcnkiOiEwLCJlX29wdF9pbl92NF9wYWdlIjohMCwiaW1wb3J0LWV4cG9ydC1jdXN0b21pemF0aW9uIjohMCwiZV9wcm9fdmFyaWFibGVzIjohMH0sInVybHMiOnsiYXNzZXRzIjoiaHR0cHM6XC9cL2diZWF3YXJkLmNvbVwvd3AtY29udGVudFwvcGx1Z2luc1wvZWxlbWVudG9yXC9hc3NldHNcLyIsImFqYXh1cmwiOiJodHRwczpcL1wvZ2JlYXdhcmQuY29tXC93cC1hZG1pblwvYWRtaW4tYWpheC5waHAiLCJ1cGxvYWRVcmwiOiJodHRwczpcL1wvZ2JlYXdhcmQuY29tXC93cC1jb250ZW50XC91cGxvYWRzIn0sIm5vbmNlcyI6eyJmbG9hdGluZ0J1dHRvbnNDbGlja1RyYWNraW5nIjoiOTNhOWE2ZjYyNSJ9LCJzd2lwZXJDbGFzcyI6InN3aXBlciIsInNldHRpbmdzIjp7InBhZ2UiOltdLCJlZGl0b3JQcmVmZXJlbmNlcyI6W119LCJraXQiOnsiYWN0aXZlX2JyZWFrcG9pbnRzIjpbInZpZXdwb3J0X21vYmlsZSIsInZpZXdwb3J0X3RhYmxldCJdLCJnbG9iYWxfaW1hZ2VfbGlnaHRib3giOiJ5ZXMiLCJsaWdodGJveF9lbmFibGVfY291bnRlciI6InllcyIsImxpZ2h0Ym94X2VuYWJsZV9mdWxsc2NyZWVuIjoieWVzIiwibGlnaHRib3hfZW5hYmxlX3pvb20iOiJ5ZXMiLCJsaWdodGJveF9lbmFibGVfc2hhcmUiOiJ5ZXMiLCJsaWdodGJveF90aXRsZV9zcmMiOiJ0aXRsZSIsImxpZ2h0Ym94X2Rlc2NyaXB0aW9uX3NyYyI6ImRlc2NyaXB0aW9uIiwiaGVsbG9faGVhZGVyX2xvZ29fdHlwZSI6ImxvZ28iLCJoZWxsb19oZWFkZXJfbWVudV9sYXlvdXQiOiJob3Jpem9udGFsIiwiaGVsbG9fZm9vdGVyX2xvZ29fdHlwZSI6ImxvZ28ifSwicG9zdCI6eyJpZCI6MTIsInRpdGxlIjoiR2xvYmFsJTIwQnVzaW5lc3MlMjBFeGNlbGxlbmNlJTIwQXdhcmRzJTIwMjAyNSUyMCU3QyUyMEdCRSUyMCVFMiU4MCU5MyUyMFJlY29nbml6aW5nJTIwR2xvYmFsJTIwTGVhZGVycyIsImV4Y2VycHQiOiIiLCJmZWF0dXJlZEltYWdlIjohMX19",
+      "https://gbeaward.com/wp-content/litespeed/js/b1d3c98724fe0906ed4a2c75448f76d2.js?ver=ff8ad",
+      "https://gbeaward.com/wp-content/litespeed/js/5c0847b6e5991f0dc2d3992936c6ea05.js?ver=a9e9f",
+      "https://gbeaward.com/wp-content/litespeed/js/0d9fda0de961853c043602f42a697e3f.js?ver=e98f1",
+      "https://gbeaward.com/wp-content/litespeed/js/fbe818ad3b68dbf64260e18c955051a0.js?ver=5c83c",
+      "https://gbeaward.com/wp-content/litespeed/js/3db3599c842a2a00c5ac52f2e2df5d2c.js?ver=c9ea2",
+      "https://gbeaward.com/wp-content/litespeed/js/ecbddd86bf2aa7aa4aeced1b5d2cdb3e.js?ver=c517f",
+      "data:text/javascript;base64,d3AuaTE4bi5zZXRMb2NhbGVEYXRhKHsndGV4dCBkaXJlY3Rpb25cdTAwMDRsdHInOlsnbHRyJ119KQ==",
+      "data:text/javascript;base64,dmFyIEVsZW1lbnRvclByb0Zyb250ZW5kQ29uZmlnPXsiYWpheHVybCI6Imh0dHBzOlwvXC9nYmVhd2FyZC5jb21cL3dwLWFkbWluXC9hZG1pbi1hamF4LnBocCIsIm5vbmNlIjoiMDA4MzYwNmYzZiIsInVybHMiOnsiYXNzZXRzIjoiaHR0cHM6XC9cL2diZWF3YXJkLmNvbVwvd3AtY29udGVudFwvcGx1Z2luc1wvZWxlbWVudG9yLXByb1wvYXNzZXRzXC8iLCJyZXN0IjoiaHR0cHM6XC9cL2diZWF3YXJkLmNvbVwvd3AtanNvblwvIn0sInNldHRpbmdzIjp7ImxhenlfbG9hZF9iYWNrZ3JvdW5kX2ltYWdlcyI6ITB9LCJwb3B1cCI6eyJoYXNQb3BVcHMiOiEwfSwic2hhcmVCdXR0b25zTmV0d29ya3MiOnsiZmFjZWJvb2siOnsidGl0bGUiOiJGYWNlYm9vayIsImhhc19jb3VudGVyIjohMH0sInR3aXR0ZXIiOnsidGl0bGUiOiJUd2l0dGVyIn0sImxpbmtlZGluIjp7InRpdGxlIjoiTGlua2VkSW4iLCJoYXNfY291bnRlciI6ITB9LCJwaW50ZXJlc3QiOnsidGl0bGUiOiJQaW50ZXJlc3QiLCJoYXNfY291bnRlciI6ITB9LCJyZWRkaXQiOnsidGl0bGUiOiJSZWRkaXQiLCJoYXNfY291bnRlciI6ITB9LCJ2ayI6eyJ0aXRsZSI6IlZLIiwiaGFzX2NvdW50ZXIiOiEwfSwib2Rub2tsYXNzbmlraSI6eyJ0aXRsZSI6Ik9LIiwiaGFzX2NvdW50ZXIiOiEwfSwidHVtYmxyIjp7InRpdGxlIjoiVHVtYmxyIn0sImRpZ2ciOnsidGl0bGUiOiJEaWdnIn0sInNreXBlIjp7InRpdGxlIjoiU2t5cGUifSwic3R1bWJsZXVwb24iOnsidGl0bGUiOiJTdHVtYmxlVXBvbiIsImhhc19jb3VudGVyIjohMH0sIm1peCI6eyJ0aXRsZSI6Ik1peCJ9LCJ0ZWxlZ3JhbSI6eyJ0aXRsZSI6IlRlbGVncmFtIn0sInBvY2tldCI6eyJ0aXRsZSI6IlBvY2tldCIsImhhc19jb3VudGVyIjohMH0sInhpbmciOnsidGl0bGUiOiJYSU5HIiwiaGFzX2NvdW50ZXIiOiEwfSwid2hhdHNhcHAiOnsidGl0bGUiOiJXaGF0c0FwcCJ9LCJlbWFpbCI6eyJ0aXRsZSI6IkVtYWlsIn0sInByaW50Ijp7InRpdGxlIjoiUHJpbnQifSwieC10d2l0dGVyIjp7InRpdGxlIjoiWCJ9LCJ0aHJlYWRzIjp7InRpdGxlIjoiVGhyZWFkcyJ9fSwiZmFjZWJvb2tfc2RrIjp7ImxhbmciOiJlbl9VUyIsImFwcF9pZCI6IiJ9LCJsb3R0aWUiOnsiZGVmYXVsdEFuaW1hdGlvblVybCI6Imh0dHBzOlwvXC9nYmVhd2FyZC5jb21cL3dwLWNvbnRlbnRcL3BsdWdpbnNcL2VsZW1lbnRvci1wcm9cL21vZHVsZXNcL2xvdHRpZVwvYXNzZXRzXC9hbmltYXRpb25zXC9kZWZhdWx0Lmpzb24ifX0=",
+      "https://gbeaward.com/wp-content/litespeed/js/82094c7d4cf3ec7d61af75f3464fc354.js?ver=98798",
+      "https://gbeaward.com/wp-content/litespeed/js/265422046e1854f84fb17438beb74063.js?ver=5f541",
+      "https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447",
+      "https://gbeaward.com/wp-content/plugins/elementor/assets/lib/dialog/dialog.min.js?ver=4.9.3",
+      "https://gbeaward.com/wp-content/plugins/elementor/assets/lib/swiper/v8/swiper.min.js?ver=8.4.5"
+    ],
+    "semanticBlocks": [
+      {
+        "index": 0,
+        "tag": "header",
+        "id": "",
+        "classes": "elementor elementor-32 elementor-location-header",
+        "rect": {
+          "top": 0,
+          "width": 1440,
+          "height": 150
+        },
+        "headings": [],
+        "buttons": [
+          "Home",
+          "Previous Winners",
+          "About",
+          "Contact",
+          "<img fetchpriority=\"high\" width=\"195\" height=\"300\" src=\"https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png\" class=\"attachment-medium size-medium wp-image-348\" alt=\"\" srcset=\"https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png 195w, https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777.png 549w\" sizes=\"(max-width: 195px) 100vw, 195px\" />",
+          "Apply Now"
+        ],
+        "text": "Home Previous Winners About Contact <img fetchpriority=\"high\" width=\"195\" height=\"300\" src=\"https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png\" class=\"attachment-medium size-medium wp-image-348\" alt=\"\" srcset=\"https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png 195w, https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777.png 549w\" sizes=\"(max-width: 195px) 100vw, 195px\" /> Apply Now",
+        "styles": {
+          "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "24px",
+          "color": "rgb(51, 51, 51)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "display": "block",
+          "position": "static",
+          "zIndex": "auto",
+          "opacity": "1",
+          "transition": "all"
+        },
+        "backgroundUrl": null,
+        "images": [
+          {
+            "src": "https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png",
+            "alt": "",
+            "naturalWidth": 195,
+            "naturalHeight": 300
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "tag": "footer",
+        "id": "",
+        "classes": "elementor elementor-35 elementor-location-footer",
+        "rect": {
+          "top": 3939,
+          "width": 1440,
+          "height": 514
+        },
+        "headings": [],
+        "buttons": [
+          "Home",
+          "Nominees",
+          "Previous Winners",
+          "About",
+          "Contact",
+          "Home",
+          "Nominees",
+          "Previous Winners",
+          "About",
+          "Contact",
+          "Instagram",
+          "Facebook"
+        ],
+        "text": "Global Business Excellence Awards Home Nominees Previous Winners About Contact Home Nominees Previous Winners About Contact GBE Awards 2025 is your premier destination for recognizing and honoring achievements that shape the future. From innovation and creativity to leadership and impact, we spotlight individuals and organizations making a difference globally. Join us to celebrate, inspire, and be inspired. Instagram Facebook X-twitter Linkedin Whatsapp Privacy Policy © 2025 Global Business Excellence Awards Website Developed by Codezela Technologies",
+        "styles": {
+          "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "24px",
+          "color": "rgb(51, 51, 51)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "display": "block",
+          "position": "static",
+          "zIndex": "auto",
+          "opacity": "1",
+          "transition": "all"
+        },
+        "backgroundUrl": null,
+        "images": []
+      }
+    ]
+  },
+  "mobileBlocks": [
+    {
+      "index": 0,
+      "tag": "header",
+      "classes": "elementor elementor-32 elementor-location-header",
+      "rect": {
+        "top": 0,
+        "width": 390,
+        "height": 150
+      },
+      "headings": []
+    },
+    {
+      "index": 1,
+      "tag": "footer",
+      "classes": "elementor elementor-35 elementor-location-footer",
+      "rect": {
+        "top": 4528,
+        "width": 390,
+        "height": 826
+      },
+      "headings": []
+    }
+  ],
+  "downloadedAssets": [
+    {
+      "url": "https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png",
+      "publicPath": "/assets/live/logo-e1738704108777-195x300-33756ccd0b.png",
+      "status": 200,
+      "bytes": 21559
+    },
+    {
+      "url": "https://gbeaward.com/wp-content/uploads/2025/02/Trophy@4x-1.png.webp",
+      "publicPath": "/assets/live/trophy-4x-1-png-06b29f01c0.webp",
+      "status": 200,
+      "bytes": 22408
+    },
+    {
+      "url": "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp",
+      "publicPath": "/assets/live/award-small-img-300x300-png-bea10b6124.webp",
+      "status": 200,
+      "bytes": 25934
+    },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "url": "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-32x32.png",
+      "publicPath": "/assets/live/cropped-gbe-awards-logo-32x32-07b2c12a33.png",
+      "status": 200,
+      "bytes": 826
+    },
+    {
+      "url": "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-192x192.png",
+      "publicPath": "/assets/live/cropped-gbe-awards-logo-192x192-37b43e1197.png",
+      "status": 200,
+      "bytes": 5862
+    },
+    {
+      "url": "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-180x180.png",
+      "publicPath": "/assets/live/cropped-gbe-awards-logo-180x180-86f84aae85.png",
+      "status": 200,
+      "bytes": 5445
+    }
+  ],
+  "assetMap": {
+    "https://gbeaward.com/wp-content/uploads/2025/02/logo-e1738704108777-195x300.png": "/assets/live/logo-e1738704108777-195x300-33756ccd0b.png",
+    "https://gbeaward.com/wp-content/uploads/2025/02/Trophy@4x-1.png.webp": "/assets/live/trophy-4x-1-png-06b29f01c0.webp",
+    "https://gbeaward.com/wp-content/uploads/2025/02/award-small-img-300x300.png.webp": "/assets/live/award-small-img-300x300-png-bea10b6124.webp",
+    "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-32x32.png": "/assets/live/cropped-gbe-awards-logo-32x32-07b2c12a33.png",
+    "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-192x192.png": "/assets/live/cropped-gbe-awards-logo-192x192-37b43e1197.png",
+    "https://gbeaward.com/wp-content/uploads/2025/06/cropped-GBE-Awards-Logo-180x180.png": "/assets/live/cropped-gbe-awards-logo-180x180-86f84aae85.png"
+  }
+}

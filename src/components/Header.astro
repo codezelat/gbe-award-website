@@ -1,0 +1,23 @@
+---
+import { assetPaths, navItems } from "../data/home";
+---
+
+<header class="site-header" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Global Business Excellence Awards home">
+    <img src={assetPaths.logo} alt="GBE Awards" width="46" height="70" decoding="async" />
+  </a>
+
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    {navItems.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+  </nav>
+
+  <a class="apply-link" href="/apply">APPLY NOW</a>
+
+  <button class="menu-button" type="button" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>

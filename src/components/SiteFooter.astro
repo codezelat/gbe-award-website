@@ -1,0 +1,22 @@
+---
+import SocialLinks from "./SocialLinks";
+import { footerItems } from "../data/home";
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <h2>Global Business Excellence Awards</h2>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      {footerItems.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <p>
+      GBE Awards 2025 is your premier destination for recognizing and honoring achievements that shape the
+      future. From innovation and creativity to leadership and impact, we spotlight individuals and organizations
+      making a difference globally. Join us to celebrate, inspire, and be inspired.
+    </p>
+    <SocialLinks compact />
+    <a class="privacy-link" href="/privacy-policy">Privacy Policy</a>
+    <small>© 2025 Global Business Excellence Awards</small>
+    <small>Website Developed by Codezela Technologies</small>
+  </div>
+</footer>

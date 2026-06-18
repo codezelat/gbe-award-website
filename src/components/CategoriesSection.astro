@@ -1,0 +1,25 @@
+---
+import { assetPaths, categories } from "../data/home";
+---
+
+<section class="categories-section" aria-labelledby="categories-title">
+  <div class="section-heading reveal">
+    <h2 id="categories-title">Awards Across Diverse Categories</h2>
+    <p>
+      From finance, media, technology, and arts to business and community service, we celebrate excellence in every field
+    </p>
+  </div>
+
+  <div class="category-track" aria-label="Award categories">
+    {categories.map((category) => (
+      <article class="category-card reveal">
+        <img src={assetPaths.award} alt="" width="100" height="100" loading="lazy" decoding="async" />
+        <h3>{category}</h3>
+      </article>
+    ))}
+  </div>
+
+  <div class="carousel-dots" aria-hidden="true">
+    {categories.slice(0, 7).map((_, index) => <span class={index === 0 ? "active" : ""}></span>)}
+  </div>
+</section>

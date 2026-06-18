@@ -1,0 +1,28 @@
+---
+import { assetPaths, nominees } from "../data/home";
+---
+
+<section class="nominees-section" aria-labelledby="nominees-title">
+  <div class="section-heading section-heading--subtle reveal">
+    <h2 id="nominees-title" class="sr-only">Meet the Nominees</h2>
+    <p>Celebrating outstanding talent and achievements across every category.</p>
+  </div>
+
+  <div class="nominee-grid">
+    {nominees.map((nominee) => (
+      <article class="nominee-card reveal">
+        <div>
+          <h3>{nominee.title}</h3>
+          <p>{nominee.name}</p>
+        </div>
+        <div class={`portrait portrait--${nominee.portrait}`} aria-hidden="true"></div>
+        <div class="nominee-footer">
+          <span>Congratulations!</span>
+          <img src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <a class="outline-button nominee-link" href="/nominees" aria-label="View all nominees"></a>
+</section>

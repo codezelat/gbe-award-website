@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import HeroSection from "../components/HeroSection.astro";
+import AboutSection from "../components/AboutSection.astro";
+import CategoriesSection from "../components/CategoriesSection.astro";
+import JourneySection from "../components/JourneySection.astro";
+import NomineesSection from "../components/NomineesSection.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { assetPaths, seo } from "../data/home";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={seo.description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:image" content={assetPaths.favicon} />
+    <link rel="icon" type="image/png" href="/assets/live/cropped-gbe-awards-logo-32x32-07b2c12a33.png" />
+    <link rel="apple-touch-icon" href="/assets/live/cropped-gbe-awards-logo-180x180-86f84aae85.png" />
+    <title>{seo.title}</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <CategoriesSection />
+        <JourneySection />
+        <NomineesSection />
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

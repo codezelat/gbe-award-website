@@ -1,0 +1,21 @@
+---
+import SocialLinks from "./SocialLinks";
+import { assetPaths } from "../data/home";
+---
+
+<section class="hero-section" aria-labelledby="hero-title">
+  <div class="hero-inner">
+    <img class="hero-trophy hero-trophy--left" src={assetPaths.trophy} alt="" width="177" height="550" decoding="async" />
+    <div class="hero-copy reveal">
+      <h1 id="hero-title">Global Business<br />Excellence Awards</h1>
+      <p>
+        Celebrate achievements, honor innovation, and inspire greatness. Join us in awarding the best in
+        class across multiple categories where your excellence meets recognition.
+      </p>
+      <a class="gold-button" href="/apply">APPLY NOW <span aria-hidden="true">◎</span></a>
+    </div>
+    <img class="hero-trophy hero-trophy--right" src={assetPaths.trophy} alt="" width="177" height="550" decoding="async" />
+  </div>
+
+  <SocialLinks />
+</section>
