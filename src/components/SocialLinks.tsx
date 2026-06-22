@@ -28,11 +28,18 @@ function LinkedinIcon(props: IconProps) {
   );
 }
 
+function XIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M17.53 3h3.2l-7 8 8.24 10.91h-6.46l-5.06-6.61L6.1 21.91H2.9l7.48-8.55L2.43 3h6.62l4.57 6.05L17.53 3Zm-1.12 16.17h1.77L7.68 4.71H5.78l10.63 14.46Z" />
+    </svg>
+  );
+}
+
 function WhatsappIcon(props: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path d="M4.7 19.4 6 15.6a7.4 7.4 0 1 1 2.7 2.7l-4 1.1Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-      <path d="M9.2 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.6 1.4c.1.3 0 .5-.2.7l-.4.4c.6 1 1.3 1.8 2.4 2.3l.5-.5c.2-.2.4-.3.7-.1l1.4.7c.3.1.4.3.3.6-.1.6-.8 1.5-1.4 1.5-2.6 0-6.2-3.1-6.2-6 0-.3.1-.5.1-.6Z" fill="currentColor" />
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.1c-.24.68-1.42 1.31-1.95 1.35-.5.05-1.13.29-3.8-.79-3.2-1.26-5.26-4.52-5.42-4.73-.16-.21-1.3-1.73-1.3-3.29 0-1.56.82-2.33 1.1-2.64.29-.32.63-.4.84-.4l.6.01c.19.01.45-.07.7.54.24.62.84 2.15.91 2.3.07.16.12.35.02.56-.1.21-.15.35-.29.54-.15.18-.31.41-.44.55-.15.15-.3.31-.13.6.17.29.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.45.29.14.46.12.63-.07.17-.2.73-.85.93-1.15.19-.29.39-.24.65-.15.27.1 1.69.8 1.98.95.29.14.49.21.56.33.07.12.07.7-.17 1.38Z" />
     </svg>
   );
 }
@@ -40,7 +47,7 @@ function WhatsappIcon(props: IconProps) {
 const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/gbeaward/", Icon: InstagramIcon },
   { label: "Facebook", href: "https://www.facebook.com/gbeaward/", Icon: FacebookIcon },
-  { label: "X / Twitter", href: "https://www.x.com/gbeaward/", text: "X" },
+  { label: "X (Twitter)", href: "https://x.com/gbeaward", Icon: XIcon },
   { label: "LinkedIn", href: "https://www.linkedin.com/company/gbeaward/", Icon: LinkedinIcon },
   { label: "WhatsApp", href: "https://wa.link/10p065", Icon: WhatsappIcon },
 ];
@@ -52,9 +59,9 @@ type SocialLinksProps = {
 export default function SocialLinks({ compact = false }: SocialLinksProps) {
   return (
     <nav className={compact ? "social-links social-links--footer" : "social-links"} aria-label="Social links">
-      {socialLinks.map(({ label, href, Icon, text }) => (
-        <a key={label} href={href} aria-label={label}>
-          {Icon ? <Icon aria-hidden="true" /> : <span aria-hidden="true">{text}</span>}
+      {socialLinks.map(({ label, href, Icon }) => (
+        <a key={label} href={href} aria-label={label} target="_blank" rel="noopener noreferrer">
+          <Icon aria-hidden="true" />
         </a>
       ))}
     </nav>
