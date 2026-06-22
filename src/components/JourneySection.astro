@@ -2,17 +2,17 @@
 import { assetPaths } from "../data/home";
 ---
 
-<section class="journey-section" aria-labelledby="journey-title">
-  <div class="journey-media">
-    <img src={assetPaths.interview} alt="Interview" width="768" height="419" loading="eager" decoding="async" />
-    <img src={assetPaths.awardInHand} alt="Award in hand" width="768" height="419" loading="eager" decoding="async" />
-    <img src={assetPaths.redCarpet} alt="Red carpet night city" width="768" height="512" loading="eager" decoding="async" />
+<section class="bg-gbe-panel py-20 text-center max-[560px]:pb-[78px] max-[560px]:pt-10" aria-labelledby="journey-title">
+  <div class="container-gbe mb-[66px] grid grid-cols-3 gap-10 max-[1024px]:mb-[86px] max-[1024px]:grid-cols-1 max-[1024px]:gap-3.5">
+    <img class="h-[202px] w-full rounded-xl object-cover object-center max-[1024px]:h-[159px]" src={assetPaths.interview} alt="Interview" width="768" height="419" loading="eager" decoding="async" />
+    <img class="h-[202px] w-full rounded-xl object-cover object-center max-[1024px]:h-[159px]" src={assetPaths.awardInHand} alt="Award in hand" width="768" height="419" loading="eager" decoding="async" />
+    <img class="h-[202px] w-full rounded-xl object-cover object-center max-[1024px]:h-[159px]" src={assetPaths.redCarpet} alt="Red carpet night city" width="768" height="512" loading="eager" decoding="async" />
   </div>
-  <h2 id="journey-title" class="journey-title reveal">Your Journey to Recognition Starts Here</h2>
-  <p class="journey-copy reveal">
+  <h2 id="journey-title" class="gold-text mx-auto mb-7 mt-0 animate-[revealUp_760ms_both_ease] text-[clamp(32px,3vw,40px)] font-black leading-[1.1]">Your Journey to Recognition Starts Here</h2>
+  <p class="container-gbe mb-[55px] animate-[revealUp_760ms_both_ease] text-[clamp(15px,1.3vw,18px)] font-normal leading-[1.7] text-gbe-muted max-[1024px]:text-[15px]">
     Join a prestigious community of achievers, be acknowledged for your hard work, and inspire others with
     your story. GBE Awards 2026 is more than an award. It’s a platform to amplify your achievements and leave a
     lasting legacy on the global stage.
   </p>
-  <a class="outline-button" href="/apply">APPLY NOW</a>
+  <a class="gold-fill inline-flex h-[57px] w-[193px] items-center justify-center rounded-full border border-[rgba(255,176,1,0.62)] text-base font-bold leading-none tracking-[0.04em] text-[#080808] transition-[background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-[linear-gradient(270deg,#8a641f_0%,#ffda76_48%,#8a641f_100%)] hover:shadow-gold-glow" href="/apply">APPLY NOW</a>
 </section>
