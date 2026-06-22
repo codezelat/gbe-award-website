@@ -38,11 +38,11 @@ function WhatsappIcon(props: IconProps) {
 }
 
 const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/", Icon: InstagramIcon },
-  { label: "Facebook", href: "https://www.facebook.com/", Icon: FacebookIcon },
-  { label: "X-twitter", href: "https://x.com/", text: "X" },
-  { label: "Linkedin", href: "https://www.linkedin.com/", Icon: LinkedinIcon },
-  { label: "Whatsapp", href: "https://wa.me/", Icon: WhatsappIcon },
+  { label: "Instagram", href: "https://www.instagram.com/gbeaward/", Icon: InstagramIcon },
+  { label: "Facebook", href: "https://www.facebook.com/gbeaward/", Icon: FacebookIcon },
+  { label: "X / Twitter", href: "https://www.x.com/gbeaward/", text: "X" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/gbeaward/", Icon: LinkedinIcon },
+  { label: "WhatsApp", href: "https://wa.link/10p065", Icon: WhatsappIcon },
 ];
 
 type SocialLinksProps = {
