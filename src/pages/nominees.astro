@@ -1,0 +1,66 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { assetPaths, featuredNominees, nomineeEntries } from "../data/home";
+
+const title = "Nominees | Global Business Excellence Awards 2026";
+const description =
+  "Meet the outstanding nominees of the Global Business Excellence Awards 2026. Companies, entrepreneurs, and leaders recognised for their excellence across the UK, Sri Lanka, and beyond.";
+const allNominees = [...featuredNominees, ...nomineeEntries];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://gbeaward.com/nominees" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[radial-gradient(circle_at_50%_9%,rgba(255,176,1,0.055),transparent_22rem),linear-gradient(#000,#000)]">
+      <Header />
+      <main class="bg-[radial-gradient(circle_at_50%_0%,rgba(224,176,60,0.08),transparent_420px),#000] pt-[210px] pb-24 max-[1024px]:pt-[160px] max-[560px]:pt-[130px] max-[560px]:pb-14">
+        <div class="container-gbe">
+          <h1 class="gold-text mb-3 text-center text-[clamp(36px,5vw,56px)] font-black leading-none max-[560px]:text-[28px]">Meet the Nominees</h1>
+          <p class="mx-auto mb-16 max-w-[680px] text-center text-[clamp(16px,1.4vw,19px)] font-normal leading-[1.7] text-gbe-muted max-[560px]:mb-10 max-[560px]:text-[15px]">
+            Outstanding talent and organisations from across the UK, Sri Lanka, and international markets,
+            recognised for their impact and excellence.
+          </p>
+
+          <div class="grid grid-cols-3 gap-6 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
+            {allNominees.map((nominee) => (
+              <article class="group relative overflow-hidden rounded-[15px] border border-[rgba(255,176,1,0.25)] bg-[linear-gradient(135deg,rgba(255,176,1,0.06),transparent_40%),rgba(5,5,5,0.95)] p-6 text-left transition-all duration-300 hover:-translate-y-1.5 hover:border-gbe-gold/60 hover:shadow-[0_12px_40px_rgba(255,176,1,0.2)]">
+                <div class="mb-4 flex items-center gap-4">
+                  <div class="relative shrink-0">
+                    <div class="absolute -inset-0.5 rounded-full bg-gradient-to-br from-gbe-gold/50 to-transparent opacity-0 blur-[2px] transition-opacity duration-300 group-hover:opacity-100"></div>
+                    <img class="relative h-16 w-16 rounded-full border-2 border-[rgba(255,176,1,0.35)] object-cover object-center transition-transform duration-300 group-hover:scale-105" src={nominee.image} alt="" width="300" height="300" loading="lazy" decoding="async" />
+                  </div>
+                  <div class="flex items-center gap-2 rounded-full border border-[rgba(255,176,1,0.25)] bg-black/50 px-3 py-1.5">
+                    <img class="h-4 w-4 object-contain" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
+                    <span class="text-[10px] font-black uppercase tracking-[0.12em] text-gbe-gold-soft">Nominee</span>
+                  </div>
+                </div>
+                <h2 class="m-0 text-[clamp(16px,1.3vw,19px)] font-bold leading-[1.25] text-white transition-colors duration-300 group-hover:text-gbe-gold">{nominee.title}</h2>
+                <p class="mb-4 mt-2 text-sm font-normal leading-[1.5] text-gbe-muted">{nominee.name}</p>
+                <div class="flex items-center justify-between border-t border-[rgba(255,176,1,0.1)] pt-3">
+                  <span class="font-script text-2xl font-bold leading-[0.9] text-white/80">Congratulations!</span>
+                  <img class="h-8 w-8 object-contain opacity-60 transition-opacity duration-300 group-hover:opacity-100" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { assetPaths, categories } from "../data/home";
+
+const title = "About GBE Awards | Global Business Excellence Awards 2026";
+const description =
+  "Learn about the Global Business Excellence Awards, organised by London Business Consultancy in London, UK. Discover our mission, judging process, and commitment to recognising excellence across the UK, Sri Lanka, and worldwide.";
+
+const stats = [
+  { value: "16", label: "Award Categories", sub: "Spanning every major industry sector" },
+  { value: "2", label: "Global Hubs", sub: "London, UK and Colombo, Sri Lanka" },
+  { value: "100+", label: "Nominees", sub: "Recognised across all categories" },
+  { value: "2026", label: "Award Year", sub: "Celebrating the sixth edition" },
+];
+
+const processSteps = [
+  { step: "01", title: "Nomination", desc: "Companies and individuals are nominated or self-nominate across one of our sixteen categories. Submissions include business impact, achievements, and supporting evidence." },
+  { step: "02", title: "Evaluation", desc: "Each nomination is assessed by our expert judging panel against criteria including innovation, leadership, market impact, sustainability, and measurable results." },
+  { step: "03", title: "Shortlisting", desc: "Judges deliberate to produce a shortlist of the most outstanding candidates per category, ensuring a fair and rigorous selection at every stage." },
+  { step: "04", title: "Award", desc: "Winners are announced and celebrated at the GBE Awards ceremony, receiving global recognition, media coverage, and entry into our alumni network." },
+];
+
+const values = [
+  { title: "Integrity", desc: "A transparent, merit-based judging process where every nomination is evaluated fairly and consistently." },
+  { title: "Excellence", desc: "We set the highest bar for what constitutes achievement, ensuring a GBE Award carries genuine prestige." },
+  { title: "Global Reach", desc: "Bridging the UK, Sri Lanka, and international markets to build a truly cross-border community of leaders." },
+  { title: "Impact", desc: "Beyond the trophy, we help winners unlock new partnerships, visibility, and growth opportunities." },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://gbeaward.com/about" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[radial-gradient(circle_at_50%_9%,rgba(255,176,1,0.055),transparent_22rem),linear-gradient(#000,#000)]">
+      <Header />
+      <main class="bg-[radial-gradient(circle_at_50%_0%,rgba(224,176,60,0.08),transparent_420px),#000] pt-[210px] pb-24 max-[1024px]:pt-[160px] max-[560px]:pt-[130px] max-[560px]:pb-14">
+
+        <!-- Hero -->
+        <section class="container-gbe mb-20 text-center max-[560px]:mb-12">
+          <h1 class="gold-text mb-4 text-[clamp(36px,5vw,56px)] font-black leading-none max-[560px]:text-[28px]">About GBE Awards</h1>
+          <p class="mx-auto max-w-[800px] text-[clamp(16px,1.4vw,19px)] font-normal leading-[1.7] text-gbe-muted max-[560px]:text-[15px]">
+            Organised by London Business Consultancy in London, UK, the Global Business Excellence Awards
+            celebrates the companies, entrepreneurs, and leaders redefining success across industries and borders.
+          </p>
+        </section>
+
+        <!-- Image showcase -->
+        <section class="container-gbe mb-20 max-[560px]:mb-12">
+          <div class="grid grid-cols-3 gap-5 max-[560px]:grid-cols-1">
+            <div class="group relative h-[280px] overflow-hidden rounded-[14px] border border-[rgba(255,176,1,0.3)] max-[560px]:h-[220px]">
+              <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" src={assetPaths.interview} alt="GBE Awards interview panel" width="768" height="419" loading="eager" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <p class="absolute bottom-4 left-4 m-0 text-sm font-bold uppercase tracking-wider text-white">Recognition</p>
+            </div>
+            <div class="group relative h-[280px] overflow-hidden rounded-[14px] border border-[rgba(255,176,1,0.3)] max-[560px]:h-[220px]">
+              <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" src={assetPaths.awardInHand} alt="Award trophy in hand at ceremony" width="768" height="419" loading="eager" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <p class="absolute bottom-4 left-4 m-0 text-sm font-bold uppercase tracking-wider text-white">Excellence</p>
+            </div>
+            <div class="group relative h-[280px] overflow-hidden rounded-[14px] border border-[rgba(255,176,1,0.3)] max-[560px]:h-[220px]">
+              <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" src={assetPaths.redCarpet} alt="Red carpet awards ceremony" width="768" height="512" loading="eager" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <p class="absolute bottom-4 left-4 m-0 text-sm font-bold uppercase tracking-wider text-white">Celebration</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="container-gbe mb-20 max-[560px]:mb-12">
+          <div class="grid grid-cols-4 gap-5 max-[1024px]:grid-cols-2 max-[560px]:gap-4">
+            {stats.map((stat) => (
+              <div class="rounded-[14px] border border-[rgba(255,176,1,0.35)] bg-[rgba(8,8,8,0.7)] p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-gbe-gold hover:shadow-[0_8px_30px_rgba(255,176,1,0.18)]">
+                <div class="gold-text mb-3 text-[clamp(32px,3vw,44px)] font-black leading-none">{stat.value}</div>
+                <p class="m-0 text-sm font-bold uppercase tracking-wider text-white">{stat.label}</p>
+                <p class="mt-1.5 mb-0 text-xs font-normal leading-relaxed text-gbe-muted">{stat.sub}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Mission -->
+        <section class="container-gbe mb-20 max-[560px]:mb-12">
+          <div class="mx-auto grid max-w-[1100px] grid-cols-[1fr_1fr] gap-10 max-[560px]:grid-cols-1">
+            <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[rgba(6,6,6,0.82)] p-10 max-[560px]:rounded-[14px] max-[560px]:p-7">
+              <div class="mb-5 h-14 w-14 shrink-0 place-items-center rounded-full border border-[rgba(255,176,1,0.5)] bg-black/40 grid">
+                <img src={assetPaths.award} alt="" width="32" height="32" loading="lazy" decoding="async" />
+              </div>
+              <h2 class="gold-text mb-4 mt-0 text-2xl font-black leading-tight max-[560px]:text-xl">Our Mission</h2>
+              <p class="mb-4 mt-0 text-[clamp(15px,1.2vw,17px)] font-normal leading-[1.7] text-gbe-muted max-[560px]:text-sm">
+                The Global Business Excellence Awards exists to shine a spotlight on the organisations and
+                individuals who push boundaries, drive innovation, and create lasting impact. We believe
+                recognition is more than a trophy, it is a catalyst for growth, credibility, and new
+                opportunities on the global stage.
+              </p>
+              <p class="m-0 text-[clamp(15px,1.2vw,17px)] font-normal leading-[1.7] text-gbe-muted max-[560px]:text-sm">
+                By bridging markets across the United Kingdom, Sri Lanka, and South Asia, we build a powerful
+                network that helps businesses scale internationally and gain the recognition they deserve.
+              </p>
+            </article>
+            <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[rgba(6,6,6,0.82)] p-10 max-[560px]:rounded-[14px] max-[560px]:p-7">
+              <div class="mb-5 grid h-14 w-14 shrink-0 place-items-center rounded-full border border-[rgba(255,176,1,0.5)] bg-black/40">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7 text-gbe-gold">
+                  <path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h2 class="gold-text mb-4 mt-0 text-2xl font-black leading-tight max-[560px]:text-xl">Who We Are</h2>
+              <p class="mb-4 mt-0 text-[clamp(15px,1.2vw,17px)] font-normal leading-[1.7] text-gbe-muted max-[560px]:text-sm">
+                London Business Consultancy is a UK-based advisory firm with deep roots in the Sri Lankan and
+                South Asian business communities. We provide strategic guidance to companies seeking to expand,
+                innovate, and connect across borders.
+              </p>
+              <p class="m-0 text-[clamp(15px,1.2vw,17px)] font-normal leading-[1.7] text-gbe-muted max-[560px]:text-sm">
+                Through GBE Awards, we extend that mission, bridging markets, connecting leaders, and building
+                a network that spans from London's financial district to Colombo's thriving enterprise
+                ecosystem and beyond.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Values -->
+        <section class="container-gbe mb-20 max-[560px]:mb-12">
+          <h2 class="gold-text mb-10 text-center text-[clamp(28px,3.5vw,40px)] font-black leading-tight max-[560px]:mb-8 max-[560px]:text-[24px]">What We Stand For</h2>
+          <div class="grid grid-cols-4 gap-5 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
+            {values.map((value) => (
+              <div class="rounded-[14px] border border-[rgba(255,176,1,0.3)] bg-[rgba(8,8,8,0.6)] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gbe-gold">
+                <h3 class="gold-text mb-3 mt-0 text-xl font-black leading-tight">{value.title}</h3>
+                <p class="m-0 text-sm font-normal leading-[1.6] text-gbe-muted">{value.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Judging process timeline -->
+        <section class="container-gbe mb-20 max-[560px]:mb-12">
+          <h2 class="gold-text mb-3 text-center text-[clamp(28px,3.5vw,40px)] font-black leading-tight max-[560px]:text-[24px]">Our Judging Process</h2>
+          <p class="mx-auto mb-12 max-w-[700px] text-center text-[clamp(15px,1.3vw,17px)] font-normal leading-[1.6] text-gbe-muted max-[560px]:mb-8 max-[560px]:text-sm">
+            Every nomination goes through a rigorous, transparent, four-stage evaluation led by industry experts from the UK, Sri Lanka, and international markets.
+          </p>
+          <div class="relative mx-auto max-w-[900px]">
+            <div class="absolute left-[27px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-gbe-gold/60 via-gbe-gold/30 to-transparent max-[560px]:left-[19px]"></div>
+            {processSteps.map((item) => (
+              <div class="relative mb-8 grid grid-cols-[56px_1fr] gap-5 last:mb-0 max-[560px]:grid-cols-[40px_1fr] max-[560px]:gap-4">
+                <div class="gold-fill grid h-14 w-14 place-items-center rounded-full border border-[rgba(255,176,1,0.5)] text-lg font-black text-black shadow-[0_0_20px_rgba(255,176,1,0.25)] max-[560px]:h-10 max-[560px]:w-10 max-[560px]:text-sm">{item.step}</div>
+                <div class="pt-2">
+                  <h3 class="mb-2 mt-0 text-xl font-bold text-white max-[560px]:text-lg">{item.title}</h3>
+                  <p class="mb-0 mt-0 text-[clamp(14px,1.1vw,16px)] font-normal leading-[1.6] text-gbe-muted max-[560px]:text-sm">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Categories list -->
+        <section class="container-gbe mb-20 max-[560px]:mb-12">
+          <h2 class="gold-text mb-10 text-center text-[clamp(28px,3.5vw,40px)] font-black leading-tight max-[560px]:mb-8 max-[560px]:text-[24px]">Award Categories</h2>
+          <div class="grid grid-cols-4 gap-4 max-[1024px]:grid-cols-3 max-[560px]:grid-cols-1">
+            {categories.map((category) => (
+              <div class="flex items-center gap-3 rounded-[10px] border border-[rgba(255,176,1,0.2)] bg-[rgba(8,8,8,0.5)] px-5 py-4 transition-colors duration-200 hover:border-gbe-gold/60">
+                <img class="h-8 w-8 shrink-0 object-contain" src={assetPaths.award} alt="" width="32" height="32" loading="lazy" decoding="async" />
+                <span class="text-sm font-bold leading-tight text-white">{category}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container-gbe text-center">
+          <div class="mx-auto max-w-[800px] rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[radial-gradient(circle_at_50%_50%,rgba(255,176,1,0.06),transparent),rgba(6,6,6,0.82)] px-10 py-14 max-[560px]:rounded-[14px] max-[560px]:px-7 max-[560px]:py-10">
+            <div class="mx-auto mb-6 grid h-20 w-20 place-items-center">
+              <img class="h-20 w-20 object-contain drop-shadow-[0_0_20px_rgba(255,176,1,0.3)]" src={assetPaths.award} alt="" width="80" height="80" loading="lazy" decoding="async" />
+            </div>
+            <h2 class="gold-text mb-4 mt-0 text-[clamp(24px,3vw,34px)] font-black leading-tight">Ready to Be Recognised?</h2>
+            <p class="mx-auto mb-8 max-w-[500px] text-[clamp(15px,1.2vw,17px)] font-normal leading-[1.7] text-gbe-muted max-[560px]:text-sm">
+              Nominate yourself or your organisation today and join a prestigious community of award-winning
+              businesses across the UK, Sri Lanka, and the world.
+            </p>
+            <a class="btn-gold btn-gold-hover" href="/contact">Apply Now</a>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+    </div>
+  </body>
+</html>
