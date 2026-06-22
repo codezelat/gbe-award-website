@@ -2,13 +2,13 @@
 import { FeaturedNomineeSlider, NomineeEntrySlider } from "./LoopSliders";
 ---
 
-<section class="bg-black py-20 text-center max-[560px]:py-[72px]" aria-labelledby="nominees-title">
+<section class="bg-black pb-20 pt-9 text-center max-[560px]:pb-[72px] max-[560px]:pt-9" aria-labelledby="nominees-title">
   <div class="animate-[revealUp_760ms_both_ease]">
     <h2 id="nominees-title" class="sr-only">Meet the Nominees</h2>
     <p class="mx-auto mb-0 mt-0 max-w-[980px] text-[clamp(14px,1.2vw,16px)] font-normal leading-[1.6] text-gbe-muted">Celebrating outstanding talent and achievements across every category.</p>
   </div>
 
-  <div class="container-gbe mb-12 mt-[42px] max-[560px]:mt-[34px]">
+  <div class="container-gbe mb-12 mt-8 max-[560px]:mt-7">
     <FeaturedNomineeSlider client:load />
     <NomineeEntrySlider client:load />
   </div>
