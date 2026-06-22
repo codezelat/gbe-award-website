@@ -40,18 +40,112 @@ import { assetPaths, navItems } from "../data/home";
   </a>
 
   <button
+    data-menu-button
     class="hidden h-10 w-10 justify-self-end place-items-center rounded-lg border border-[rgba(255,176,1,0.4)] bg-black/40 backdrop-blur-sm transition-colors duration-200 hover:bg-gbe-gold/10 max-[1024px]:grid"
     type="button"
     aria-label="Open menu"
+    aria-controls="mobile-menu"
+    aria-expanded="false"
   >
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="h-5 w-5 text-gbe-gold">
-      <path d="M4 7h16M4 12h16M4 17h16" />
+      <path data-menu-icon-open d="M4 7h16M4 12h16M4 17h16" />
+      <path data-menu-icon-close class="hidden" d="M6 6l12 12M18 6 6 18" />
     </svg>
   </button>
 </header>
 
+<div
+  data-menu-scrim
+  class="fixed inset-0 z-40 hidden bg-black/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 min-[1025px]:hidden"
+  aria-hidden="true"
+></div>
+
+<nav
+  id="mobile-menu"
+  data-mobile-menu
+  class="pointer-events-none fixed left-1/2 top-[104px] z-[60] hidden w-[min(430px,calc(100vw-32px))] -translate-x-1/2 -translate-y-3 rounded-[24px] border border-[rgba(255,176,1,0.56)] bg-[linear-gradient(145deg,rgba(10,10,10,0.96),rgba(0,0,0,0.88))] p-4 opacity-0 shadow-[0_28px_70px_rgba(0,0,0,0.72),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl transition-[opacity,transform] duration-300 min-[1025px]:hidden max-[560px]:top-[84px]"
+  aria-label="Mobile navigation"
+>
+  <div class="rounded-[18px] border border-white/10 bg-white/[0.03] p-2">
+    {navItems.map((item) => (
+      <a
+        class="flex items-center rounded-2xl px-4 py-3 text-[15px] font-extrabold uppercase tracking-[0.08em] text-white/90 transition-all duration-200 hover:bg-gbe-gold hover:text-black focus-visible:bg-gbe-gold focus-visible:text-black"
+        href={item.href}
+        data-menu-link
+      >
+        {item.label}
+      </a>
+    ))}
+  </div>
+
+  <div class="mt-4">
+    <a
+      class="btn-gold btn-gold-hover min-h-[52px] w-full !px-4 !text-[13px]"
+      href="/contact"
+      data-menu-link
+    >
+      Apply Now
+    </a>
+  </div>
+</nav>
+
 <script>
   const header = document.getElementById("site-header");
+  const menuButton = document.querySelector("[data-menu-button]");
+  const mobileMenu = document.querySelector("[data-mobile-menu]");
+  const menuScrim = document.querySelector("[data-menu-scrim]");
+  const menuOpenIcon = document.querySelector("[data-menu-icon-open]");
+  const menuCloseIcon = document.querySelector("[data-menu-icon-close]");
+
+  const setMenuOpen = (open) => {
+    if (!menuButton || !mobileMenu || !menuScrim || !menuOpenIcon || !menuCloseIcon) return;
+
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menuOpenIcon.classList.toggle("hidden", open);
+    menuCloseIcon.classList.toggle("hidden", !open);
+
+    if (open) {
+      mobileMenu.classList.remove("hidden");
+      menuScrim.classList.remove("hidden");
+      document.body.classList.add("overflow-hidden");
+      requestAnimationFrame(() => {
+        mobileMenu.classList.remove("pointer-events-none", "opacity-0", "-translate-y-3");
+        menuScrim.classList.remove("opacity-0");
+      });
+      return;
+    }
+
+    mobileMenu.classList.add("pointer-events-none", "opacity-0", "-translate-y-3");
+    menuScrim.classList.add("opacity-0");
+    document.body.classList.remove("overflow-hidden");
+    window.setTimeout(() => {
+      if (menuButton.getAttribute("aria-expanded") === "false") {
+        mobileMenu.classList.add("hidden");
+        menuScrim.classList.add("hidden");
+      }
+    }, 300);
+  };
+
+  if (menuButton && mobileMenu && menuScrim) {
+    menuButton.addEventListener("click", () => {
+      setMenuOpen(menuButton.getAttribute("aria-expanded") !== "true");
+    });
+
+    menuScrim.addEventListener("click", () => setMenuOpen(false));
+    mobileMenu.querySelectorAll("[data-menu-link]").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1024) setMenuOpen(false);
+    });
+  }
+
   if (header) {
     let ticking = false;
     const onScroll = () => {

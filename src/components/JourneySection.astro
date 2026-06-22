@@ -1,12 +1,23 @@
 ---
 import { assetPaths } from "../data/home";
+import JourneyImageSlider from "./JourneyImageSlider";
+
+const journeyImages = [
+  { src: assetPaths.interview, alt: "Interview" },
+  { src: assetPaths.awardInHand, alt: "Award in hand" },
+  { src: assetPaths.redCarpet, alt: "Red carpet night city" },
+];
 ---
 
 <section class="bg-gbe-panel py-20 text-center max-[560px]:pb-[78px] max-[560px]:pt-10" aria-labelledby="journey-title">
-  <div class="container-gbe mb-[66px] grid grid-cols-3 gap-10 max-[1024px]:mb-[86px] max-[1024px]:grid-cols-1 max-[1024px]:gap-3.5">
-    <img class="h-[202px] w-full rounded-xl object-cover object-center max-[1024px]:h-[159px]" src={assetPaths.interview} alt="Interview" width="768" height="419" loading="eager" decoding="async" />
-    <img class="h-[202px] w-full rounded-xl object-cover object-center max-[1024px]:h-[159px]" src={assetPaths.awardInHand} alt="Award in hand" width="768" height="419" loading="eager" decoding="async" />
-    <img class="h-[202px] w-full rounded-xl object-cover object-center max-[1024px]:h-[159px]" src={assetPaths.redCarpet} alt="Red carpet night city" width="768" height="512" loading="eager" decoding="async" />
+  <div class="container-gbe mb-[66px] grid grid-cols-3 gap-10 max-[1024px]:hidden">
+    {journeyImages.map((image) => (
+      <img class="h-[202px] w-full rounded-xl object-cover object-center" src={image.src} alt={image.alt} width="768" height="419" loading="eager" decoding="async" />
+    ))}
+  </div>
+
+  <div class="mb-[72px] hidden overflow-hidden max-[1024px]:block max-[560px]:mb-[64px]">
+    <JourneyImageSlider images={journeyImages} client:load />
   </div>
   <h2 id="journey-title" class="gold-text mx-auto mb-7 mt-0 animate-[revealUp_760ms_both_ease] text-[clamp(32px,3vw,40px)] font-black leading-[1.1]">Your Journey to Recognition Starts Here</h2>
   <p class="container-gbe mb-[55px] animate-[revealUp_760ms_both_ease] text-[clamp(15px,1.3vw,18px)] font-normal leading-[1.7] text-gbe-muted max-[1024px]:text-[15px]">

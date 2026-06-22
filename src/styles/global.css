@@ -141,6 +141,10 @@
   overflow: visible !important;
 }
 
+.journey-mobile-slider .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
 .category-slider .swiper-pagination {
   position: relative !important;
   margin-top: 28px;
