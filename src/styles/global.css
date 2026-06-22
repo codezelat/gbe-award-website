@@ -17,8 +17,10 @@
   --gold: #ffb001;
   --gold-soft: #e0b03c;
   --gold-deep: #6a4c1a;
+  --gold-bright: #ffd05a;
+  --gold-gradient: linear-gradient(270deg, #6a4c1a 0%, #b88419 27%, #ffd05a 50%, #b88419 73%, #6a4c1a 100%);
   --border-gold: rgba(255, 176, 1, 0.72);
-  --shadow-gold: 0 0 26px rgba(255, 176, 1, 0.18);
+  --shadow-gold: 0 0 30px rgba(255, 176, 1, 0.28);
   --container: min(1260px, calc(100vw - 48px));
   font-family: "Tajawal", system-ui, sans-serif;
   background: var(--bg);
@@ -71,6 +73,7 @@ img {
   background:
     radial-gradient(circle at 50% 9%, rgba(255, 176, 1, 0.055), transparent 22rem),
     linear-gradient(#000, #000);
+  animation: pageFade 420ms ease both;
 }
 
 .site-header {
@@ -96,6 +99,7 @@ img {
   width: 46px;
   height: 70px;
   object-fit: contain;
+  animation: mediaFade 420ms ease both;
 }
 
 .desktop-nav {
@@ -137,8 +141,8 @@ img {
   justify-self: end;
   padding: 0 28px;
   border: 0;
-  background: linear-gradient(135deg, #6f511d, #ffbc25 50%, #6d4b16);
-  color: #fff;
+  background: var(--gold-gradient);
+  color: #080808;
   box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.16);
 }
 
@@ -148,9 +152,9 @@ img {
 
 .hero-section {
   position: relative;
-  min-height: 1186px;
+  min-height: 1040px;
   margin-top: -100px;
-  padding-top: 522px;
+  padding-top: 382px;
   background: #000;
   overflow: hidden;
 }
@@ -164,7 +168,7 @@ img {
 
 .hero-video {
   z-index: 0;
-  opacity: 0.32;
+  opacity: 0.68;
 }
 
 .hero-video iframe {
@@ -180,8 +184,8 @@ img {
 .hero-video-overlay {
   z-index: 1;
   background:
-    radial-gradient(circle at 50% 48%, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.9) 48%, #000 78%),
-    linear-gradient(#000 0 8%, transparent 18% 78%, #000 100%);
+    radial-gradient(circle at 50% 47%, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.68) 50%, #000 82%),
+    linear-gradient(#000 0 7%, transparent 20% 74%, #000 100%);
 }
 
 .hero-inner {
@@ -202,7 +206,7 @@ img {
   height: 450px;
   object-fit: contain;
   filter: drop-shadow(0 20px 22px rgba(255, 176, 1, 0.12));
-  animation: trophyFloat 5.8s ease-in-out infinite;
+  animation: mediaFade 480ms ease both, trophyFloat 5.8s ease-in-out infinite;
 }
 
 .hero-trophy--left {
@@ -224,19 +228,22 @@ img {
 .hero-copy h1 {
   margin: 0;
   max-width: 770px;
-  color: var(--gold-soft);
-  font-size: clamp(44px, 5.2vw, 68px);
+  color: transparent;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: clamp(48px, 5vw, 72px);
   font-weight: 900;
-  line-height: 0.94;
+  line-height: 1;
 }
 
 .hero-copy p {
   max-width: 770px;
-  margin: 34px 0 28px;
+  margin: 32px 0 28px;
   color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.28;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
 }
 
 .gold-button {
@@ -248,10 +255,12 @@ img {
   min-height: 57px;
   padding: 0 28px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #80601d, #ffb812 54%, #735113);
+  border: 1px solid var(--gold-deep);
+  background: var(--gold-gradient);
   color: #000;
-  font-size: 14px;
-  font-weight: 900;
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
@@ -335,7 +344,10 @@ img {
 
 .section-display {
   margin: 0;
-  color: var(--gold-soft);
+  color: transparent;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
   font-size: clamp(38px, 4vw, 52px);
   font-weight: 900;
   line-height: 1.05;
@@ -371,7 +383,10 @@ img {
 
 .section-heading h2 {
   margin: 0;
-  color: var(--gold-soft);
+  color: transparent;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
   font-size: clamp(31px, 3vw, 40px);
   font-weight: 900;
   line-height: 1.1;
@@ -466,12 +481,14 @@ img {
   border-radius: 12px;
   object-fit: cover;
   object-position: center;
+  opacity: 1;
+  filter: none;
 }
 
 .journey-title {
   margin: 0 auto 28px;
   color: transparent;
-  background: linear-gradient(270deg, var(--gold-deep) 0%, var(--gold-soft) 47%, var(--gold-deep) 100%);
+  background: var(--gold-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   font-size: clamp(32px, 3vw, 40px);
@@ -490,16 +507,23 @@ img {
 
 .outline-button {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 193px;
   height: 57px;
   border: 1px solid rgba(255, 176, 1, 0.62);
   border-radius: 999px;
+  color: #080808;
+  background: var(--gold-gradient);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
   transition: background-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 
 .outline-button:hover {
   transform: translateY(-2px);
-  background: rgba(255, 176, 1, 0.12);
+  background: linear-gradient(270deg, #8a641f 0%, #ffda76 48%, #8a641f 100%);
   box-shadow: var(--shadow-gold);
 }
 
@@ -618,7 +642,10 @@ img {
 
 .site-footer h2 {
   margin: 0 0 34px;
-  color: var(--gold-soft);
+  color: transparent;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
   font-size: 32px;
   font-weight: 900;
   line-height: 1.1;
@@ -692,6 +719,26 @@ img {
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mediaFade {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
   }
 }
 
