@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { seo } from "../data/home";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The page you are looking for could not be found. Explore the Global Business Excellence Awards 2026." />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+    <title>Page Not Found | Global Business Excellence Awards</title>
+  </head>
+  <body>
+    <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[radial-gradient(circle_at_50%_9%,rgba(255,176,1,0.055),transparent_22rem),linear-gradient(#000,#000)]">
+      <Header />
+      <main class="flex min-h-screen flex-col items-center justify-center px-6 text-center">
+        <div class="animate-[revealUp_760ms_both_ease]">
+          <h1 class="gold-text m-0 text-[clamp(80px,18vw,200px)] font-black leading-none">404</h1>
+          <h2 class="gold-text mb-6 mt-4 text-[clamp(24px,4vw,36px)] font-black leading-[1.15]">Page Not Found</h2>
+          <p class="mx-auto mb-10 max-w-[480px] text-[clamp(15px,1.3vw,17px)] font-normal leading-[1.7] text-gbe-muted">
+            The page you are looking for may have been moved, renamed, or no longer exists. Let's get you back on track.
+          </p>
+          <a class="btn-gold btn-gold-hover" href="/">Return Home</a>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

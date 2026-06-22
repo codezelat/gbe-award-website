@@ -24,20 +24,22 @@ export const footerItems = [
 ];
 
 export const categories = [
-  "Healthcare & Wellness",
-  "Finance & Banking",
-  "Retail & E-commerce",
   "Business & Entrepreneurship",
-  "Corporate Excellence",
-  "Marketing, Branding & Advertising",
   "Technology & Innovation",
-  "Education & Academia",
-  "Healthcare & Wellness",
   "Finance & Banking",
-  "Retail & E-commerce",
-  "Business & Entrepreneurship",
-  "Corporate Excellence",
+  "Healthcare & Wellness",
   "Marketing, Branding & Advertising",
+  "Media & Broadcasting",
+  "Education & Academia",
+  "Corporate Excellence",
+  "Retail & E-commerce",
+  "Real Estate & Property Development",
+  "Hospitality & Tourism",
+  "Manufacturing & Industrial",
+  "Digital Transformation",
+  "Sustainability & ESG",
+  "Social Impact & Community",
+  "Women in Business Leadership",
 ];
 
 export const featuredNominees = [
@@ -187,7 +189,9 @@ export const nomineeEntries = [
 ];
 
 export const seo = {
-  title: "Global Business Excellence Awards 2026 | GBE - Recognizing Global Leaders",
+  title: "GBE Awards 2026 | Global Business Excellence Awards - Recognising Global Leaders",
   description:
-    "Join the Global Business Excellence Awards 2026 (GBE Awards 2026) and celebrate outstanding achievements in business. Recognizing global innovation, leadership, and excellence. Nominate now!",
+    "The Global Business Excellence Awards 2026 recognise outstanding companies and leaders across the UK, Sri Lanka, and beyond. From London's financial district to Colombo's startup ecosystem, GBE Awards celebrates innovation, leadership, and enterprise. Nominate or apply today.",
+  keywords:
+    "business excellence awards, GBE awards 2026, London business awards, UK business awards, Sri Lanka business awards, Colombo business awards, corporate excellence, business consultancy awards, entrepreneur awards, innovation awards, leadership awards",
 };
