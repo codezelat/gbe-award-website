@@ -2,22 +2,68 @@
 import { assetPaths, navItems } from "../data/home";
 ---
 
-<header class="fixed left-1/2 top-0 z-20 grid h-[150px] w-[var(--container)] -translate-x-1/2 grid-cols-[1fr_auto_1fr] items-center max-[1024px]:grid-cols-[auto_1fr_auto] max-[560px]:h-[90px] max-[560px]:w-[calc(100vw-40px)]" aria-label="Primary">
-  <a class="justify-self-start translate-x-[110px] max-[1024px]:translate-x-0" href="/" aria-label="Global Business Excellence Awards home">
-    <img class="h-[70px] w-[46px] animate-[mediaFade_420ms_ease_both] object-contain max-[560px]:h-[49px] max-[560px]:w-8" src={assetPaths.logo} alt="GBE Awards" width="46" height="70" decoding="async" />
+<header
+  id="site-header"
+  class="site-header fixed left-1/2 top-0 z-50 grid h-[130px] w-[var(--container)] -translate-x-1/2 grid-cols-[1fr_auto_1fr] items-center rounded-b-[20px] max-[1024px]:grid-cols-[auto_1fr_auto] max-[560px]:h-[90px] max-[560px]:w-[calc(100vw-40px)]"
+  aria-label="Primary"
+>
+  <a class="justify-self-center" href="/" aria-label="Global Business Excellence Awards home">
+    <img
+      class="h-[64px] w-[42px] animate-[mediaFade_420ms_ease_both] object-contain max-[560px]:h-[49px] max-[560px]:w-8"
+      src={assetPaths.logo}
+      alt="GBE Awards"
+      width="46"
+      height="70"
+      decoding="async"
+    />
   </a>
 
-  <nav class="flex min-h-[69px] items-center gap-[18px] rounded-full border border-[rgba(255,176,1,0.72)] px-[72px] py-[11px] max-[1024px]:hidden" aria-label="Primary navigation">
+  <nav
+    class="desktop-nav flex min-h-[56px] items-center gap-1.5 rounded-full border border-[rgba(255,176,1,0.5)] bg-black/40 px-3 py-2 backdrop-blur-sm max-[1024px]:hidden"
+    aria-label="Primary navigation"
+  >
     {navItems.map((item) => (
-      <a class="inline-flex min-h-[45px] items-center justify-center rounded-full border border-[rgba(255,176,1,0.72)] px-[26px] text-[15px] font-bold leading-none tracking-[0.06em] text-white transition-[transform,background-color,color,box-shadow] duration-[220ms] hover:-translate-y-0.5 hover:bg-gbe-gold hover:text-[#070707] hover:shadow-gold-glow" href={item.href}>{item.label}</a>
+      <a
+        class="rounded-full px-5 py-2.5 text-[14px] font-bold uppercase tracking-[0.08em] text-white/90 transition-all duration-200 hover:bg-gbe-gold hover:text-black hover:shadow-[0_0_18px_rgba(255,176,1,0.4)]"
+        href={item.href}
+      >
+        {item.label}
+      </a>
     ))}
   </nav>
 
-  <a class="gold-fill inline-flex min-h-[45px] items-center justify-center justify-self-end rounded-full px-7 text-[15px] font-bold leading-none tracking-[0.06em] text-[#080808] shadow-[inset_0_0_16px_rgba(255,255,255,0.16)] transition-[transform,background-color,color,box-shadow] duration-[220ms] hover:-translate-y-0.5 hover:bg-gbe-gold hover:text-[#070707] hover:shadow-gold-glow max-[1024px]:hidden" href="/apply">APPLY NOW</a>
+  <a
+    class="btn-gold btn-gold-hover justify-self-center min-h-[48px] !px-7 !text-[14px] max-[1024px]:hidden"
+    href="/apply"
+  >
+    Apply Now
+  </a>
 
-  <button class="hidden w-7 justify-self-end gap-1 border-0 bg-transparent p-0 max-[1024px]:grid" type="button" aria-label="Open menu">
-    <span class="block h-[3px] w-full rounded-full bg-gbe-gold"></span>
-    <span class="block h-[3px] w-full rounded-full bg-gbe-gold"></span>
-    <span class="block h-[3px] w-full rounded-full bg-gbe-gold"></span>
+  <button
+    class="hidden h-10 w-10 justify-self-end place-items-center rounded-lg border border-[rgba(255,176,1,0.4)] bg-black/40 backdrop-blur-sm transition-colors duration-200 hover:bg-gbe-gold/10 max-[1024px]:grid"
+    type="button"
+    aria-label="Open menu"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="h-5 w-5 text-gbe-gold">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
   </button>
 </header>
+
+<script>
+  const header = document.getElementById("site-header");
+  if (header) {
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          header.classList.toggle("site-header--scrolled", window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+</script>

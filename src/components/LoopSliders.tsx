@@ -15,24 +15,26 @@ const sliderModules = [Autoplay, Pagination];
 export function CategorySlider() {
   return (
     <Swiper
-      className="category-slider gbe-swiper container-gbe mt-[42px] pb-0 max-[560px]:mt-[54px]"
+      className="category-slider gbe-swiper container-gbe mt-[42px] max-[560px]:mt-[54px]"
       modules={sliderModules}
       slidesPerView={1}
       slidesPerGroup={1}
-      spaceBetween={10}
+      spaceBetween={16}
       loop
-      autoplay={{ delay: 2000, disableOnInteraction: false }}
+      autoplay={{ delay: 2500, disableOnInteraction: false }}
       pagination={{ clickable: true }}
       breakpoints={{
-        768: { slidesPerView: 2 },
-        1025: { slidesPerView: 3 },
+        768: { slidesPerView: 2, spaceBetween: 20 },
+        1025: { slidesPerView: 3, spaceBetween: 24 },
       }}
     >
       {categories.map((category, index) => (
         <SwiperSlide key={`${category}-${index}`}>
-          <article className="grid min-h-[250px] place-items-center rounded-[10px] border-2 border-[rgba(255,176,1,0.78)] bg-gbe-panel px-5 pb-[38px] pt-11 transition-[transform,box-shadow,border-color] duration-[240ms] hover:-translate-y-1 hover:border-gbe-gold hover:shadow-gold-glow max-[1024px]:min-h-[238px]">
-            <img className="h-[100px] w-[100px] object-contain" src={assetPaths.award} alt="" width="100" height="100" loading="lazy" decoding="async" />
-            <h3 className="mb-0 mt-5 max-w-[300px] text-[clamp(18px,1.6vw,22px)] font-bold leading-[1.2] text-white max-[560px]:text-[17px]">{category}</h3>
+          <article className="group grid min-h-[250px] place-items-center overflow-hidden rounded-[12px] border border-[rgba(255,176,1,0.5)] bg-gradient-to-b from-[#0a0a0a] to-[#050505] px-5 pb-[38px] pt-11 transition-all duration-300 hover:-translate-y-[6px] hover:border-gbe-gold hover:shadow-[0_12px_40px_rgba(255,176,1,0.25)] hover:bg-gradient-to-b hover:from-[#111111] hover:to-[#0a0a0a] max-[1024px]:min-h-[238px]">
+            <div className="mb-5 transition-transform duration-300 group-hover:scale-110">
+              <img className="h-[100px] w-[100px] object-contain drop-shadow-[0_4px_12px_rgba(255,176,1,0.15)]" src={assetPaths.award} alt="" width="100" height="100" loading="lazy" decoding="async" />
+            </div>
+            <h3 className="mb-0 max-w-[300px] text-center text-[clamp(17px,1.5vw,21px)] font-bold leading-[1.25] text-white transition-colors duration-300 group-hover:text-gbe-gold max-[560px]:text-[17px]">{category}</h3>
           </article>
         </SwiperSlide>
       ))}
