@@ -6,7 +6,7 @@ type Particle = {
   speed: number;
   size: number;
   opacity: number;
-  hue: "gold" | "blue";
+  variant: "gold" | "accent";
 };
 
 const particleCount = 72;
@@ -18,9 +18,45 @@ function createParticles() {
     speed: 0.0008 + Math.random() * 0.0018,
     size: 0.65 + Math.random() * 1.85,
     opacity: 0.16 + Math.random() * 0.5,
-    hue: index % 4 === 0 ? "gold" : "blue",
+    variant: index % 4 === 0 ? "gold" : "accent",
   }));
 }
+
+type ThemeColors = {
+  bgCenter: (pulse: number) => string;
+  bgMid: string;
+  bgEdge: string;
+  particlePrimary: (opacity: number) => string;
+  particleSecondary: (opacity: number) => string;
+  shimmerMid: string;
+  shimmerEnd: string;
+  ringInner: string;
+  ringOuter: string;
+};
+
+const darkTheme: ThemeColors = {
+  bgCenter: (pulse) => `rgba(28, 82, 196, ${0.2 + pulse * 0.04})`,
+  bgMid: "rgba(9, 24, 72, 0.22)",
+  bgEdge: "rgba(0, 0, 0, 0.1)",
+  particlePrimary: (o) => `rgba(255, 206, 104, ${o})`,
+  particleSecondary: (o) => `rgba(116, 166, 255, ${o})`,
+  shimmerMid: "rgba(255, 176, 1, 0.07)",
+  shimmerEnd: "rgba(38, 111, 255, 0)",
+  ringInner: "rgba(255, 176, 1, 0.11)",
+  ringOuter: "rgba(38, 111, 255, 0)",
+};
+
+const lightTheme: ThemeColors = {
+  bgCenter: (pulse) => `rgba(200, 150, 30, ${0.2 + pulse * 0.06})`,
+  bgMid: "rgba(200, 150, 30, 0.1)",
+  bgEdge: "rgba(200, 150, 30, 0)",
+  particlePrimary: (o) => `rgba(200, 150, 30, ${o * 1.2})`,
+  particleSecondary: (o) => `rgba(180, 130, 20, ${o * 0.9})`,
+  shimmerMid: "rgba(200, 150, 30, 0.12)",
+  shimmerEnd: "rgba(200, 150, 30, 0)",
+  ringInner: "rgba(200, 150, 30, 0.18)",
+  ringOuter: "rgba(200, 150, 30, 0)",
+};
 
 export default function HeroLiveBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -33,7 +69,25 @@ export default function HeroLiveBackground() {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let currentTheme: "dark" | "light" = "dark";
+
+    const readTheme = () => {
+      currentTheme =
+        document.documentElement.getAttribute("data-theme") === "light"
+          ? "light"
+          : "dark";
+    };
+    readTheme();
+
+    const themeObserver = new MutationObserver(readTheme);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
     const particles = createParticles();
     let animationFrame = 0;
     let width = 0;
@@ -52,16 +106,26 @@ export default function HeroLiveBackground() {
     };
 
     const drawAura = (time: number) => {
+      const colors =
+        currentTheme === "light" ? lightTheme : darkTheme;
       const centerX = width / 2;
       const centerY = height * 0.38;
       const pulse = Math.sin(time * 0.0012) * 0.5 + 0.5;
 
       context.clearRect(0, 0, width, height);
 
-      const background = context.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(width, height) * 0.72);
-      background.addColorStop(0, `rgba(28, 82, 196, ${0.2 + pulse * 0.04})`);
-      background.addColorStop(0.36, "rgba(9, 24, 72, 0.22)");
-      background.addColorStop(0.78, "rgba(0, 0, 0, 0.1)");
+      // Background glow
+      const background = context.createRadialGradient(
+        centerX,
+        centerY,
+        0,
+        centerX,
+        centerY,
+        Math.max(width, height) * 0.72
+      );
+      background.addColorStop(0, colors.bgCenter(pulse));
+      background.addColorStop(0.36, colors.bgMid);
+      background.addColorStop(0.78, colors.bgEdge);
       background.addColorStop(1, "rgba(0, 0, 0, 0)");
       context.fillStyle = background;
       context.fillRect(0, 0, width, height);
@@ -69,13 +133,19 @@ export default function HeroLiveBackground() {
       context.save();
       context.globalCompositeOperation = "screen";
 
+      // Shimmer lines
       for (let i = 0; i < 9; i += 1) {
         const offset = (i - 4) * width * 0.07;
         const shimmer = Math.sin(time * 0.00055 + i) * 28;
-        const gradient = context.createLinearGradient(centerX + offset, height * 0.08, centerX + offset + shimmer, height * 0.78);
+        const gradient = context.createLinearGradient(
+          centerX + offset,
+          height * 0.08,
+          centerX + offset + shimmer,
+          height * 0.78
+        );
         gradient.addColorStop(0, "rgba(255, 208, 90, 0)");
-        gradient.addColorStop(0.48, "rgba(255, 176, 1, 0.07)");
-        gradient.addColorStop(1, "rgba(38, 111, 255, 0)");
+        gradient.addColorStop(0.48, colors.shimmerMid);
+        gradient.addColorStop(1, colors.shimmerEnd);
 
         context.beginPath();
         context.moveTo(centerX + offset * 0.22, height * 0.12);
@@ -85,30 +155,54 @@ export default function HeroLiveBackground() {
         context.stroke();
       }
 
+      // Particles
       particles.forEach((particle) => {
-        particle.angle += particle.speed * (prefersReducedMotion.matches ? 0.2 : 1);
-        const ellipseX = centerX + Math.cos(particle.angle) * particle.radius * width * 0.58;
-        const ellipseY = centerY + Math.sin(particle.angle * 1.38) * particle.radius * height * 0.36;
-        const twinkle = 0.48 + Math.sin(time * 0.0022 + particle.angle * 7) * 0.42;
+        particle.angle +=
+          particle.speed * (prefersReducedMotion.matches ? 0.2 : 1);
+        const ellipseX =
+          centerX +
+          Math.cos(particle.angle) * particle.radius * width * 0.58;
+        const ellipseY =
+          centerY +
+          Math.sin(particle.angle * 1.38) * particle.radius * height * 0.36;
+        const twinkle =
+          0.48 + Math.sin(time * 0.0022 + particle.angle * 7) * 0.42;
 
         context.beginPath();
         context.arc(ellipseX, ellipseY, particle.size, 0, Math.PI * 2);
         context.fillStyle =
-          particle.hue === "gold"
-            ? `rgba(255, 206, 104, ${particle.opacity * twinkle})`
-            : `rgba(116, 166, 255, ${particle.opacity * twinkle})`;
+          particle.variant === "gold"
+            ? colors.particlePrimary(particle.opacity * twinkle)
+            : colors.particleSecondary(particle.opacity * twinkle);
         context.fill();
       });
 
-      const ringRadius = Math.min(width, height) * (0.23 + pulse * 0.018);
-      const ring = context.createRadialGradient(centerX, centerY, ringRadius * 0.78, centerX, centerY, ringRadius * 1.2);
+      // Ring
+      const ringRadius =
+        Math.min(width, height) * (0.23 + pulse * 0.018);
+      const ring = context.createRadialGradient(
+        centerX,
+        centerY,
+        ringRadius * 0.78,
+        centerX,
+        centerY,
+        ringRadius * 1.2
+      );
       ring.addColorStop(0, "rgba(255, 176, 1, 0)");
-      ring.addColorStop(0.48, "rgba(255, 176, 1, 0.11)");
-      ring.addColorStop(1, "rgba(38, 111, 255, 0)");
+      ring.addColorStop(0.48, colors.ringInner);
+      ring.addColorStop(1, colors.ringOuter);
       context.strokeStyle = ring;
       context.lineWidth = 1.4;
       context.beginPath();
-      context.ellipse(centerX, centerY, ringRadius * 1.55, ringRadius * 0.52, 0, 0, Math.PI * 2);
+      context.ellipse(
+        centerX,
+        centerY,
+        ringRadius * 1.55,
+        ringRadius * 0.52,
+        0,
+        0,
+        Math.PI * 2
+      );
       context.stroke();
 
       context.restore();
@@ -122,8 +216,8 @@ export default function HeroLiveBackground() {
     resize();
     drawAura(0);
 
-    const observer = new ResizeObserver(resize);
-    observer.observe(canvas);
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(canvas);
 
     const startAnimation = () => {
       window.cancelAnimationFrame(animationFrame);
@@ -161,7 +255,8 @@ export default function HeroLiveBackground() {
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
-      observer.disconnect();
+      resizeObserver.disconnect();
+      themeObserver.disconnect();
       prefersReducedMotion.removeEventListener("change", onMotionChange);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
