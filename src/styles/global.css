@@ -6,7 +6,7 @@
 @import "@fontsource/tangerine/700.css";
 @import "tailwindcss";
 
-/* ===== THEME VARIABLES ===== */
+/* ===== DARK THEME (default) ===== */
 :root,
 [data-theme="dark"] {
   --c-bg: #000000;
@@ -39,6 +39,7 @@
   color-scheme: dark;
 }
 
+/* ===== LIGHT THEME ===== */
 [data-theme="light"] {
   --c-bg: #f3f1ec;
   --c-surface: #ffffff;
@@ -56,17 +57,17 @@
   --c-header-bg: rgba(243, 241, 236, 0.88);
   --c-header-shadow: 0 4px 20px rgba(26, 26, 46, 0.08);
   --c-input-bg: rgba(255, 255, 255, 0.85);
-  --c-card-shadow: 0 2px 16px rgba(26, 26, 46, 0.06), 0 0 0 1px rgba(255, 176, 1, 0.06);
-  --c-card-shadow-hover: 0 12px 40px rgba(26, 26, 46, 0.1), 0 0 0 1px rgba(255, 176, 1, 0.15);
+  --c-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --c-card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.07), 0 4px 6px rgba(0, 0, 0, 0.05);
   --c-border-subtle: rgba(26, 26, 46, 0.08);
   --c-border-card: rgba(255, 176, 1, 0.3);
   --c-border-gold: rgba(255, 176, 1, 0.5);
-  --c-hero-overlay: radial-gradient(circle at 50% 35%, rgba(255, 200, 60, 0.1) 0%, rgba(255, 176, 1, 0.04) 35%, transparent 65%);
-  --c-page-glow: radial-gradient(circle at 50% 0%, rgba(255, 200, 60, 0.1) 0%, rgba(255, 176, 1, 0.03) 35%, transparent 60%), linear-gradient(var(--c-bg), var(--c-bg));
-  --c-hero-glow: radial-gradient(circle at 50% 30%, rgba(200, 150, 30, 0.25), rgba(255, 176, 1, 0.1) 40%, transparent 70%), radial-gradient(circle at 20% 60%, rgba(255, 176, 1, 0.12), transparent 50%), radial-gradient(circle at 80% 60%, rgba(255, 176, 1, 0.12), transparent 50%), linear-gradient(var(--c-bg), var(--c-bg));
+  --c-hero-overlay: radial-gradient(circle at 50% 40%, rgba(255, 200, 60, 0.12) 0%, rgba(255, 176, 1, 0.04) 40%, transparent 70%);
+  --c-page-glow: radial-gradient(circle at 50% 0%, rgba(255, 200, 60, 0.08) 0%, transparent 50%), linear-gradient(var(--c-bg), var(--c-bg));
+  --c-hero-glow: radial-gradient(ellipse at 50% 40%, rgba(255, 200, 60, 0.15) 0%, rgba(255, 176, 1, 0.05) 45%, transparent 70%), radial-gradient(circle at 20% 70%, rgba(255, 176, 1, 0.06), transparent 45%), radial-gradient(circle at 80% 70%, rgba(255, 176, 1, 0.06), transparent 45%), linear-gradient(var(--c-bg), var(--c-bg));
   --c-img-overlay: linear-gradient(to top, rgba(26, 26, 46, 0.7), transparent 60%);
   --c-img-gradient-bottom: rgba(26, 26, 46, 0.75);
-  --gold-gradient: linear-gradient(270deg, #4a3008 0%, #8a6420 27%, #c8941e 50%, #8a6420 73%, #4a3008 100%);
+  --gold-gradient: linear-gradient(270deg, #b8860b 0%, #daa520 30%, #f0c040 50%, #daa520 70%, #b8860b 100%);
   color-scheme: light;
 }
 
@@ -205,10 +206,7 @@
   }
 
   [data-theme="light"] .mandala {
-    background:
-      repeating-radial-gradient(circle, transparent 0 12px, rgba(255, 176, 1, 0.12) 13px 14px),
-      conic-gradient(from 0deg, transparent, rgba(255, 176, 1, 0.15), transparent 35deg);
-    opacity: 0.5;
+    opacity: 0.35;
   }
 
   .nominee-card::before {
@@ -220,33 +218,148 @@
   }
 }
 
-/* ===== HERO LIGHT MODE ===== */
+/* ========================================================
+   LIGHT MODE OVERRIDES (outside @layer for highest priority)
+   ======================================================== */
+
+/* Gold text becomes deep navy in light mode for readability */
+[data-theme="light"] .gold-text {
+  color: var(--c-text);
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+}
+
+/* Gold fill stays gold but with vibrant gradient */
+[data-theme="light"] .gold-fill {
+  box-shadow: 0 2px 8px rgba(184, 134, 11, 0.25);
+}
+
+/* Hero: hide dark-mode canvas, show CSS atmosphere */
 .hero-section canvas {
   transition: opacity 0.5s ease;
 }
 
 [data-theme="light"] .hero-section canvas {
-  opacity: 0.4;
+  display: none;
 }
 
+/* Trophy shadows */
 [data-theme="light"] .hero-section .hero-trophy-shadow {
-  filter: drop-shadow(0 20px 32px rgba(200, 150, 30, 0.3));
+  filter: drop-shadow(0 20px 30px rgba(184, 134, 11, 0.25));
 }
 
 [data-theme="dark"] .hero-section .hero-trophy-shadow {
   filter: drop-shadow(0 20px 24px rgba(17, 80, 255, 0.22));
 }
 
-/* Gold text visibility in light mode */
-[data-theme="light"] .gold-text {
-  text-shadow: 0 2px 4px rgba(74, 48, 8, 0.25);
+/* Hero animated orbs (light mode atmosphere) */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
-[data-theme="light"] .gold-fill {
-  box-shadow: 0 2px 8px rgba(74, 48, 8, 0.2);
+[data-theme="dark"] .hero-orbs {
+  display: none;
 }
 
-/* ===== SWIPER OVERRIDES (outside layers to beat cascade) ===== */
+.hero-orb--1 {
+  top: 5%;
+  left: -5%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(255, 200, 60, 0.45) 0%, rgba(255, 176, 1, 0.15) 40%, transparent 70%);
+  filter: blur(30px);
+  animation: orbDrift1 18s ease-in-out infinite;
+}
+
+.hero-orb--2 {
+  top: 20%;
+  right: -3%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(255, 176, 1, 0.35) 0%, rgba(255, 200, 60, 0.1) 40%, transparent 70%);
+  filter: blur(25px);
+  animation: orbDrift2 14s ease-in-out infinite;
+}
+
+.hero-orb--3 {
+  bottom: 8%;
+  left: 22%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 200, 60, 0.3) 0%, rgba(255, 176, 1, 0.08) 40%, transparent 70%);
+  filter: blur(35px);
+  animation: orbDrift3 22s ease-in-out infinite;
+}
+
+@media (max-width: 1024px) {
+  .hero-orb--1 { width: 380px; height: 380px; }
+  .hero-orb--2 { width: 320px; height: 320px; }
+  .hero-orb--3 { width: 280px; height: 280px; }
+}
+
+@media (max-width: 560px) {
+  .hero-orb--3 { display: none; }
+  .hero-orb--1 { width: 280px; height: 280px; top: 10%; left: -10%; }
+  .hero-orb--2 { width: 240px; height: 240px; top: 30%; right: -8%; }
+}
+
+@keyframes orbDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  25% { transform: translate(35px, -25px) scale(1.06); opacity: 0.9; }
+  50% { transform: translate(-20px, 20px) scale(0.94); opacity: 0.65; }
+  75% { transform: translate(15px, 30px) scale(1.03); opacity: 0.85; }
+}
+
+@keyframes orbDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.65; }
+  33% { transform: translate(-30px, 25px) scale(1.08); opacity: 0.85; }
+  66% { transform: translate(25px, -20px) scale(0.95); opacity: 0.6; }
+}
+
+@keyframes orbDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  20% { transform: translate(20px, -30px) scale(1.04); opacity: 0.8; }
+  40% { transform: translate(-15px, 10px) scale(0.97); opacity: 0.55; }
+  60% { transform: translate(25px, 15px) scale(1.06); opacity: 0.75; }
+  80% { transform: translate(-10px, -20px) scale(0.98); opacity: 0.7; }
+}
+
+/* Hero line art pattern (light mode only) */
+.hero-pattern {
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 23px, rgba(255, 176, 1, 0.14) 23px, rgba(255, 176, 1, 0.14) 25px),
+    repeating-linear-gradient(-45deg, transparent, transparent 23px, rgba(255, 176, 1, 0.14) 23px, rgba(255, 176, 1, 0.14) 25px);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 80%);
+}
+
+[data-theme="dark"] .hero-pattern {
+  display: none;
+}
+
+/* Header scroll border */
+[data-theme="light"] .site-header--scrolled {
+  border-bottom-color: rgba(26, 26, 46, 0.08);
+}
+
+/* Mobile menu icon: navy in light mode */
+[data-theme="light"] [data-menu-button] svg {
+  color: var(--c-text);
+}
+
+/* Hover accent: rich burgundy in light mode (gold is unreadable on cream) */
+[data-theme="light"] .hover\:text-gbe-gold:hover,
+[data-theme="light"] .group:hover .group-hover\:text-gbe-gold,
+[data-theme="light"] .group:hover .group-hover\:text-gbe-gold-soft,
+[data-theme="light"] a:hover .text-gbe-gold-soft {
+  color: #8b1a2b;
+}
+
+/* Swiper overrides (outside layers to beat cascade) */
 .gbe-swiper {
   --swiper-theme-color: #ffb001;
   overflow: visible !important;
@@ -284,37 +397,7 @@
   box-shadow: 0 0 10px rgba(255, 176, 1, 0.5);
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes revealUp {
-  from { transform: translateY(28px); }
-  to { transform: translateY(0); }
-}
-
-@keyframes pageFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes mediaFade {
-  from { opacity: 0; filter: blur(6px); }
-  to { opacity: 1; filter: blur(0); }
-}
-
-@keyframes trophyFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ===== HEADER SCROLL STATE ===== */
+/* Header scroll state */
 .site-header--scrolled {
   background: var(--c-header-bg) !important;
   backdrop-filter: blur(14px);
@@ -344,11 +427,7 @@
   transition: all 0.35s ease;
 }
 
-[data-theme="light"] .site-header--scrolled {
-  border-bottom-color: rgba(26, 26, 46, 0.08);
-}
-
-/* ===== THEME TOGGLE ===== */
+/* Theme toggle */
 .theme-toggle {
   position: relative;
   width: 52px;
@@ -408,18 +487,37 @@
   opacity: 0;
 }
 
-/* ===== CARD SURFACES (light mode depth) ===== */
-[data-theme="light"] .gbe-card-surface {
-  background: var(--c-card);
-  box-shadow: var(--c-card-shadow);
-  border-color: var(--c-border-card);
+/* ===== ANIMATIONS ===== */
+@keyframes revealUp {
+  from { transform: translateY(28px); }
+  to { transform: translateY(0); }
 }
 
-[data-theme="light"] .gbe-card-surface:hover {
-  box-shadow: var(--c-card-shadow-hover);
+@keyframes pageFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* ===== IMAGE OVERLAYS (readable in both themes) ===== */
+@keyframes mediaFade {
+  from { opacity: 0; filter: blur(6px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+@keyframes trophyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Image overlays */
 .gbe-img-overlay {
   background: var(--c-img-overlay);
 }
