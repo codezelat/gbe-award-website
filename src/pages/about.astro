@@ -66,17 +66,17 @@ const values = [
           <div class="grid grid-cols-3 gap-5 max-[560px]:grid-cols-1">
             <div class="group relative h-[280px] overflow-hidden rounded-[14px] border border-[rgba(255,176,1,0.3)] max-[560px]:h-[220px]">
               <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" src={assetPaths.interview} alt="GBE Awards interview panel" width="768" height="419" loading="eager" decoding="async" />
-              <div class="absolute inset-0 bg-gradient-to-t from-gbe-bg/80 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               <p class="absolute bottom-4 left-4 m-0 text-sm font-bold uppercase tracking-wider text-gbe-text">Recognition</p>
             </div>
             <div class="group relative h-[280px] overflow-hidden rounded-[14px] border border-[rgba(255,176,1,0.3)] max-[560px]:h-[220px]">
               <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" src={assetPaths.awardInHand} alt="Award trophy in hand at ceremony" width="768" height="419" loading="eager" decoding="async" />
-              <div class="absolute inset-0 bg-gradient-to-t from-gbe-bg/80 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               <p class="absolute bottom-4 left-4 m-0 text-sm font-bold uppercase tracking-wider text-gbe-text">Excellence</p>
             </div>
             <div class="group relative h-[280px] overflow-hidden rounded-[14px] border border-[rgba(255,176,1,0.3)] max-[560px]:h-[220px]">
               <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" src={assetPaths.redCarpet} alt="Red carpet awards ceremony" width="768" height="512" loading="eager" decoding="async" />
-              <div class="absolute inset-0 bg-gradient-to-t from-gbe-bg/80 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               <p class="absolute bottom-4 left-4 m-0 text-sm font-bold uppercase tracking-wider text-gbe-text">Celebration</p>
             </div>
           </div>
@@ -86,7 +86,7 @@ const values = [
         <section class="container-gbe mb-20 max-[560px]:mb-12">
           <div class="grid grid-cols-4 gap-5 max-[1024px]:grid-cols-2 max-[560px]:gap-4">
             {stats.map((stat) => (
-              <div class="rounded-[14px] border border-[rgba(255,176,1,0.35)] bg-[var(--c-overlay-faint)] p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-gbe-gold hover:shadow-[0_8px_30px_rgba(255,176,1,0.18)]">
+              <div class="rounded-[14px] border border-[rgba(255,176,1,0.35)] bg-gbe-card p-6 text-center shadow-[var(--c-card-shadow)] transition-all duration-300 hover:-translate-y-1 hover:border-gbe-gold hover:shadow-[0_8px_30px_rgba(255,176,1,0.18)]">
                 <div class="gold-text mb-3 text-[clamp(32px,3vw,44px)] font-black leading-none">{stat.value}</div>
                 <p class="m-0 text-sm font-bold uppercase tracking-wider text-gbe-text">{stat.label}</p>
                 <p class="mt-1.5 mb-0 text-xs font-normal leading-relaxed text-gbe-muted">{stat.sub}</p>
@@ -98,8 +98,8 @@ const values = [
         <!-- Mission -->
         <section class="container-gbe mb-20 max-[560px]:mb-12">
           <div class="mx-auto grid max-w-[1100px] grid-cols-[1fr_1fr] gap-10 max-[560px]:grid-cols-1">
-            <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[var(--c-overlay)] p-10 max-[560px]:rounded-[14px] max-[560px]:p-7">
-              <div class="mb-5 h-14 w-14 shrink-0 place-items-center rounded-full border border-[rgba(255,176,1,0.5)] bg-gbe-bg/40 grid">
+            <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-gbe-card p-10 shadow-[var(--c-card-shadow)] max-[560px]:rounded-[14px] max-[560px]:p-7">
+              <div class="mb-5 h-14 w-14 shrink-0 place-items-center rounded-full border border-[rgba(255,176,1,0.5)] bg-gbe-surface-3 grid">
                 <img src={assetPaths.award} alt="" width="32" height="32" loading="lazy" decoding="async" />
               </div>
               <h2 class="gold-text mb-4 mt-0 text-2xl font-black leading-tight max-[560px]:text-xl">Our Mission</h2>
@@ -114,8 +114,8 @@ const values = [
                 network that helps businesses scale internationally and gain the recognition they deserve.
               </p>
             </article>
-            <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[var(--c-overlay)] p-10 max-[560px]:rounded-[14px] max-[560px]:p-7">
-              <div class="mb-5 grid h-14 w-14 shrink-0 place-items-center rounded-full border border-[rgba(255,176,1,0.5)] bg-gbe-bg/40">
+            <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-gbe-card p-10 shadow-[var(--c-card-shadow)] max-[560px]:rounded-[14px] max-[560px]:p-7">
+              <div class="mb-5 grid h-14 w-14 shrink-0 place-items-center rounded-full border border-[rgba(255,176,1,0.5)] bg-gbe-surface-3">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-7 w-7 text-gbe-gold">
                   <path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4" stroke-linejoin="round"/>
                 </svg>
@@ -140,7 +140,7 @@ const values = [
           <h2 class="gold-text mb-10 text-center text-[clamp(28px,3.5vw,40px)] font-black leading-tight max-[560px]:mb-8 max-[560px]:text-[24px]">What We Stand For</h2>
           <div class="grid grid-cols-4 gap-5 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
             {values.map((value) => (
-              <div class="rounded-[14px] border border-[rgba(255,176,1,0.3)] bg-[var(--c-overlay-faint)] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gbe-gold">
+              <div class="rounded-[14px] border border-[rgba(255,176,1,0.3)] bg-gbe-card p-7 shadow-[var(--c-card-shadow)] transition-all duration-300 hover:-translate-y-1 hover:border-gbe-gold">
                 <h3 class="gold-text mb-3 mt-0 text-xl font-black leading-tight">{value.title}</h3>
                 <p class="m-0 text-sm font-normal leading-[1.6] text-gbe-muted">{value.desc}</p>
               </div>
@@ -173,7 +173,7 @@ const values = [
           <h2 class="gold-text mb-10 text-center text-[clamp(28px,3.5vw,40px)] font-black leading-tight max-[560px]:mb-8 max-[560px]:text-[24px]">Award Categories</h2>
           <div class="grid grid-cols-4 gap-4 max-[1024px]:grid-cols-3 max-[560px]:grid-cols-1">
             {categories.map((category) => (
-              <div class="flex items-center gap-3 rounded-[10px] border border-[rgba(255,176,1,0.2)] bg-[var(--c-overlay-faint)] px-5 py-4 transition-colors duration-200 hover:border-gbe-gold/60">
+              <div class="flex items-center gap-3 rounded-[10px] border border-[rgba(255,176,1,0.2)] bg-gbe-card px-5 py-4 shadow-[var(--c-card-shadow)] transition-colors duration-200 hover:border-gbe-gold/60">
                 <img class="h-8 w-8 shrink-0 object-contain" src={assetPaths.award} alt="" width="32" height="32" loading="lazy" decoding="async" />
                 <span class="text-sm font-bold leading-tight text-gbe-text">{category}</span>
               </div>
@@ -183,7 +183,7 @@ const values = [
 
         <!-- CTA -->
         <section class="container-gbe text-center">
-          <div class="mx-auto max-w-[800px] rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[radial-gradient(circle_at_50%_50%,rgba(255,176,1,0.06),transparent),var(--c-overlay)] px-10 py-14 max-[560px]:rounded-[14px] max-[560px]:px-7 max-[560px]:py-10">
+          <div class="mx-auto max-w-[800px] rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[radial-gradient(circle_at_50%_50%,rgba(255,176,1,0.06),transparent),var(--c-card)] px-10 py-14 shadow-[var(--c-card-shadow)] max-[560px]:rounded-[14px] max-[560px]:px-7 max-[560px]:py-10">
             <div class="mx-auto mb-6 grid h-20 w-20 place-items-center">
               <img class="h-20 w-20 object-contain drop-shadow-[0_0_20px_rgba(255,176,1,0.3)]" src={assetPaths.award} alt="" width="80" height="80" loading="lazy" decoding="async" />
             </div>

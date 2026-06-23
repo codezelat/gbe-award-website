@@ -30,7 +30,7 @@ export function CategorySlider() {
     >
       {categories.map((category, index) => (
         <SwiperSlide key={`${category}-${index}`}>
-          <article className="group grid min-h-[250px] place-items-center overflow-hidden rounded-[12px] border border-[rgba(255,176,1,0.5)] bg-gradient-to-b from-gbe-surface-3 to-gbe-surface px-5 pb-[38px] pt-11 transition-all duration-300 hover:-translate-y-[6px] hover:border-gbe-gold hover:shadow-[0_12px_40px_rgba(255,176,1,0.25)] hover:bg-gradient-to-b hover:from-gbe-surface-3/80 hover:to-gbe-surface-2 max-[1024px]:min-h-[238px]">
+          <article className="group grid min-h-[250px] place-items-center overflow-hidden rounded-[12px] border border-[rgba(255,176,1,0.5)] bg-gradient-to-b from-gbe-surface-3 to-gbe-surface px-5 pb-[38px] pt-11 shadow-[var(--c-card-shadow)] transition-all duration-300 hover:-translate-y-[6px] hover:border-gbe-gold hover:shadow-[0_12px_40px_rgba(255,176,1,0.25)] hover:bg-gradient-to-b hover:from-gbe-surface-3/80 hover:to-gbe-surface-2 max-[1024px]:min-h-[238px]">
             <div className="mb-5 transition-transform duration-300 group-hover:scale-110">
               <img className="h-[100px] w-[100px] object-contain drop-shadow-[0_4px_12px_rgba(255,176,1,0.15)]" src={assetPaths.award} alt="" width="100" height="100" loading="lazy" decoding="async" />
             </div>
@@ -44,7 +44,7 @@ export function CategorySlider() {
 
 function NomineeCard({ nominee }: { nominee: Nominee }) {
   return (
-    <article className="nominee-card group relative grid min-h-[367px] grid-cols-[minmax(0,1fr)_124px] grid-rows-[1fr_auto] overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.16)] bg-[radial-gradient(circle_at_88%_18%,rgba(255,176,1,0.2),transparent_120px),linear-gradient(135deg,rgba(255,176,1,0.16),transparent_23%,transparent_72%,rgba(25,84,255,0.16)),var(--c-card)] px-[30px] pb-6 pt-[38px] text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-[rgba(255,176,1,0.55)] hover:shadow-[0_20px_55px_rgba(0,0,0,0.55),0_0_34px_rgba(255,176,1,0.18)] max-[1024px]:min-h-[336px] max-[1024px]:grid-cols-[minmax(0,1fr)_94px] max-[1024px]:px-6 max-[1024px]:pb-[22px] max-[1024px]:pt-[34px]">
+    <article className="nominee-card group relative grid min-h-[367px] grid-cols-[minmax(0,1fr)_124px] grid-rows-[1fr_auto] overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.16)] bg-[radial-gradient(circle_at_88%_18%,rgba(255,176,1,0.2),transparent_120px),linear-gradient(135deg,rgba(255,176,1,0.16),transparent_23%,transparent_72%,rgba(25,84,255,0.16)),var(--c-card)] px-[30px] pb-6 pt-[38px] text-left shadow-[var(--c-card-shadow)] transition-all duration-300 hover:-translate-y-2 hover:border-[rgba(255,176,1,0.55)] hover:shadow-[var(--c-card-shadow-hover),0_0_34px_rgba(255,176,1,0.18)] max-[1024px]:min-h-[336px] max-[1024px]:grid-cols-[minmax(0,1fr)_94px] max-[1024px]:px-6 max-[1024px]:pb-[22px] max-[1024px]:pt-[34px]">
       <div className="relative z-[1] pr-4">
         <div className="mb-5 h-px w-16 bg-gradient-to-r from-gbe-gold to-transparent transition-all duration-300 group-hover:w-24" aria-hidden="true"></div>
         <h3 className="m-0 text-[clamp(19px,1.55vw,23px)] font-extrabold leading-[1.12] text-gbe-text transition-colors duration-300 group-hover:text-gbe-gold max-[1024px]:text-lg">{nominee.title}</h3>

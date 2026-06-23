@@ -77,7 +77,7 @@ const reasons = [
         <section class="container-gbe mb-16 max-[560px]:mb-10">
           <div class="grid grid-cols-4 gap-4 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
             {reasons.map((reason) => (
-              <div class="rounded-[12px] border border-[rgba(255,176,1,0.25)] bg-[var(--c-overlay-faint)] p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-gbe-gold/60">
+              <div class="rounded-[12px] border border-[rgba(255,176,1,0.25)] bg-gbe-card p-5 text-center shadow-[var(--c-card-shadow)] transition-all duration-300 hover:-translate-y-1 hover:border-gbe-gold/60">
                 <h3 class="gold-text mb-1.5 mt-0 text-lg font-black leading-tight">{reason.title}</h3>
                 <p class="m-0 text-xs font-normal leading-[1.5] text-gbe-muted">{reason.desc}</p>
               </div>
@@ -90,32 +90,32 @@ const reasons = [
           <div class="grid grid-cols-[1.3fr_1fr] gap-8 max-[1024px]:grid-cols-1">
 
             <!-- Form -->
-            <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[var(--c-overlay)] p-10 max-[560px]:rounded-[14px] max-[560px]:p-7">
+            <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-gbe-card p-10 shadow-[var(--c-card-shadow)] max-[560px]:rounded-[14px] max-[560px]:p-7">
               <h2 class="gold-text mb-6 mt-0 text-2xl font-black leading-tight max-[560px]:text-xl">Send Us a Message</h2>
               <form class="flex flex-col gap-4" action="mailto:info@gbeaward.com" method="post" enctype="text/plain">
                 <div class="grid grid-cols-2 gap-4 max-[560px]:grid-cols-1">
                   <label class="flex flex-col gap-2">
                     <span class="text-sm font-bold uppercase tracking-wider text-gbe-text">Name</span>
-                    <input class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-bg/60 px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" type="text" name="name" placeholder="Your full name" required />
+                    <input class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-card px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" type="text" name="name" placeholder="Your full name" required />
                   </label>
                   <label class="flex flex-col gap-2">
                     <span class="text-sm font-bold uppercase tracking-wider text-gbe-text">Email</span>
-                    <input class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-bg/60 px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" type="email" name="email" placeholder="you@example.com" required />
+                    <input class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-card px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" type="email" name="email" placeholder="you@example.com" required />
                   </label>
                 </div>
                 <div class="grid grid-cols-2 gap-4 max-[560px]:grid-cols-1">
                   <label class="flex flex-col gap-2">
                     <span class="text-sm font-bold uppercase tracking-wider text-gbe-text">Phone <span class="font-normal normal-case text-gbe-muted">(optional)</span></span>
-                    <input class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-bg/60 px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" type="tel" name="phone" placeholder="+44 ..." />
+                    <input class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-card px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" type="tel" name="phone" placeholder="+44 ..." />
                   </label>
                   <label class="flex flex-col gap-2">
                     <span class="text-sm font-bold uppercase tracking-wider text-gbe-text">Organisation <span class="font-normal normal-case text-gbe-muted">(optional)</span></span>
-                    <input class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-bg/60 px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" type="text" name="organisation" placeholder="Company name" />
+                    <input class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-card px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" type="text" name="organisation" placeholder="Company name" />
                   </label>
                 </div>
                 <label class="flex flex-col gap-2">
                   <span class="text-sm font-bold uppercase tracking-wider text-gbe-text">Subject</span>
-                  <select class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-bg/60 px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" name="subject">
+                  <select class="rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-card px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" name="subject">
                     <option>General Enquiry</option>
                     <option>Nomination / Application</option>
                     <option>Partnership Opportunity</option>
@@ -124,7 +124,7 @@ const reasons = [
                 </label>
                 <label class="flex flex-col gap-2">
                   <span class="text-sm font-bold uppercase tracking-wider text-gbe-text">Message</span>
-                  <textarea class="min-h-[140px] resize-y rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-bg/60 px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" name="message" placeholder="Tell us how we can help..." rows="5" required></textarea>
+                  <textarea class="min-h-[140px] resize-y rounded-lg border border-[rgba(255,176,1,0.3)] bg-gbe-card px-4 py-3 text-base text-gbe-text outline-none transition-colors focus:border-gbe-gold max-[560px]:py-2.5 max-[560px]:text-sm" name="message" placeholder="Tell us how we can help..." rows="5" required></textarea>
                 </label>
                 <button class="btn-gold btn-gold-hover mt-2 w-full" type="submit">Send Message</button>
               </form>
@@ -132,7 +132,7 @@ const reasons = [
 
             <!-- Info column -->
             <div class="flex flex-col gap-6">
-              <article class="overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[var(--c-overlay)] max-[560px]:rounded-[14px]">
+              <article class="overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-gbe-card shadow-[var(--c-card-shadow)] max-[560px]:rounded-[14px]">
                 <div class="relative h-[160px] overflow-hidden">
                   <img class="h-full w-full object-cover" src={assetPaths.redCarpet} alt="GBE Awards ceremony" width="768" height="512" loading="eager" decoding="async" />
                   <div class="absolute inset-0 bg-gradient-to-t from-[var(--c-img-gradient-bottom)] via-transparent to-transparent"></div>
@@ -141,7 +141,7 @@ const reasons = [
                   <h2 class="gold-text mb-0 mt-0 text-2xl font-black leading-tight max-[560px]:text-xl">Our Details</h2>
                   {contactInfo.map((item) => (
                     <div class="flex items-start gap-4">
-                      <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[rgba(255,176,1,0.4)] bg-gbe-bg/40">
+                      <div class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[rgba(255,176,1,0.4)] bg-gbe-surface-3">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-gbe-gold" set:html={item.icon} />
                       </div>
                       <div class="pt-1">
@@ -157,7 +157,7 @@ const reasons = [
                 </div>
               </article>
 
-              <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[var(--c-overlay)] p-8 text-center max-[560px]:rounded-[14px] max-[560px]:p-7">
+              <article class="rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-gbe-card p-8 text-center shadow-[var(--c-card-shadow)] max-[560px]:rounded-[14px] max-[560px]:p-7">
                 <h2 class="gold-text mb-5 mt-0 text-2xl font-black leading-tight max-[560px]:text-xl">Follow Us</h2>
                 <p class="mb-5 mt-0 text-sm font-normal leading-[1.6] text-gbe-muted">Stay connected for the latest updates, winner announcements, and event news.</p>
                 <SocialLinks compact />

@@ -40,13 +40,13 @@ const allNominees = [...featuredNominees, ...nomineeEntries];
 
           <div class="grid grid-cols-3 gap-6 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
             {allNominees.map((nominee) => (
-              <article class="group relative overflow-hidden rounded-[15px] border border-[rgba(255,176,1,0.25)] bg-[linear-gradient(135deg,rgba(255,176,1,0.06),transparent_40%),var(--c-card)] p-6 text-left transition-all duration-300 hover:-translate-y-1.5 hover:border-gbe-gold/60 hover:shadow-[0_12px_40px_rgba(255,176,1,0.2)]">
+              <article class="group relative overflow-hidden rounded-[15px] border border-[rgba(255,176,1,0.25)] bg-[linear-gradient(135deg,rgba(255,176,1,0.06),transparent_40%),var(--c-card)] p-6 text-left shadow-[var(--c-card-shadow)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gbe-gold/60 hover:shadow-[0_12px_40px_rgba(255,176,1,0.2)]">
                 <div class="mb-4 flex items-center gap-4">
                   <div class="relative shrink-0">
                     <div class="absolute -inset-0.5 rounded-full bg-gradient-to-br from-gbe-gold/50 to-transparent opacity-0 blur-[2px] transition-opacity duration-300 group-hover:opacity-100"></div>
                     <img class="relative h-16 w-16 rounded-full border-2 border-[rgba(255,176,1,0.35)] object-cover object-center transition-transform duration-300 group-hover:scale-105" src={nominee.image} alt="" width="300" height="300" loading="lazy" decoding="async" />
                   </div>
-                  <div class="flex items-center gap-2 rounded-full border border-[rgba(255,176,1,0.25)] bg-gbe-bg/50 px-3 py-1.5">
+                  <div class="flex items-center gap-2 rounded-full border border-[rgba(255,176,1,0.25)] bg-gbe-surface-3 px-3 py-1.5">
                     <img class="h-4 w-4 object-contain" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
                     <span class="text-[10px] font-black uppercase tracking-[0.12em] text-gbe-gold-soft">Nominee</span>
                   </div>
