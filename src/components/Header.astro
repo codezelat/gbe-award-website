@@ -18,19 +18,36 @@ import { assetPaths, navItems } from "../data/home";
     />
   </a>
 
-  <nav
-    class="desktop-nav flex min-h-[56px] items-center gap-1.5 rounded-full border border-[rgba(255,176,1,0.5)] bg-black/40 px-3 py-2 backdrop-blur-sm max-[1024px]:hidden"
-    aria-label="Primary navigation"
-  >
-    {navItems.map((item) => (
-      <a
-        class="rounded-full px-5 py-2.5 text-[14px] font-bold uppercase tracking-[0.08em] text-white/90 transition-all duration-200 hover:bg-gbe-gold hover:text-black hover:shadow-[0_0_18px_rgba(255,176,1,0.4)]"
-        href={item.href}
-      >
-        {item.label}
-      </a>
-    ))}
-  </nav>
+  <div class="flex items-center gap-3 justify-self-center max-[1024px]:hidden">
+    <nav
+      class="desktop-nav flex min-h-[56px] items-center gap-1.5 rounded-full border border-[rgba(255,176,1,0.5)] bg-gbe-surface-3/60 px-3 py-2 backdrop-blur-sm"
+      aria-label="Primary navigation"
+    >
+      {navItems.map((item) => (
+        <a
+          class="rounded-full px-5 py-2.5 text-[14px] font-bold uppercase tracking-[0.08em] text-gbe-text/90 transition-all duration-200 hover:bg-gbe-gold hover:text-black hover:shadow-[0_0_18px_rgba(255,176,1,0.4)]"
+          href={item.href}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <button
+      class="theme-toggle"
+      type="button"
+      aria-label="Toggle theme"
+      onclick="window.__toggleTheme()"
+    >
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+      </svg>
+    </button>
+  </div>
 
   <a
     class="btn-gold btn-gold-hover justify-self-center min-h-[48px] !px-7 !text-[14px] max-[1024px]:hidden"
@@ -39,37 +56,53 @@ import { assetPaths, navItems } from "../data/home";
     Apply Now
   </a>
 
-  <button
-    data-menu-button
-    class="hidden h-10 w-10 justify-self-end place-items-center rounded-lg border border-[rgba(255,176,1,0.4)] bg-black/40 backdrop-blur-sm transition-colors duration-200 hover:bg-gbe-gold/10 max-[1024px]:grid"
-    type="button"
-    aria-label="Open menu"
-    aria-controls="mobile-menu"
-    aria-expanded="false"
-  >
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="h-5 w-5 text-gbe-gold">
-      <path data-menu-icon-open d="M4 7h16M4 12h16M4 17h16" />
-      <path data-menu-icon-close class="hidden" d="M6 6l12 12M18 6 6 18" />
-    </svg>
-  </button>
+  <div class="flex items-center gap-2 justify-self-end max-[1024px]:flex min-[1025px]:hidden">
+    <button
+      class="theme-toggle"
+      type="button"
+      aria-label="Toggle theme"
+      onclick="window.__toggleTheme()"
+    >
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+      </svg>
+    </button>
+    <button
+      data-menu-button
+      class="grid h-10 w-10 place-items-center rounded-lg border border-[rgba(255,176,1,0.4)] bg-gbe-surface-3/60 backdrop-blur-sm transition-colors duration-200 hover:bg-gbe-gold/10"
+      type="button"
+      aria-label="Open menu"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="h-5 w-5 text-gbe-gold">
+        <path data-menu-icon-open d="M4 7h16M4 12h16M4 17h16" />
+        <path data-menu-icon-close class="hidden" d="M6 6l12 12M18 6 6 18" />
+      </svg>
+    </button>
+  </div>
 </header>
 
 <div
   data-menu-scrim
-  class="fixed inset-0 z-40 hidden bg-black/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 min-[1025px]:hidden"
+  class="fixed inset-0 z-40 hidden bg-gbe-bg/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 min-[1025px]:hidden"
   aria-hidden="true"
 ></div>
 
 <nav
   id="mobile-menu"
   data-mobile-menu
-  class="pointer-events-none fixed left-1/2 top-[104px] z-[60] hidden w-[min(430px,calc(100vw-32px))] -translate-x-1/2 -translate-y-3 rounded-[24px] border border-[rgba(255,176,1,0.56)] bg-[linear-gradient(145deg,rgba(10,10,10,0.96),rgba(0,0,0,0.88))] p-4 opacity-0 shadow-[0_28px_70px_rgba(0,0,0,0.72),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl transition-[opacity,transform] duration-300 min-[1025px]:hidden max-[560px]:top-[84px]"
+  class="pointer-events-none fixed left-1/2 top-[104px] z-[60] hidden w-[min(430px,calc(100vw-32px))] -translate-x-1/2 -translate-y-3 rounded-[24px] border border-[rgba(255,176,1,0.56)] bg-gbe-surface-3/95 p-4 opacity-0 shadow-[0_28px_70px_var(--c-header-shadow),inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl transition-[opacity,transform] duration-300 min-[1025px]:hidden max-[560px]:top-[84px]"
   aria-label="Mobile navigation"
 >
-  <div class="rounded-[18px] border border-white/10 bg-white/[0.03] p-2">
+  <div class="rounded-[18px] border border-gbe-text/10 bg-gbe-text/[0.03] p-2">
     {navItems.map((item) => (
       <a
-        class="flex items-center rounded-2xl px-4 py-3 text-[15px] font-extrabold uppercase tracking-[0.08em] text-white/90 transition-all duration-200 hover:bg-gbe-gold hover:text-black focus-visible:bg-gbe-gold focus-visible:text-black"
+        class="flex items-center rounded-2xl px-4 py-3 text-[15px] font-extrabold uppercase tracking-[0.08em] text-gbe-text/90 transition-all duration-200 hover:bg-gbe-gold hover:text-black focus-visible:bg-gbe-gold focus-visible:text-black"
         href={item.href}
         data-menu-link
       >
@@ -88,6 +121,16 @@ import { assetPaths, navItems } from "../data/home";
     </a>
   </div>
 </nav>
+
+<script>
+  window.__toggleTheme = function () {
+    const html = document.documentElement;
+    const current = html.getAttribute("data-theme");
+    const next = current === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", next);
+    localStorage.setItem("gbe-theme", next);
+  };
+</script>
 
 <script>
   const header = document.getElementById("site-header");

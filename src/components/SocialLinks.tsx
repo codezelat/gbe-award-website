@@ -60,13 +60,13 @@ export default function SocialLinks({ compact = false }: SocialLinksProps) {
       className={
         compact
           ? "static z-[2] flex min-h-0 min-w-0 translate-x-0 items-center justify-center gap-8 border-0 p-0"
-          : "fixed bottom-6 left-1/2 z-50 flex min-h-[64px] min-w-[360px] -translate-x-1/2 items-center justify-center gap-7 rounded-full border border-[rgba(255,176,1,0.9)] bg-black/90 px-12 shadow-[0_18px_40px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md max-[1024px]:bottom-5 max-[1024px]:min-h-[56px] max-[1024px]:w-fit max-[1024px]:min-w-[min(390px,calc(100vw-32px))] max-[1024px]:gap-7 max-[1024px]:px-9 max-[560px]:bottom-4 max-[560px]:min-h-[48px] max-[560px]:min-w-[min(358px,calc(100vw-32px))] max-[560px]:gap-6 max-[560px]:px-8"
+          : "fixed bottom-6 left-1/2 z-50 flex min-h-[64px] min-w-[360px] -translate-x-1/2 items-center justify-center gap-7 rounded-full border border-[rgba(255,176,1,0.9)] bg-gbe-bg/90 px-12 shadow-[0_18px_40px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md max-[1024px]:bottom-5 max-[1024px]:min-h-[56px] max-[1024px]:w-fit max-[1024px]:min-w-[min(390px,calc(100vw-32px))] max-[1024px]:gap-7 max-[1024px]:px-9 max-[560px]:bottom-4 max-[560px]:min-h-[48px] max-[560px]:min-w-[min(358px,calc(100vw-32px))] max-[560px]:gap-6 max-[560px]:px-8"
       }
       aria-label="Social links"
     >
       {socialLinks.map(({ label, href, Icon }) => (
         <a
-          className="grid h-8 w-8 place-items-center text-[17px] font-black text-white transition-[color,transform] duration-200 hover:-translate-y-[3px] hover:text-gbe-gold max-[1024px]:h-7 max-[1024px]:w-7 max-[1024px]:drop-shadow-[0_0_7px_rgba(255,255,255,0.42)] max-[560px]:h-6 max-[560px]:w-6 [&_svg]:h-[26px] [&_svg]:w-[26px] max-[1024px]:[&_svg]:h-[22px] max-[1024px]:[&_svg]:w-[22px] max-[560px]:[&_svg]:h-[19px] max-[560px]:[&_svg]:w-[19px]"
+          className="grid h-8 w-8 place-items-center text-[17px] font-black text-gbe-text transition-[color,transform] duration-200 hover:-translate-y-[3px] hover:text-gbe-gold max-[1024px]:h-7 max-[1024px]:w-7 max-[1024px]:drop-shadow-[0_0_7px_rgba(255,255,255,0.42)] max-[560px]:h-6 max-[560px]:w-6 [&_svg]:h-[26px] [&_svg]:w-[26px] max-[1024px]:[&_svg]:h-[22px] max-[1024px]:[&_svg]:w-[22px] max-[560px]:[&_svg]:h-[19px] max-[560px]:[&_svg]:w-[19px]"
           key={label}
           href={href}
           aria-label={label}

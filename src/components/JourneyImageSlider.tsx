@@ -32,7 +32,7 @@ export default function JourneyImageSlider({ images }: { images: JourneyImage[] 
     >
       {loopImages.map((image, index) => (
         <SwiperSlide key={`${image.src}-${index}`}>
-          <figure className="relative m-0 overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.24)] bg-black shadow-[0_20px_52px_rgba(0,0,0,0.48)]">
+          <figure className="relative m-0 overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.24)] bg-gbe-bg shadow-[0_20px_52px_rgba(0,0,0,0.48)]">
             <img
               className="aspect-[16/10] w-full object-cover object-center"
               src={image.src}

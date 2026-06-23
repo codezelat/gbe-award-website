@@ -7,7 +7,7 @@ import { footerItems } from "../data/home";
   <div class="container-gbe">
     <h2 class="gold-text mb-[34px] mt-0 text-[clamp(26px,2.5vw,34px)] font-bold leading-[1.15] max-[560px]:text-[clamp(22px,6vw,26px)]">Global Business Excellence Awards</h2>
     <nav class="flex flex-wrap justify-center gap-[38px] max-[560px]:flex-col max-[560px]:gap-[22px]" aria-label="Footer navigation">
-      {footerItems.map((item, index) => <a class:list={["text-[15px] font-bold tracking-[0.04em] text-white transition-colors duration-200 hover:text-gbe-gold", index === 0 && "text-gbe-gold"]} href={item.href}>{item.label}</a>)}
+      {footerItems.map((item, index) => <a class:list={["text-[15px] font-bold tracking-[0.04em] text-gbe-text transition-colors duration-200 hover:text-gbe-gold", index === 0 && "text-gbe-gold"]} href={item.href}>{item.label}</a>)}
     </nav>
     <p class="mx-auto mb-7 mt-10 max-w-[760px] text-[clamp(14px,1.2vw,16px)] font-normal leading-[1.7] text-gbe-muted max-[560px]:max-w-[480px] max-[560px]:text-sm">
       Organised by London Business Consultancy in London, UK, GBE Awards 2026 is the premier platform for

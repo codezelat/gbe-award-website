@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import ThemeInit from "../components/ThemeInit.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths } from "../data/home";
@@ -12,6 +13,7 @@ const description =
 <!doctype html>
 <html lang="en">
   <head>
+    <ThemeInit />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
@@ -25,13 +27,13 @@ const description =
     <title>{title}</title>
   </head>
   <body>
-    <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[radial-gradient(circle_at_50%_9%,rgba(255,176,1,0.055),transparent_22rem),linear-gradient(#000,#000)]">
+    <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">
       <Header />
-      <main class="bg-[radial-gradient(circle_at_50%_0%,rgba(224,176,60,0.08),transparent_420px),#000] pt-[210px] pb-24 max-[560px]:pt-[130px] max-[560px]:pb-14">
-        <article class="mx-auto w-[min(920px,calc(100vw-48px))] rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[rgba(6,6,6,0.82)] p-12 text-white max-[560px]:w-[min(342px,calc(100vw-32px))] max-[560px]:rounded-[14px] max-[560px]:px-[22px] max-[560px]:py-7">
+      <main class="bg-[radial-gradient(circle_at_50%_0%,rgba(224,176,60,0.08),transparent_420px),var(--c-bg)] pt-[210px] pb-24 max-[560px]:pt-[130px] max-[560px]:pb-14">
+        <article class="mx-auto w-[min(920px,calc(100vw-48px))] rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-[var(--c-overlay)] p-12 text-gbe-text max-[560px]:w-[min(342px,calc(100vw-32px))] max-[560px]:rounded-[14px] max-[560px]:px-[22px] max-[560px]:py-7">
           <p class="mb-[18px] mt-0 text-sm font-extrabold text-gbe-gold-soft">Last updated: June 23, 2026</p>
           <h1 class="gold-text mb-7 mt-0 text-[clamp(38px,5vw,64px)] font-black leading-none max-[560px]:text-[36px]">Privacy Policy</h1>
-          <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+          <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
             Global Business Excellence Awards respects your privacy. This policy explains how we collect,
             use, and protect information when you visit our website, contact us, apply for an award, or
             interact with our online channels.
@@ -39,12 +41,12 @@ const description =
 
           <section>
             <h2 class="gold-text mb-3 mt-[38px] text-2xl font-black leading-[1.15] max-[560px]:text-[21px]">Information We Collect</h2>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
               We may collect information you choose to provide, such as your name, email address, phone
               number, organization, nomination details, application details, messages, and files or images
               submitted with an enquiry or application.
             </p>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
               We may also collect basic technical information such as browser type, device type, pages
               visited, referral source, and approximate location derived from analytics or server logs.
             </p>
@@ -52,7 +54,7 @@ const description =
 
           <section>
             <h2 class="gold-text mb-3 mt-[38px] text-2xl font-black leading-[1.15] max-[560px]:text-[21px]">How We Use Information</h2>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
               We use information to respond to enquiries, process applications and nominations, manage award
               communications, improve our website, protect the website from misuse, and share updates related
               to Global Business Excellence Awards.
@@ -61,7 +63,7 @@ const description =
 
           <section>
             <h2 class="gold-text mb-3 mt-[38px] text-2xl font-black leading-[1.15] max-[560px]:text-[21px]">Sharing Information</h2>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
               We do not sell personal information. We may share information with trusted service providers,
               event partners, judges, or advisors when needed to operate the awards, review submissions,
               provide website services, or comply with legal obligations.
@@ -70,7 +72,7 @@ const description =
 
           <section>
             <h2 class="gold-text mb-3 mt-[38px] text-2xl font-black leading-[1.15] max-[560px]:text-[21px]">Cookies and Analytics</h2>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
               Our website may use cookies and analytics tools to understand site performance, visitor
               activity, and content effectiveness. You can control cookies through your browser settings.
             </p>
@@ -78,7 +80,7 @@ const description =
 
           <section>
             <h2 class="gold-text mb-3 mt-[38px] text-2xl font-black leading-[1.15] max-[560px]:text-[21px]">Data Security</h2>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
               We use reasonable safeguards to protect information. However, no website, email, or online
               transmission is completely secure, so we cannot guarantee absolute security.
             </p>
@@ -86,7 +88,7 @@ const description =
 
           <section>
             <h2 class="gold-text mb-3 mt-[38px] text-2xl font-black leading-[1.15] max-[560px]:text-[21px]">Your Choices</h2>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
               You may contact us to request access, correction, or deletion of personal information you have
               provided, subject to any records we need to keep for legitimate business, event, or legal
               purposes.
@@ -95,7 +97,7 @@ const description =
 
           <section>
             <h2 class="gold-text mb-3 mt-[38px] text-2xl font-black leading-[1.15] max-[560px]:text-[21px]">Third-Party Links</h2>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-sm max-[560px]:leading-[1.6]">
               Our website may link to social media pages, partner websites, or third-party services. Their
               privacy practices are controlled by those third parties, not by us.
             </p>
@@ -103,7 +105,7 @@ const description =
 
           <section>
             <h2 class="gold-text mb-3 mt-[38px] text-2xl font-black leading-[1.15] max-[560px]:text-[21px]">Contact Us</h2>
-            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-white/90 max-[560px]:text-[15px]">
+            <p class="mb-4 mt-0 text-[17px] font-medium leading-[1.65] text-gbe-text/90 max-[560px]:text-[15px]">
               For privacy questions or requests, contact Global Business Excellence Awards through the
               contact options provided on this website or our official social media channels.
             </p>
