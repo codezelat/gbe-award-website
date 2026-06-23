@@ -235,13 +235,13 @@
   box-shadow: 0 2px 8px rgba(184, 134, 11, 0.25);
 }
 
-/* Hero: hide dark-mode canvas, show CSS atmosphere */
+/* Hero: show canvas particles in light mode with warm gold */
 .hero-section canvas {
   transition: opacity 0.5s ease;
 }
 
 [data-theme="light"] .hero-section canvas {
-  display: none;
+  opacity: 0.45;
 }
 
 /* Trophy shadows */
@@ -272,7 +272,7 @@
   height: 550px;
   background: radial-gradient(circle, rgba(255, 200, 60, 0.45) 0%, rgba(255, 176, 1, 0.15) 40%, transparent 70%);
   filter: blur(30px);
-  animation: orbDrift1 18s ease-in-out infinite;
+  animation: orbDrift1 14s ease-in-out infinite;
 }
 
 .hero-orb--2 {
@@ -282,7 +282,7 @@
   height: 450px;
   background: radial-gradient(circle, rgba(255, 176, 1, 0.35) 0%, rgba(255, 200, 60, 0.1) 40%, transparent 70%);
   filter: blur(25px);
-  animation: orbDrift2 14s ease-in-out infinite;
+  animation: orbDrift2 11s ease-in-out infinite;
 }
 
 .hero-orb--3 {
@@ -292,7 +292,7 @@
   height: 400px;
   background: radial-gradient(circle, rgba(255, 200, 60, 0.3) 0%, rgba(255, 176, 1, 0.08) 40%, transparent 70%);
   filter: blur(35px);
-  animation: orbDrift3 22s ease-in-out infinite;
+  animation: orbDrift3 16s ease-in-out infinite;
 }
 
 @media (max-width: 1024px) {
@@ -309,32 +309,38 @@
 
 @keyframes orbDrift1 {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
-  25% { transform: translate(35px, -25px) scale(1.06); opacity: 0.9; }
-  50% { transform: translate(-20px, 20px) scale(0.94); opacity: 0.65; }
-  75% { transform: translate(15px, 30px) scale(1.03); opacity: 0.85; }
+  25% { transform: translate(50px, -35px) scale(1.08); opacity: 0.95; }
+  50% { transform: translate(-30px, 30px) scale(0.92); opacity: 0.6; }
+  75% { transform: translate(25px, 40px) scale(1.05); opacity: 0.85; }
 }
 
 @keyframes orbDrift2 {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.65; }
-  33% { transform: translate(-30px, 25px) scale(1.08); opacity: 0.85; }
-  66% { transform: translate(25px, -20px) scale(0.95); opacity: 0.6; }
+  33% { transform: translate(-45px, 35px) scale(1.1); opacity: 0.9; }
+  66% { transform: translate(35px, -30px) scale(0.92); opacity: 0.55; }
 }
 
 @keyframes orbDrift3 {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-  20% { transform: translate(20px, -30px) scale(1.04); opacity: 0.8; }
-  40% { transform: translate(-15px, 10px) scale(0.97); opacity: 0.55; }
-  60% { transform: translate(25px, 15px) scale(1.06); opacity: 0.75; }
-  80% { transform: translate(-10px, -20px) scale(0.98); opacity: 0.7; }
+  20% { transform: translate(30px, -40px) scale(1.06); opacity: 0.85; }
+  40% { transform: translate(-25px, 15px) scale(0.94); opacity: 0.5; }
+  60% { transform: translate(35px, 25px) scale(1.1); opacity: 0.8; }
+  80% { transform: translate(-15px, -30px) scale(0.96); opacity: 0.7; }
 }
 
-/* Hero line art pattern (light mode only) */
+/* Hero concentric ripple pattern (light mode only) */
 .hero-pattern {
-  background:
-    repeating-linear-gradient(45deg, transparent, transparent 23px, rgba(255, 176, 1, 0.14) 23px, rgba(255, 176, 1, 0.14) 25px),
-    repeating-linear-gradient(-45deg, transparent, transparent 23px, rgba(255, 176, 1, 0.14) 23px, rgba(255, 176, 1, 0.14) 25px);
-  mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 80%);
+  background: repeating-radial-gradient(
+    circle at 50% 42%,
+    transparent 0px,
+    transparent 58px,
+    rgba(255, 176, 1, 0.12) 58px,
+    rgba(255, 176, 1, 0.12) 60px
+  );
+  mask-image: radial-gradient(ellipse at 50% 42%, #000 8%, rgba(0,0,0,0.5) 25%, transparent 55%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 42%, #000 8%, rgba(0,0,0,0.5) 25%, transparent 55%);
+  transform-origin: 50% 42%;
+  animation: ripplePulse 7s ease-in-out infinite;
 }
 
 [data-theme="dark"] .hero-pattern {
@@ -515,6 +521,11 @@
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+@keyframes ripplePulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.4; }
+  50% { transform: scale(1.12); opacity: 1; }
 }
 
 /* Image overlays */
