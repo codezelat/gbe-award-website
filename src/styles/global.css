@@ -63,10 +63,10 @@
   --c-border-gold: rgba(255, 176, 1, 0.5);
   --c-hero-overlay: radial-gradient(circle at 50% 35%, rgba(255, 200, 60, 0.1) 0%, rgba(255, 176, 1, 0.04) 35%, transparent 65%);
   --c-page-glow: radial-gradient(circle at 50% 0%, rgba(255, 200, 60, 0.1) 0%, rgba(255, 176, 1, 0.03) 35%, transparent 60%), linear-gradient(var(--c-bg), var(--c-bg));
-  --c-hero-glow: radial-gradient(circle at 50% 30%, rgba(255, 200, 60, 0.14), rgba(255, 176, 1, 0.04) 40%, transparent 70%), radial-gradient(circle at 20% 60%, rgba(255, 176, 1, 0.06), transparent 50%), radial-gradient(circle at 80% 60%, rgba(255, 176, 1, 0.06), transparent 50%), linear-gradient(var(--c-bg), var(--c-bg));
+  --c-hero-glow: radial-gradient(circle at 50% 30%, rgba(200, 150, 30, 0.25), rgba(255, 176, 1, 0.1) 40%, transparent 70%), radial-gradient(circle at 20% 60%, rgba(255, 176, 1, 0.12), transparent 50%), radial-gradient(circle at 80% 60%, rgba(255, 176, 1, 0.12), transparent 50%), linear-gradient(var(--c-bg), var(--c-bg));
   --c-img-overlay: linear-gradient(to top, rgba(26, 26, 46, 0.7), transparent 60%);
   --c-img-gradient-bottom: rgba(26, 26, 46, 0.75);
-  --gold-gradient: linear-gradient(270deg, #8a6420 0%, #c8941e 27%, #ffc833 50%, #c8941e 73%, #8a6420 100%);
+  --gold-gradient: linear-gradient(270deg, #4a3008 0%, #8a6420 27%, #c8941e 50%, #8a6420 73%, #4a3008 100%);
   color-scheme: light;
 }
 
@@ -226,15 +226,24 @@
 }
 
 [data-theme="light"] .hero-section canvas {
-  opacity: 0.06;
+  opacity: 0.4;
 }
 
 [data-theme="light"] .hero-section .hero-trophy-shadow {
-  filter: drop-shadow(0 20px 24px rgba(255, 176, 1, 0.2));
+  filter: drop-shadow(0 20px 32px rgba(200, 150, 30, 0.3));
 }
 
 [data-theme="dark"] .hero-section .hero-trophy-shadow {
   filter: drop-shadow(0 20px 24px rgba(17, 80, 255, 0.22));
+}
+
+/* Gold text visibility in light mode */
+[data-theme="light"] .gold-text {
+  text-shadow: 0 2px 4px rgba(74, 48, 8, 0.25);
+}
+
+[data-theme="light"] .gold-fill {
+  box-shadow: 0 2px 8px rgba(74, 48, 8, 0.2);
 }
 
 /* ===== SWIPER OVERRIDES (outside layers to beat cascade) ===== */
