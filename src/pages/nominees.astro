@@ -3,12 +3,16 @@ import "../styles/global.css";
 import ThemeInit from "../components/ThemeInit.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import { assetPaths, featuredNominees, nomineeEntries } from "../data/home";
+import { assetPaths } from "../data/home";
+import { getPublicNominees } from "../lib/public-content";
+
+export const prerender = false;
 
 const title = "Nominees | Global Business Excellence Awards 2026";
 const description =
   "Meet the outstanding nominees of the Global Business Excellence Awards 2026. Companies, entrepreneurs, and leaders recognised for their excellence across the UK, Sri Lanka, and beyond.";
-const allNominees = [...featuredNominees, ...nomineeEntries];
+Astro.response.headers.set("cache-control", "public, s-maxage=60, stale-while-revalidate=300");
+const allNominees = await getPublicNominees();
 ---
 
 <!doctype html>
@@ -53,6 +57,7 @@ const allNominees = [...featuredNominees, ...nomineeEntries];
                 </div>
                 <h2 class="m-0 text-[clamp(16px,1.3vw,19px)] font-bold leading-[1.25] text-gbe-text transition-colors duration-300 group-hover:text-gbe-gold">{nominee.title}</h2>
                 <p class="mb-4 mt-2 text-sm font-normal leading-[1.5] text-gbe-muted">{nominee.name}</p>
+                {nominee.market ? <p class="mb-4 mt-[-6px] text-xs font-bold uppercase tracking-[0.12em] text-gbe-gold-soft">{nominee.market} · {nominee.year}</p> : null}
                 <div class="flex items-center justify-between border-t border-[rgba(255,176,1,0.1)] pt-3">
                   <span class="font-script text-2xl font-bold leading-[0.9] text-gbe-text/80">Congratulations!</span>
                   <img class="h-8 w-8 object-contain opacity-60 transition-opacity duration-300 group-hover:opacity-100" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />

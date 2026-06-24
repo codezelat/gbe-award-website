@@ -1,0 +1,23 @@
+---
+export const prerender = false;
+
+import "../../styles/global.css";
+import AdminDashboard from "../../components/admin/AdminDashboard";
+import { getAdminSession } from "../../lib/admin/auth";
+
+const session = await getAdminSession(Astro.request.headers);
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#000000" />
+    <title>GBE Admin Dashboard</title>
+  </head>
+  <body>
+    <AdminDashboard initialAuthed={Boolean(session)} client:load />
+  </body>
+</html>

@@ -3,13 +3,17 @@ import "../styles/global.css";
 import ThemeInit from "../components/ThemeInit.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import { assetPaths, featuredNominees } from "../data/home";
+import { assetPaths } from "../data/home";
+import { getPublicWinners } from "../lib/public-content";
+
+export const prerender = false;
 
 const title = "Previous Winners | Global Business Excellence Awards";
 const description =
   "Celebrating the past winners of the Global Business Excellence Awards. Discover the companies and leaders who set the benchmark for excellence across industries.";
 
-const winners = featuredNominees.slice(0, 8);
+Astro.response.headers.set("cache-control", "public, s-maxage=60, stale-while-revalidate=300");
+const winners = await getPublicWinners();
 ---
 
 <!doctype html>
@@ -88,6 +92,7 @@ const winners = featuredNominees.slice(0, 8);
                 <div class="relative z-[1] px-6 pb-6 text-center">
                   <h2 class="m-0 text-[clamp(16px,1.3vw,19px)] font-bold leading-[1.3] text-gbe-text transition-colors duration-300 group-hover:text-gbe-gold">{winner.title}</h2>
                   <p class="mb-5 mt-2 text-sm font-normal leading-[1.5] text-gbe-muted">{winner.name}</p>
+                  {winner.market ? <p class="mb-5 mt-[-12px] text-xs font-bold uppercase tracking-[0.12em] text-gbe-gold-soft">{winner.market} · {winner.year}</p> : null}
 
                   <!-- Divider -->
                   <div class="relative mb-4">
