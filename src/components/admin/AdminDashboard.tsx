@@ -13,6 +13,7 @@ import {
   Sparkles,
   Trash2,
   Trophy,
+  UploadCloud,
   X,
 } from "lucide-react";
 
@@ -223,6 +224,7 @@ export default function AdminDashboard({ initialAuthed }: { initialAuthed: boole
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
   const [editing, setEditing] = useState<FormState | null>(null);
 
@@ -391,6 +393,32 @@ export default function AdminDashboard({ initialAuthed }: { initialAuthed: boole
       return;
     }
     await loadData();
+  }
+
+  async function uploadImage(file: File | null) {
+    if (!editing || !file) return;
+
+    setUploading(true);
+    setMessage("");
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("folder", tab);
+
+    const response = await fetch("/api/gbe-admin-safe/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const body = await response.json().catch(() => null);
+    setUploading(false);
+
+    if (!response.ok) {
+      setMessage(body?.error ?? "Image upload failed.");
+      return;
+    }
+
+    setEditing({ ...editing, imageUrl: body.url });
   }
 
   if (!authed) {
@@ -605,8 +633,55 @@ export default function AdminDashboard({ initialAuthed }: { initialAuthed: boole
               <TextField label="Market" value={editing.market} onChange={(value) => setEditing({ ...editing, market: value })} required />
               <SelectField label="Status" value={editing.status} onChange={(value) => setEditing({ ...editing, status: value })} options={tab === "winners" ? ["draft", "published", "archived"] : ["draft", "submitted", "shortlisted", "published", "archived"]} />
               <TextField label="Sort order" value={editing.sortOrder} onChange={(value) => setEditing({ ...editing, sortOrder: value })} type="number" />
-              <TextField label="Image URL" value={editing.imageUrl} onChange={(value) => setEditing({ ...editing, imageUrl: value })} />
               <TextField label="Slug" value={editing.slug} onChange={(value) => setEditing({ ...editing, slug: value })} />
+            </div>
+
+            <div className="grid gap-3 rounded-xl border border-white/10 bg-black/30 p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p className="m-0 text-sm font-black uppercase tracking-[0.16em] text-gbe-gold-bright">Profile image</p>
+                  <p className="m-0 mt-1 text-sm font-medium text-gbe-muted">Upload, replace, or remove the image used on public cards.</p>
+                </div>
+                {editing.imageUrl ? (
+                  <button
+                    className="inline-flex min-h-10 items-center justify-center rounded-full border border-red-400/25 px-4 text-sm font-bold text-red-100 transition hover:border-red-400/60 hover:bg-red-400/10"
+                    onClick={() => setEditing({ ...editing, imageUrl: "" })}
+                    type="button"
+                  >
+                    Remove image
+                  </button>
+                ) : null}
+              </div>
+              <div className="grid grid-cols-[132px_minmax(0,1fr)] gap-4 max-[560px]:grid-cols-1">
+                <div className="grid aspect-square place-items-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.035]">
+                  {editing.imageUrl ? (
+                    <img className="h-full w-full object-cover" src={editing.imageUrl} alt="" loading="lazy" decoding="async" />
+                  ) : (
+                    <div className="grid place-items-center gap-2 text-center text-gbe-muted">
+                      <UploadCloud size={28} />
+                      <span className="text-xs font-bold uppercase tracking-[0.14em]">No image</span>
+                    </div>
+                  )}
+                </div>
+                <label className="flex min-w-0 cursor-pointer flex-col justify-center gap-3 rounded-xl border border-dashed border-gbe-gold/25 bg-black/25 px-5 py-4 text-sm font-bold text-gbe-muted transition hover:border-gbe-gold/60 hover:text-gbe-text">
+                  <span className="inline-flex items-center gap-2 text-base text-gbe-text">
+                    {uploading ? <Loader2 className="animate-spin" size={18} /> : <UploadCloud size={18} />}
+                    {uploading ? "Uploading image..." : editing.imageUrl ? "Replace image" : "Upload image"}
+                  </span>
+                  <span className="text-sm font-medium leading-6 text-gbe-muted">Images are stored in Cloudflare R2 and delivered from media.gbeaward.com. Accepted formats: JPG, PNG, WebP, AVIF up to 5MB.</span>
+                  {editing.imageUrl ? <span className="truncate text-xs font-semibold text-gbe-gold-soft">{editing.imageUrl}</span> : null}
+                  <input
+                    className="sr-only"
+                    disabled={uploading}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/avif"
+                    onChange={(event) => {
+                      void uploadImage(event.target.files?.[0] ?? null);
+                      event.currentTarget.value = "";
+                    }}
+                  />
+                </label>
+              </div>
             </div>
 
             <TextArea label="Summary" value={editing.summary} onChange={(value) => setEditing({ ...editing, summary: value })} rows={4} />
