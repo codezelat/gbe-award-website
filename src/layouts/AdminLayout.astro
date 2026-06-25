@@ -1,0 +1,299 @@
+---
+export const prerender = false;
+
+import "../styles/global.css";
+
+export type AdminView = "overview" | "winners" | "nominations";
+
+interface Props {
+  activeView: AdminView;
+  pageTitle: string;
+  crumb: string;
+}
+
+const { activeView, pageTitle, crumb } = Astro.props;
+
+const navItems: { id: AdminView; label: string; href: string; icon: string }[] = [
+  { id: "overview", label: "Overview", href: "/gbe-admin-safe/overview", icon: "dashboard" },
+  { id: "winners", label: "Past Winners", href: "/gbe-admin-safe/winners", icon: "trophy" },
+  { id: "nominations", label: "Nominations", href: "/gbe-admin-safe/nominations", icon: "award" },
+];
+
+const iconPaths: Record<string, string> = {
+  dashboard:
+    "M3 3h7v9H3V3zm0 11h7v7H3v-7zm11-11h7v7h-7V3zm0 9h7v9h-7v-9z",
+  trophy:
+    "M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M6 4v6a6 6 0 0 0 12 0V4M8 4h8M9 20h6M12 14v6",
+  award:
+    "M15.562 12.43a4 4 0 1 0-7.124 0l-1.438 4.29a1 1 0 0 0 .95 1.32h8.1a1 1 0 0 0 .95-1.32zM12 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM8.5 20h7M12 17v3",
+};
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0a0a0c" />
+    <title>{pageTitle} - GBE Admin</title>
+  </head>
+  <body class="min-h-screen bg-[#0a0a0c] text-zinc-100 antialiased">
+    <div class="pointer-events-none fixed inset-x-0 top-0 h-[420px] bg-[radial-gradient(ellipse_at_top,rgba(255,176,1,0.05),transparent_60%)]"></div>
+
+    <div class="relative mx-auto flex min-h-screen max-w-[1500px]">
+      <!-- Desktop sidebar -->
+      <aside class="sticky top-0 hidden h-screen w-[256px] shrink-0 border-r border-white/[0.06] bg-[#0c0c0e] lg:block">
+        <div class="flex h-full flex-col">
+          <div class="flex items-center gap-2.5 px-5 py-5">
+            <div class="grid size-9 shrink-0 place-items-center rounded-lg bg-gradient-to-b from-[#ffc424] to-[#f59e0b] text-[#1a1206] shadow-[0_4px_14px_-4px_rgba(245,158,11,0.7)]">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d={iconPaths.trophy}></path>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <p class="truncate text-[14px] font-bold text-zinc-100">GBE Awards</p>
+              <p class="truncate text-[11px] text-zinc-500">Admin Console</p>
+            </div>
+          </div>
+
+          <nav class="flex-1 space-y-1 px-3 py-2">
+            <p class="px-2 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-600">Workspace</p>
+            {
+              navItems.map((item) => {
+                const active = item.id === activeView;
+                return (
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "group relative flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
+                      active
+                        ? "bg-white/[0.06] text-zinc-100"
+                        : "text-zinc-400 hover:bg-white/[0.03] hover:text-zinc-200",
+                    ]}
+                  >
+                    {active && (
+                      <span class="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#ffc424] to-[#f59e0b]"></span>
+                    )}
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class:list={[
+                        "shrink-0 transition-colors",
+                        active ? "text-[#ffd05a]" : "text-zinc-500 group-hover:text-zinc-300",
+                      ]}
+                    >
+                      <path d={iconPaths[item.icon]}></path>
+                    </svg>
+                    {item.label}
+                  </a>
+                );
+              })
+            }
+          </nav>
+
+          <div class="space-y-1 border-t border-white/[0.05] px-3 py-3">
+            <a
+              href="/"
+              target="_blank"
+              rel="noreferrer"
+              class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-400 transition hover:bg-white/[0.03] hover:text-zinc-200"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-zinc-500">
+                <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+              View public site
+            </a>
+            <button
+              id="admin-logout-btn"
+              class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-400 transition hover:bg-rose-500/[0.08] hover:text-rose-300"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-zinc-500">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
+              </svg>
+              Sign out
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Mobile sidebar overlay -->
+      <div id="mobile-sidebar-backdrop" class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm lg:hidden"></div>
+      <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 z-50 hidden w-[270px] border-r border-white/[0.06] bg-[#0c0c0e] lg:hidden">
+        <div class="flex h-full flex-col">
+          <div class="flex items-center justify-between px-5 py-5">
+            <div class="flex items-center gap-2.5">
+              <div class="grid size-9 shrink-0 place-items-center rounded-lg bg-gradient-to-b from-[#ffc424] to-[#f59e0b] text-[#1a1206]">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={iconPaths.trophy}></path>
+                </svg>
+              </div>
+              <div>
+                <p class="text-[14px] font-bold text-zinc-100">GBE Awards</p>
+                <p class="text-[11px] text-zinc-500">Admin Console</p>
+              </div>
+            </div>
+            <button id="mobile-sidebar-close" class="grid size-8 place-items-center rounded-lg text-zinc-500 transition hover:bg-white/[0.06] hover:text-zinc-200" aria-label="Close menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <nav class="flex-1 space-y-1 px-3 py-2">
+            <p class="px-2 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-600">Workspace</p>
+            {
+              navItems.map((item) => {
+                const active = item.id === activeView;
+                return (
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "group relative flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
+                      active
+                        ? "bg-white/[0.06] text-zinc-100"
+                        : "text-zinc-400 hover:bg-white/[0.03] hover:text-zinc-200",
+                    ]}
+                  >
+                    {active && (
+                      <span class="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#ffc424] to-[#f59e0b]"></span>
+                    )}
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class:list={[
+                        "shrink-0 transition-colors",
+                        active ? "text-[#ffd05a]" : "text-zinc-500 group-hover:text-zinc-300",
+                      ]}
+                    >
+                      <path d={iconPaths[item.icon]}></path>
+                    </svg>
+                    {item.label}
+                  </a>
+                );
+              })
+            }
+          </nav>
+
+          <div class="space-y-1 border-t border-white/[0.05] px-3 py-3">
+            <a
+              href="/"
+              target="_blank"
+              rel="noreferrer"
+              class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-400 transition hover:bg-white/[0.03] hover:text-zinc-200"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-zinc-500">
+                <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+              View public site
+            </a>
+            <button
+              class="mobile-logout-btn flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-400 transition hover:bg-rose-500/[0.08] hover:text-rose-300"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-zinc-500">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
+              </svg>
+              Sign out
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main column -->
+      <div class="flex min-w-0 flex-1 flex-col">
+        <header class="sticky top-0 z-30 flex h-16 items-center justify-between gap-3 border-b border-white/[0.06] bg-[#0a0a0c]/80 px-4 backdrop-blur-xl sm:px-6 lg:px-8">
+          <div class="flex items-center gap-3">
+            <button id="mobile-menu-open" class="grid size-9 place-items-center rounded-lg text-zinc-400 transition hover:bg-white/[0.06] hover:text-zinc-100 lg:hidden" aria-label="Open menu">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+            <nav class="flex items-center gap-1.5 text-sm">
+              <span class="text-zinc-500">GBE</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-700">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+              <span class="font-semibold text-zinc-200">{crumb}</span>
+            </nav>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <a
+              href="/"
+              target="_blank"
+              rel="noreferrer"
+              class="hidden items-center gap-1.5 rounded-lg border border-white/[0.08] px-3 py-2 text-[13px] font-medium text-zinc-300 transition hover:border-white/[0.16] hover:text-zinc-100 sm:flex"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+              View site
+            </a>
+            <button
+              class="desktop-logout-btn grid size-9 place-items-center rounded-lg text-zinc-400 transition hover:bg-white/[0.06] hover:text-zinc-100"
+              aria-label="Sign out"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <main class="flex-1 px-4 py-6 sm:px-6 lg:px-8">
+          <slot />
+        </main>
+      </div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var sidebar = document.getElementById('mobile-sidebar');
+        var backdrop = document.getElementById('mobile-sidebar-backdrop');
+        var openBtn = document.getElementById('mobile-menu-open');
+        var closeBtn = document.getElementById('mobile-sidebar-close');
+
+        function openSidebar() {
+          if (!sidebar || !backdrop) return;
+          sidebar.classList.remove('hidden');
+          sidebar.style.transform = 'translateX(0)';
+          sidebar.style.transition = 'transform 0.3s cubic-bezier(0.4,0,0.2,1)';
+          backdrop.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeSidebar() {
+          if (!sidebar || !backdrop) return;
+          sidebar.style.transform = 'translateX(-100%)';
+          backdrop.classList.add('hidden');
+          setTimeout(function () { sidebar.classList.add('hidden'); }, 300);
+          document.body.style.overflow = '';
+        }
+
+        if (openBtn) openBtn.addEventListener('click', openSidebar);
+        if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+        if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+        function doLogout() {
+          fetch('/api/auth/sign-out', { method: 'POST' }).finally(function () {
+            window.location.href = '/gbe-admin-safe/';
+          });
+        }
+        document.querySelectorAll('#admin-logout-btn, .desktop-logout-btn, .mobile-logout-btn').forEach(function (el) {
+          el.addEventListener('click', doLogout);
+        });
+      })();
+    </script>
+  </body>
+</html>
