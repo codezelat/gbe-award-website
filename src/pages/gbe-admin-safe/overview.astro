@@ -15,25 +15,11 @@ const cards = [
     icon: "M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M6 4v6a6 6 0 0 0 12 0V4M8 4h8M9 20h6M12 14v6",
   },
   {
-    label: "Winner drafts",
-    value: stats.winners.draft,
-    detail: "Awaiting review",
-    accent: "bg-amber-400/10 text-amber-300 ring-amber-400/20",
-    icon: "M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6 7.1 18.2 9 12.4 4 8.8h6.1z",
-  },
-  {
     label: "Nominations",
     value: stats.nominations.total,
     detail: `${stats.nominations.submitted} submitted`,
     accent: "bg-sky-400/10 text-sky-300 ring-sky-400/20",
     icon: "M15.562 12.43a4 4 0 1 0-7.124 0l-1.438 4.29a1 1 0 0 0 .95 1.32h8.1a1 1 0 0 0 .95-1.32zM12 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM8.5 20h7M12 17v3",
-  },
-  {
-    label: "Shortlisted",
-    value: stats.nominations.shortlisted,
-    detail: "Priority follow-up",
-    accent: "bg-violet-400/10 text-violet-300 ring-violet-400/20",
-    icon: "M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6 7.1 18.2 9 12.4 4 8.8h6.1z",
   },
 ];
 ---
@@ -45,7 +31,7 @@ const cards = [
       <p class="mt-1 text-sm text-zinc-500">A snapshot of your award content across all markets.</p>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 max-[560px]:grid-cols-1 lg:grid-cols-4">
+    <div class="grid grid-cols-2 gap-4 max-[560px]:grid-cols-1">
       {
         cards.map((card) => (
           <div class="rounded-2xl border border-white/[0.06] bg-[#101013] p-5 transition-colors hover:border-white/[0.1]">

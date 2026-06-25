@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, Eye, EyeOff, Lock, Mail, ShieldCheck, Trophy } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { Button, cn } from "./ui";
 
 export default function AdminLogin() {
@@ -40,60 +40,36 @@ export default function AdminLogin() {
 
   return (
     <main className="relative grid min-h-screen lg:grid-cols-[1.1fr_1fr]">
-      {/* Ambient background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-0 size-[620px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,176,1,0.07),transparent_60%)] blur-2xl" />
-      </div>
-
       {/* Brand panel */}
-      <section className="relative hidden flex-col justify-between overflow-hidden border-r border-white/[0.06] bg-[#0c0c0e] p-12 lg:flex">
+      <section className="relative hidden flex-col items-center justify-center overflow-hidden border-r border-white/[0.06] bg-[#0c0c0e] p-12 lg:flex">
         <div className="pointer-events-none absolute -right-24 top-1/4 size-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,176,1,0.06),transparent_65%)] blur-3xl" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:44px_44px]" />
 
-        <div className="relative flex items-center gap-3">
-          <div className="grid size-11 place-items-center rounded-xl bg-gradient-to-b from-[#ffc424] to-[#f59e0b] text-[#1a1206] shadow-[0_6px_20px_-6px_rgba(245,158,11,0.7)]">
-            <Trophy size={22} />
-          </div>
-          <div>
-            <p className="text-[15px] font-bold tracking-tight text-zinc-100">
-              GBE Awards
-            </p>
-            <p className="text-xs font-medium text-zinc-500">Admin Console</p>
-          </div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="relative flex flex-col items-center text-center"
+        >
+          <img
+            className="mb-8 h-[88px] w-auto object-contain"
+            src="/assets/brand/gbe-logo.png"
+            alt="GBE Awards"
+            width="60"
+            height="92"
+            decoding="async"
+          />
+          <p className="text-[clamp(28px,3vw,40px)] font-extrabold leading-[1.1] tracking-tight text-zinc-50">
+            Global Business
+            <br />
+            Excellence Awards
+          </p>
+          <p className="mt-4 text-[15px] font-medium text-[#ffd05a]">
+            2026 &middot; Admin Console
+          </p>
+        </motion.div>
 
-        <div className="relative max-w-md">
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-[clamp(34px,3.4vw,46px)] font-extrabold leading-[1.08] tracking-tight text-zinc-50"
-          >
-            Manage the Global Business Excellence Awards.
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-5 text-[15px] leading-relaxed text-zinc-400"
-          >
-            A private workspace to curate past winners, review nominations, and
-            keep the public showcase accurate across the UK, Sri Lanka, and
-            international markets.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-8 flex items-center gap-2.5 text-sm text-zinc-500"
-          >
-            <ShieldCheck size={16} className="text-emerald-400/80" />
-            Protected session &middot; all changes are audited
-          </motion.div>
-        </div>
-
-        <p className="relative text-xs text-zinc-600">
+        <p className="relative mt-16 text-xs text-zinc-600">
           &copy; 2026 London Business Consultancy
         </p>
       </section>
@@ -106,27 +82,23 @@ export default function AdminLogin() {
           transition={{ duration: 0.45 }}
           className="w-full max-w-[400px]"
         >
-          <div className="mb-8 lg:hidden">
-            <div className="mb-4 grid size-11 place-items-center rounded-xl bg-gradient-to-b from-[#ffc424] to-[#f59e0b] text-[#1a1206]">
-              <Trophy size={22} />
-            </div>
-            <p className="text-sm font-semibold text-zinc-400">GBE Admin Console</p>
+          <div className="mb-8 flex flex-col items-center lg:hidden">
+            <img
+              className="mb-3 h-[64px] w-auto object-contain"
+              src="/assets/brand/gbe-logo.png"
+              alt="GBE Awards"
+              width="44"
+              height="68"
+              decoding="async"
+            />
+            <p className="text-sm font-semibold text-zinc-400">Admin Console</p>
           </div>
 
-          <div className="mb-7">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#ffb001]/10 px-3 py-1 text-xs font-semibold text-[#ffd05a] ring-1 ring-inset ring-[#ffb001]/25">
-              <Lock size={12} />
-              Restricted access
-            </span>
-            <h2 className="mt-4 text-2xl font-bold tracking-tight text-zinc-50">
-              Welcome back
-            </h2>
-            <p className="mt-1.5 text-sm text-zinc-400">
-              Sign in with your administrator credentials to continue.
-            </p>
-          </div>
+          <h2 className="text-2xl font-bold tracking-tight text-zinc-50">
+            Sign in
+          </h2>
 
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <form className="mt-7 flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
               <label className="mb-1.5 block text-[13px] font-medium text-zinc-300">
                 Email address
@@ -192,14 +164,9 @@ export default function AdminLogin() {
               icon={!submitting ? ArrowRight : undefined}
               className={cn("mt-1 w-full", !submitting && "flex-row-reverse")}
             >
-              {submitting ? "Signing in..." : "Sign in to dashboard"}
+              {submitting ? "Signing in..." : "Sign in"}
             </Button>
           </form>
-
-          <p className="mt-8 text-center text-xs leading-relaxed text-zinc-600">
-            Authorised administrators only. Unauthorised access is prohibited
-            and monitored.
-          </p>
         </motion.div>
       </section>
     </main>
