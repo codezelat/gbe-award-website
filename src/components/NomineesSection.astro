@@ -1,5 +1,9 @@
 ---
 import { FeaturedNomineeSlider, NomineeEntrySlider } from "./LoopSliders";
+import { getHomepageNominees } from "../lib/public-content";
+
+const { featured, entries } = await getHomepageNominees();
+const hasNominees = featured.length > 0 || entries.length > 0;
 ---
 
 <section class="bg-gbe-bg pb-20 pt-9 text-center max-[560px]:pb-[72px] max-[560px]:pt-9" aria-labelledby="nominees-title">
@@ -8,10 +12,23 @@ import { FeaturedNomineeSlider, NomineeEntrySlider } from "./LoopSliders";
     <p class="mx-auto mb-0 mt-[18px] max-w-[980px] text-[clamp(14px,1.2vw,16px)] font-normal leading-[1.6] text-gbe-muted max-[560px]:mt-3">Outstanding talent and organisations from across the UK, Sri Lanka, and international markets, recognised for their impact and excellence.</p>
   </div>
 
-  <div class="container-gbe mb-12 mt-8 max-[560px]:mt-7">
-    <FeaturedNomineeSlider client:load />
-    <NomineeEntrySlider client:load />
-  </div>
+  {
+    hasNominees ? (
+      <div class="container-gbe mb-12 mt-8 max-[560px]:mt-7">
+        {featured.length > 0 ? <FeaturedNomineeSlider nominees={featured} client:visible /> : null}
+        {entries.length > 0 ? <NomineeEntrySlider nominees={entries} client:visible /> : null}
+      </div>
+    ) : (
+      <div class="container-gbe mt-8 max-[560px]:mt-7">
+        <div class="rounded-[18px] border border-[rgba(255,176,1,0.18)] bg-[linear-gradient(135deg,rgba(255,176,1,0.08),transparent_45%),var(--c-card)] px-8 py-10 text-left shadow-[var(--c-card-shadow)] max-[560px]:px-6 max-[560px]:py-8">
+          <p class="text-sm font-bold uppercase tracking-[0.16em] text-gbe-gold-soft">Live data pending</p>
+          <p class="mt-3 text-[clamp(15px,1.15vw,17px)] font-normal leading-[1.7] text-gbe-muted">
+            Published and shortlisted nominees will appear here automatically once they are available in the awards database.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   <a class="btn-gold btn-gold-hover" href="/nominees">View All Nominees</a>
 </section>

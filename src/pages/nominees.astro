@@ -42,29 +42,38 @@ const allNominees = await getPublicNominees();
             recognised for their impact and excellence.
           </p>
 
-          <div class="grid grid-cols-3 gap-6 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
-            {allNominees.map((nominee) => (
-              <article class="group relative overflow-hidden rounded-[15px] border border-[rgba(255,176,1,0.25)] bg-[linear-gradient(135deg,rgba(255,176,1,0.06),transparent_40%),var(--c-card)] p-6 text-left shadow-[var(--c-card-shadow)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gbe-gold/60 hover:shadow-[0_12px_40px_rgba(255,176,1,0.2)]">
-                <div class="mb-4 flex items-center gap-4">
-                  <div class="relative shrink-0">
-                    <div class="absolute -inset-0.5 rounded-full bg-gradient-to-br from-gbe-gold/50 to-transparent opacity-0 blur-[2px] transition-opacity duration-300 group-hover:opacity-100"></div>
-                    <img class="relative h-16 w-16 rounded-full border-2 border-[rgba(255,176,1,0.35)] object-cover object-center transition-transform duration-300 group-hover:scale-105" src={nominee.image} alt="" width="300" height="300" loading="lazy" decoding="async" />
+          {allNominees.length > 0 ? (
+            <div class="grid grid-cols-3 gap-6 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
+              {allNominees.map((nominee) => (
+                <article class="group relative overflow-hidden rounded-[15px] border border-[rgba(255,176,1,0.25)] bg-[linear-gradient(135deg,rgba(255,176,1,0.06),transparent_40%),var(--c-card)] p-6 text-left shadow-[var(--c-card-shadow)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gbe-gold/60 hover:shadow-[0_12px_40px_rgba(255,176,1,0.2)]">
+                  <div class="mb-4 flex items-center gap-4">
+                    <div class="relative shrink-0">
+                      <div class="absolute -inset-0.5 rounded-full bg-gradient-to-br from-gbe-gold/50 to-transparent opacity-0 blur-[2px] transition-opacity duration-300 group-hover:opacity-100"></div>
+                      <img class="relative h-16 w-16 rounded-full border-2 border-[rgba(255,176,1,0.35)] object-cover object-center transition-transform duration-300 group-hover:scale-105" src={nominee.image} alt={nominee.name} width="300" height="300" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="flex items-center gap-2 rounded-full border border-[rgba(255,176,1,0.25)] bg-gbe-surface-3 px-3 py-1.5">
+                      <img class="h-4 w-4 object-contain" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
+                      <span class="text-[10px] font-black uppercase tracking-[0.12em] text-gbe-gold-soft">Nominee</span>
+                    </div>
                   </div>
-                  <div class="flex items-center gap-2 rounded-full border border-[rgba(255,176,1,0.25)] bg-gbe-surface-3 px-3 py-1.5">
-                    <img class="h-4 w-4 object-contain" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
-                    <span class="text-[10px] font-black uppercase tracking-[0.12em] text-gbe-gold-soft">Nominee</span>
+                  <h2 class="m-0 text-[clamp(16px,1.3vw,19px)] font-bold leading-[1.25] text-gbe-text transition-colors duration-300 group-hover:text-gbe-gold">{nominee.title}</h2>
+                  <p class="mb-4 mt-2 text-sm font-normal leading-[1.5] text-gbe-muted">{nominee.name}</p>
+                  {nominee.market ? <p class="mb-4 mt-[-6px] text-xs font-bold uppercase tracking-[0.12em] text-gbe-gold-soft">{nominee.market} · {nominee.year}</p> : null}
+                  <div class="flex items-center justify-between border-t border-[rgba(255,176,1,0.1)] pt-3">
+                    <span class="font-script text-2xl font-bold leading-[0.9] text-gbe-text/80">Congratulations!</span>
+                    <img class="h-8 w-8 object-contain opacity-60 transition-opacity duration-300 group-hover:opacity-100" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
                   </div>
-                </div>
-                <h2 class="m-0 text-[clamp(16px,1.3vw,19px)] font-bold leading-[1.25] text-gbe-text transition-colors duration-300 group-hover:text-gbe-gold">{nominee.title}</h2>
-                <p class="mb-4 mt-2 text-sm font-normal leading-[1.5] text-gbe-muted">{nominee.name}</p>
-                {nominee.market ? <p class="mb-4 mt-[-6px] text-xs font-bold uppercase tracking-[0.12em] text-gbe-gold-soft">{nominee.market} · {nominee.year}</p> : null}
-                <div class="flex items-center justify-between border-t border-[rgba(255,176,1,0.1)] pt-3">
-                  <span class="font-script text-2xl font-bold leading-[0.9] text-gbe-text/80">Congratulations!</span>
-                  <img class="h-8 w-8 object-contain opacity-60 transition-opacity duration-300 group-hover:opacity-100" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div class="rounded-[18px] border border-[rgba(255,176,1,0.18)] bg-[linear-gradient(135deg,rgba(255,176,1,0.08),transparent_45%),var(--c-card)] px-8 py-10 text-center shadow-[var(--c-card-shadow)] max-[560px]:px-6 max-[560px]:py-8">
+              <p class="text-sm font-bold uppercase tracking-[0.16em] text-gbe-gold-soft">No nominees published yet</p>
+              <p class="mx-auto mt-3 max-w-[620px] text-[clamp(15px,1.15vw,17px)] font-normal leading-[1.7] text-gbe-muted">
+                Once nominees are shortlisted or published in the awards database, they will appear here automatically.
+              </p>
+            </div>
+          )}
         </div>
       </main>
       <SiteFooter />

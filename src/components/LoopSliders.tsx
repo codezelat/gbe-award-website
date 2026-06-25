@@ -2,9 +2,9 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { assetPaths, categories, featuredNominees, nomineeEntries } from "../data/home";
+import { assetPaths, categories } from "../data/home";
 
-type Nominee = {
+export type Nominee = {
   title: string;
   name: string;
   image: string;
@@ -62,6 +62,8 @@ function NomineeCard({ nominee }: { nominee: Nominee }) {
 }
 
 function NomineeSlider({ nominees, className }: { nominees: Nominee[]; className: string }) {
+  const canLoop = nominees.length > 3;
+
   return (
     <Swiper
       className={`nominee-slider gbe-swiper m-0 w-full ${className}`}
@@ -69,8 +71,9 @@ function NomineeSlider({ nominees, className }: { nominees: Nominee[]; className
       slidesPerView={1}
       slidesPerGroup={1}
       spaceBetween={25}
-      loop
-      autoplay={{ delay: 2000, disableOnInteraction: false }}
+      loop={canLoop}
+      autoplay={canLoop ? { delay: 2400, disableOnInteraction: false, pauseOnMouseEnter: true } : false}
+      watchOverflow
       breakpoints={{
         768: { slidesPerView: 2 },
         1025: { slidesPerView: 3 },
@@ -85,10 +88,10 @@ function NomineeSlider({ nominees, className }: { nominees: Nominee[]; className
   );
 }
 
-export function FeaturedNomineeSlider() {
-  return <NomineeSlider nominees={featuredNominees} className="nominee-slider--featured" />;
+export function FeaturedNomineeSlider({ nominees }: { nominees: Nominee[] }) {
+  return <NomineeSlider nominees={nominees} className="nominee-slider--featured" />;
 }
 
-export function NomineeEntrySlider() {
-  return <NomineeSlider nominees={nomineeEntries} className="nominee-slider--entries mt-[25px]" />;
+export function NomineeEntrySlider({ nominees }: { nominees: Nominee[] }) {
+  return <NomineeSlider nominees={nominees} className="nominee-slider--entries mt-[25px]" />;
 }
