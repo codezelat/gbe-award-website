@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import ThemeInit from "../components/ThemeInit.astro";
+import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import HeroSection from "../components/HeroSection.astro";
 import AboutSection from "../components/AboutSection.astro";
@@ -9,69 +10,30 @@ import JourneySection from "../components/JourneySection.astro";
 import NomineesSection from "../components/NomineesSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths, seo } from "../data/home";
+import { buildEventSchema, buildPageSchema } from "../lib/seo";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <ThemeInit />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={seo.description} />
-    <meta name="keywords" content={seo.keywords} />
-    <meta name="robots" content="index, follow" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href="https://gbeaward.com/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={seo.title} />
-    <meta property="og:description" content={seo.description} />
-    <meta property="og:image" content={assetPaths.favicon} />
-    <meta property="og:url" content="https://gbeaward.com/" />
-    <meta property="og:site_name" content="Global Business Excellence Awards" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={seo.title} />
-    <meta name="twitter:description" content={seo.description} />
-    <meta name="twitter:image" content={assetPaths.favicon} />
-    <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png" />
-    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+    <SeoHead
+      title={seo.title}
+      description={seo.description}
+      keywords={seo.keywords}
+      path="/"
+      image={assetPaths.trophy}
+      schema={[
+        buildPageSchema({
+          path: "/",
+          title: seo.title,
+          description: seo.description,
+          image: assetPaths.trophy,
+        }),
+        buildEventSchema(),
+      ]}
+    />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#000000" />
-    <title>{seo.title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Event",
-      name: "Global Business Excellence Awards 2026",
-      description: seo.description,
-      startDate: "2026-01-01",
-      endDate: "2026-12-31",
-      eventStatus: "https://schema.org/EventScheduled",
-      eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
-      organizer: {
-        "@type": "Organization",
-        name: "Global Business Excellence Awards",
-        url: "https://gbeaward.com/"
-      },
-      location: [
-        {
-          "@type": "Place",
-          name: "London, United Kingdom",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "London",
-            addressCountry: "GB"
-          }
-        },
-        {
-          "@type": "Place",
-          name: "Colombo, Sri Lanka",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: "Colombo",
-            addressCountry: "LK"
-          }
-        }
-      ]
-    })} />
   </head>
   <body>
     <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">

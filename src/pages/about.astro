@@ -1,9 +1,11 @@
 ---
 import "../styles/global.css";
 import ThemeInit from "../components/ThemeInit.astro";
+import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths, categories } from "../data/home";
+import { buildBreadcrumbSchema, buildPageSchema } from "../lib/seo";
 
 const title = "About GBE Awards | Global Business Excellence Awards 2026";
 const description =
@@ -35,17 +37,25 @@ const values = [
 <html lang="en">
   <head>
     <ThemeInit />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://gbeaward.com/about" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png" />
-    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
-    <title>{title}</title>
+    <SeoHead
+      title={title}
+      description={description}
+      path="/about"
+      image={assetPaths.redCarpet}
+      schema={[
+        buildPageSchema({
+          path: "/about",
+          title,
+          description,
+          pageType: "AboutPage",
+          image: assetPaths.redCarpet,
+        }),
+        buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]),
+      ]}
+    />
   </head>
   <body>
     <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">

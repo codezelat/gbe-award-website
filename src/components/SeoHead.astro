@@ -1,0 +1,81 @@
+---
+import { absoluteUrl, assetUrl, buildOrganizationSchema, buildWebsiteSchema, seoDefaults, type JsonLd } from "../lib/seo";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  keywords?: string;
+  schema?: JsonLd | JsonLd[];
+  canonical?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  image = seoDefaults.defaultImage,
+  type = "website",
+  noindex = false,
+  keywords,
+  schema = [],
+  canonical = true,
+} = Astro.props;
+
+const canonicalUrl = absoluteUrl(path);
+const imageUrl = assetUrl(image);
+const robots = noindex
+  ? "noindex, nofollow, noarchive, nosnippet"
+  : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+const schemaGraph = [
+  buildOrganizationSchema(),
+  buildWebsiteSchema(),
+  ...(Array.isArray(schema) ? schema : [schema]).filter(Boolean),
+];
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<meta name="googlebot" content={robots} />
+<meta name="author" content="London Business Consultancy" />
+<meta name="theme-color" content="#000000" />
+<meta name="generator" content={Astro.generator} />
+{keywords ? <meta name="keywords" content={keywords} /> : null}
+
+{canonical ? <link rel="canonical" href={canonicalUrl} /> : null}
+{canonical ? <link rel="alternate" hrefLang="en-gb" href={canonicalUrl} /> : null}
+{canonical ? <link rel="alternate" hrefLang="x-default" href={canonicalUrl} /> : null}
+
+<meta property="og:locale" content={seoDefaults.locale} />
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content={seoDefaults.siteName} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:secure_url" content={imageUrl} />
+<meta property="og:image:alt" content={title} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={title} />
+<meta name="twitter:site" content={seoDefaults.twitterHandle} />
+<meta name="twitter:creator" content={seoDefaults.twitterHandle} />
+
+<link rel="icon" type="image/png" href="/assets/brand/favicon-32.png" />
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+
+<title>{title}</title>
+
+{
+  schemaGraph.map((entry) => (
+    <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+  ))
+}

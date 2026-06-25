@@ -1,10 +1,12 @@
 ---
 import "../styles/global.css";
 import ThemeInit from "../components/ThemeInit.astro";
+import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths } from "../data/home";
 import { getPublicWinners } from "../lib/public-content";
+import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, normalizeDescription } from "../lib/seo";
 
 export const prerender = false;
 
@@ -14,23 +16,50 @@ const description =
 
 Astro.response.headers.set("cache-control", "public, s-maxage=60, stale-while-revalidate=300");
 const winners = await getPublicWinners();
+const winnerSummary = winners
+  .slice(0, 10)
+  .map((winner) => ({
+    name: `${winner.name} - ${winner.title}`,
+    image: winner.image,
+    description: normalizeDescription(
+      winner.summary?.trim() ||
+        `${winner.name} is featured among Global Business Excellence Awards winners${winner.market ? ` for ${winner.market}` : ""}.`,
+    ),
+  }));
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <ThemeInit />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://gbeaward.com/previous-winners" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png" />
-    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
-    <title>{title}</title>
+    <SeoHead
+      title={title}
+      description={description}
+      path="/previous-winners"
+      image={winners[0]?.image || assetPaths.trophy}
+      schema={[
+        buildPageSchema({
+          path: "/previous-winners",
+          title,
+          description,
+          pageType: "CollectionPage",
+          image: winners[0]?.image || assetPaths.trophy,
+        }),
+        buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Previous Winners", path: "/previous-winners" },
+        ]),
+        ...(winnerSummary.length > 0
+          ? [
+              buildItemListSchema({
+                path: "/previous-winners",
+                title: "Global Business Excellence Awards previous winners",
+                items: winnerSummary,
+              }),
+            ]
+          : []),
+      ]}
+    />
   </head>
   <body>
     <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">

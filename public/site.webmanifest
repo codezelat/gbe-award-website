@@ -1,11 +1,15 @@
 {
   "name": "Global Business Excellence Awards",
   "short_name": "GBE Awards",
+  "id": "/",
+  "lang": "en-GB",
   "description": "Recognising outstanding businesses and visionaries across the UK, Sri Lanka, and the world.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
+  "categories": ["business", "events", "awards"],
   "icons": [
     {
       "src": "/assets/brand/favicon-192.png",

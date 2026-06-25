@@ -1,10 +1,12 @@
 ---
 import "../styles/global.css";
 import ThemeInit from "../components/ThemeInit.astro";
+import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths } from "../data/home";
 import { getPublicNominees } from "../lib/public-content";
+import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, normalizeDescription } from "../lib/seo";
 
 export const prerender = false;
 
@@ -13,23 +15,50 @@ const description =
   "Meet the outstanding nominees of the Global Business Excellence Awards 2026. Companies, entrepreneurs, and leaders recognised for their excellence across the UK, Sri Lanka, and beyond.";
 Astro.response.headers.set("cache-control", "public, s-maxage=60, stale-while-revalidate=300");
 const allNominees = await getPublicNominees();
+const nomineeSummary = allNominees
+  .slice(0, 10)
+  .map((nominee) => ({
+    name: `${nominee.name} - ${nominee.title}`,
+    image: nominee.image,
+    description: normalizeDescription(
+      nominee.summary?.trim() ||
+        `${nominee.name} is recognised in ${nominee.category ?? "a Global Business Excellence Awards category"}${nominee.market ? ` for ${nominee.market}` : ""}.`,
+    ),
+  }));
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <ThemeInit />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://gbeaward.com/nominees" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png" />
-    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
-    <title>{title}</title>
+    <SeoHead
+      title={title}
+      description={description}
+      path="/nominees"
+      image={allNominees[0]?.image || assetPaths.trophy}
+      schema={[
+        buildPageSchema({
+          path: "/nominees",
+          title,
+          description,
+          pageType: "CollectionPage",
+          image: allNominees[0]?.image || assetPaths.trophy,
+        }),
+        buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Nominees", path: "/nominees" },
+        ]),
+        ...(nomineeSummary.length > 0
+          ? [
+              buildItemListSchema({
+                path: "/nominees",
+                title: "Global Business Excellence Awards nominees",
+                items: nomineeSummary,
+              }),
+            ]
+          : []),
+      ]}
+    />
   </head>
   <body>
     <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">
