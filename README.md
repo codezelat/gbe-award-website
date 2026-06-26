@@ -1,284 +1,203 @@
-# Global Business Excellence Awards (GBE Awards)
+# Global Business Excellence Awards Website
 
-The official website for the **Global Business Excellence Awards 2026**, organised by London Business Consultancy in London, UK. The awards celebrate outstanding companies, entrepreneurs, and visionaries across the United Kingdom, Sri Lanka, and the world.
+Official website for the **Global Business Excellence Awards 2026**, organised by **London Business Consultancy** in **London, UK**.
 
-Built with Astro, React, and Tailwind CSS for a fast, accessible, and SEO-optimised experience.
+This repo is a production Astro site with:
+- public marketing pages
+- a protected admin CMS
+- Neon Postgres via Drizzle
+- Better Auth for admin login
+- Cloudflare R2 media storage
+- shared SEO/structured-data infrastructure
+- Google Analytics on public pages only
 
----
+## Current State
 
-## Table of Contents
+- Public routes: `/`, `/about`, `/contact`, `/nominees`, `/previous-winners`, `/privacy-policy`, `/404`
+- Protected routes: `/gbe-admin-safe/*`, `/api/gbe-admin-safe/*`, `/api/auth/*`
+- Public nominee and winner content is DB-backed
+- Previous winners are imported from the live legacy site and stored locally in Postgres
+- Winner images are stored on the project media domain, not left on legacy WordPress URLs
+- Admin/auth surfaces are explicitly noindexed
 
-- [Overview](#overview)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Pages](#pages)
-- [Components](#components)
-- [Styling](#styling)
-- [Assets](#assets)
-- [SEO](#seo)
-- [Build and Deploy](#build-and-deploy)
-- [Scripts](#scripts)
-- [License](#license)
+## Stack
 
----
+- `astro` 6
+- `@astrojs/react`
+- `@astrojs/vercel`
+- `tailwindcss` v4 via `@tailwindcss/vite`
+- `react` 19
+- `swiper`
+- `better-auth`
+- `drizzle-orm`
+- `@neondatabase/serverless`
+- Cloudflare R2 via `@aws-sdk/client-s3`
 
-## Overview
-
-GBE Awards is a prestigious international business awards platform bridging London's corporate community with Colombo's thriving enterprise ecosystem. The website showcases award categories, featured nominees, previous winners, and provides a nomination/application pathway for businesses worldwide.
-
-### Key Features
-
-- **7 fully designed pages** with consistent design language
-- **Responsive design** with breakpoints at 1024px and 560px
-- **Swiper carousels** for category and nominee showcases
-- **Scroll-aware header** with frosted glass effect on scroll
-- **Accessibility** baked in: semantic HTML, ARIA labels, focus-visible outlines, reduced-motion support
-- **SEO complete**: per-page meta tags, Open Graph, Twitter Cards, JSON-LD structured data, sitemap, robots.txt
-- **PWA-ready** with web manifest and theme colour
-- **Optimised assets**: all images served as WebP where possible, semantic file naming, organised directory structure
-
----
-
-## Tech Stack
-
-| Technology | Version | Purpose |
-|---|---|---|
-| [Astro](https://astro.build) | ^6.4.8 | Static site generator, page routing |
-| [React](https://react.dev) | ^19.2 | Interactive components (sliders, social links, animations) |
-| [Tailwind CSS](https://tailwindcss.com) | ^4.3 | Utility-first styling, custom theme tokens |
-| [Swiper](https://swiperjs.com) | ^12.2 | Touch-enabled carousels |
-| [@fontsource/tajawal](https://fontsource.org) | ^5.2 | Primary UI/body font (self-hosted) |
-| [@fontsource/tangerine](https://fontsource.org) | ^5.2 | Script font for decorative headings |
-| [Motion](https://motion.dev) | ^12.40 | Animation library (available, used selectively) |
-| [Lucide React](https://lucide.dev) | ^1.21 | Icon library (available, custom SVGs used where needed) |
-| [clsx](https://github.com/lukeed/clsx) | ^2.1 | Conditional class names |
-| [tailwind-merge](https://github.com/dcastil/tailwind-merge) | ^3.6 | Tailwind class conflict resolution |
-| [Playwright](https://playwright.dev) | ^1.61 | E2E testing and asset capture (dev dependency) |
-
----
-
-## Prerequisites
-
-- **Node.js** >= 22.12.0
-- **npm** (bundled with Node.js)
-
----
-
-## Getting Started
+## Commands
 
 ```bash
-# Clone the repository
-git clone https://github.com/sayuru/gbe-award-website.git
-cd gbe-award-website
-
-# Install dependencies
 npm install
-
-# Start the development server
 npm run dev
+npm run build
 ```
 
-The dev server runs at `http://localhost:4321`.
-
----
-
-## Project Structure
-
-```
-gbe-award-website/
-├── public/
-│   ├── assets/
-│   │   ├── brand/           # Logo, trophy, award icon, favicons
-│   │   ├── journey/         # Hero/journey section photos
-│   │   └── nominees/        # Nominee portraits and logos
-│   ├── favicon.ico
-│   ├── favicon.svg
-│   ├── robots.txt           # Search engine crawling rules
-│   ├── sitemap.xml          # URL index for search engines
-│   └── site.webmanifest     # PWA manifest
-├── src/
-│   ├── components/
-│   │   ├── AboutSection.astro
-│   │   ├── CategoriesSection.astro
-│   │   ├── Header.astro
-│   │   ├── HeroLiveBackground.tsx
-│   │   ├── HeroSection.astro
-│   │   ├── JourneyImageSlider.tsx
-│   │   ├── JourneySection.astro
-│   │   ├── LoopSliders.tsx
-│   │   ├── NomineesSection.astro
-│   │   ├── SiteFooter.astro
-│   │   └── SocialLinks.tsx
-│   ├── data/
-│   │   └── home.ts          # Central data: asset paths, nav, categories, nominees, SEO
-│   ├── pages/
-│   │   ├── index.astro      # Homepage
-│   │   ├── about.astro      # About GBE Awards
-│   │   ├── contact.astro    # Contact form and details
-│   │   ├── nominees.astro   # All nominees grid
-│   │   ├── previous-winners.astro
-│   │   ├── privacy-policy.astro
-│   │   └── 404.astro        # Custom not-found page
-│   └── styles/
-│       └── global.css       # Tailwind config, theme tokens, component styles, animations
-├── docs/                    # Design references and research docs
-├── scripts/                 # Asset capture/download tooling
-├── astro.config.mjs
-├── tsconfig.json
-├── package.json
-├── AGENTS.md                # AI coding agent instructions
-└── README.md                # This file
-```
-
----
-
-## Pages
-
-| Route | File | Description |
-|---|---|---|
-| `/` | `index.astro` | Homepage with hero, about teaser, categories, journey, nominees |
-| `/about` | `about.astro` | Full about page with mission, values, judging process, stats |
-| `/contact` | `contact.astro` | Contact form, organisation details, social links |
-| `/nominees` | `nominees.astro` | Grid of all nominees with card design |
-| `/previous-winners` | `previous-winners.astro` | Hall of Excellence with premium animated winner cards |
-| `/privacy-policy` | `privacy-policy.astro` | Full privacy policy |
-| 404 | `404.astro` | Custom 404 with gold styling and return-home CTA |
-
----
-
-## Components
-
-### Astro Components (`.astro`)
-
-Rendered at build time (zero client JS unless they hydrate React islands).
-
-- **Header.astro** - Fixed navigation with scroll-aware shrink effect, desktop pill nav, mobile hamburger
-- **HeroSection.astro** - Full-height hero with animated background, trophy assets, CTA
-- **AboutSection.astro** - Homepage about teaser card with mandala decorations
-- **CategoriesSection.astro** - Heading + Swiper category carousel
-- **JourneySection.astro** - Media gallery + copy + CTA
-- **NomineesSection.astro** - Two-row nominee slider section
-- **SiteFooter.astro** - Footer with nav, copy, social links, credits
-
-### React Components (`.tsx`)
-
-Hydrated client-side via Astro `client:load` directives.
-
-- **SocialLinks.tsx** - Reusable social icon bar (Instagram, Facebook, X, LinkedIn, WhatsApp) with SVG icons
-- **LoopSliders.tsx** - Exports `CategorySlider`, `FeaturedNomineeSlider`, `NomineeEntrySlider` using Swiper
-- **HeroLiveBackground.tsx** - Animated particle/canvas background for the hero section
-- **JourneyImageSlider.tsx** - Mobile-only image carousel for journey photos
-
----
-
-## Styling
-
-The project uses **Tailwind CSS v4** with a custom theme defined in `src/styles/global.css`.
-
-### Design Tokens
-
-```css
-@theme {
-  --color-gbe-gold: #ffb001;
-  --color-gbe-gold-soft: #e0b03c;
-  --color-gbe-gold-deep: #6a4c1a;
-  --color-gbe-gold-bright: #ffd05a;
-  --color-gbe-muted: #d8d8d8;
-  --color-gbe-panel: #050505;
-  --color-gbe-footer: #1b1b1b;
-  --font-sans: "Tajawal", system-ui, sans-serif;
-  --font-script: "Tangerine", cursive;
-}
-```
-
-### Custom Utilities
-
-- `container-gbe` - Centered container with max-width (1260px desktop, 92vw tablet)
-- `gold-text` - Gold gradient text clip effect
-- `gold-fill` - Gold gradient background fill
-- `btn-gold` / `btn-gold-hover` - Reusable gold gradient button with glow shadow
-
-### Approach
-
-Most styling is done inline via Tailwind utility classes in `.astro` and `.tsx` files. Shared patterns (buttons, gold text, container) use custom `@utility` definitions. Swiper overrides and keyframe animations are defined outside layers with `!important` where needed to win the cascade over Swiper's bundled CSS.
-
----
-
-## Assets
-
-All static assets live in `public/assets/` and are organised by purpose:
-
-| Directory | Contents | Count |
-|---|---|---|
-| `brand/` | Logo, trophy, award icon, favicons (32px, 192px, 270px, apple-touch) | 15 |
-| `journey/` | Interview, award-in-hand, red-carpet photos (multiple resolutions) | 14 |
-| `nominees/` | Nominee portraits and company logos (multiple resolutions) | 45 |
-
-Assets are referenced via the `assetPaths` object in `src/data/home.ts`. Multi-resolution variants follow the naming convention: `[name].webp`, `[name]-small.webp` (150px), `[name]-medium.webp` (768px), `[name]-large.webp` (1024px), `[name]-full.webp` (original).
-
----
-
-## SEO
-
-Each page includes:
-- Unique `<title>` and `<meta name="description">`
-- `<meta name="keywords">` on the homepage
-- Open Graph tags (`og:type`, `og:title`, `og:description`, `og:image`, `og:url`)
-- Twitter Card tags
-- `<link rel="canonical">`
-- Proper `<meta name="robots">` directives
-
-The homepage additionally includes:
-- JSON-LD structured data (Schema.org `Event` type with dual locations: London GB + Colombo LK)
-- `<link rel="manifest">` pointing to `site.webmanifest`
-- `<meta name="theme-color">`
-
-Infrastructure files in `public/`:
-- `robots.txt` - Allows all crawlers, points to sitemap
-- `sitemap.xml` - All 6 indexable routes with priority and changefreq
-- `site.webmanifest` - PWA manifest with icons and theme colour
-
----
-
-## Build and Deploy
+Useful project scripts:
 
 ```bash
-# Production build (outputs to ./dist/)
-npm run build
-
-# Preview the production build locally
-npm run preview
+npm run seed:admin       # create/check the first admin user
+npm run import:winners   # import real previous winners from gbeaward.com
+npm run r2:migrate-images
 ```
 
-The build generates static HTML for all 7 pages. The output in `dist/` can be deployed to any static hosting provider (Netlify, Vercel, Cloudflare Pages, GitHub Pages, or any S3-compatible host).
+Notes:
+- `npm run build` is the required verification command before shipping changes.
+- `npm run preview` is currently **not supported** with the configured Vercel adapter.
 
-### Deployment Checklist
+## Environment
 
-- Verify all 7 pages build without errors
-- Confirm `robots.txt`, `sitemap.xml`, and `site.webmanifest` are present in `dist/`
-- Test on mobile (390px), tablet (768px), and desktop (1440px) viewports
-- Validate favicon displays correctly in browser tab
-- Check that all internal links resolve (no 404s)
+Copy `.env.example` to `.env` and fill in the real values.
 
----
+Required:
 
-## Scripts
+```env
+DATABASE_URL=
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
+PUBLIC_SITE_URL=
+R2_BUCKET=
+R2_ENDPOINT=
+R2_ACCESS_KEY_ID=
+R2_SECRET_ACCESS_KEY=
+R2_PUBLIC_BASE_URL=
+```
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start Astro dev server at `localhost:4321` |
-| `npm run build` | Build production site to `./dist/` |
-| `npm run preview` | Preview production build locally |
-| `npm run astro` | Run Astro CLI commands directly |
+Optional:
 
----
+```env
+ALLOW_ADMIN_SIGNUP=false
+PUBLIC_GOOGLE_TAG_ID=GT-W6V9ZG59
+```
 
-## License
+Notes:
+- `BETTER_AUTH_URL` and `PUBLIC_SITE_URL` should match the environment you are running in.
+- `PUBLIC_GOOGLE_TAG_ID` is optional because the repo currently falls back to `GT-W6V9ZG59`.
+- `ALLOW_ADMIN_SIGNUP` should stay disabled outside controlled setup flows.
 
-This project is proprietary. All rights reserved by London Business Consultancy.
+## Architecture
 
-Website developed by [Codezela Technologies](https://codezela.com).
+### Public content
 
-&copy; 2026 Global Business Excellence Awards.
+- `src/pages/index.astro`
+- `src/pages/nominees.astro`
+- `src/pages/previous-winners.astro`
+- `src/lib/public-content.ts`
+
+Homepage structure and static brand data still live in `src/data/home.ts`, but nominee/winner cards shown publicly come from the database.
+
+### Admin CMS
+
+- `src/pages/gbe-admin-safe/index.astro`
+- `src/pages/gbe-admin-safe/overview.astro`
+- `src/pages/gbe-admin-safe/winners.astro`
+- `src/pages/gbe-admin-safe/nominations.astro`
+- `src/components/admin/ContentManager.tsx`
+- `src/components/admin/AdminForm.tsx`
+
+The admin uses in-app modals and toasts. Native browser `alert`/`confirm` popups have been removed from the current UI flow.
+
+### Database
+
+- `src/lib/db/schema.ts`
+- `src/lib/db/index.ts`
+
+Main tables:
+- `past_winners`
+- `nominations`
+- Better Auth tables: `user`, `session`, `account`, `verification`
+
+### Auth
+
+- `src/lib/auth.ts`
+- `src/lib/admin/auth.ts`
+- `src/pages/api/auth/[...all].ts`
+
+### Media storage
+
+- `src/lib/admin/r2.ts`
+- `src/pages/api/gbe-admin-safe/upload.ts`
+
+Admin image uploads go to Cloudflare R2 and are served from `R2_PUBLIC_BASE_URL`.
+
+### SEO and analytics
+
+- `src/components/SeoHead.astro`
+- `src/lib/seo.ts`
+- `src/components/GoogleAnalytics.astro`
+- `src/pages/sitemap.xml.ts`
+- `src/middleware.ts`
+
+What is implemented:
+- canonical tags
+- robots directives
+- Open Graph and Twitter cards
+- JSON-LD structured data
+- generated sitemap
+- protected-route `X-Robots-Tag`
+- Google Analytics on public pages only
+
+## Winner Import Workflow
+
+Real previous winners are imported by:
+
+- `scripts/import-live-winners.ts`
+
+What it does:
+- fetches real winner posts from the live WordPress API
+- reads the winner detail page heading to capture the actual award title
+- uploads remote winner images into the project R2 bucket
+- upserts winners into `past_winners`
+- archives local winner rows no longer present in the live source
+
+This replaced the old fake content seeding path.
+
+## Styling Conventions
+
+- Theme and shared utilities live in `src/styles/global.css`
+- Use `gold-text` for gold gradient typography
+- Use `btn-gold` and `btn-gold-hover` for shared CTA styling
+- Use `container-gbe` for standard content width
+- Swiper override rules must stay outside Tailwind layers
+
+## Verification Checklist
+
+Before marking work complete:
+
+```bash
+npm run build
+```
+
+Then verify:
+- public pages still render
+- admin routes still require auth
+- winners and nominees still load from DB
+- noindex remains on admin/auth routes
+- imported winner images resolve from the media domain
+- analytics tag appears on public routes only
+
+## Launch Notes
+
+Before final domain cutover:
+- set final production values in `.env`
+- confirm `BETTER_AUTH_URL` and `PUBLIC_SITE_URL` use the production domain
+- optionally set `PUBLIC_GOOGLE_TAG_ID` explicitly in production env
+- run `npm run build`
+- verify homepage, nominees, previous winners, sitemap, robots, and admin login after deploy
+
+## Repo Truths
+
+- This is **not** a static-only site anymore.
+- This is **not** a Tailwind config file repo; Tailwind v4 theme lives in CSS.
+- `public/sitemap.xml` is no longer the source of truth; sitemap is generated from Astro.
+- `scripts/seed-content.ts` has been removed and should not be reintroduced.
