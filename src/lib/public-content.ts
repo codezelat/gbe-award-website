@@ -60,14 +60,14 @@ export async function getPublicNominees(): Promise<PublicAwardCard[]> {
   }
 }
 
-export async function getPublicWinners(): Promise<PublicAwardCard[]> {
+export async function getPublicWinners(limit = 120): Promise<PublicAwardCard[]> {
   try {
     const rows = await db
       .select()
       .from(schema.pastWinners)
       .where(eq(schema.pastWinners.status, "published"))
       .orderBy(desc(schema.pastWinners.year), asc(schema.pastWinners.sortOrder), desc(schema.pastWinners.updatedAt))
-      .limit(48);
+      .limit(limit);
 
     return rows.map(mapWinner);
   } catch (error) {

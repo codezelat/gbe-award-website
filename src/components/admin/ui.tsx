@@ -14,6 +14,7 @@ import { twMerge } from "tailwind-merge";
 import {
   AlertCircle,
   CheckCircle2,
+  CircleAlert,
   Info,
   Loader2,
   X,
@@ -596,6 +597,69 @@ export function Modal({
         </div>
       ) : null}
     </AnimatePresence>
+  );
+}
+
+export function ConfirmDialog({
+  open,
+  title,
+  description,
+  confirmLabel = "Confirm",
+  cancelLabel = "Cancel",
+  tone = "danger",
+  pending = false,
+  onConfirm,
+  onClose,
+}: {
+  open: boolean;
+  title: string;
+  description: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  tone?: "danger" | "primary";
+  pending?: boolean;
+  onConfirm: () => void;
+  onClose: () => void;
+}) {
+  return (
+    <Modal open={open} onClose={pending ? () => {} : onClose} labelledBy="confirm-dialog-title">
+      <div className="max-w-lg">
+        <div className="border-b border-white/[0.06] px-6 py-5">
+          <div className="flex items-start gap-3">
+            <div
+              className={cn(
+                "mt-0.5 grid size-11 shrink-0 place-items-center rounded-2xl ring-1 ring-inset",
+                tone === "danger"
+                  ? "bg-rose-500/10 text-rose-300 ring-rose-500/25"
+                  : "bg-[#ffb001]/10 text-[#ffd05a] ring-[#ffb001]/25",
+              )}
+            >
+              <CircleAlert size={20} />
+            </div>
+            <div>
+              <h2 id="confirm-dialog-title" className="text-lg font-bold text-zinc-50">
+                {title}
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-zinc-400">{description}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-end gap-2 border-t border-white/[0.04] bg-[#0c0c0f] px-6 py-4">
+          <Button variant="ghost" type="button" onClick={onClose} disabled={pending}>
+            {cancelLabel}
+          </Button>
+          <Button
+            variant={tone === "danger" ? "danger" : "primary"}
+            type="button"
+            onClick={onConfirm}
+            loading={pending}
+          >
+            {pending ? "Working..." : confirmLabel}
+          </Button>
+        </div>
+      </div>
+    </Modal>
   );
 }
 

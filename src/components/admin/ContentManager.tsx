@@ -14,6 +14,7 @@ import AdminForm, { blankForm, rowToForm } from "./AdminForm";
 import {
   Badge,
   Button,
+  ConfirmDialog,
   EmptyState,
   SelectField,
   ToastProvider,
@@ -100,6 +101,8 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<FormState | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<Row | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const statusOptions = isWinner
     ? [
@@ -159,8 +162,7 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
 
   async function handleDelete(row: Row) {
     const name = personName(kind, row);
-    if (!window.confirm(`Delete "${name}"? This action cannot be undone.`)) return;
-
+    setDeleting(true);
     try {
       const res = await fetch(`/api/gbe-admin-safe/${kind}/${row.id}`, {
         method: "DELETE",
@@ -175,9 +177,12 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
         description: `${name} was removed.`,
         variant: "success",
       });
+      setPendingDelete(null);
       await load();
     } catch {
       showToast({ title: "Delete failed", variant: "error" });
+    } finally {
+      setDeleting(false);
     }
   }
 
@@ -340,7 +345,7 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
                           </button>
                           <button
                             className="grid size-8 place-items-center rounded-lg text-zinc-500 transition hover:bg-rose-500/10 hover:text-rose-300"
-                            onClick={() => void handleDelete(row)}
+                            onClick={() => setPendingDelete(row)}
                             aria-label={`Delete ${name}`}
                             type="button"
                           >
@@ -408,6 +413,28 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
           />
         ) : null}
       </AnimatePresence>
+
+      <ConfirmDialog
+        open={Boolean(pendingDelete)}
+        title={`Delete ${config.singular}?`}
+        description={
+          pendingDelete
+            ? `Delete "${personName(kind, pendingDelete)}" permanently. This action cannot be undone.`
+            : ""
+        }
+        confirmLabel="Delete record"
+        cancelLabel="Keep record"
+        tone="danger"
+        pending={deleting}
+        onClose={() => {
+          if (!deleting) setPendingDelete(null);
+        }}
+        onConfirm={() => {
+          if (pendingDelete) {
+            void handleDelete(pendingDelete);
+          }
+        }}
+      />
     </div>
   );
 }

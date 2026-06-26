@@ -1,0 +1,29 @@
+---
+import { SITE_GOOGLE_TAG_ID, SITE_URL } from "../lib/site";
+
+const googleTagId = SITE_GOOGLE_TAG_ID?.trim();
+const hostname = new URL(SITE_URL).hostname;
+---
+
+{
+  googleTagId ? (
+    <>
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`}></script>
+      <script
+        is:inline
+        define:vars={{ googleTagId, hostname }}
+      >
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = window.gtag || gtag;
+          gtag('js', new Date());
+          gtag('set', 'linker', { domains: [hostname] });
+          gtag('config', googleTagId);
+        `}
+      </script>
+    </>
+  ) : null
+}
