@@ -9,7 +9,6 @@ The primary search intent is the intersection of:
 - the recipient's exact public name;
 - the exact award title and category;
 - Global Business Excellence Awards and GBE Awards;
-- the verified market or country, where it is genuinely relevant;
 - the award year.
 
 No implementation can guarantee a number-one ranking. The system should maximize eligibility, clarity, authority, internal discovery, and backlink potential while following Google Search guidelines.
@@ -40,10 +39,10 @@ The existing `/previous-winners` page remains the Hall of Excellence directory. 
 
 - a subtle whole-card hover and keyboard-focus treatment;
 - a compact `Read winner story` affordance that appears without covering content;
-- recipient, award, market, and year remaining visible without interaction;
+- recipient, award, and year remaining visible without interaction;
 - no heavy client-side animation or hydration requirement.
 
-The directory supports crawlable year, market, and category filtering. Filtering must remain usable without JavaScript. Pagination is server-rendered when required, and every indexable detail page is reachable through ordinary HTML links.
+The directory supports crawlable year and category filtering. Filtering must remain usable without JavaScript. Pagination is server-rendered when required, and every indexable detail page is reachable through ordinary HTML links.
 
 ### Winner Story Layout
 
@@ -54,16 +53,16 @@ The reading column is approximately 720-820px wide. The hero may be wider than t
 Page order:
 
 1. Compact breadcrumbs.
-2. Award label, market, and publication date.
+2. Award label and publication date.
 3. Natural editorial H1.
 4. Standfirst of roughly 30-60 words.
 5. Large responsive hero image with optional caption and credit.
-6. Minimal award-facts panel for recipient, award, year, market, ceremony date, and location when verified.
+6. Minimal award-facts panel for recipient, award, year, and ceremony date when verified.
 7. Server-rendered article body.
 8. Optional winner quote.
 9. About the recipient and verified official link.
 10. Short reusable context about GBE Awards and London Business Consultancy.
-11. Three or four related winners selected by category, market, or year.
+11. Three or four related winners selected by category or year.
 12. Restrained nomination/application CTA.
 
 Optional sections are omitted cleanly when data is absent. Empty headings, placeholder prose, fake quotes, and invented judging rationale are prohibited.
@@ -87,7 +86,6 @@ The existing `past_winners` record remains the source of truth. It gains fields 
 - `recipientName`
 - `organization`
 - `industry`
-- `location`
 - `officialWebsiteUrl`
 - `linkedinUrl`
 - `facebookUrl`
@@ -98,9 +96,7 @@ The existing `past_winners` record remains the source of truth. It gains fields 
 - `awardTitle`
 - `category`
 - `year`
-- `market`
 - `ceremonyDate`
-- `ceremonyLocation`
 - `awardCitation`
 
 ### Editorial Story
@@ -148,11 +144,10 @@ Each story should naturally cover:
 - what was awarded and when;
 - who the recipient is;
 - verified work, achievements, or impact relevant to the recognition;
-- the award's market context;
 - why the recognition matters, without unsupported claims;
 - useful official links and related GBE records.
 
-Location terms such as Sri Lanka, United Kingdom, London, or International are used only when accurate. Keyword stuffing, hidden text, copied company boilerplate, invented quotations, fake judges' comments, and unsupported `best`, `leading`, or `number one` claims are prohibited.
+Geography is not used as a winner-story tag, filter, keyword target, metadata field, structured-data field, or article template requirement. Existing legacy market values are ignored by the feature. Keyword stuffing, hidden text, copied company boilerplate, invented quotations, fake judges' comments, and unsupported `best`, `leading`, or `number one` claims are prohibited.
 
 ## Per-Story Search Strategy
 
@@ -162,7 +157,6 @@ The primary keyword cluster is generated from factual fields rather than manuall
 {recipient name} + {award title}
 {recipient name} + Global Business Excellence Awards
 {recipient name} + GBE Awards {year}
-{award title} + {verified market}
 ```
 
 The H1 is a readable announcement, for example:
@@ -275,7 +269,7 @@ Migration must be additive and safe:
 
 1. Add nullable fields and new supporting tables or JSON columns.
 2. Backfill news-style canonical slugs while preserving current slugs as aliases.
-3. Preserve all 59 images, names, awards, markets, and source dates.
+3. Preserve all 59 images, names, awards, and source dates while excluding legacy market labels from the feature.
 4. Create public basic-record pages as `noindex,follow`.
 5. Research and draft each story from captured sources.
 6. Fact-check and publish indexing in controlled batches.
@@ -292,7 +286,7 @@ The live import script must never overwrite human-edited article content during 
 - A winner has no official website or social profile.
 - No suitable hero image exists.
 - Images fail or are removed from R2.
-- Ceremony date or location is unknown.
+- Ceremony date is unknown.
 - A quote or award citation is unavailable.
 - A slug is changed after publication.
 - A winner is archived after being indexed.
@@ -325,4 +319,3 @@ Implementation is complete only after:
 - Automatically generated factual claims or quotes.
 - Paid-link schemes or guarantees of a particular search ranking.
 - Public nominee detail pages unless designed and approved separately.
-

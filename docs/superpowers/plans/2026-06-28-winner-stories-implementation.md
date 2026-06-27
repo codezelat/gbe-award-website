@@ -116,7 +116,6 @@ standfirst: text("standfirst"),
 body: jsonb("body").$type<WinnerRichText>(),
 officialWebsiteUrl: text("official_website_url"),
 industry: text("industry"),
-location: text("location"),
 awardCitation: text("award_citation"),
 achievementHighlights: text("achievement_highlights").array(),
 heroImageUrl: text("hero_image_url"),
@@ -132,6 +131,8 @@ factCheckedAt: timestamp("fact_checked_at", { withTimezone: true }),
 ```
 
 Create `winner_slug_aliases` with unique alias, winner FK with cascade, and timestamps.
+
+Do not add any new geography fields. Keep the legacy winner `market` column only for migration compatibility, remove its default, make it nullable, and backfill all existing winner market values to `NULL`. Winner-story queries, forms, filters, metadata, schema, and content packages must not expose or consume it. Keep nomination behavior unchanged.
 
 - [ ] **Step 2: Generate and inspect the SQL migration**
 
@@ -214,7 +215,7 @@ Cover published canonical lookup, alias lookup, draft exclusion, archived exclus
 Export focused functions:
 
 ```ts
-getWinnerDirectory(input: { page: number; year?: number; market?: string; category?: string }): Promise<WinnerDirectoryResult>
+getWinnerDirectory(input: { page: number; year?: number; category?: string }): Promise<WinnerDirectoryResult>
 getPublishedWinnerBySlug(slug: string): Promise<WinnerStoryRecord | null>
 resolveWinnerSlug(slug: string): Promise<{ winner: WinnerStoryRecord; redirect: boolean } | null>
 getRelatedWinners(winner: WinnerStoryRecord, limit?: number): Promise<WinnerCardData[]>
@@ -279,7 +280,7 @@ git commit -m "feat: add winner article SEO and discovery"
 
 - [ ] **Step 1: Create `WinnerStoryCard.astro`**
 
-Use a semantic linked article with the existing gold border and quiet motion. The entire card is clickable, while a bottom `Read winner story` row shifts by only a few pixels on hover/focus. Preserve recipient, award, market, and year without hover.
+Use a semantic linked article with the existing gold border and quiet motion. The entire card is clickable, while a bottom `Read winner story` row shifts by only a few pixels on hover/focus. Preserve recipient, award, and year without hover.
 
 - [ ] **Step 2: Refactor the directory**
 
@@ -345,11 +346,11 @@ git commit -m "feat: add winner story editorial workflow"
 
 - [ ] **Step 1: Export immutable research inputs**
 
-Run `scripts/export-winner-research.ts` to write each DB ID, recipient, organization, exact award, year, current market, legacy slug, image URL, and source date into one JSON file per award record.
+Run `scripts/export-winner-research.ts` to write each DB ID, recipient, organization, exact award, year, legacy slug, image URL, and source date into one JSON file per award record. Do not export the legacy market field.
 
 - [ ] **Step 2: Correct obvious source-data defects before writing**
 
-Flag repeated unrelated images, inferred organizations, generic `International` markets, honorifics embedded in names, and duplicate recipients with multiple awards. Do not silently infer corrections without a source.
+Flag repeated unrelated images, inferred organizations, honorifics embedded in names, and duplicate recipients with multiple awards. Backfill every legacy winner market value to `NULL`; never display or replace it and never use geography in metadata, content templates, filters, or keyword clusters.
 
 - [ ] **Step 3: Dispatch research in independent batches**
 
@@ -357,7 +358,7 @@ Use parallel agents with non-overlapping winner files. Each agent must record so
 
 - [ ] **Step 4: Draft one unique article per award win**
 
-Each JSON package includes recipient type, canonical news-style slug, headline, standfirst, structured body, industry, location, official links, image metadata, keyword cluster, SEO title/description, source notes, and fact-check date. Typical length is 700-1,200 useful words when sources support it.
+Each JSON package includes recipient type, canonical news-style slug, headline, standfirst, structured body, industry, official links, image metadata, keyword cluster, SEO title/description, source notes, and fact-check date. Typical length is 700-1,200 useful words when sources support it.
 
 - [ ] **Step 5: Run automated editorial validation**
 
@@ -365,7 +366,7 @@ Each JSON package includes recipient type, canonical news-style slug, headline, 
 
 - [ ] **Step 6: Perform human-style cross-file review**
 
-Search all 59 packages for repeated introductions, generic claims, accidental wrong-company facts, keyword stuffing, and geography conflicts. Verify repeated recipients such as Caravan Fresh and Codezela have award-specific stories rather than near duplicates.
+Search all 59 packages for repeated introductions, generic claims, accidental wrong-company facts, keyword stuffing, and any accidental geography targeting. Verify repeated recipients such as Caravan Fresh and Codezela have award-specific stories rather than near duplicates.
 
 - [ ] **Step 7: Import transactionally**
 
@@ -407,7 +408,7 @@ git commit -m "feat: add winner story sharing analytics"
 
 - [ ] **Step 1: Protect editorial content from the live importer**
 
-Change `scripts/import-live-winners.ts` so synchronization updates only source identity fields and media when explicitly configured. It must not overwrite headline, standfirst, body, canonical slug, sources, dates, index status, or human-corrected market/organization values.
+Change `scripts/import-live-winners.ts` so synchronization updates only source identity fields and media when explicitly configured. It must not overwrite headline, standfirst, body, canonical slug, sources, dates, index status, or human-corrected organization values, and it must not repopulate winner market values.
 
 - [ ] **Step 2: Update repository documentation**
 
@@ -449,4 +450,3 @@ git commit -m "chore: harden winner stories for launch"
 - [ ] **Step 9: Record final evidence**
 
 Report migration status, test/build results, public route counts, sitemap counts, redirect counts, content-quality results, remaining noindex records, and any external-source limitations. Do not claim ranking guarantees or production readiness without this evidence.
-
