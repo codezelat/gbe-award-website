@@ -19,6 +19,9 @@ const image = winner.heroImageUrl || winner.imageUrl || null;
 const imageAlt = winner.heroImageAlt || `${recipient}, ${awardTitle}`;
 const updatedDate = winner.contentUpdatedAt ? new Date(winner.contentUpdatedAt) : null;
 const hasBody = Boolean(winner.bodyHtml?.trim());
+const normalizedAwardTitle = awardTitle.toLowerCase().replace(/\s+/g, " ").trim();
+const normalizedCategory = (winner.category || "").toLowerCase().replace(/\s+/g, " ").trim();
+const showCategory = Boolean(winner.category && normalizedCategory && normalizedCategory !== normalizedAwardTitle);
 ---
 
 <article class="winner-article">
@@ -87,7 +90,7 @@ const hasBody = Boolean(winner.bodyHtml?.trim());
             <dt class="font-bold text-gbe-text">Award</dt>
             <dd class="mt-1 text-gbe-muted">{awardTitle}</dd>
           </div>
-          {winner.category ? (
+          {showCategory ? (
             <div>
               <dt class="font-bold text-gbe-text">Category</dt>
               <dd class="mt-1 text-gbe-muted">{winner.category}</dd>
