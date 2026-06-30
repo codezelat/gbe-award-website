@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { PUBLIC_SITE_PAGES, SITE_URL } from "../lib/site";
+import { PUBLIC_SITE_PAGE_IMAGES, PUBLIC_SITE_PAGES, SITE_URL } from "../lib/site";
 import { getIndexableWinnerUrls } from "../lib/winners/queries";
 
 function escapeXml(value: string) {
@@ -13,19 +13,28 @@ function escapeXml(value: string) {
 
 export const GET: APIRoute = async () => {
   const winnerUrls = await getIndexableWinnerUrls();
+  const buildImageXml = (image: { loc: string; title?: string; caption?: string }) => {
+    const loc = new URL(image.loc, SITE_URL).toString();
+    const title = image.title ? `\n      <image:title>${escapeXml(image.title)}</image:title>` : "";
+    const caption = image.caption ? `\n      <image:caption>${escapeXml(image.caption)}</image:caption>` : "";
+
+    return `\n    <image:image>\n      <image:loc>${escapeXml(loc)}</image:loc>${title}${caption}\n    </image:image>`;
+  };
   const staticUrls = PUBLIC_SITE_PAGES.map(
-    (page) => `  <url>
+    (page) => {
+      const images = PUBLIC_SITE_PAGE_IMAGES[page.path]?.map(buildImageXml).join("") ?? "";
+
+      return `  <url>
     <loc>${escapeXml(new URL(page.path, SITE_URL).toString())}</loc>
     <lastmod>${page.lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
-  </url>`,
+    <priority>${page.priority}</priority>${images}
+  </url>`;
+    },
   );
   const winnerEntries = winnerUrls.map((winner) => {
     const loc = new URL(`/previous-winners/${winner.slug}`, SITE_URL).toString();
-    const image = winner.imageUrl
-      ? `\n    <image:image>\n      <image:loc>${escapeXml(new URL(winner.imageUrl, SITE_URL).toString())}</image:loc>\n    </image:image>`
-      : "";
+    const image = winner.imageUrl ? buildImageXml({ loc: winner.imageUrl, title: winner.recipient || "GBE Awards winner" }) : "";
 
     return `  <url>
     <loc>${escapeXml(loc)}</loc>

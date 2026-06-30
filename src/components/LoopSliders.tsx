@@ -51,7 +51,7 @@ function NomineeCard({ nominee }: { nominee: Nominee }) {
         <p className="mb-0 mt-[18px] text-[clamp(15px,1.15vw,16px)] font-medium leading-[1.45] text-gbe-text/72 transition-colors duration-300 group-hover:text-gbe-text/88 max-[1024px]:text-[15px]">{nominee.name}</p>
       </div>
       <div className="relative z-[1] self-center justify-self-center rounded-full bg-[linear-gradient(135deg,rgba(255,176,1,0.78),rgba(255,255,255,0.22),rgba(31,92,255,0.36))] p-[3px] shadow-[0_0_26px_rgba(255,176,1,0.14)] transition-transform duration-300 group-hover:scale-105">
-        <img className="h-28 w-28 rounded-full bg-gbe-card object-cover object-center max-[1024px]:h-[88px] max-[1024px]:w-[88px]" src={nominee.image} alt="" width="300" height="300" loading="lazy" decoding="async" />
+        <img className="h-28 w-28 rounded-full bg-gbe-card object-cover object-center max-[1024px]:h-[88px] max-[1024px]:w-[88px]" src={nominee.image} alt={`${nominee.name} nominee profile image`} width="300" height="300" loading="lazy" decoding="async" />
       </div>
       <div className="relative z-[1] col-span-full mt-8 flex items-end justify-between gap-[18px] border-t border-gbe-text/10 pt-5">
         <span className="font-script text-[42px] font-bold leading-[0.9] text-gbe-text transition-colors duration-300 group-hover:text-gbe-gold">Congratulations!</span>

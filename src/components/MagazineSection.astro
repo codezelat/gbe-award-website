@@ -1,33 +1,36 @@
 ---
 import { assetPaths, digitalMagazine } from "../data/home";
+
+const magazineSrcSet = `${assetPaths.magazineMockup} 960w, ${assetPaths.magazineMockupLarge} 1536w`;
 ---
 
-<section class="relative overflow-hidden bg-gbe-bg py-[72px] max-[560px]:py-[48px]" aria-labelledby="digital-magazine-title">
+<section class="relative overflow-hidden bg-gbe-bg py-[72px] max-[560px]:py-[48px]" aria-labelledby="magazine-title">
   <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gbe-gold/24 to-transparent" aria-hidden="true"></div>
   <div class="container-gbe">
     <div class="magazine-shell">
       <div class="magazine-copy">
-        <p class="magazine-eyebrow">Digital magazine</p>
-        <h2 id="digital-magazine-title" class="gold-text text-[clamp(32px,4vw,54px)] font-black leading-[0.98]">
+        <p class="magazine-eyebrow">Awards magazine</p>
+        <h2 id="magazine-title" class="gold-text text-[clamp(32px,4vw,54px)] font-black leading-[0.98]">
           {digitalMagazine.title}
         </h2>
         <p class="magazine-description">{digitalMagazine.description}</p>
         <div class="magazine-actions">
-          <a class="btn-gold btn-gold-hover inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-black uppercase tracking-[0.18em] text-black" href={digitalMagazine.url} target="_blank" rel="noopener noreferrer" aria-label="Read the GBE Awards 2025 digital magazine">
-            Read digital magazine
+          <a class="btn-gold btn-gold-hover inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-black uppercase tracking-[0.18em] text-black" href={digitalMagazine.url} target="_blank" rel="noopener noreferrer" aria-label="Read the GBE Awards 2025 magazine">
+            Read magazine
           </a>
-          <span class="magazine-meta" aria-label="Magazine format">Interactive flipbook · 84 pages</span>
         </div>
       </div>
 
-      <a class="magazine-visual group" href={digitalMagazine.url} target="_blank" rel="noopener noreferrer" aria-label="Open the GBE Awards 2025 digital magazine">
+      <a class="magazine-visual group" href={digitalMagazine.url} target="_blank" rel="noopener noreferrer" aria-label="Open the GBE Awards 2025 magazine">
         <span class="magazine-visual-glow" aria-hidden="true"></span>
         <img
           class="relative z-[1] h-auto w-full transition duration-700 ease-out group-hover:scale-[1.018]"
           src={assetPaths.magazineMockup}
-          alt="GBE Awards digital magazine mockup showing the real front cover and final page"
-          width="1536"
-          height="1024"
+          srcset={magazineSrcSet}
+          sizes="(max-width: 1024px) 92vw, 56vw"
+          alt="GBE Awards 2025 magazine cover and curved final page mockup"
+          width="960"
+          height="640"
           loading="lazy"
           decoding="async"
         />
@@ -81,14 +84,6 @@ import { assetPaths, digitalMagazine } from "../data/home";
     align-items: center;
     gap: 14px 18px;
     margin-top: 30px;
-  }
-
-  .magazine-meta {
-    color: var(--c-soft);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 
   .magazine-visual {
@@ -156,12 +151,6 @@ import { assetPaths, digitalMagazine } from "../data/home";
       min-height: 48px;
       padding-inline: 16px;
       letter-spacing: 0.12em;
-    }
-
-    .magazine-meta {
-      width: 100%;
-      text-align: center;
-      font-size: 12px;
     }
   }
 </style>

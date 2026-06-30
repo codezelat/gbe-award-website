@@ -15,14 +15,15 @@ export const assetPaths = {
   aboutStageWinnersLarge: "/assets/journey/about-stage-winners-large.webp",
   aboutLeadership: "/assets/journey/about-leadership.webp",
   aboutLeadershipLarge: "/assets/journey/about-leadership-large.webp",
-  magazineMockup: "/assets/magazine/gbe-magazine-mockup.webp",
+  magazineMockup: "/assets/magazine/gbe-awards-magazine-2025-mockup.webp",
+  magazineMockupLarge: "/assets/magazine/gbe-awards-magazine-2025-mockup-large.webp",
 };
 
 export const digitalMagazine = {
   url: "https://magazine.gbeaward.com/",
-  title: "Read the GBE Awards 2025 Digital Magazine",
+  title: "Read the GBE Awards 2025 Magazine",
   description:
-    "Browse the interactive 84-page digital edition from the Global Business Excellence Awards 2025, featuring event highlights, award moments, and editorial coverage from the ceremony.",
+    "Browse the Global Business Excellence Awards 2025 magazine, featuring event highlights, award moments, and editorial coverage from the ceremony.",
 };
 
 export const navItems = [

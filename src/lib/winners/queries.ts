@@ -169,11 +169,12 @@ export async function getRelatedWinners(winner: WinnerStoryRecord, limit = 3): P
   }
 }
 
-export async function getIndexableWinnerUrls(): Promise<Array<{ slug: string; lastmod: Date; imageUrl?: string | null }>> {
+export async function getIndexableWinnerUrls(): Promise<Array<{ slug: string; lastmod: Date; imageUrl?: string | null; recipientName?: string | null }>> {
   try {
     const rows = await db
       .select({
         slug: schema.pastWinners.slug,
+        recipientName: schema.pastWinners.recipientName,
         contentUpdatedAt: schema.pastWinners.contentUpdatedAt,
         publishedAt: schema.pastWinners.publishedAt,
         updatedAt: schema.pastWinners.updatedAt,
@@ -186,6 +187,7 @@ export async function getIndexableWinnerUrls(): Promise<Array<{ slug: string; la
 
     return rows.map((row) => ({
       slug: row.slug,
+      recipientName: row.recipientName,
       lastmod: row.contentUpdatedAt || row.publishedAt || row.updatedAt,
       imageUrl: pickRealWinnerImage(row.heroImageUrl, row.imageUrl),
     }));
