@@ -3,9 +3,18 @@ export const assetPaths = {
   favicon: "/assets/brand/favicon-192.png",
   trophy: "/assets/brand/hero-award-2026.webp",
   award: "/assets/brand/award-icon.webp",
-  interview: "/assets/journey/interview.webp",
-  awardInHand: "/assets/journey/award-in-hand.webp",
-  redCarpet: "/assets/journey/red-carpet.webp",
+  journeyWinners: "/assets/journey/journey-winners.webp",
+  journeyWinnersLarge: "/assets/journey/journey-winners-large.webp",
+  journeyRecognition: "/assets/journey/journey-recognition.webp",
+  journeyRecognitionLarge: "/assets/journey/journey-recognition-large.webp",
+  journeyAwardHandover: "/assets/journey/journey-award-handover.webp",
+  journeyAwardHandoverLarge: "/assets/journey/journey-award-handover-large.webp",
+  aboutEventWelcome: "/assets/journey/about-event-welcome.webp",
+  aboutEventWelcomeLarge: "/assets/journey/about-event-welcome-large.webp",
+  aboutStageWinners: "/assets/journey/about-stage-winners.webp",
+  aboutStageWinnersLarge: "/assets/journey/about-stage-winners-large.webp",
+  aboutLeadership: "/assets/journey/about-leadership.webp",
+  aboutLeadershipLarge: "/assets/journey/about-leadership-large.webp",
 };
 
 export const navItems = [

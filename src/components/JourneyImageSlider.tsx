@@ -4,6 +4,7 @@ import "swiper/css";
 
 type JourneyImage = {
   src: string;
+  srcSet?: string;
   alt: string;
 };
 
@@ -36,9 +37,11 @@ export default function JourneyImageSlider({ images }: { images: JourneyImage[] 
             <img
               className="aspect-[16/10] w-full object-cover object-center"
               src={image.src}
+              srcSet={image.srcSet}
+              sizes="(max-width: 560px) 92vw, (max-width: 1024px) 62vw, 30vw"
               alt={image.alt}
-              width="768"
-              height="480"
+              width="900"
+              height="600"
               loading="lazy"
               decoding="async"
             />

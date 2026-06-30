@@ -53,14 +53,14 @@ const reasons = [
       title={title}
       description={description}
       path="/contact"
-      image={assetPaths.redCarpet}
+      image={assetPaths.aboutEventWelcome}
       schema={[
         buildPageSchema({
           path: "/contact",
           title,
           description,
           pageType: "ContactPage",
-          image: assetPaths.redCarpet,
+          image: assetPaths.aboutEventWelcome,
         }),
         buildBreadcrumbSchema([
           { name: "Home", path: "/" },
@@ -144,7 +144,7 @@ const reasons = [
             <div class="flex flex-col gap-6">
               <article class="overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-gbe-card shadow-[var(--c-card-shadow)] max-[560px]:rounded-[14px]">
                 <div class="relative h-[160px] overflow-hidden">
-                  <img class="h-full w-full object-cover" src={assetPaths.redCarpet} alt="GBE Awards ceremony" width="768" height="512" loading="eager" decoding="async" />
+                  <img class="h-full w-full object-cover" src={assetPaths.aboutEventWelcome} srcset={`${assetPaths.aboutEventWelcome} 900w, ${assetPaths.aboutEventWelcomeLarge} 1440w`} sizes="(max-width: 1024px) 92vw, 420px" alt="GBE Awards ceremony welcome" width="900" height="600" loading="eager" decoding="async" />
                   <div class="absolute inset-0 bg-gradient-to-t from-[var(--c-img-gradient-bottom)] via-transparent to-transparent"></div>
                 </div>
                 <div class="flex flex-col gap-5 p-8 max-[560px]:p-7">

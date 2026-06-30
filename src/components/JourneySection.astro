@@ -3,16 +3,28 @@ import { assetPaths } from "../data/home";
 import JourneyImageSlider from "./JourneyImageSlider";
 
 const journeyImages = [
-  { src: assetPaths.interview, alt: "Interview" },
-  { src: assetPaths.awardInHand, alt: "Award in hand" },
-  { src: assetPaths.redCarpet, alt: "Red carpet night city" },
+  {
+    src: assetPaths.journeyWinners,
+    srcSet: `${assetPaths.journeyWinners} 900w, ${assetPaths.journeyWinnersLarge} 1440w`,
+    alt: "GBE Awards winner receiving recognition on stage",
+  },
+  {
+    src: assetPaths.journeyRecognition,
+    srcSet: `${assetPaths.journeyRecognition} 900w, ${assetPaths.journeyRecognitionLarge} 1440w`,
+    alt: "GBE Awards recipient with award presenters",
+  },
+  {
+    src: assetPaths.journeyAwardHandover,
+    srcSet: `${assetPaths.journeyAwardHandover} 900w, ${assetPaths.journeyAwardHandoverLarge} 1179w`,
+    alt: "GBE Awards trophy handover ceremony",
+  },
 ];
 ---
 
 <section class="bg-gbe-surface py-20 text-center max-[560px]:pb-[78px] max-[560px]:pt-10" aria-labelledby="journey-title">
   <div class="container-gbe mb-[66px] grid grid-cols-3 gap-10 max-[1024px]:hidden">
     {journeyImages.map((image) => (
-      <img class="h-[202px] w-full rounded-xl object-cover object-center" src={image.src} alt={image.alt} width="768" height="419" loading="lazy" decoding="async" />
+      <img class="h-[202px] w-full rounded-xl object-cover object-center" src={image.src} srcset={image.srcSet} sizes="(max-width: 1024px) 82vw, 30vw" alt={image.alt} width="900" height="600" loading="lazy" decoding="async" />
     ))}
   </div>
 
