@@ -23,6 +23,9 @@ npm run dev      # Dev server at localhost:4321
 npm run build    # Production build to ./dist/ (must pass before completing any task)
 npm run seed:admin
 npm run import:winners
+npm run export:winner-research
+npm run import:winner-stories -- --check
+npm run import:winner-stories
 npm run r2:migrate-images
 ```
 
@@ -36,6 +39,7 @@ Always run `npm run build` before finishing. Public pages, admin routes, and ser
 
 - `src/data/home.ts` is the source of truth for brand assets, nav items, static homepage content, and shared SEO copy.
 - `src/lib/public-content.ts` is the public data layer for nominees and previous winners. Public nominee and winner cards are DB-backed, not hardcoded.
+- `src/lib/winners/*` owns winner-story slugs, sanitization, quality checks, public queries, and article SEO.
 - `src/lib/db/schema.ts` defines the app tables, including `past_winners`, `nominations`, and Better Auth tables.
 - `src/components/SeoHead.astro` is the shared public SEO head path.
 - `src/components/GoogleAnalytics.astro` injects analytics on public pages only.
@@ -70,6 +74,8 @@ Always run `npm run build` before finishing. Public pages, admin routes, and ser
 - Do not add `<link rel="icon" type="image/svg+xml" href="/favicon.svg">`. The SVG is the Astro default, not the GBE logo.
 - Do not reintroduce fake content seeding for winners or nominees.
 - Do not put analytics on `/gbe-admin-safe`, `/api/gbe-admin-safe`, or `/api/auth`.
+- Do not use winner `market` values in winner-story URLs, filters, UI labels, article copy, metadata, schema, or keyword strategy.
+- Do not overwrite winner-story editorial fields from `scripts/import-live-winners.ts`; use `scripts/import-winner-stories.ts` and JSON packages instead.
 
 ## Content
 
@@ -78,3 +84,7 @@ Always run `npm run build` before finishing. Public pages, admin routes, and ser
 - The current award year is **2026**.
 - Developer credit in footer links to [Codezela Technologies](https://codezela.com).
 - Real previous winners are imported from the legacy live site into local Postgres and should be treated as the source for the new site after import.
+- Winner stories live in `content/winner-stories/2025/*.json` and import by immutable winner ID.
+- Old winner slugs are retained as aliases when canonical story slugs change.
+- Only quality-approved, source-backed stories should use `indexingStatus=index`; weak-source, identity-risk, or wrong-image-risk records should remain `noindex`.
+- Never invent quotes, judge comments, audience numbers, biographical claims, or ranking claims for winner stories.

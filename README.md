@@ -46,6 +46,9 @@ Useful project scripts:
 ```bash
 npm run seed:admin       # create/check the first admin user
 npm run import:winners   # import real previous winners from gbeaward.com
+npm run export:winner-research
+npm run import:winner-stories -- --check
+npm run import:winner-stories
 npm run r2:migrate-images
 ```
 
@@ -92,9 +95,14 @@ Notes:
 - `src/pages/index.astro`
 - `src/pages/nominees.astro`
 - `src/pages/previous-winners.astro`
+- `src/pages/previous-winners/[slug].astro`
 - `src/lib/public-content.ts`
+- `src/lib/winners/queries.ts`
+- `src/lib/winners/content.ts`
+- `src/lib/winners/seo.ts`
 
 Homepage structure and static brand data still live in `src/data/home.ts`, but nominee/winner cards shown publicly come from the database.
+Previous-winner cards link to canonical winner-story pages. Risky or incomplete stories stay live as award records but are `noindex` until the package passes the quality gate.
 
 ### Admin CMS
 
@@ -157,10 +165,32 @@ What it does:
 - fetches real winner posts from the live WordPress API
 - reads the winner detail page heading to capture the actual award title
 - uploads remote winner images into the project R2 bucket
-- upserts winners into `past_winners`
-- archives local winner rows no longer present in the live source
+- upserts source identity/media fields into `past_winners`
+- keeps winner `market` values cleared
+- does not overwrite human story fields, canonical story slugs, SEO story text, or article bodies
+- archives local winner rows only when `ALLOW_ARCHIVE_MISSING_WINNERS=true`
 
 This replaced the old fake content seeding path.
+
+## Winner Story Workflow
+
+Winner stories are managed as source-backed JSON packages in `content/winner-stories/2025/`.
+
+Use:
+
+```bash
+npm run export:winner-research
+npm run import:winner-stories -- --check
+npm run import:winner-stories
+```
+
+Rules:
+- import by immutable winner ID, not by display name
+- keep old slugs as aliases when canonical slugs change
+- only set `indexingStatus=index` when article quality checks pass
+- keep weak-source, identity-risk, or wrong-image-risk records as `noindex`
+- do not add geography tags, filters, or keyword targeting for winner stories
+- do not invent quotes, judging comments, audience metrics, or unsupported ranking claims
 
 ## Styling Conventions
 

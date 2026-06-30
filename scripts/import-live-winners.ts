@@ -271,9 +271,18 @@ async function upsertWinner(winner: ImportedWinner) {
     .from(schema.pastWinners)
     .where(eq(schema.pastWinners.slug, winner.slug))
     .limit(1);
+  const aliasMatch = existing[0]
+    ? []
+    : await db
+        .select({ id: schema.pastWinners.id })
+        .from(schema.winnerSlugAliases)
+        .innerJoin(schema.pastWinners, eq(schema.winnerSlugAliases.winnerId, schema.pastWinners.id))
+        .where(eq(schema.winnerSlugAliases.alias, winner.slug))
+        .limit(1);
+  const existingId = existing[0]?.id ?? aliasMatch[0]?.id;
 
-  if (existing[0]) {
-    await db.update(schema.pastWinners).set(updateValues).where(eq(schema.pastWinners.id, existing[0].id));
+  if (existingId) {
+    await db.update(schema.pastWinners).set(updateValues).where(eq(schema.pastWinners.id, existingId));
     return "updated";
   }
 

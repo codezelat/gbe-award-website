@@ -23,14 +23,11 @@ const hasBody = Boolean(winner.bodyHtml?.trim());
 ---
 
 <article class="winner-article">
-  <nav class="container-gbe mb-8 max-w-[1120px]" aria-label="Winner story breadcrumb">
-    <ol class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-gbe-text/55">
-      <li>
-        <a class="text-gbe-gold-soft no-underline transition-colors hover:text-gbe-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold" href="/previous-winners">Previous Winners</a>
-      </li>
-      <li aria-hidden="true">/</li>
-      <li class="max-w-[min(560px,80vw)] truncate text-gbe-text/50">{recipient}</li>
-    </ol>
+  <nav class="container-gbe mb-8 max-w-[1120px]" aria-label="Winner story navigation">
+    <a class="inline-flex items-center gap-2 text-sm font-bold text-gbe-gold-soft no-underline transition-colors hover:text-gbe-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold" href="/previous-winners">
+      <span aria-hidden="true">←</span>
+      All previous winners
+    </a>
   </nav>
 
   <header class="container-gbe max-w-[1120px] text-center">

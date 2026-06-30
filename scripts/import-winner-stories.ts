@@ -68,7 +68,12 @@ function paragraphTexts(node: unknown): string[] {
 
 function hasNameAndAwardInOpening(story: StoryPackage, recipientName: string, awardTitle: string) {
   const opening = paragraphTexts(story.body).slice(0, 2).join(" ").toLowerCase();
-  return opening.includes(recipientName.toLowerCase()) && opening.includes(awardTitle.toLowerCase().slice(0, 28));
+  const visibleAwardTitle = story.headline.replace(new RegExp(`^${recipientName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} wins\\s+`, "i"), "");
+  return (
+    opening.includes(recipientName.toLowerCase()) &&
+    (opening.includes(awardTitle.toLowerCase().slice(0, 28)) ||
+      opening.includes(visibleAwardTitle.toLowerCase().slice(0, 28)))
+  );
 }
 
 async function readPackages() {
