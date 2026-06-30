@@ -175,6 +175,9 @@ Winner stories are DB-managed content, not committed JSON article packages. The 
 
 Rules:
 - edit winner-story content through the database/admin workflow
+- keep `imageUrl` as the winner profile/card image
+- use `heroImageUrl` only for a separate wide story banner image
+- if `heroImageUrl` is empty or duplicates `imageUrl`, the story page falls back to the contained profile-image hero layout instead of rendering a duplicated cover and circle
 - keep old slugs as aliases when canonical slugs change
 - only set `indexing_status=index` when article quality checks pass
 - keep weak-source, identity-risk, or wrong-image-risk records as `noindex`
