@@ -15,6 +15,13 @@
       "when": 1782594815642,
       "tag": "0001_funny_lockheed",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1782830116931,
+      "tag": "0002_little_doctor_octopus",
+      "breakpoints": true
     }
   ]
 }

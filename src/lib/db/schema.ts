@@ -70,7 +70,7 @@ export const verification = pgTable(
 
 export const contentStatus = pgEnum("content_status", ["draft", "published", "archived"]);
 export const nominationStatus = pgEnum("nomination_status", ["draft", "submitted", "shortlisted", "published", "archived"]);
-export const winnerRecipientType = pgEnum("winner_recipient_type", ["person", "organization"]);
+export const winnerRecipientType = pgEnum("winner_recipient_type", ["person", "organization", "creative_work"]);
 export const winnerArticleType = pgEnum("winner_article_type", ["article", "news"]);
 export const winnerIndexingStatus = pgEnum("winner_indexing_status", ["noindex", "index"]);
 

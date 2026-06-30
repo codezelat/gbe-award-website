@@ -1,0 +1,66 @@
+---
+import { assetPaths } from "../data/home";
+import type { WinnerCardData } from "../lib/winners/queries";
+
+interface Props {
+  winner: WinnerCardData;
+  index?: number;
+}
+
+const { winner, index = 0 } = Astro.props;
+const image = winner.imageUrl || assetPaths.award;
+const title = winner.headline || winner.awardTitle || "Global Business Excellence Awards winner";
+const recipient = winner.recipientName || "Award winner";
+---
+
+<a
+  class="winner-story-card group block h-full overflow-hidden rounded-[16px] border border-[rgba(255,176,1,0.3)] bg-gbe-card text-inherit no-underline shadow-[var(--c-card-shadow)] transition-all duration-500 hover:-translate-y-1.5 hover:border-gbe-gold hover:shadow-[0_20px_60px_rgba(255,176,1,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold"
+  href={winner.storyPath}
+  style={`animation-delay:${index * 60}ms`}
+  aria-label={`Read winner story for ${recipient}`}
+>
+  <article class="relative h-full overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-transparent via-[rgba(255,176,1,0.07)] to-transparent opacity-0 transition-all duration-700 group-hover:translate-x-full group-hover:opacity-100"></div>
+    <div class="pointer-events-none absolute -left-20 -top-20 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(255,176,1,0.12),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+    <div class="pointer-events-none absolute -bottom-20 -right-20 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(255,176,1,0.1),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+    <div class="relative overflow-hidden px-6 pt-7">
+      <div class="relative mx-auto mb-5 w-fit">
+        <div class="absolute -inset-[5px] rounded-full bg-[conic-gradient(from_0deg,#6a4c1a,#ffd05a,#6a4c1a)] opacity-50 blur-[3px] transition-opacity duration-500 group-hover:opacity-100 group-hover:[animation:spin_4s_linear_infinite]"></div>
+        <div class="absolute -inset-[1px] rounded-full bg-[conic-gradient(from_0deg,#6a4c1a,#ffd05a,#6a4c1a)] opacity-60"></div>
+        <img class="relative h-24 w-24 rounded-full border-2 border-[var(--c-surface-3)] bg-gbe-surface-3 object-cover object-center transition-transform duration-500 group-hover:scale-110" src={image} alt={recipient} width="300" height="300" loading="lazy" decoding="async" />
+        <div class="gold-fill absolute -bottom-1 -right-1 grid h-8 w-8 place-items-center rounded-full border-2 border-[var(--c-surface-3)] shadow-[0_2px_12px_rgba(255,176,1,0.4)]">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="h-4 w-4 text-black" aria-hidden="true">
+            <path d="M5 12l4 4L19 6" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full border border-[rgba(255,176,1,0.35)] bg-gbe-surface-3 px-4 py-1.5">
+        <img class="h-3.5 w-3.5 object-contain" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
+        <span class="text-[10px] font-black uppercase tracking-[0.15em] text-gbe-gold-soft">Award Winner</span>
+      </div>
+    </div>
+
+    <div class="relative z-[1] flex min-h-[252px] flex-col px-6 pb-6 text-center">
+      <h2 class="m-0 text-[clamp(16px,1.3vw,19px)] font-bold leading-[1.3] text-gbe-text transition-colors duration-300 group-hover:text-gbe-gold">{title}</h2>
+      <p class="mb-5 mt-2 text-sm font-normal leading-[1.5] text-gbe-muted">{recipient}</p>
+      <p class="mb-5 mt-[-12px] text-xs font-bold uppercase tracking-[0.12em] text-gbe-gold-soft">{winner.year}</p>
+
+      <div class="relative mb-4 mt-auto">
+        <div class="h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,176,1,0.2)] to-transparent"></div>
+        <div class="gold-fill absolute left-1/2 top-1/2 grid h-7 w-7 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[rgba(255,176,1,0.5)]">
+          <img class="h-4 w-4 object-contain" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
+        </div>
+      </div>
+
+      <span class="inline-flex items-center justify-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-gbe-text/70 transition-all duration-300 group-hover:translate-x-1 group-hover:text-gbe-gold-soft">
+        Read winner story
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="h-4 w-4" aria-hidden="true">
+          <path d="M5 12h14"></path>
+          <path d="m13 6 6 6-6 6"></path>
+        </svg>
+      </span>
+    </div>
+  </article>
+</a>

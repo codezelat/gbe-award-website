@@ -1,0 +1,147 @@
+---
+import { assetPaths } from "../data/home";
+import type { WinnerCardData } from "../lib/winners/queries";
+
+interface Props {
+  winner: WinnerCardData;
+  related?: WinnerCardData[];
+}
+
+const { winner, related = [] } = Astro.props;
+const recipient = winner.recipientName || "Award winner";
+const awardTitle = winner.awardTitle || "Global Business Excellence Awards";
+const headline = winner.headline || `${recipient} wins ${awardTitle}`;
+const standfirst =
+  winner.standfirst ||
+  winner.awardCitation ||
+  `${recipient} is recognised as a Global Business Excellence Awards winner for ${awardTitle}.`;
+const image = winner.heroImageUrl || winner.imageUrl || assetPaths.trophy;
+const imageAlt = winner.heroImageAlt || `${recipient}, ${awardTitle}`;
+const publishedDate = winner.publishedAt ? new Date(winner.publishedAt) : null;
+const updatedDate = winner.contentUpdatedAt ? new Date(winner.contentUpdatedAt) : null;
+const hasBody = Boolean(winner.bodyHtml?.trim());
+---
+
+<article class="winner-article">
+  <header class="container-gbe max-w-[1120px] text-center">
+    <a class="mb-8 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-gbe-gold-soft no-underline transition-colors hover:text-gbe-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold" href="/previous-winners">
+      <span aria-hidden="true">←</span>
+      Previous Winners
+    </a>
+    <p class="mb-5 text-xs font-black uppercase tracking-[0.22em] text-gbe-gold-soft">Winner Story</p>
+    <h1 class="gold-text mx-auto mb-5 max-w-[980px] text-[clamp(34px,5vw,64px)] font-black leading-[0.98] max-[560px]:text-[30px]">{headline}</h1>
+    <p class="mx-auto mb-8 max-w-[760px] text-[clamp(17px,1.5vw,21px)] font-normal leading-[1.75] text-gbe-muted">{standfirst}</p>
+    <div class="mx-auto flex max-w-[760px] flex-wrap items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-gbe-text/62">
+      <span>{recipient}</span>
+      <span aria-hidden="true">•</span>
+      <span>{winner.year}</span>
+      {publishedDate ? (
+        <>
+          <span aria-hidden="true">•</span>
+          <time datetime={publishedDate.toISOString()}>{publishedDate.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</time>
+        </>
+      ) : null}
+    </div>
+  </header>
+
+  <div class="container-gbe mt-12 max-w-[1120px]">
+    <figure class="relative overflow-hidden rounded-[24px] border border-[rgba(255,176,1,0.28)] bg-gbe-card shadow-[var(--c-card-shadow)]">
+      <img class="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" src={image} alt="" loading="eager" decoding="async" aria-hidden="true" />
+      <div class="relative grid min-h-[420px] place-items-center bg-[radial-gradient(circle_at_50%_20%,rgba(255,176,1,0.13),transparent_320px)] p-10 max-[560px]:min-h-[300px] max-[560px]:p-5">
+        <img class="max-h-[340px] max-w-full rounded-[18px] object-contain shadow-[0_18px_60px_rgba(0,0,0,0.28)]" src={image} alt={imageAlt} width="1200" height="720" loading="eager" decoding="async" />
+      </div>
+      {winner.heroImageCaption ? (
+        <figcaption class="border-t border-gbe-text/10 px-6 py-4 text-center text-sm font-normal leading-[1.6] text-gbe-muted">
+          {winner.heroImageCaption}
+          {winner.heroImageCredit ? <span> Image: {winner.heroImageCredit}</span> : null}
+        </figcaption>
+      ) : null}
+    </figure>
+  </div>
+
+  <div class="container-gbe mt-12 grid max-w-[1060px] grid-cols-[minmax(0,1fr)_300px] gap-10 max-[1024px]:grid-cols-1">
+    <div class="rounded-[22px] border border-[rgba(255,176,1,0.22)] bg-gbe-card px-10 py-11 shadow-[var(--c-card-shadow)] max-[560px]:rounded-[18px] max-[560px]:px-6 max-[560px]:py-8">
+      {hasBody ? (
+        <div class="winner-prose" set:html={winner.bodyHtml}></div>
+      ) : (
+        <div class="winner-prose">
+          <p>
+            {recipient} is recorded as the winner of {awardTitle} at the Global Business Excellence Awards.
+            This page is the official award record for the win. A fuller editorial story will be published after
+            the recipient profile, sources, and media notes have passed review.
+          </p>
+          {winner.summary ? <p>{winner.summary}</p> : null}
+          {winner.awardCitation ? <blockquote>{winner.awardCitation}</blockquote> : null}
+        </div>
+      )}
+
+      {winner.quoteText ? (
+        <blockquote class="mt-10 rounded-[18px] border border-[rgba(255,176,1,0.24)] bg-gbe-surface-3 px-7 py-6 text-[clamp(18px,1.7vw,23px)] font-medium leading-[1.6] text-gbe-text">
+          “{winner.quoteText}”
+          {winner.quoteAuthor ? <footer class="mt-4 text-sm font-bold uppercase tracking-[0.14em] text-gbe-gold-soft">{winner.quoteAuthor}{winner.quoteAuthorRole ? `, ${winner.quoteAuthorRole}` : ""}</footer> : null}
+        </blockquote>
+      ) : null}
+    </div>
+
+    <aside class="space-y-5">
+      <section class="rounded-[18px] border border-[rgba(255,176,1,0.22)] bg-gbe-card p-6 shadow-[var(--c-card-shadow)]">
+        <h2 class="mb-4 mt-0 text-sm font-black uppercase tracking-[0.16em] text-gbe-gold-soft">Award Record</h2>
+        <dl class="space-y-4 text-sm">
+          <div>
+            <dt class="font-bold text-gbe-text">Recipient</dt>
+            <dd class="mt-1 text-gbe-muted">{recipient}</dd>
+          </div>
+          <div>
+            <dt class="font-bold text-gbe-text">Award</dt>
+            <dd class="mt-1 text-gbe-muted">{awardTitle}</dd>
+          </div>
+          {winner.category ? (
+            <div>
+              <dt class="font-bold text-gbe-text">Category</dt>
+              <dd class="mt-1 text-gbe-muted">{winner.category}</dd>
+            </div>
+          ) : null}
+          {winner.industry ? (
+            <div>
+              <dt class="font-bold text-gbe-text">Industry</dt>
+              <dd class="mt-1 text-gbe-muted">{winner.industry}</dd>
+            </div>
+          ) : null}
+          {updatedDate ? (
+            <div>
+              <dt class="font-bold text-gbe-text">Updated</dt>
+              <dd class="mt-1 text-gbe-muted"><time datetime={updatedDate.toISOString()}>{updatedDate.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</time></dd>
+            </div>
+          ) : null}
+        </dl>
+      </section>
+
+      {winner.officialWebsiteUrl || winner.linkedinUrl || winner.facebookUrl || winner.instagramUrl ? (
+        <section class="rounded-[18px] border border-[rgba(255,176,1,0.22)] bg-gbe-card p-6 shadow-[var(--c-card-shadow)]">
+          <h2 class="mb-4 mt-0 text-sm font-black uppercase tracking-[0.16em] text-gbe-gold-soft">Recipient Links</h2>
+          <div class="flex flex-col gap-3">
+            {winner.officialWebsiteUrl ? <a class="text-sm font-bold text-gbe-text underline decoration-gbe-gold/40 underline-offset-4 transition-colors hover:text-gbe-gold" href={winner.officialWebsiteUrl} rel="noopener noreferrer" target="_blank">Official website</a> : null}
+            {winner.linkedinUrl ? <a class="text-sm font-bold text-gbe-text underline decoration-gbe-gold/40 underline-offset-4 transition-colors hover:text-gbe-gold" href={winner.linkedinUrl} rel="noopener noreferrer" target="_blank">LinkedIn</a> : null}
+            {winner.facebookUrl ? <a class="text-sm font-bold text-gbe-text underline decoration-gbe-gold/40 underline-offset-4 transition-colors hover:text-gbe-gold" href={winner.facebookUrl} rel="noopener noreferrer" target="_blank">Facebook</a> : null}
+            {winner.instagramUrl ? <a class="text-sm font-bold text-gbe-text underline decoration-gbe-gold/40 underline-offset-4 transition-colors hover:text-gbe-gold" href={winner.instagramUrl} rel="noopener noreferrer" target="_blank">Instagram</a> : null}
+          </div>
+        </section>
+      ) : null}
+    </aside>
+  </div>
+
+  {related.length > 0 ? (
+    <section class="container-gbe mt-16 max-w-[1060px]">
+      <h2 class="gold-text mb-6 text-center text-[clamp(24px,3vw,34px)] font-black leading-tight">More Winner Stories</h2>
+      <div class="grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
+        {related.map((item) => (
+          <a class="rounded-[16px] border border-[rgba(255,176,1,0.22)] bg-gbe-card p-5 text-left text-inherit no-underline shadow-[var(--c-card-shadow)] transition-all hover:-translate-y-1 hover:border-gbe-gold/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold" href={item.storyPath}>
+            <p class="mb-2 text-xs font-black uppercase tracking-[0.14em] text-gbe-gold-soft">{item.year}</p>
+            <h3 class="m-0 text-base font-bold leading-[1.35] text-gbe-text">{item.awardTitle}</h3>
+            <p class="mb-0 mt-2 text-sm leading-[1.5] text-gbe-muted">{item.recipientName}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ) : null}
+</article>
