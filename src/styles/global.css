@@ -527,6 +527,85 @@
   box-shadow: 0 0 10px rgba(255, 176, 1, 0.5);
 }
 
+.winner-prose {
+  color: var(--c-text);
+  font-size: clamp(16px, 1.18vw, 18px);
+  font-weight: 400;
+  line-height: 1.82;
+}
+
+.winner-prose > *:first-child {
+  margin-top: 0;
+}
+
+.winner-prose > *:last-child {
+  margin-bottom: 0;
+}
+
+.winner-prose p {
+  margin: 0 0 1.35em;
+  color: color-mix(in srgb, var(--c-text) 78%, transparent);
+}
+
+.winner-prose h2,
+.winner-prose h3 {
+  margin: 2em 0 0.72em;
+  color: var(--c-text);
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.winner-prose h2 {
+  font-size: clamp(24px, 2.5vw, 34px);
+}
+
+.winner-prose h3 {
+  font-size: clamp(20px, 2vw, 26px);
+}
+
+.winner-prose a {
+  color: #ffb001;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 176, 1, 0.42);
+  text-underline-offset: 0.22em;
+}
+
+.winner-prose ul,
+.winner-prose ol {
+  margin: 0 0 1.4em;
+  padding-left: 1.2em;
+  color: color-mix(in srgb, var(--c-text) 78%, transparent);
+}
+
+.winner-prose li + li {
+  margin-top: 0.55em;
+}
+
+.winner-prose blockquote {
+  margin: 2em 0;
+  border-left: 3px solid #ffb001;
+  border-radius: 0 16px 16px 0;
+  background: color-mix(in srgb, var(--c-card) 86%, #ffb001 14%);
+  padding: 1.25rem 1.5rem;
+  color: var(--c-text);
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .winner-story-card,
+  .winner-story-card *,
+  .winner-article,
+  .winner-article * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Header scroll state */
 .site-header--scrolled {
   background: var(--c-header-bg) !important;

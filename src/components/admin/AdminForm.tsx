@@ -100,7 +100,6 @@ export default function AdminForm({
           organization: form.organization,
           category: form.category,
           year: form.year,
-          market: form.market,
           summary: form.summary,
           imageUrl: form.imageUrl,
           slug: form.slug,
@@ -227,12 +226,14 @@ export default function AdminForm({
                 type="number"
                 required
               />
-              <SelectField
-                label="Market"
-                value={form.market}
-                onChange={(v) => set("market", v)}
-                options={MARKETS.map((m) => ({ value: m, label: m }))}
-              />
+              {!isWinner ? (
+                <SelectField
+                  label="Market"
+                  value={form.market}
+                  onChange={(v) => set("market", v)}
+                  options={MARKETS.map((m) => ({ value: m, label: m }))}
+                />
+              ) : null}
             </div>
           </section>
 
@@ -462,7 +463,7 @@ export function rowToForm(kind: ContentKind, row: RowRecord): FormState {
     organization: row.organization ?? "",
     category: row.category,
     year: String(row.year),
-    market: row.market,
+    market: kind === "nominations" ? row.market : "",
     summary: row.summary,
     notes: kind === "nominations" ? (row as RowRecord & { notes: string }).notes : "",
     imageUrl: row.imageUrl ?? "",

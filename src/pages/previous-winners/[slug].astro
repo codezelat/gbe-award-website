@@ -6,8 +6,9 @@ import Header from "../../components/Header.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import WinnerStoryArticle from "../../components/WinnerStoryArticle.astro";
 import { assetPaths } from "../../data/home";
-import { buildBreadcrumbSchema, buildPageSchema, normalizeDescription } from "../../lib/seo";
+import { normalizeDescription } from "../../lib/seo";
 import { getRelatedWinners, resolveWinnerSlug } from "../../lib/winners/queries";
+import { buildWinnerArticleSchema } from "../../lib/winners/seo";
 
 export const prerender = false;
 
@@ -59,20 +60,10 @@ if (noindex) {
       image={image}
       type="article"
       noindex={noindex}
-      schema={[
-        buildPageSchema({
-          path,
-          title,
-          description,
-          pageType: "WebPage",
-          image,
-        }),
-        buildBreadcrumbSchema([
-          { name: "Home", path: "/" },
-          { name: "Previous Winners", path: "/previous-winners" },
-          { name: winner.recipientName || "Winner Story", path },
-        ]),
-      ]}
+      publishedTime={winner.publishedAt || undefined}
+      modifiedTime={winner.contentUpdatedAt || winner.publishedAt || undefined}
+      authorName={winner.authorName || undefined}
+      schema={buildWinnerArticleSchema({ winner, path, title, description, image })}
     />
   </head>
   <body>

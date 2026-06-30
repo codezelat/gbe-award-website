@@ -1,0 +1,38 @@
+---
+import { absoluteUrl } from "../lib/seo";
+
+interface Props {
+  path: string;
+  title: string;
+}
+
+const { path, title } = Astro.props;
+const url = absoluteUrl(path);
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+const links = [
+  { label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`, event: "linkedin" },
+  { label: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, event: "facebook" },
+  { label: "X", href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`, event: "x" },
+  { label: "WhatsApp", href: `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`, event: "whatsapp" },
+  { label: "Email", href: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`, event: "email" },
+];
+---
+
+<section class="rounded-[18px] border border-[rgba(255,176,1,0.22)] bg-gbe-card p-6 shadow-[var(--c-card-shadow)]">
+  <h2 class="mb-4 mt-0 text-sm font-black uppercase tracking-[0.16em] text-gbe-gold-soft">Share Story</h2>
+  <div class="flex flex-wrap gap-2">
+    {links.map((link) => (
+      <a
+        class="rounded-full border border-[rgba(255,176,1,0.24)] px-3 py-2 text-xs font-bold text-gbe-text no-underline transition-colors hover:border-gbe-gold hover:text-gbe-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gbe-gold"
+        href={link.href}
+        rel="noopener noreferrer"
+        target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+        data-ga-event="winner_story_share"
+        data-ga-share-channel={link.event}
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+</section>

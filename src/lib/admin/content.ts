@@ -11,7 +11,6 @@ export const winnerInputSchema = z.object({
   organization: emptyToNull,
   category: z.string().trim().min(2).max(160),
   year: z.coerce.number().int().min(2000).max(2100).default(2026),
-  market: z.string().trim().min(2).max(120).default("International"),
   summary: z.string().trim().max(1000).default(""),
   imageUrl: emptyToNull,
   slug: z.string().trim().max(180).optional(),
@@ -78,7 +77,6 @@ export async function listWinners(url: URL) {
           ilike(schema.pastWinners.recipientName, `%${q}%`),
           ilike(schema.pastWinners.organization, `%${q}%`),
           ilike(schema.pastWinners.category, `%${q}%`),
-          ilike(schema.pastWinners.market, `%${q}%`),
         )
       : undefined,
   );
@@ -161,6 +159,7 @@ export async function getDashboardStats() {
 export async function createWinner(input: WinnerInput) {
   const values = {
     ...input,
+    market: null,
     slug: input.slug ? slugify(input.slug) : slugify(`${input.recipientName}-${input.awardTitle}-${input.year}`),
     updatedAt: new Date(),
   };
@@ -172,6 +171,7 @@ export async function createWinner(input: WinnerInput) {
 export async function updateWinner(id: string, input: WinnerInput) {
   const values = {
     ...input,
+    market: null,
     slug: input.slug ? slugify(input.slug) : slugify(`${input.recipientName}-${input.awardTitle}-${input.year}`),
     updatedAt: new Date(),
   };

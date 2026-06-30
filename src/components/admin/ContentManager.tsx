@@ -221,11 +221,11 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
             size={17}
             className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500"
           />
-          <input
-            className="h-11 w-full rounded-lg border border-white/[0.08] bg-[#0e0e11] pl-10 pr-3.5 text-[15px] text-zinc-100 outline-none transition-all placeholder:text-zinc-500 focus:border-[#ffb001]/55 focus:ring-2 focus:ring-[#ffb001]/18"
-            placeholder="Search title, name, category, market..."
-            onChange={(e) => debouncedSearch(e.target.value)}
-          />
+            <input
+              className="h-11 w-full rounded-lg border border-white/[0.08] bg-[#0e0e11] pl-10 pr-3.5 text-[15px] text-zinc-100 outline-none transition-all placeholder:text-zinc-500 focus:border-[#ffb001]/55 focus:ring-2 focus:ring-[#ffb001]/18"
+              placeholder={isWinner ? "Search title, name, or category..." : "Search title, name, category, or market..."}
+              onChange={(e) => debouncedSearch(e.target.value)}
+            />
         </div>
         <div className="w-full sm:w-[180px]">
           <SelectField
@@ -318,7 +318,7 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
                       </td>
                       <td className="px-4 py-3.5">
                         <div className="text-sm text-zinc-300">{row.category}</div>
-                        <div className="text-[12px] text-zinc-600">{row.market}</div>
+                        {!isWinner ? <div className="text-[12px] text-zinc-600">{row.market}</div> : null}
                       </td>
                       <td className="px-4 py-3.5">
                         <span className="font-mono text-sm text-zinc-400">

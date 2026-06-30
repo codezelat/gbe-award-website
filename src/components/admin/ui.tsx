@@ -38,7 +38,7 @@ export type WinnerRow = {
   organization: string | null;
   category: string;
   year: number;
-  market: string;
+  market: string | null;
   summary: string;
   imageUrl: string | null;
   slug: string;

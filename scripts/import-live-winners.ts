@@ -6,7 +6,7 @@ import { uploadBufferToR2 } from "../src/lib/admin/r2";
 import { slugify } from "../src/lib/admin/content";
 
 const WINNER_API_URL = "https://gbeaward.com/wp-json/wp/v2/winner?per_page=100&page=1&_embed";
-const DEFAULT_MARKET = "International";
+const ALLOW_ARCHIVE_MISSING_WINNERS = process.env.ALLOW_ARCHIVE_MISSING_WINNERS === "true";
 const CONCURRENCY = 6;
 const contentTypeByExtension: Record<string, string> = {
   ".jpg": "image/jpeg",
@@ -39,7 +39,6 @@ type ImportedWinner = {
   organization: string | null;
   category: string;
   year: number;
-  market: string;
   summary: string;
   seoTitle: string;
   seoDescription: string;
@@ -143,13 +142,6 @@ async function fetchText(url: string) {
   return response.text();
 }
 
-function inferMarket(awardTitle: string) {
-  if (/sri lanka/i.test(awardTitle)) return "Sri Lanka";
-  if (/\buk\b|united kingdom/i.test(awardTitle)) return "UK";
-  if (/international|global/i.test(awardTitle)) return "International";
-  return DEFAULT_MARKET;
-}
-
 async function uploadRemoteImage(url: string | null, folder: string, filenameBase: string) {
   if (!url) return null;
 
@@ -236,7 +228,6 @@ async function fetchImportedWinners() {
       organization: inferOrganization(recipientName),
       category: awardMeta.awardTitle,
       year: awardMeta.year,
-      market: inferMarket(awardMeta.awardTitle),
       summary,
       seoTitle: `${recipientName} | ${awardMeta.awardTitle} Winner | Global Business Excellence Awards`,
       seoDescription,
@@ -246,13 +237,13 @@ async function fetchImportedWinners() {
 }
 
 async function upsertWinner(winner: ImportedWinner) {
-  const values = {
+  const insertValues = {
     awardTitle: winner.awardTitle,
     recipientName: winner.recipientName,
     organization: winner.organization,
     category: winner.category,
     year: winner.year,
-    market: winner.market,
+    market: null,
     summary: winner.summary,
     imageUrl: winner.imageUrl,
     slug: winner.slug,
@@ -260,6 +251,18 @@ async function upsertWinner(winner: ImportedWinner) {
     sortOrder: winner.sortOrder,
     seoTitle: winner.seoTitle,
     seoDescription: winner.seoDescription,
+    updatedAt: new Date(),
+  };
+  const updateValues = {
+    awardTitle: winner.awardTitle,
+    recipientName: winner.recipientName,
+    organization: winner.organization,
+    category: winner.category,
+    year: winner.year,
+    market: null,
+    imageUrl: winner.imageUrl,
+    status: "published" as const,
+    sortOrder: winner.sortOrder,
     updatedAt: new Date(),
   };
 
@@ -270,15 +273,16 @@ async function upsertWinner(winner: ImportedWinner) {
     .limit(1);
 
   if (existing[0]) {
-    await db.update(schema.pastWinners).set(values).where(eq(schema.pastWinners.id, existing[0].id));
+    await db.update(schema.pastWinners).set(updateValues).where(eq(schema.pastWinners.id, existing[0].id));
     return "updated";
   }
 
-  await db.insert(schema.pastWinners).values(values);
+  await db.insert(schema.pastWinners).values(insertValues);
   return "inserted";
 }
 
 async function archiveMissingWinners(activeSlugs: string[]) {
+  if (!ALLOW_ARCHIVE_MISSING_WINNERS) return 0;
   if (activeSlugs.length === 0) return 0;
 
   const rows = await db

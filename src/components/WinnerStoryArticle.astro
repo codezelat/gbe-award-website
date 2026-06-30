@@ -1,5 +1,6 @@
 ---
 import { assetPaths } from "../data/home";
+import WinnerShareLinks from "./WinnerShareLinks.astro";
 import type { WinnerCardData } from "../lib/winners/queries";
 
 interface Props {
@@ -17,31 +18,24 @@ const standfirst =
   `${recipient} is recognised as a Global Business Excellence Awards winner for ${awardTitle}.`;
 const image = winner.heroImageUrl || winner.imageUrl || assetPaths.trophy;
 const imageAlt = winner.heroImageAlt || `${recipient}, ${awardTitle}`;
-const publishedDate = winner.publishedAt ? new Date(winner.publishedAt) : null;
 const updatedDate = winner.contentUpdatedAt ? new Date(winner.contentUpdatedAt) : null;
 const hasBody = Boolean(winner.bodyHtml?.trim());
 ---
 
 <article class="winner-article">
+  <nav class="container-gbe mb-8 max-w-[1120px]" aria-label="Winner story breadcrumb">
+    <ol class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-gbe-text/55">
+      <li>
+        <a class="text-gbe-gold-soft no-underline transition-colors hover:text-gbe-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold" href="/previous-winners">Previous Winners</a>
+      </li>
+      <li aria-hidden="true">/</li>
+      <li class="max-w-[min(560px,80vw)] truncate text-gbe-text/50">{recipient}</li>
+    </ol>
+  </nav>
+
   <header class="container-gbe max-w-[1120px] text-center">
-    <a class="mb-8 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-gbe-gold-soft no-underline transition-colors hover:text-gbe-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold" href="/previous-winners">
-      <span aria-hidden="true">←</span>
-      Previous Winners
-    </a>
-    <p class="mb-5 text-xs font-black uppercase tracking-[0.22em] text-gbe-gold-soft">Winner Story</p>
     <h1 class="gold-text mx-auto mb-5 max-w-[980px] text-[clamp(34px,5vw,64px)] font-black leading-[0.98] max-[560px]:text-[30px]">{headline}</h1>
-    <p class="mx-auto mb-8 max-w-[760px] text-[clamp(17px,1.5vw,21px)] font-normal leading-[1.75] text-gbe-muted">{standfirst}</p>
-    <div class="mx-auto flex max-w-[760px] flex-wrap items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-gbe-text/62">
-      <span>{recipient}</span>
-      <span aria-hidden="true">•</span>
-      <span>{winner.year}</span>
-      {publishedDate ? (
-        <>
-          <span aria-hidden="true">•</span>
-          <time datetime={publishedDate.toISOString()}>{publishedDate.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</time>
-        </>
-      ) : null}
-    </div>
+    <p class="mx-auto mb-0 max-w-[760px] text-[clamp(17px,1.5vw,21px)] font-normal leading-[1.75] text-gbe-muted">{standfirst}</p>
   </header>
 
   <div class="container-gbe mt-12 max-w-[1120px]">
@@ -59,7 +53,7 @@ const hasBody = Boolean(winner.bodyHtml?.trim());
     </figure>
   </div>
 
-  <div class="container-gbe mt-12 grid max-w-[1060px] grid-cols-[minmax(0,1fr)_300px] gap-10 max-[1024px]:grid-cols-1">
+  <div class="container-gbe mt-12 grid max-w-[1120px] grid-cols-[minmax(0,1fr)_300px] gap-10 max-[1024px]:grid-cols-1">
     <div class="rounded-[22px] border border-[rgba(255,176,1,0.22)] bg-gbe-card px-10 py-11 shadow-[var(--c-card-shadow)] max-[560px]:rounded-[18px] max-[560px]:px-6 max-[560px]:py-8">
       {hasBody ? (
         <div class="winner-prose" set:html={winner.bodyHtml}></div>
@@ -127,11 +121,13 @@ const hasBody = Boolean(winner.bodyHtml?.trim());
           </div>
         </section>
       ) : null}
+
+      {winner.slug ? <WinnerShareLinks path={`/previous-winners/${winner.slug}`} title={headline} /> : null}
     </aside>
   </div>
 
   {related.length > 0 ? (
-    <section class="container-gbe mt-16 max-w-[1060px]">
+    <section class="container-gbe mt-16 max-w-[1120px]">
       <h2 class="gold-text mb-6 text-center text-[clamp(24px,3vw,34px)] font-black leading-tight">More Winner Stories</h2>
       <div class="grid grid-cols-3 gap-5 max-[1024px]:grid-cols-2 max-[560px]:grid-cols-1">
         {related.map((item) => (
