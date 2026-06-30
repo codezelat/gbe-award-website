@@ -19,7 +19,7 @@ export const assetPaths = {
   magazineMockupLarge: "/assets/magazine/gbe-awards-magazine-2025-mockup-large.webp",
 };
 
-export const digitalMagazine = {
+export const magazineFeature = {
   url: "https://magazine.gbeaward.com/",
   title: "Read the GBE Awards 2025 Magazine",
   description:

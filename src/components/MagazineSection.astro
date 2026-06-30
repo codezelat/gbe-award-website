@@ -1,5 +1,5 @@
 ---
-import { assetPaths, digitalMagazine } from "../data/home";
+import { assetPaths, magazineFeature } from "../data/home";
 
 const magazineSrcSet = `${assetPaths.magazineMockup} 960w, ${assetPaths.magazineMockupLarge} 1536w`;
 ---
@@ -11,17 +11,17 @@ const magazineSrcSet = `${assetPaths.magazineMockup} 960w, ${assetPaths.magazine
       <div class="magazine-copy">
         <p class="magazine-eyebrow">Awards magazine</p>
         <h2 id="magazine-title" class="gold-text text-[clamp(32px,4vw,54px)] font-black leading-[0.98]">
-          {digitalMagazine.title}
+          {magazineFeature.title}
         </h2>
-        <p class="magazine-description">{digitalMagazine.description}</p>
+        <p class="magazine-description">{magazineFeature.description}</p>
         <div class="magazine-actions">
-          <a class="btn-gold btn-gold-hover inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-black uppercase tracking-[0.18em] text-black" href={digitalMagazine.url} target="_blank" rel="noopener noreferrer" aria-label="Read the GBE Awards 2025 magazine">
+          <a class="btn-gold btn-gold-hover inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-black uppercase tracking-[0.18em] text-black" href={magazineFeature.url} target="_blank" rel="noopener noreferrer" aria-label="Read the GBE Awards 2025 magazine">
             Read magazine
           </a>
         </div>
       </div>
 
-      <a class="magazine-visual group" href={digitalMagazine.url} target="_blank" rel="noopener noreferrer" aria-label="Open the GBE Awards 2025 magazine">
+      <div class="magazine-visual group">
         <span class="magazine-visual-glow" aria-hidden="true"></span>
         <img
           class="relative z-[1] h-auto w-full transition duration-700 ease-out group-hover:scale-[1.018]"
@@ -34,7 +34,7 @@ const magazineSrcSet = `${assetPaths.magazineMockup} 960w, ${assetPaths.magazine
           loading="lazy"
           decoding="async"
         />
-      </a>
+      </div>
     </div>
   </div>
   <div class="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gbe-gold/20 to-transparent" aria-hidden="true"></div>
@@ -90,14 +90,15 @@ const magazineSrcSet = `${assetPaths.magazineMockup} 960w, ${assetPaths.magazine
     position: relative;
     display: block;
     min-width: 0;
-    border-radius: 18px;
-    outline: none;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 176, 1, 0.12);
     isolation: isolate;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
   }
 
-  .magazine-visual:focus-visible {
-    outline: 2px solid rgba(255, 176, 1, 0.8);
-    outline-offset: 5px;
+  .magazine-visual img {
+    border-radius: inherit;
   }
 
   .magazine-visual-glow {
