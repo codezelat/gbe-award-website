@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 // Ordered by priority: 1 (highest) → 4 → 2 → 3 (lowest)
 const slides = [
-  { src: "/assets/journey/GBEAWARD_BNR_IMG_1.jpg", w: 2044, h: 1193, duration: 8000 },
-  { src: "/assets/journey/GBEAWARD_BNR_IMG_4.jpg", w: 2042, h: 1001, duration: 7000 },
-  { src: "/assets/journey/GBEAWARD_BNR_IMG_2.jpg", w: 1785, h: 1015, duration: 5000 },
-  { src: "/assets/journey/GBEAWARD_BNR_IMG_3.jpg", w: 1811, h: 990, duration: 3000 },
+  { src: "/assets/journey/hero-banner-1.webp", w: 1920, h: 1120, duration: 8000 },
+  { src: "/assets/journey/hero-banner-4.webp", w: 1920, h: 941, duration: 7000 },
+  { src: "/assets/journey/hero-banner-2.webp", w: 1920, h: 1091, duration: 5000 },
+  { src: "/assets/journey/hero-banner-3.webp", w: 1920, h: 1049, duration: 3000 },
 ];
 
 const FADE_DURATION = 1200;
