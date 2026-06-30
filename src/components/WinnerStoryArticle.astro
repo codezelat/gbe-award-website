@@ -16,8 +16,10 @@ const standfirst =
   winner.standfirst ||
   winner.awardCitation ||
   `${recipient} is recognised as a Global Business Excellence Awards winner for ${awardTitle}.`;
-const image = pickRealWinnerImage(winner.heroImageUrl, winner.imageUrl);
-const imageAlt = winner.heroImageAlt || `${recipient}, ${awardTitle}`;
+const bannerImage = pickRealWinnerImage(winner.heroImageUrl);
+const profileImage = pickRealWinnerImage(winner.imageUrl);
+const bannerAlt = winner.heroImageAlt || `${recipient} winner story banner for ${awardTitle}`;
+const profileAlt = `${recipient}, ${awardTitle}`;
 const updatedDate = winner.contentUpdatedAt ? new Date(winner.contentUpdatedAt) : null;
 const hasBody = Boolean(winner.bodyHtml?.trim());
 const normalizedAwardTitle = awardTitle.toLowerCase().replace(/\s+/g, " ").trim();
@@ -38,19 +40,33 @@ const showCategory = Boolean(winner.category && normalizedCategory && normalized
     <p class="mx-auto mb-0 w-full text-[clamp(16px,1.12vw,18px)] font-normal leading-[1.68] text-gbe-muted max-[560px]:text-[16px] max-[560px]:leading-[1.65]">{standfirst}</p>
   </header>
 
-  {image ? (
+  {bannerImage ? (
     <div class="container-gbe mt-12 max-w-[1120px]">
       <figure class="relative overflow-hidden rounded-[24px] border border-[rgba(255,176,1,0.28)] bg-gbe-card shadow-[var(--c-card-shadow)]">
-        <img class="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" src={image} alt="" loading="eager" decoding="async" aria-hidden="true" />
-        <div class="relative grid min-h-[420px] place-items-center bg-[radial-gradient(circle_at_50%_20%,rgba(255,176,1,0.13),transparent_320px)] p-10 max-[560px]:min-h-[300px] max-[560px]:p-5">
-          <img class="max-h-[340px] max-w-full rounded-[18px] object-contain shadow-[0_18px_60px_rgba(0,0,0,0.28)]" src={image} alt={imageAlt} width="1200" height="720" loading="eager" decoding="async" />
+        <div class="relative min-h-[460px] overflow-hidden bg-gbe-surface-3 max-[1024px]:min-h-[390px] max-[560px]:min-h-[300px]">
+          <img class="absolute inset-0 h-full w-full object-cover" src={bannerImage} alt={bannerAlt} width="1600" height="900" loading="eager" decoding="async" />
+          <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(13,11,8,0.58),rgba(13,11,8,0.12)_48%,rgba(13,11,8,0.48))]" aria-hidden="true"></div>
+          {profileImage ? (
+            <div class="absolute left-8 top-8 grid size-[122px] place-items-center rounded-full border border-[rgba(255,176,1,0.55)] bg-gbe-card/90 p-2 shadow-[0_18px_48px_rgba(0,0,0,0.34)] backdrop-blur max-[560px]:left-5 max-[560px]:top-5 max-[560px]:size-[86px] max-[560px]:p-1.5">
+              <img class="h-full w-full rounded-full object-cover" src={profileImage} alt={profileAlt} width="240" height="240" loading="eager" decoding="async" />
+            </div>
+          ) : null}
         </div>
-        {winner.heroImageCaption ? (
+        {winner.heroImageCaption || winner.heroImageCredit ? (
           <figcaption class="border-t border-gbe-text/10 px-6 py-4 text-center text-sm font-normal leading-[1.6] text-gbe-muted">
             {winner.heroImageCaption}
-            {winner.heroImageCredit ? <span> Image: {winner.heroImageCredit}</span> : null}
+            {winner.heroImageCredit ? <span>{winner.heroImageCaption ? " " : ""}Image: {winner.heroImageCredit}</span> : null}
           </figcaption>
         ) : null}
+      </figure>
+    </div>
+  ) : profileImage ? (
+    <div class="container-gbe mt-12 max-w-[1120px]">
+      <figure class="relative overflow-hidden rounded-[24px] border border-[rgba(255,176,1,0.28)] bg-gbe-card shadow-[var(--c-card-shadow)]">
+        <img class="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" src={profileImage} alt="" loading="eager" decoding="async" aria-hidden="true" />
+        <div class="relative grid min-h-[420px] place-items-center bg-[radial-gradient(circle_at_50%_20%,rgba(255,176,1,0.13),transparent_320px)] p-10 max-[560px]:min-h-[300px] max-[560px]:p-5">
+          <img class="max-h-[340px] max-w-full rounded-[18px] object-contain shadow-[0_18px_60px_rgba(0,0,0,0.28)]" src={profileImage} alt={profileAlt} width="1200" height="720" loading="eager" decoding="async" />
+        </div>
       </figure>
     </div>
   ) : null}
