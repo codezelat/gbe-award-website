@@ -23,6 +23,7 @@ const winnerSummary = winners
   .slice(0, 10)
   .map((winner) => ({
     name: `${winner.recipientName} - ${winner.displayAwardTitle || winner.awardTitle}`,
+    url: winner.storyPath,
     image: winner.imageUrl || assetPaths.trophy,
     description: normalizeDescription(
       winner.standfirst?.trim() ||

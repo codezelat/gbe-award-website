@@ -45,7 +45,7 @@
   --c-surface: #ffffff;
   --c-surface-2: #f5f3ed;
   --c-surface-3: #edeae2;
-  --c-card: #ffffff;
+  --c-card: #fffaf0;
   --c-footer: #e8e5dc;
   --c-text: #141428;
   --c-muted: #5c5a6e;
@@ -67,7 +67,7 @@
   --c-hero-glow: radial-gradient(ellipse at 50% 35%, rgba(255, 200, 60, 0.1) 0%, rgba(255, 176, 1, 0.04) 45%, transparent 70%), radial-gradient(circle at 20% 70%, rgba(255, 176, 1, 0.05), transparent 45%), radial-gradient(circle at 80% 70%, rgba(255, 176, 1, 0.05), transparent 45%), linear-gradient(var(--c-bg), var(--c-bg));
   --c-img-overlay: linear-gradient(to top, rgba(20, 20, 40, 0.65), transparent 60%);
   --c-img-gradient-bottom: rgba(20, 20, 40, 0.7);
-  --gold-gradient: linear-gradient(270deg, #7a5c0e 0%, #a67c00 25%, #c9950a 50%, #a67c00 75%, #7a5c0e 100%);
+  --gold-gradient: linear-gradient(270deg, #4f3400 0%, #835800 22%, #b37b00 47%, #6e4900 72%, #2d210b 100%);
   color-scheme: light;
 }
 
@@ -228,12 +228,64 @@
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   background-clip: text;
-  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.6));
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.85)) drop-shadow(0 8px 18px rgba(103, 67, 0, 0.12));
+}
+
+/* Grey support copy becomes true ink in light mode for editorial readability. */
+[data-theme="light"] .text-gbe-muted {
+  color: #101014 !important;
+}
+
+[data-theme="light"] .text-gbe-gold,
+[data-theme="light"] .text-gbe-gold-soft {
+  color: #6f4800;
 }
 
 /* Gold fill stays gold but with vibrant gradient */
 [data-theme="light"] .gold-fill {
   box-shadow: 0 2px 8px rgba(184, 134, 11, 0.25);
+}
+
+[data-theme="light"] .winner-story-card {
+  position: relative;
+  border-color: rgba(111, 72, 0, 0.28);
+  background:
+    radial-gradient(circle at 16% 0%, rgba(255, 190, 74, 0.28), transparent 32%),
+    linear-gradient(145deg, rgba(255, 252, 245, 0.98) 0%, rgba(247, 232, 196, 0.86) 52%, rgba(255, 248, 231, 0.96) 100%);
+  box-shadow: 0 18px 45px rgba(61, 43, 13, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .winner-story-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.7), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(111, 72, 0, 0.08), transparent 34%);
+  opacity: 0.95;
+}
+
+[data-theme="light"] .winner-story-card:hover {
+  border-color: rgba(111, 72, 0, 0.52);
+  box-shadow: 0 28px 65px rgba(61, 43, 13, 0.16), 0 8px 26px rgba(179, 123, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="light"] .winner-story-card .winner-image-shell img {
+  border-color: rgba(111, 72, 0, 0.22);
+  background: #f0dfb9;
+  box-shadow: 0 10px 26px rgba(61, 43, 13, 0.14);
+}
+
+[data-theme="light"] .winner-story-card .winner-award-pill,
+[data-theme="light"] .winner-story-card .winner-award-panel {
+  border-color: rgba(111, 72, 0, 0.24);
+  background: linear-gradient(180deg, rgba(255, 252, 243, 0.92), rgba(239, 218, 171, 0.58));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="light"] .winner-story-card .winner-award-panel {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 10px 26px rgba(61, 43, 13, 0.07);
 }
 
 /* Hero: show canvas particles in light mode with warm gold */

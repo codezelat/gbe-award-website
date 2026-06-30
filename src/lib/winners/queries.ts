@@ -1,6 +1,7 @@
 import { and, asc, count, desc, eq, ne, or, sql } from "drizzle-orm";
 import { db, schema } from "../db";
 import { deriveDisplayAwardTitle, renderWinnerRichText } from "./content";
+import { pickRealWinnerImage } from "./images";
 import type { WinnerRichText, WinnerStoryRecord } from "./types";
 
 export type WinnerCardData = WinnerStoryRecord & {
@@ -66,7 +67,7 @@ export function mapWinnerStory(row: typeof schema.pastWinners.$inferSelect): Win
   return {
     ...base,
     displayAwardTitle: deriveDisplayAwardTitle(base),
-    imageUrl: row.heroImageUrl || row.imageUrl,
+    imageUrl: row.imageUrl,
     storyPath: storyPath(row.slug),
     bodyHtml: row.body ? renderWinnerRichText(row.body as WinnerRichText) : "",
   };
@@ -186,7 +187,7 @@ export async function getIndexableWinnerUrls(): Promise<Array<{ slug: string; la
     return rows.map((row) => ({
       slug: row.slug,
       lastmod: row.contentUpdatedAt || row.publishedAt || row.updatedAt,
-      imageUrl: row.heroImageUrl || row.imageUrl,
+      imageUrl: pickRealWinnerImage(row.heroImageUrl, row.imageUrl),
     }));
   } catch (error) {
     console.error("[winner-queries] getIndexableWinnerUrls failed", error);

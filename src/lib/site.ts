@@ -9,6 +9,7 @@ export const SITE_ORGANIZER_NAME = "London Business Consultancy";
 export const SITE_ORGANIZER_EMAIL = "info@gbeaward.com";
 export const SITE_WHATSAPP_URL = "https://wa.link/10p065";
 export const SITE_DEFAULT_OG_IMAGE = "/assets/brand/hero-award-2026.webp";
+export const SITE_LAST_UPDATED = "2026-06-30";
 
 export const SITE_SOCIAL_LINKS = [
   "https://www.instagram.com/gbeaward/",
@@ -19,10 +20,10 @@ export const SITE_SOCIAL_LINKS = [
 ];
 
 export const PUBLIC_SITE_PAGES = [
-  { path: "/", changefreq: "weekly", priority: "1.0" },
-  { path: "/about", changefreq: "monthly", priority: "0.8" },
-  { path: "/nominees", changefreq: "weekly", priority: "0.8" },
-  { path: "/previous-winners", changefreq: "weekly", priority: "0.8" },
-  { path: "/contact", changefreq: "monthly", priority: "0.7" },
-  { path: "/privacy-policy", changefreq: "yearly", priority: "0.3" },
+  { path: "/", changefreq: "weekly", priority: "1.0", lastmod: SITE_LAST_UPDATED },
+  { path: "/about", changefreq: "monthly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
+  { path: "/nominees", changefreq: "weekly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
+  { path: "/previous-winners", changefreq: "weekly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
+  { path: "/contact", changefreq: "monthly", priority: "0.7", lastmod: SITE_LAST_UPDATED },
+  { path: "/privacy-policy", changefreq: "yearly", priority: "0.3", lastmod: SITE_LAST_UPDATED },
 ] as const;

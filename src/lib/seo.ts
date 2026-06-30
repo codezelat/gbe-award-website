@@ -147,6 +147,9 @@ export function buildPageSchema({
     isPartOf: {
       "@id": `${SITE_URL}/#website`,
     },
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+    },
     about: {
       "@id": `${SITE_URL}/#organization`,
     },
@@ -165,7 +168,7 @@ export function buildItemListSchema({
 }: {
   path: string;
   title: string;
-  items: Array<{ name: string; image?: string; description?: string }>;
+  items: Array<{ name: string; image?: string; description?: string; url?: string }>;
 }): JsonLd {
   return {
     "@context": "https://schema.org",
@@ -179,6 +182,7 @@ export function buildItemListSchema({
       item: {
         "@type": "Thing",
         name: item.name,
+        url: item.url ? absoluteUrl(item.url) : undefined,
         image: item.image ? assetUrl(item.image) : undefined,
         description: item.description,
       },
@@ -186,41 +190,24 @@ export function buildItemListSchema({
   };
 }
 
-export function buildEventSchema(): JsonLd {
+export function buildAwardProgramSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
-    "@type": "Event",
-    "@id": `${SITE_URL}/#event`,
+    "@type": "Service",
+    "@id": `${SITE_URL}/#awards-program`,
     name: "Global Business Excellence Awards 2026",
+    serviceType: "Business awards and recognition programme",
     description:
-      "The Global Business Excellence Awards 2026 celebrates outstanding business leadership, innovation, and impact across the UK, Sri Lanka, and international markets.",
-    startDate: "2026-01-01",
-    endDate: "2026-12-31",
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
-    image: [assetUrl("/assets/brand/hero-award-2026.webp")],
+      "The Global Business Excellence Awards 2026 recognises companies, entrepreneurs, leaders, and creative professionals for business excellence, innovation, leadership, and public achievement.",
     url: SITE_URL,
-    organizer: {
+    provider: {
       "@id": `${SITE_URL}/#organization`,
     },
-    location: [
+    image: assetUrl("/assets/brand/hero-award-2026.webp"),
+    audience: [
       {
-        "@type": "Place",
-        name: "London, United Kingdom",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "London",
-          addressCountry: "GB",
-        },
-      },
-      {
-        "@type": "Place",
-        name: "Colombo, Sri Lanka",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Colombo",
-          addressCountry: "LK",
-        },
+        "@type": "BusinessAudience",
+        audienceType: "Companies, entrepreneurs, executives, founders, and professionals",
       },
     ],
   };

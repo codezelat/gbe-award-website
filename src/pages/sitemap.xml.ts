@@ -16,6 +16,9 @@ export const GET: APIRoute = async () => {
   const staticUrls = PUBLIC_SITE_PAGES.map(
     (page) => `  <url>
     <loc>${escapeXml(new URL(page.path, SITE_URL).toString())}</loc>
+    <lastmod>${page.lastmod}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
   </url>`,
   );
   const winnerEntries = winnerUrls.map((winner) => {
@@ -26,7 +29,9 @@ export const GET: APIRoute = async () => {
 
     return `  <url>
     <loc>${escapeXml(loc)}</loc>
-    <lastmod>${winner.lastmod.toISOString()}</lastmod>${image}
+    <lastmod>${winner.lastmod.toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>${image}
   </url>`;
   });
   const body = `<?xml version="1.0" encoding="UTF-8"?>

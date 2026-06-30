@@ -21,6 +21,7 @@ import {
 } from "./ui";
 
 const MARKETS = ["International", "United Kingdom", "Sri Lanka", "Europe", "Asia", "North America", "Middle East", "Africa"];
+type ImageField = "imageUrl" | "heroImageUrl";
 
 function sectionTitle(title: string, desc: string) {
   return (
@@ -48,23 +49,25 @@ export default function AdminForm({
 }) {
   const [form, setForm] = useState<FormState>(editing);
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [uploadingField, setUploadingField] = useState<ImageField | null>(null);
   const [formError, setFormError] = useState("");
 
   const isWinner = kind === "winners";
+  const uploadingProfile = uploadingField === "imageUrl";
+  const uploadingBanner = uploadingField === "heroImageUrl";
 
   function set<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  async function uploadImage(file: File | null) {
+  async function uploadImage(file: File | null, field: ImageField) {
     if (!file) return;
-    setUploading(true);
+    setUploadingField(field);
     setFormError("");
 
     const fd = new FormData();
     fd.append("file", file);
-    fd.append("folder", kind);
+    fd.append("folder", field === "heroImageUrl" ? `${kind}-banners` : `${kind}-profiles`);
 
     try {
       const res = await fetch("/api/gbe-admin-safe/upload", {
@@ -75,12 +78,15 @@ export default function AdminForm({
       if (!res.ok) {
         throw new Error(body?.error ?? "Image upload failed.");
       }
-      set("imageUrl", body.url as string);
-      showToast({ title: "Image uploaded", variant: "success" });
+      set(field, body.url as string);
+      showToast({
+        title: field === "heroImageUrl" ? "Banner image uploaded" : "Profile image uploaded",
+        variant: "success",
+      });
     } catch (err) {
       setFormError(err instanceof Error ? err.message : "Image upload failed.");
     } finally {
-      setUploading(false);
+      setUploadingField(null);
     }
   }
 
@@ -105,6 +111,10 @@ export default function AdminForm({
           slug: form.slug,
           status: form.status,
           sortOrder: form.sortOrder,
+          heroImageUrl: form.heroImageUrl,
+          heroImageAlt: form.heroImageAlt,
+          heroImageCaption: form.heroImageCaption,
+          heroImageCredit: form.heroImageCredit,
           seoTitle: form.seoTitle,
           seoDescription: form.seoDescription,
         }
@@ -280,11 +290,13 @@ export default function AdminForm({
             </div>
           </section>
 
-          {/* Image */}
+          {/* Profile image */}
           <section className="space-y-4 border-t border-white/[0.05] pt-6">
             {sectionTitle(
               "Profile image",
-              "Stored in Cloudflare R2, delivered from the media CDN.",
+              isWinner
+                ? "Used for cards, profile logo, and as the story image when no banner is uploaded."
+                : "Stored in Cloudflare R2, delivered from the media CDN.",
             )}
             <div className="grid gap-4 sm:grid-cols-[120px_1fr]">
               <div className="grid aspect-square place-items-center overflow-hidden rounded-xl border border-white/[0.08] bg-[#0e0e11]">
@@ -310,15 +322,16 @@ export default function AdminForm({
                   className={cn(
                     "flex cursor-pointer flex-1 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/[0.12] bg-[#0c0c0f] px-4 py-3 text-center transition",
                     "hover:border-[#ffb001]/40 hover:bg-[#ffb001]/[0.03]",
+                    uploadingField ? "pointer-events-none opacity-70" : "",
                   )}
                 >
-                  {uploading ? (
+                  {uploadingProfile ? (
                     <Loader2 size={20} className="animate-spin text-[#ffb001]" />
                   ) : (
                     <UploadCloud size={20} className="text-zinc-400" />
                   )}
                   <span className="text-sm font-medium text-zinc-300">
-                    {uploading
+                    {uploadingProfile
                       ? "Uploading..."
                       : form.imageUrl
                         ? "Replace image"
@@ -331,9 +344,9 @@ export default function AdminForm({
                     className="sr-only"
                     type="file"
                     accept="image/jpeg,image/png,image/webp,image/avif"
-                    disabled={uploading}
+                    disabled={Boolean(uploadingField)}
                     onChange={(e) => {
-                      void uploadImage(e.target.files?.[0] ?? null);
+                      void uploadImage(e.target.files?.[0] ?? null, "imageUrl");
                       e.currentTarget.value = "";
                     }}
                   />
@@ -346,6 +359,7 @@ export default function AdminForm({
                     <button
                       className="grid size-7 shrink-0 place-items-center rounded-md text-rose-400/70 transition hover:bg-rose-500/10 hover:text-rose-300"
                       onClick={() => set("imageUrl", "")}
+                      disabled={Boolean(uploadingField)}
                       type="button"
                       aria-label="Remove image"
                     >
@@ -356,6 +370,117 @@ export default function AdminForm({
               </div>
             </div>
           </section>
+
+          {isWinner ? (
+            <section className="space-y-4 border-t border-white/[0.05] pt-6">
+              {sectionTitle(
+                "Story banner image",
+                "Optional wide image for the winner story hero. Leave empty to keep the current profile-image layout.",
+              )}
+              <div className="grid gap-4">
+                <div className="overflow-hidden rounded-xl border border-white/[0.08] bg-[#0e0e11]">
+                  <div className="grid aspect-[16/7] min-h-[180px] place-items-center">
+                    {form.heroImageUrl ? (
+                      <img
+                        src={form.heroImageUrl}
+                        alt=""
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="flex flex-col items-center gap-2 text-zinc-600">
+                        <ImagePlus size={24} />
+                        <span className="text-[11px] font-semibold uppercase tracking-wide">
+                          No banner image
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
+                  <label
+                    className={cn(
+                      "flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/[0.12] bg-[#0c0c0f] px-4 py-4 text-center transition",
+                      "hover:border-[#ffb001]/40 hover:bg-[#ffb001]/[0.03]",
+                      uploadingField ? "pointer-events-none opacity-70" : "",
+                    )}
+                  >
+                    {uploadingBanner ? (
+                      <Loader2 size={20} className="animate-spin text-[#ffb001]" />
+                    ) : (
+                      <UploadCloud size={20} className="text-zinc-400" />
+                    )}
+                    <span className="text-sm font-medium text-zinc-300">
+                      {uploadingBanner
+                        ? "Uploading..."
+                        : form.heroImageUrl
+                          ? "Replace banner"
+                          : "Upload banner"}
+                    </span>
+                    <span className="text-[11px] text-zinc-600">
+                      Wide JPG, PNG, WebP or AVIF &middot; max 5MB
+                    </span>
+                    <input
+                      className="sr-only"
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp,image/avif"
+                      disabled={Boolean(uploadingField)}
+                      onChange={(e) => {
+                        void uploadImage(e.target.files?.[0] ?? null, "heroImageUrl");
+                        e.currentTarget.value = "";
+                      }}
+                    />
+                  </label>
+                  {form.heroImageUrl ? (
+                    <button
+                      className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-rose-500/25 px-4 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10 disabled:cursor-not-allowed disabled:opacity-50 sm:self-center"
+                      onClick={() => {
+                        set("heroImageUrl", "");
+                        set("heroImageAlt", "");
+                        set("heroImageCaption", "");
+                        set("heroImageCredit", "");
+                      }}
+                      disabled={Boolean(uploadingField)}
+                      type="button"
+                    >
+                      <Trash2 size={15} />
+                      Remove
+                    </button>
+                  ) : null}
+                </div>
+
+                {form.heroImageUrl ? (
+                  <div className="rounded-lg bg-[#0e0e11] px-3 py-2">
+                    <p className="truncate text-[11px] text-zinc-500">{form.heroImageUrl}</p>
+                  </div>
+                ) : null}
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextField
+                    label="Banner alt text"
+                    value={form.heroImageAlt}
+                    onChange={(v) => set("heroImageAlt", v)}
+                    placeholder="Describe the banner image"
+                  />
+                  <TextField
+                    label="Image credit"
+                    value={form.heroImageCredit}
+                    onChange={(v) => set("heroImageCredit", v)}
+                    placeholder="Optional"
+                  />
+                  <div className="sm:col-span-2">
+                    <TextField
+                      label="Caption"
+                      value={form.heroImageCaption}
+                      onChange={(v) => set("heroImageCaption", v)}
+                      placeholder="Optional public caption"
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+          ) : null}
 
           {/* Summary */}
           <section className="space-y-4 border-t border-white/[0.05] pt-6">
@@ -443,6 +568,10 @@ export function blankForm(kind: ContentKind): FormState {
     summary: "",
     notes: "",
     imageUrl: "",
+    heroImageUrl: "",
+    heroImageAlt: "",
+    heroImageCaption: "",
+    heroImageCredit: "",
     slug: "",
     status: kind === "winners" ? "draft" : "submitted",
     sortOrder: "0",
@@ -456,6 +585,13 @@ export function rowToForm(kind: ContentKind, row: RowRecord): FormState {
     kind === "winners"
       ? (row as RowRecord & { recipientName: string }).recipientName
       : (row as RowRecord & { nomineeName: string }).nomineeName;
+  const winnerRow = kind === "winners" ? (row as RowRecord & {
+    heroImageUrl?: string | null;
+    heroImageAlt?: string | null;
+    heroImageCaption?: string | null;
+    heroImageCredit?: string | null;
+  }) : null;
+
   return {
     id: row.id,
     awardTitle: row.awardTitle,
@@ -467,6 +603,10 @@ export function rowToForm(kind: ContentKind, row: RowRecord): FormState {
     summary: row.summary,
     notes: kind === "nominations" ? (row as RowRecord & { notes: string }).notes : "",
     imageUrl: row.imageUrl ?? "",
+    heroImageUrl: winnerRow?.heroImageUrl ?? "",
+    heroImageAlt: winnerRow?.heroImageAlt ?? "",
+    heroImageCaption: winnerRow?.heroImageCaption ?? "",
+    heroImageCredit: winnerRow?.heroImageCredit ?? "",
     slug: row.slug,
     status: row.status,
     sortOrder: String(row.sortOrder),

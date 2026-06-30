@@ -41,6 +41,10 @@ export type WinnerRow = {
   market: string | null;
   summary: string;
   imageUrl: string | null;
+  heroImageUrl: string | null;
+  heroImageAlt: string | null;
+  heroImageCaption: string | null;
+  heroImageCredit: string | null;
   slug: string;
   status: "draft" | "published" | "archived";
   sortOrder: number;
@@ -94,6 +98,10 @@ export type FormState = {
   summary: string;
   notes: string;
   imageUrl: string;
+  heroImageUrl: string;
+  heroImageAlt: string;
+  heroImageCaption: string;
+  heroImageCredit: string;
   slug: string;
   status: string;
   sortOrder: string;

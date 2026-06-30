@@ -44,6 +44,13 @@ const schemaGraph = [
   buildWebsiteSchema(),
   ...(Array.isArray(schema) ? schema : [schema]).filter(Boolean),
 ];
+const schemaDocument = {
+  "@context": "https://schema.org",
+  "@graph": schemaGraph.map((entry) => {
+    const { ["@context"]: _context, ...schemaEntry } = entry;
+    return schemaEntry;
+  }),
+};
 ---
 
 <meta charset="utf-8" />
@@ -60,6 +67,7 @@ const schemaGraph = [
 {canonical ? <link rel="canonical" href={canonicalUrl} /> : null}
 {canonical ? <link rel="alternate" hrefLang="en-gb" href={canonicalUrl} /> : null}
 {canonical ? <link rel="alternate" hrefLang="x-default" href={canonicalUrl} /> : null}
+<link rel="manifest" href="/site.webmanifest" />
 
 <meta property="og:locale" content={seoDefaults.locale} />
 <meta property="og:type" content={type} />
@@ -73,6 +81,7 @@ const schemaGraph = [
 {type === "article" && publishedIso ? <meta property="article:published_time" content={publishedIso} /> : null}
 {type === "article" && modifiedIso ? <meta property="article:modified_time" content={modifiedIso} /> : null}
 {type === "article" && authorName ? <meta property="article:author" content={authorName} /> : null}
+{type === "article" ? <meta property="article:publisher" content={absoluteUrl("/")} /> : null}
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
@@ -87,8 +96,4 @@ const schemaGraph = [
 
 <title>{title}</title>
 
-{
-  schemaGraph.map((entry) => (
-    <script type="application/ld+json" set:html={JSON.stringify(entry)} />
-  ))
-}
+<script type="application/ld+json" set:html={JSON.stringify(schemaDocument)} />

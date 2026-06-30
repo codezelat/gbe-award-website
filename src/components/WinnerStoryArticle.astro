@@ -1,6 +1,7 @@
 ---
 import WinnerShareLinks from "./WinnerShareLinks.astro";
 import type { WinnerCardData } from "../lib/winners/queries";
+import { pickRealWinnerImage } from "../lib/winners/images";
 
 interface Props {
   winner: WinnerCardData;
@@ -15,7 +16,7 @@ const standfirst =
   winner.standfirst ||
   winner.awardCitation ||
   `${recipient} is recognised as a Global Business Excellence Awards winner for ${awardTitle}.`;
-const image = winner.heroImageUrl || winner.imageUrl || null;
+const image = pickRealWinnerImage(winner.heroImageUrl, winner.imageUrl);
 const imageAlt = winner.heroImageAlt || `${recipient}, ${awardTitle}`;
 const updatedDate = winner.contentUpdatedAt ? new Date(winner.contentUpdatedAt) : null;
 const hasBody = Boolean(winner.bodyHtml?.trim());

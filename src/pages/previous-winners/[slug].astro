@@ -7,6 +7,7 @@ import SiteFooter from "../../components/SiteFooter.astro";
 import WinnerStoryArticle from "../../components/WinnerStoryArticle.astro";
 import { assetPaths } from "../../data/home";
 import { normalizeDescription } from "../../lib/seo";
+import { pickRealWinnerImage } from "../../lib/winners/images";
 import { getRelatedWinners, resolveWinnerSlug } from "../../lib/winners/queries";
 import { buildWinnerArticleSchema } from "../../lib/winners/seo";
 
@@ -42,7 +43,8 @@ const description = normalizeDescription(
     `${winner.recipientName} is recognised as a Global Business Excellence Awards winner for ${awardTitle}.`,
 );
 const path = `/previous-winners/${winner.slug}`;
-const image = winner.socialImageUrl || winner.heroImageUrl || winner.imageUrl || assetPaths.trophy;
+const realWinnerImage = pickRealWinnerImage(winner.heroImageUrl, winner.imageUrl);
+const image = winner.socialImageUrl || realWinnerImage || assetPaths.trophy;
 const noindex = winner.indexingStatus !== "index";
 
 if (noindex) {

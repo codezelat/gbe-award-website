@@ -10,7 +10,7 @@ import JourneySection from "../components/JourneySection.astro";
 import NomineesSection from "../components/NomineesSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths, seo } from "../data/home";
-import { buildEventSchema, buildPageSchema } from "../lib/seo";
+import { buildAwardProgramSchema, buildPageSchema } from "../lib/seo";
 ---
 
 <!doctype html>
@@ -30,10 +30,9 @@ import { buildEventSchema, buildPageSchema } from "../lib/seo";
           description: seo.description,
           image: assetPaths.trophy,
         }),
-        buildEventSchema(),
+        buildAwardProgramSchema(),
       ]}
     />
-    <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>
     <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">
