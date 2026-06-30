@@ -2,7 +2,7 @@
 import SocialLinks from "./SocialLinks";
 import ImagePreview from "./ImagePreview.astro";
 import LondonBusinessConsultancyLogo from "./LondonBusinessConsultancyLogo.astro";
-import { footerItems } from "../data/home";
+import { assetPaths, footerItems } from "../data/home";
 ---
 
 <footer class="bg-gbe-footer pb-24 pt-16 text-center max-[560px]:pb-16 max-[560px]:pt-[52px]">
@@ -16,7 +16,11 @@ import { footerItems } from "../data/home";
       recognising organisations and individuals who shape the future. From innovation and leadership to social
       impact and enterprise, we spotlight excellence across London, Colombo, and the global business community.
     </p>
-    <LondonBusinessConsultancyLogo />
+    <div class="footer-affiliation-row" aria-label="London Business Consultancy with United Kingdom and Sri Lanka presence">
+      <img class="footer-country-flag" src={assetPaths.unitedKingdomFlag} alt="United Kingdom" width="64" height="64" loading="lazy" decoding="async" />
+      <LondonBusinessConsultancyLogo />
+      <img class="footer-country-flag" src={assetPaths.sriLankaFlag} alt="Sri Lanka" width="64" height="64" loading="lazy" decoding="async" />
+    </div>
     <SocialLinks compact />
     <a class="mt-7 block text-sm font-normal text-gbe-muted" href="/privacy-policy">Privacy Policy</a>
     <small class="mt-[52px] block text-sm font-normal text-gbe-muted">© 2026 Global Business Excellence Awards</small>

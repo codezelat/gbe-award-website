@@ -1,5 +1,7 @@
 export const assetPaths = {
   logo: "/assets/brand/gbe-logo.webp",
+  unitedKingdomFlag: "/assets/brand/flag-united-kingdom.svg",
+  sriLankaFlag: "/assets/brand/flag-sri-lanka.svg",
   favicon: "/assets/brand/favicon-192.png",
   trophy: "/assets/brand/hero-award-2026.webp",
   award: "/assets/brand/award-icon.webp",
