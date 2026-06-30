@@ -23,9 +23,6 @@ npm run dev      # Dev server at localhost:4321
 npm run build    # Production build to ./dist/ (must pass before completing any task)
 npm run seed:admin
 npm run import:winners
-npm run export:winner-research
-npm run import:winner-stories -- --check
-npm run import:winner-stories
 npm run r2:migrate-images
 ```
 
@@ -75,7 +72,8 @@ Always run `npm run build` before finishing. Public pages, admin routes, and ser
 - Do not reintroduce fake content seeding for winners or nominees.
 - Do not put analytics on `/gbe-admin-safe`, `/api/gbe-admin-safe`, or `/api/auth`.
 - Do not use winner `market` values in winner-story URLs, filters, UI labels, article copy, metadata, schema, or keyword strategy.
-- Do not overwrite winner-story editorial fields from `scripts/import-live-winners.ts`; use `scripts/import-winner-stories.ts` and JSON packages instead.
+- Do not overwrite winner-story editorial fields from `scripts/import-live-winners.ts`; story article fields are DB/admin-managed.
+- Do not commit generated `content/winner-stories/` or `content/winner-research/` exports.
 
 ## Content
 
@@ -84,7 +82,7 @@ Always run `npm run build` before finishing. Public pages, admin routes, and ser
 - The current award year is **2026**.
 - Developer credit in footer links to [Codezela Technologies](https://codezela.com).
 - Real previous winners are imported from the legacy live site into local Postgres and should be treated as the source for the new site after import.
-- Winner stories live in `content/winner-stories/2025/*.json` and import by immutable winner ID.
+- Winner stories live in the `past_winners` database rows, not committed JSON files.
 - Old winner slugs are retained as aliases when canonical story slugs change.
 - Only quality-approved, source-backed stories should use `indexingStatus=index`; weak-source, identity-risk, or wrong-image-risk records should remain `noindex`.
 - Never invent quotes, judge comments, audience numbers, biographical claims, or ranking claims for winner stories.

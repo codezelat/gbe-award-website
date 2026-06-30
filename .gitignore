@@ -18,6 +18,10 @@ playwright-report/
 coverage/
 .nyc_output/
 
+# local/generated editorial exports
+content/winner-research/
+content/winner-stories/
+
 # environment variables
 .env
 .env.production

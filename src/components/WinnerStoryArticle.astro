@@ -31,7 +31,7 @@ const hasBody = Boolean(winner.bodyHtml?.trim());
 
   <header class="container-gbe max-w-[1120px] text-center">
     <h1 class="gold-text mx-auto mb-5 max-w-[980px] text-[clamp(34px,5vw,64px)] font-black leading-[0.98] max-[560px]:text-[30px]">{headline}</h1>
-    <p class="mx-auto mb-0 max-w-[760px] text-[clamp(17px,1.5vw,21px)] font-normal leading-[1.75] text-gbe-muted">{standfirst}</p>
+    <p class="mx-auto mb-0 w-full text-[clamp(16px,1.12vw,18px)] font-normal leading-[1.68] text-gbe-muted max-[560px]:text-[16px] max-[560px]:leading-[1.65]">{standfirst}</p>
   </header>
 
   {image ? (
@@ -59,8 +59,8 @@ const hasBody = Boolean(winner.bodyHtml?.trim());
         <div class="winner-prose">
           <p>
             {recipient} is recorded as the winner of {awardTitle} at the Global Business Excellence Awards.
-            This page is the official award record for the win. A fuller editorial story will be published after
-            the recipient profile, sources, and media notes have passed review.
+            This profile gives the win a clear public page for readers looking up the recipient, the award title,
+            and the context behind the recognition.
           </p>
           {winner.summary ? <p>{winner.summary}</p> : null}
           {winner.awardCitation ? <blockquote>{winner.awardCitation}</blockquote> : null}

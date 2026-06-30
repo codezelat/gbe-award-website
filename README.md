@@ -46,9 +46,6 @@ Useful project scripts:
 ```bash
 npm run seed:admin       # create/check the first admin user
 npm run import:winners   # import real previous winners from gbeaward.com
-npm run export:winner-research
-npm run import:winner-stories -- --check
-npm run import:winner-stories
 npm run r2:migrate-images
 ```
 
@@ -102,7 +99,7 @@ Notes:
 - `src/lib/winners/seo.ts`
 
 Homepage structure and static brand data still live in `src/data/home.ts`, but nominee/winner cards shown publicly come from the database.
-Previous-winner cards link to canonical winner-story pages. Risky or incomplete stories stay live as award records but are `noindex` until the package passes the quality gate.
+Previous-winner cards link to canonical winner-story pages. Winner-story article copy, SEO metadata, indexing state, and public slugs are stored in `past_winners` and served from the database.
 
 ### Admin CMS
 
@@ -174,23 +171,16 @@ This replaced the old fake content seeding path.
 
 ## Winner Story Workflow
 
-Winner stories are managed as source-backed JSON packages in `content/winner-stories/2025/`.
-
-Use:
-
-```bash
-npm run export:winner-research
-npm run import:winner-stories -- --check
-npm run import:winner-stories
-```
+Winner stories are DB-managed content, not committed JSON article packages. The live site reads article body, headline, standfirst, SEO fields, source notes, indexing state, links, and media fields from `past_winners`.
 
 Rules:
-- import by immutable winner ID, not by display name
+- edit winner-story content through the database/admin workflow
 - keep old slugs as aliases when canonical slugs change
-- only set `indexingStatus=index` when article quality checks pass
+- only set `indexing_status=index` when article quality checks pass
 - keep weak-source, identity-risk, or wrong-image-risk records as `noindex`
 - do not add geography tags, filters, or keyword targeting for winner stories
 - do not invent quotes, judging comments, audience metrics, or unsupported ranking claims
+- do not commit generated `content/winner-stories/` or `content/winner-research/` exports; those paths are ignored for local scratch/export work
 
 ## Styling Conventions
 
