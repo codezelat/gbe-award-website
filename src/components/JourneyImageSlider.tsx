@@ -39,7 +39,7 @@ export default function JourneyImageSlider({ images }: { images: JourneyImage[] 
               alt={image.alt}
               width="768"
               height="480"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_62%,rgba(0,0,0,0.46))]" aria-hidden="true"></div>

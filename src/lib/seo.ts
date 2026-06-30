@@ -85,7 +85,7 @@ export function buildOrganizationSchema(): JsonLd {
       "@type": "ImageObject",
       url: assetUrl("/assets/brand/gbe-logo-full.png"),
     },
-    image: assetUrl("/assets/brand/hero-award-2026.png"),
+    image: assetUrl("/assets/brand/hero-award-2026.webp"),
     description:
       "Global Business Excellence Awards recognises outstanding companies, entrepreneurs, and leaders across the United Kingdom, Sri Lanka, and international markets.",
     areaServed: ["United Kingdom", "Sri Lanka", "International"],
@@ -198,7 +198,7 @@ export function buildEventSchema(): JsonLd {
     endDate: "2026-12-31",
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
-    image: [assetUrl("/assets/brand/hero-award-2026.png")],
+    image: [assetUrl("/assets/brand/hero-award-2026.webp")],
     url: SITE_URL,
     organizer: {
       "@id": `${SITE_URL}/#organization`,

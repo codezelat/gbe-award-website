@@ -1,10 +1,31 @@
 ---
 import HeroLiveBackground from "./HeroLiveBackground";
+import HeroBackgroundSlider from "./HeroBackgroundSlider";
 import SocialLinks from "./SocialLinks";
 import { assetPaths } from "../data/home";
 ---
 
-<section class="hero-section relative -mt-[100px] min-h-[832px] overflow-hidden bg-gbe-bg pt-[306px] max-[1024px]:-mt-[120px] max-[1024px]:min-h-[700px] max-[1024px]:pt-[235px] max-[560px]:-mt-[100px] max-[560px]:min-h-[625px] max-[560px]:pt-[190px]" aria-labelledby="hero-title">
+<section
+  class="hero-section relative -mt-[100px] min-h-[832px] overflow-hidden bg-gbe-bg pt-[306px] max-[1024px]:-mt-[120px] max-[1024px]:min-h-[700px] max-[1024px]:pt-[235px] max-[560px]:-mt-[100px] max-[560px]:min-h-[625px] max-[560px]:pt-[190px]"
+  aria-labelledby="hero-title"
+>
+  <!-- Preload first banner image for light mode -->
+  <script is:inline>
+    (function () {
+      const theme = document.documentElement.getAttribute("data-theme");
+      if (theme === "light") {
+        const link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "image";
+        link.href = "/assets/journey/GBEAWARD_BNR_IMG_1.jpg";
+        link.fetchPriority = "high";
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
+
+  <!-- Background layers -->
+  <HeroBackgroundSlider client:load />
   <div class="pointer-events-none absolute inset-0 z-0 bg-[var(--c-hero-glow)]" aria-hidden="true"></div>
   <div class="hero-orbs pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
     <div class="hero-orb hero-orb--1"></div>
@@ -14,19 +35,70 @@ import { assetPaths } from "../data/home";
   <div class="hero-pattern pointer-events-none absolute inset-0 z-0" aria-hidden="true"></div>
   <HeroLiveBackground client:load />
   <div class="pointer-events-none absolute inset-0 z-[1] bg-[var(--c-hero-overlay)]" aria-hidden="true"></div>
-  <div class="container-gbe relative z-[2] grid min-h-[530px] grid-cols-[250px_minmax(0,650px)_250px] items-center justify-center gap-[55px] max-[1024px]:flex max-[1024px]:min-h-0 max-[1024px]:flex-col max-[1024px]:gap-[22px]">
-    <img class="hero-trophy-shadow h-[390px] w-[240px] justify-self-start object-contain animate-[mediaFade_480ms_ease_both,trophyFloat_5.8s_ease-in-out_infinite] max-[1024px]:h-[364px] max-[1024px]:w-[224px] max-[560px]:h-[286px] max-[560px]:w-[176px]" src={assetPaths.trophy} alt="" width="800" height="1300" loading="eager" decoding="async" fetchpriority="high" />
+
+  <!-- DARK MODE LAYOUT (original) -->
+  <div class="hero-dark-layout container-gbe relative z-[2] grid min-h-[530px] grid-cols-[250px_minmax(0,650px)_250px] items-center justify-center gap-[55px] max-[1024px]:flex max-[1024px]:min-h-0 max-[1024px]:flex-col max-[1024px]:gap-[22px]">
+    <img
+      class="hero-trophy-shadow h-[390px] w-[240px] justify-self-start object-contain animate-[mediaFade_480ms_ease_both,trophyFloat_5.8s_ease-in-out_infinite] max-[1024px]:h-[364px] max-[1024px]:w-[224px] max-[560px]:h-[286px] max-[560px]:w-[176px]"
+      src={assetPaths.trophy}
+      alt=""
+      width="800"
+      height="1300"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
     <div class="flex animate-[revealUp_760ms_both_ease] flex-col items-center text-center max-[560px]:-mt-1">
-      <div class="mb-5 h-px w-24 bg-gradient-to-r from-transparent via-gbe-gold to-transparent max-[560px]:w-16" aria-hidden="true"></div>
-      <h1 id="hero-title" class="gold-text m-0 max-w-[770px] text-[clamp(48px,5vw,72px)] font-black leading-none max-[1024px]:text-[clamp(26px,6vw,36px)] max-[1024px]:leading-[1.05] max-[560px]:text-[23px]">Global Business<br />Excellence Awards</h1>
+      <h1 id="hero-title" class="gold-text m-0 max-w-[770px] text-[clamp(48px,5vw,72px)] font-black leading-none max-[1024px]:text-[clamp(26px,6vw,36px)] max-[1024px]:leading-[1.05] max-[560px]:text-[23px]">
+        Global Business<br />Excellence Awards
+      </h1>
       <div class="mb-7 mt-5 h-px w-16 bg-gradient-to-r from-transparent via-gbe-gold/60 to-transparent max-[1024px]:mb-0 max-[1024px]:mt-3" aria-hidden="true"></div>
       <p class="mb-7 mt-0 max-w-[770px] text-[clamp(16px,1.5vw,19px)] font-normal leading-[1.6] text-gbe-muted max-[1024px]:mx-auto max-[1024px]:mb-0 max-[1024px]:mt-4 max-[1024px]:w-[var(--container)] max-[1024px]:text-[15px] max-[560px]:mt-3 max-[560px]:text-[14px] max-[560px]:leading-[1.5]">
-        Recognising outstanding businesses and visionaries across the UK, Sri Lanka, and the world. We celebrate
-        the achievements that define a new era of global excellence.
+        Recognising outstanding businesses and visionaries across the UK, Sri Lanka, and the world. We celebrate the achievements that define a new era of global excellence.
       </p>
       <a class="btn-gold btn-gold-hover max-[1024px]:hidden" href="/contact">Apply Now</a>
     </div>
-    <img class="hero-trophy-shadow h-[390px] w-[240px] justify-self-end object-contain animate-[mediaFade_480ms_ease_both,trophyFloat_5.8s_ease-in-out_infinite] [animation-delay:-2.2s] max-[1024px]:hidden" src={assetPaths.trophy} alt="" width="800" height="1300" loading="eager" decoding="async" />
+    <img
+      class="hero-trophy-shadow h-[390px] w-[240px] justify-self-end object-contain animate-[mediaFade_480ms_ease_both,trophyFloat_5.8s_ease-in-out_infinite] [animation-delay:-2.2s] max-[1024px]:hidden"
+      src={assetPaths.trophy}
+      alt=""
+      width="800"
+      height="1300"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+
+  <!-- LIGHT MODE LAYOUT (completely new editorial design) -->
+  <div class="hero-light-layout container-gbe relative z-[2] hidden min-h-[530px] items-center max-[1024px]:flex max-[1024px]:min-h-0 max-[1024px]:flex-col max-[1024px]:gap-8 max-[1024px]:pt-4">
+    <div class="hero-light-text flex flex-1 flex-col items-start justify-center gap-0 animate-[revealUp_760ms_both_ease] max-[1024px]:items-center max-[1024px]:text-center">
+      <h1 id="hero-title-light" class="m-0 leading-[1.1]">
+        <span class="hero-light-line1 block text-[clamp(22px,2.8vw,36px)] font-bold uppercase tracking-[0.18em] text-gbe-text">Global Business</span>
+        <span class="hero-light-script block py-[0.1em] font-script text-[clamp(80px,11vw,152px)] font-bold leading-[1.05] text-gbe-gold-deep">Excellence</span>
+        <span class="hero-light-line3 block text-[clamp(28px,3.6vw,48px)] font-black uppercase tracking-[0.12em] text-gbe-text">Awards 2026</span>
+      </h1>
+      <div class="hero-light-divider mt-7 mb-7 h-px w-24 bg-gradient-to-r from-gbe-gold-deep via-gbe-gold to-transparent max-[1024px]:mx-auto max-[1024px]:from-transparent max-[1024px]:via-gbe-gold max-[1024px]:to-transparent max-[560px]:mt-5 max-[560px]:mb-5 max-[560px]:w-20"></div>
+      <p class="m-0 max-w-[520px] text-[clamp(15px,1.3vw,18px)] font-normal leading-[1.7] text-gbe-muted max-[1024px]:mx-auto max-[1024px]:text-[15px] max-[560px]:text-[14px] max-[560px]:leading-[1.6]">
+        Recognising outstanding businesses and visionaries across the UK, Sri Lanka, and the world. Celebrating the achievements that define a new era of global excellence.
+      </p>
+      <a class="hero-light-cta mt-8 inline-flex items-center gap-3 rounded-full border border-gbe-gold/60 bg-gbe-text px-8 py-3.5 text-[14px] font-bold uppercase tracking-[0.08em] text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-gbe-gold-deep hover:text-white hover:shadow-xl max-[1024px]:mt-6 max-[560px]:mt-5 max-[560px]:px-6 max-[560px]:py-3 max-[560px]:text-[13px]" href="/contact">
+        Apply Now
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-light-visual relative flex flex-1 items-center justify-center max-[1024px]:order-first max-[1024px]:w-full">
+      <div class="hero-light-glow pointer-events-none absolute" aria-hidden="true"></div>
+      <img
+        class="hero-light-trophy relative z-[1] h-[480px] w-auto object-contain animate-[mediaFade_600ms_ease_both,trophyFloat_6s_ease-in-out_infinite] drop-shadow-[0_32px_64px_rgba(139,105,20,0.22)] max-[1024px]:h-[340px] max-[560px]:h-[260px]"
+        src={assetPaths.trophy}
+        alt=""
+        width="800"
+        height="1300"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
   </div>
 
   <SocialLinks />

@@ -1,7 +1,7 @@
 export const assetPaths = {
-  logo: "/assets/brand/gbe-logo.png",
+  logo: "/assets/brand/gbe-logo.webp",
   favicon: "/assets/brand/favicon-192.png",
-  trophy: "/assets/brand/hero-award-2026.png",
+  trophy: "/assets/brand/hero-award-2026.webp",
   award: "/assets/brand/award-icon.webp",
   interview: "/assets/journey/interview.webp",
   awardInHand: "/assets/journey/award-in-hand.webp",

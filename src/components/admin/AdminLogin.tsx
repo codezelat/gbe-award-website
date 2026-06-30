@@ -53,7 +53,7 @@ export default function AdminLogin() {
         >
           <img
             className="mb-8 h-[88px] w-auto object-contain"
-            src="/assets/brand/gbe-logo.png"
+            src="/assets/brand/gbe-logo.webp"
             alt="GBE Awards"
             width="60"
             height="92"
@@ -85,7 +85,7 @@ export default function AdminLogin() {
           <div className="mb-8 flex flex-col items-center lg:hidden">
             <img
               className="mb-3 h-[64px] w-auto object-contain"
-              src="/assets/brand/gbe-logo.png"
+              src="/assets/brand/gbe-logo.webp"
               alt="GBE Awards"
               width="44"
               height="68"

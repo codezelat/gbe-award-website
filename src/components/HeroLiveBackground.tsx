@@ -47,15 +47,15 @@ const darkTheme: ThemeColors = {
 };
 
 const lightTheme: ThemeColors = {
-  bgCenter: (pulse) => `rgba(200, 150, 30, ${0.2 + pulse * 0.06})`,
-  bgMid: "rgba(200, 150, 30, 0.1)",
-  bgEdge: "rgba(200, 150, 30, 0)",
-  particlePrimary: (o) => `rgba(200, 150, 30, ${o * 1.2})`,
-  particleSecondary: (o) => `rgba(180, 130, 20, ${o * 0.9})`,
-  shimmerMid: "rgba(200, 150, 30, 0.12)",
-  shimmerEnd: "rgba(200, 150, 30, 0)",
-  ringInner: "rgba(200, 150, 30, 0.18)",
-  ringOuter: "rgba(200, 150, 30, 0)",
+  bgCenter: (pulse) => `rgba(255, 200, 80, ${0.06 + pulse * 0.04})`,
+  bgMid: "rgba(255, 200, 80, 0.03)",
+  bgEdge: "rgba(255, 200, 80, 0)",
+  particlePrimary: (o) => `rgba(200, 160, 40, ${o * 0.7})`,
+  particleSecondary: (o) => `rgba(180, 140, 30, ${o * 0.5})`,
+  shimmerMid: "rgba(200, 160, 40, 0.06)",
+  shimmerEnd: "rgba(200, 160, 40, 0)",
+  ringInner: "rgba(200, 160, 40, 0.1)",
+  ringOuter: "rgba(200, 160, 40, 0)",
 };
 
 export default function HeroLiveBackground() {
@@ -133,77 +133,127 @@ export default function HeroLiveBackground() {
       context.save();
       context.globalCompositeOperation = "screen";
 
-      // Shimmer lines
-      for (let i = 0; i < 9; i += 1) {
-        const offset = (i - 4) * width * 0.07;
-        const shimmer = Math.sin(time * 0.00055 + i) * 28;
-        const gradient = context.createLinearGradient(
-          centerX + offset,
-          height * 0.08,
-          centerX + offset + shimmer,
-          height * 0.78
-        );
-        gradient.addColorStop(0, "rgba(255, 208, 90, 0)");
-        gradient.addColorStop(0.48, colors.shimmerMid);
-        gradient.addColorStop(1, colors.shimmerEnd);
+      if (currentTheme === "light") {
+        // Light mode: ethereal upward floating particles (dust motes in sunbeam)
+        particles.forEach((particle, index) => {
+          const driftSpeed = particle.speed * 0.6;
+          particle.angle += driftSpeed * (prefersReducedMotion.matches ? 0.2 : 1);
+          
+          // Upward drift with gentle horizontal sway
+          const sway = Math.sin(particle.angle * 2.5 + index) * 0.5;
+          const ellipseX = centerX + (particle.radius * width * 0.6 + sway * width * 0.15) * Math.cos(particle.angle * 0.3);
+          const ellipseY = centerY + (particle.radius * height * 0.5) * Math.sin(particle.angle * 0.5) - (time * 0.008 * particle.speed * 100) % (height * 0.8);
+          
+          // Wrap particles vertically for continuous flow
+          const wrappedY = ((ellipseY % (height * 1.2)) + height * 1.2) % (height * 1.2) - height * 0.2;
+          
+          const twinkle = 0.35 + Math.sin(time * 0.0018 + particle.angle * 5) * 0.3;
+          const size = particle.size * 0.7;
 
+          context.beginPath();
+          context.arc(ellipseX, wrappedY, size, 0, Math.PI * 2);
+          context.fillStyle =
+            particle.variant === "gold"
+              ? colors.particlePrimary(particle.opacity * twinkle)
+              : colors.particleSecondary(particle.opacity * twinkle);
+          context.fill();
+        });
+
+        // Soft diffuse shimmer rays (more subtle than dark mode)
+        for (let i = 0; i < 5; i += 1) {
+          const offset = (i - 2) * width * 0.12;
+          const shimmer = Math.sin(time * 0.0004 + i * 1.3) * 20;
+          const gradient = context.createLinearGradient(
+            centerX + offset,
+            height * 0.15,
+            centerX + offset + shimmer,
+            height * 0.75
+          );
+          gradient.addColorStop(0, "rgba(255, 208, 90, 0)");
+          gradient.addColorStop(0.5, colors.shimmerMid);
+          gradient.addColorStop(1, colors.shimmerEnd);
+
+          context.beginPath();
+          context.moveTo(centerX + offset * 0.3, height * 0.18);
+          context.lineTo(centerX + offset + shimmer, height * 0.72);
+          context.lineWidth = Math.max(0.8, width * 0.0015);
+          context.strokeStyle = gradient;
+          context.stroke();
+        }
+      } else {
+        // Dark mode: original orbital system with rings
+        // Shimmer lines
+        for (let i = 0; i < 9; i += 1) {
+          const offset = (i - 4) * width * 0.07;
+          const shimmer = Math.sin(time * 0.00055 + i) * 28;
+          const gradient = context.createLinearGradient(
+            centerX + offset,
+            height * 0.08,
+            centerX + offset + shimmer,
+            height * 0.78
+          );
+          gradient.addColorStop(0, "rgba(255, 208, 90, 0)");
+          gradient.addColorStop(0.48, colors.shimmerMid);
+          gradient.addColorStop(1, colors.shimmerEnd);
+
+          context.beginPath();
+          context.moveTo(centerX + offset * 0.22, height * 0.12);
+          context.lineTo(centerX + offset + shimmer, height * 0.78);
+          context.lineWidth = Math.max(1, width * 0.002);
+          context.strokeStyle = gradient;
+          context.stroke();
+        }
+
+        // Particles
+        particles.forEach((particle) => {
+          particle.angle +=
+            particle.speed * (prefersReducedMotion.matches ? 0.2 : 1);
+          const ellipseX =
+            centerX +
+            Math.cos(particle.angle) * particle.radius * width * 0.58;
+          const ellipseY =
+            centerY +
+            Math.sin(particle.angle * 1.38) * particle.radius * height * 0.36;
+          const twinkle =
+            0.48 + Math.sin(time * 0.0022 + particle.angle * 7) * 0.42;
+
+          context.beginPath();
+          context.arc(ellipseX, ellipseY, particle.size, 0, Math.PI * 2);
+          context.fillStyle =
+            particle.variant === "gold"
+              ? colors.particlePrimary(particle.opacity * twinkle)
+              : colors.particleSecondary(particle.opacity * twinkle);
+          context.fill();
+        });
+
+        // Ring
+        const ringRadius =
+          Math.min(width, height) * (0.23 + pulse * 0.018);
+        const ring = context.createRadialGradient(
+          centerX,
+          centerY,
+          ringRadius * 0.78,
+          centerX,
+          centerY,
+          ringRadius * 1.2
+        );
+        ring.addColorStop(0, "rgba(255, 176, 1, 0)");
+        ring.addColorStop(0.48, colors.ringInner);
+        ring.addColorStop(1, colors.ringOuter);
+        context.strokeStyle = ring;
+        context.lineWidth = 1.4;
         context.beginPath();
-        context.moveTo(centerX + offset * 0.22, height * 0.12);
-        context.lineTo(centerX + offset + shimmer, height * 0.78);
-        context.lineWidth = Math.max(1, width * 0.002);
-        context.strokeStyle = gradient;
+        context.ellipse(
+          centerX,
+          centerY,
+          ringRadius * 1.55,
+          ringRadius * 0.52,
+          0,
+          0,
+          Math.PI * 2
+        );
         context.stroke();
       }
-
-      // Particles
-      particles.forEach((particle) => {
-        particle.angle +=
-          particle.speed * (prefersReducedMotion.matches ? 0.2 : 1);
-        const ellipseX =
-          centerX +
-          Math.cos(particle.angle) * particle.radius * width * 0.58;
-        const ellipseY =
-          centerY +
-          Math.sin(particle.angle * 1.38) * particle.radius * height * 0.36;
-        const twinkle =
-          0.48 + Math.sin(time * 0.0022 + particle.angle * 7) * 0.42;
-
-        context.beginPath();
-        context.arc(ellipseX, ellipseY, particle.size, 0, Math.PI * 2);
-        context.fillStyle =
-          particle.variant === "gold"
-            ? colors.particlePrimary(particle.opacity * twinkle)
-            : colors.particleSecondary(particle.opacity * twinkle);
-        context.fill();
-      });
-
-      // Ring
-      const ringRadius =
-        Math.min(width, height) * (0.23 + pulse * 0.018);
-      const ring = context.createRadialGradient(
-        centerX,
-        centerY,
-        ringRadius * 0.78,
-        centerX,
-        centerY,
-        ringRadius * 1.2
-      );
-      ring.addColorStop(0, "rgba(255, 176, 1, 0)");
-      ring.addColorStop(0.48, colors.ringInner);
-      ring.addColorStop(1, colors.ringOuter);
-      context.strokeStyle = ring;
-      context.lineWidth = 1.4;
-      context.beginPath();
-      context.ellipse(
-        centerX,
-        centerY,
-        ringRadius * 1.55,
-        ringRadius * 0.52,
-        0,
-        0,
-        Math.PI * 2
-      );
-      context.stroke();
 
       context.restore();
     };
