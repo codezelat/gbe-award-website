@@ -4,7 +4,9 @@ import ThemeInit from "../components/ThemeInit.astro";
 import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import AboutGallerySlider from "../components/AboutGallerySlider";
 import { assetPaths, categories } from "../data/home";
+import { aboutGalleryImages } from "../data/aboutGallery";
 import { buildBreadcrumbSchema, buildPageSchema } from "../lib/seo";
 
 const title = "About the Global Business Excellence Awards 2026";
@@ -57,14 +59,14 @@ const processSteps = [
       title={title}
       description={description}
       path="/about"
-      image={assetPaths.aboutEventWelcome}
+      image="/assets/gallery/award-presentation.webp"
       schema={[
         buildPageSchema({
           path: "/about",
           title,
           description,
           pageType: "AboutPage",
-          image: assetPaths.aboutEventWelcome,
+          image: "/assets/gallery/award-presentation.webp",
         }),
         buildBreadcrumbSchema([
           { name: "Home", path: "/" },
@@ -90,7 +92,7 @@ const processSteps = [
             </div>
 
             <figure class="m-0 overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.32)] bg-gbe-card shadow-[var(--c-card-shadow)]">
-              <img class="h-[320px] w-full object-cover max-[560px]:h-[230px]" src={assetPaths.aboutEventWelcome} srcset={`${assetPaths.aboutEventWelcome} 900w, ${assetPaths.aboutEventWelcomeLarge} 1440w`} sizes="(max-width: 1024px) 92vw, 420px" alt="Traditional welcome at the Global Business Excellence Awards ceremony" width="900" height="600" loading="eager" decoding="async" />
+              <img class="h-[320px] w-full object-cover max-[560px]:h-[230px]" src="/assets/gallery/award-presentation.webp" srcset="/assets/gallery/award-presentation.webp 900w, /assets/gallery/award-presentation-large.webp 1440w" sizes="(max-width: 1024px) 92vw, 420px" alt="GBE Awards stage award presentation with guests" width="900" height="750" loading="eager" decoding="async" data-preview-image data-preview-src="/assets/gallery/award-presentation.webp" data-preview-srcset="/assets/gallery/award-presentation.webp 900w, /assets/gallery/award-presentation-large.webp 1440w" data-preview-alt="GBE Awards stage award presentation with guests" data-preview-position="50% 43%" />
             </figure>
           </div>
         </section>
@@ -104,6 +106,10 @@ const processSteps = [
               </div>
             ))}
           </div>
+        </section>
+
+        <section class="mb-16 max-[560px]:mb-12" aria-label="GBE Awards ceremony gallery">
+          <AboutGallerySlider images={aboutGalleryImages} client:load />
         </section>
 
         <section class="container-gbe mb-16 max-w-[1120px] max-[560px]:mb-12">
@@ -132,10 +138,10 @@ const processSteps = [
         <section class="container-gbe mb-16 max-w-[1120px] max-[560px]:mb-12">
           <div class="grid grid-cols-2 gap-5 max-[760px]:grid-cols-1">
             <figure class="m-0 overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.28)] bg-gbe-card">
-              <img class="h-[360px] w-full object-cover max-[560px]:h-[240px]" src={assetPaths.aboutStageWinners} srcset={`${assetPaths.aboutStageWinners} 900w, ${assetPaths.aboutStageWinnersLarge} 1440w`} sizes="(max-width: 760px) 92vw, 540px" alt="GBE Awards winners and presenters on stage" width="900" height="600" loading="lazy" decoding="async" />
+              <img class="h-[360px] w-full object-cover max-[560px]:h-[240px]" src={assetPaths.aboutStageWinners} srcset={`${assetPaths.aboutStageWinners} 900w, ${assetPaths.aboutStageWinnersLarge} 1440w`} sizes="(max-width: 760px) 92vw, 540px" alt="GBE Awards winners and presenters on stage" width="900" height="600" loading="lazy" decoding="async" data-preview-image data-preview-src={assetPaths.aboutStageWinners} data-preview-srcset={`${assetPaths.aboutStageWinners} 900w, ${assetPaths.aboutStageWinnersLarge} 1440w`} data-preview-alt="GBE Awards winners and presenters on stage" data-preview-position="50% 44%" />
             </figure>
             <figure class="m-0 overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.28)] bg-gbe-card">
-              <img class="h-[360px] w-full object-cover max-[560px]:h-[240px]" src={assetPaths.aboutLeadership} srcset={`${assetPaths.aboutLeadership} 900w, ${assetPaths.aboutLeadershipLarge} 1440w`} sizes="(max-width: 760px) 92vw, 540px" alt="GBE Awards leadership group with award recipient" width="900" height="750" loading="lazy" decoding="async" />
+              <img class="h-[360px] w-full object-cover max-[560px]:h-[240px]" src={assetPaths.aboutLeadership} srcset={`${assetPaths.aboutLeadership} 900w, ${assetPaths.aboutLeadershipLarge} 1440w`} sizes="(max-width: 760px) 92vw, 540px" alt="GBE Awards leadership group with award recipient" width="900" height="750" loading="lazy" decoding="async" data-preview-image data-preview-src={assetPaths.aboutLeadership} data-preview-srcset={`${assetPaths.aboutLeadership} 900w, ${assetPaths.aboutLeadershipLarge} 1440w`} data-preview-alt="GBE Awards leadership group with award recipient" data-preview-position="50% 42%" />
             </figure>
           </div>
         </section>

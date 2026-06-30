@@ -1,0 +1,195 @@
+<div class="image-preview-modal" data-image-preview-modal aria-hidden="true">
+  <button class="image-preview-backdrop" type="button" data-image-preview-close aria-label="Close image preview"></button>
+  <div class="image-preview-dialog" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="image-preview-close" type="button" data-image-preview-close aria-label="Close image preview">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <img data-image-preview-img alt="" />
+  </div>
+</div>
+
+<style>
+  .image-preview-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(82px, 11vh, 128px) 24px 28px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 240ms ease, visibility 240ms ease;
+  }
+
+  .image-preview-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .image-preview-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    cursor: pointer;
+    background: rgba(6, 6, 8, 0.62);
+    backdrop-filter: blur(18px) saturate(1.08);
+  }
+
+  .image-preview-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(90vw, 980px);
+    max-height: calc(100dvh - clamp(128px, 17vh, 178px));
+    padding: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 176, 1, 0.36);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.13);
+    box-shadow: 0 34px 92px rgba(0, 0, 0, 0.54);
+    transform: translateY(-10px) scale(0.97);
+    transition: transform 260ms ease;
+  }
+
+  .image-preview-modal.is-open .image-preview-dialog {
+    transform: translateY(0) scale(1);
+  }
+
+  .image-preview-dialog img {
+    display: block;
+    width: 100%;
+    max-height: calc(100dvh - clamp(150px, 19vh, 202px));
+    object-fit: contain;
+    border-radius: 15px;
+  }
+
+  .image-preview-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255, 176, 1, 0.46);
+    border-radius: 999px;
+    color: var(--c-text);
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(16px);
+  }
+
+  .image-preview-close span {
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  .image-preview-close span:first-child {
+    transform: rotate(45deg);
+  }
+
+  .image-preview-close span:last-child {
+    transform: rotate(-45deg);
+  }
+
+  .image-preview-close:focus-visible {
+    outline: 2px solid rgba(255, 176, 1, 0.78);
+    outline-offset: 3px;
+  }
+
+  :global([data-preview-image]) {
+    cursor: zoom-in;
+  }
+
+  :global(html.image-preview-lock),
+  :global(body.image-preview-lock) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 560px) {
+    .image-preview-modal {
+      padding: 74px 14px 20px;
+    }
+
+    .image-preview-dialog {
+      width: calc(100vw - 28px);
+      border-radius: 17px;
+      padding: 7px;
+    }
+
+    .image-preview-dialog img {
+      border-radius: 12px;
+    }
+
+    .image-preview-close {
+      top: 13px;
+      right: 13px;
+      width: 38px;
+      height: 38px;
+    }
+  }
+</style>
+
+<script>
+  const modal = document.querySelector<HTMLElement>("[data-image-preview-modal]");
+  const previewImage = document.querySelector<HTMLImageElement>("[data-image-preview-img]");
+  const closeButtons = Array.from(document.querySelectorAll<HTMLElement>("[data-image-preview-close]"));
+
+  const openPreview = (trigger: HTMLElement) => {
+    if (!modal || !previewImage) return;
+
+    const fallbackImage = trigger instanceof HTMLImageElement ? trigger : trigger.querySelector("img");
+    const src = trigger.dataset.previewSrc || fallbackImage?.getAttribute("src") || "";
+    const srcset = trigger.dataset.previewSrcset || fallbackImage?.getAttribute("srcset") || "";
+    const alt = trigger.dataset.previewAlt || fallbackImage?.getAttribute("alt") || "";
+    const position = trigger.dataset.previewPosition || fallbackImage?.style.objectPosition || "50% 50%";
+
+    if (!src) return;
+
+    previewImage.src = src;
+    previewImage.srcset = srcset;
+    previewImage.alt = alt;
+    previewImage.style.objectPosition = position;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("image-preview-lock");
+    document.body.classList.add("image-preview-lock");
+  };
+
+  const closePreview = () => {
+    modal?.classList.remove("is-open");
+    modal?.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("image-preview-lock");
+    document.body.classList.remove("image-preview-lock");
+  };
+
+  document.addEventListener("click", (event) => {
+    const trigger = (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-preview-image]");
+    if (!trigger) return;
+    event.preventDefault();
+    openPreview(trigger);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    const target = event.target as HTMLElement | null;
+    if ((event.key === "Enter" || event.key === " ") && target?.matches("[data-preview-image]")) {
+      event.preventDefault();
+      openPreview(target);
+    }
+
+    if (event.key === "Escape") {
+      closePreview();
+    }
+  });
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", closePreview);
+  });
+</script>

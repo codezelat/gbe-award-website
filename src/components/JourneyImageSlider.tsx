@@ -44,6 +44,11 @@ export default function JourneyImageSlider({ images }: { images: JourneyImage[] 
               height="600"
               loading="lazy"
               decoding="async"
+              data-preview-image
+              data-preview-src={image.src}
+              data-preview-srcset={image.srcSet}
+              data-preview-alt={image.alt}
+              data-preview-position="50% 44%"
             />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_62%,rgba(0,0,0,0.46))]" aria-hidden="true"></div>
           </figure>
