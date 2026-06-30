@@ -34,7 +34,7 @@ export const GET: APIRoute = async () => {
   );
   const winnerEntries = winnerUrls.map((winner) => {
     const loc = new URL(`/previous-winners/${winner.slug}`, SITE_URL).toString();
-    const image = winner.imageUrl ? buildImageXml({ loc: winner.imageUrl, title: winner.recipient || "GBE Awards winner" }) : "";
+    const image = winner.imageUrl ? buildImageXml({ loc: winner.imageUrl, title: winner.recipientName || "GBE Awards winner" }) : "";
 
     return `  <url>
     <loc>${escapeXml(loc)}</loc>
