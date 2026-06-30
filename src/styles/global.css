@@ -542,6 +542,30 @@
   color: var(--c-text);
 }
 
+.footer-organiser-logo {
+  display: block;
+  width: min(280px, 52vw);
+  height: auto;
+  margin: -0.4rem auto 1.9rem;
+  color: #ffffff;
+  opacity: 0.9;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.16));
+}
+
+[data-theme="light"] .footer-organiser-logo {
+  color: #01002b;
+  opacity: 0.82;
+  filter: drop-shadow(0 8px 18px rgba(1, 0, 43, 0.06));
+}
+
+@media (max-width: 560px) {
+  .footer-organiser-logo {
+    width: min(200px, 62vw);
+    margin-top: -0.15rem;
+    margin-bottom: 1.55rem;
+  }
+}
+
 /* Hover accent: rich burgundy in light mode (gold is unreadable on cream) */
 [data-theme="light"] .hover\:text-gbe-gold:hover,
 [data-theme="light"] .group:hover .group-hover\:text-gbe-gold,

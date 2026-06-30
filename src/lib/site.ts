@@ -12,8 +12,8 @@ export const SITE_DEFAULT_OG_IMAGE = "/assets/brand/hero-award-2026.webp";
 export const SITE_LAST_UPDATED = "2026-06-30";
 
 export const SITE_SOCIAL_LINKS = [
-  "https://www.instagram.com/gbeaward/",
   "https://www.facebook.com/gbeaward/",
+  "https://www.instagram.com/gbeaward/",
   "https://www.x.com/gbeaward/",
   "https://www.linkedin.com/company/gbeaward/",
   SITE_WHATSAPP_URL,
