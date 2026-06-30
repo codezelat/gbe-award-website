@@ -61,7 +61,17 @@ function NomineeCard({ nominee }: { nominee: Nominee }) {
   );
 }
 
-function NomineeSlider({ nominees, className }: { nominees: Nominee[]; className: string }) {
+function NomineeSlider({
+  nominees,
+  className,
+  delay = 2400,
+  reverseDirection = false,
+}: {
+  nominees: Nominee[];
+  className: string;
+  delay?: number;
+  reverseDirection?: boolean;
+}) {
   const canLoop = nominees.length > 3;
 
   return (
@@ -72,7 +82,8 @@ function NomineeSlider({ nominees, className }: { nominees: Nominee[]; className
       slidesPerGroup={1}
       spaceBetween={25}
       loop={canLoop}
-      autoplay={canLoop ? { delay: 2400, disableOnInteraction: false, pauseOnMouseEnter: true } : false}
+      speed={760}
+      autoplay={canLoop ? { delay, disableOnInteraction: false, pauseOnMouseEnter: true, reverseDirection } : false}
       watchOverflow
       breakpoints={{
         768: { slidesPerView: 2 },
@@ -89,9 +100,9 @@ function NomineeSlider({ nominees, className }: { nominees: Nominee[]; className
 }
 
 export function FeaturedNomineeSlider({ nominees }: { nominees: Nominee[] }) {
-  return <NomineeSlider nominees={nominees} className="nominee-slider--featured" />;
+  return <NomineeSlider nominees={nominees} className="nominee-slider--featured" delay={2300} />;
 }
 
 export function NomineeEntrySlider({ nominees }: { nominees: Nominee[] }) {
-  return <NomineeSlider nominees={nominees} className="nominee-slider--entries mt-[25px]" />;
+  return <NomineeSlider nominees={nominees} className="nominee-slider--entries mt-[25px]" delay={2700} reverseDirection />;
 }

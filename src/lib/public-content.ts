@@ -1,5 +1,6 @@
 import { asc, desc, eq, inArray } from "drizzle-orm";
 import { db, schema } from "./db";
+import { splitHomepageNomineeRows } from "./homepage-nominees";
 
 export type PublicAwardCard = {
   title: string;
@@ -44,14 +45,15 @@ function logPublicContentError(scope: string, error: unknown) {
   console.error(`[public-content] ${scope} failed`, error);
 }
 
-export async function getPublicNominees(): Promise<PublicAwardCard[]> {
+export async function getPublicNominees(limit = 60): Promise<PublicAwardCard[]> {
   try {
+    const rowLimit = Math.max(1, limit);
     const rows = await db
       .select()
       .from(schema.nominations)
       .where(inArray(schema.nominations.status, ["shortlisted", "published"]))
       .orderBy(desc(schema.nominations.year), asc(schema.nominations.sortOrder), desc(schema.nominations.updatedAt))
-      .limit(60);
+      .limit(rowLimit);
 
     return rows.map(mapNomination);
   } catch (error) {
@@ -76,13 +78,7 @@ export async function getPublicWinners(limit = 120): Promise<PublicAwardCard[]> 
   }
 }
 
-export async function getHomepageNominees(limit = 12): Promise<HomepageNomineeGroups> {
-  const nominees = await getPublicNominees();
-  const homepageNominees = nominees.slice(0, Math.max(0, limit));
-  const featuredCount = Math.min(6, homepageNominees.length);
-
-  return {
-    featured: homepageNominees.slice(0, featuredCount),
-    entries: homepageNominees.slice(featuredCount),
-  };
+export async function getHomepageNominees(limit = 18): Promise<HomepageNomineeGroups> {
+  const nominees = await getPublicNominees(limit);
+  return splitHomepageNomineeRows(nominees, { limit });
 }
