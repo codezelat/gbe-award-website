@@ -1,226 +1,335 @@
-# Global Business Excellence Awards Website
+<p align="center">
+  <img src="public/assets/brand/gbe-logo.webp" alt="Global Business Excellence Awards logo" width="96" />
+</p>
 
-Official website for the **Global Business Excellence Awards 2026**, organised by **London Business Consultancy** in **London, UK**.
+<h1 align="center">Global Business Excellence Awards 2026</h1>
 
-This repo is a production Astro site with:
-- public marketing pages
-- a protected admin CMS
-- Neon Postgres via Drizzle
-- Better Auth for admin login
-- Cloudflare R2 media storage
-- shared SEO/structured-data infrastructure
-- Google Analytics on public pages only
+<p align="center">
+  <strong>Official website and admin CMS for the Global Business Excellence Awards 2026.</strong><br />
+  Organised by <strong>London Business Consultancy</strong>, London, UK.
+</p>
 
-## Current State
+<p align="center">
+  <a href="https://gbeaward.com">🌐 gbeaward.com</a>
+  ·
+  <a href="https://media.gbeaward.com">🖼️ media.gbeaward.com</a>
+</p>
 
-- Public routes: `/`, `/about`, `/contact`, `/nominees`, `/previous-winners`, `/privacy-policy`, `/404`
-- Protected routes: `/gbe-admin-safe/*`, `/api/gbe-admin-safe/*`, `/api/auth/*`
-- Public nominee and winner content is DB-backed
-- Previous winners are imported from the live legacy site and stored locally in Postgres
-- Winner images are stored on the project media domain, not left on legacy WordPress URLs
-- Admin/auth surfaces are explicitly noindexed
+---
 
-## Stack
+## 🏆 About the Project
 
-- `astro` 6
-- `@astrojs/react`
-- `@astrojs/vercel`
-- `tailwindcss` v4 via `@tailwindcss/vite`
-- `react` 19
-- `swiper`
-- `better-auth`
-- `drizzle-orm`
-- `@neondatabase/serverless`
-- Cloudflare R2 via `@aws-sdk/client-s3`
+This repository powers the public marketing website and protected content-management system for the **Global Business Excellence Awards 2026**. The platform presents the awards brand, nominee profiles, previous winners, editorial winner stories, contact pathways, SEO metadata, analytics, and a secure admin surface for managing awards content.
 
-## Commands
+The site is built as a production Astro application, not a static brochure. Public nominee and previous-winner content is backed by Postgres, winner media is delivered from Cloudflare R2, and protected admin/auth routes are excluded from indexing.
 
-```bash
-npm install
-npm run dev
-npm run build
+## ✨ What It Includes
+
+- 🏠 Public marketing pages for the awards programme
+- 🏅 DB-backed nominee and previous-winner directories
+- 📰 Canonical winner-story pages with editorial SEO fields
+- 🔐 Protected admin CMS at `/gbe-admin-safe`
+- 🗃️ Neon Postgres schema managed with Drizzle ORM
+- 🖼️ Cloudflare R2 uploads and media CDN delivery
+- 🔎 Canonical URLs, Open Graph, Twitter cards, sitemap, and JSON-LD
+- 📊 Google Analytics on public pages only
+- 🚫 `noindex` and `no-store` protections for admin/auth surfaces
+- 🎨 Dark/light themed GBE visual system with self-hosted brand assets
+
+## 🧭 Public Website
+
+Core public routes:
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Awards homepage and primary brand story |
+| `/about` | Programme overview, purpose, and judging journey |
+| `/nominees` | Published nominees from the database |
+| `/previous-winners` | Published previous-winner directory |
+| `/previous-winners/[slug]` | Canonical winner-story article pages |
+| `/contact` | Enquiry and application contact page |
+| `/privacy-policy` | Privacy policy |
+| `/sitemap.xml` | Generated public sitemap |
+
+## 🛠️ Admin CMS
+
+The admin area lives behind Better Auth and is intentionally hidden from search engines.
+
+| Route | Purpose |
+| --- | --- |
+| `/gbe-admin-safe/` | Admin login |
+| `/gbe-admin-safe/overview` | Admin dashboard |
+| `/gbe-admin-safe/winners` | Previous-winner and story management |
+| `/gbe-admin-safe/nominations` | Nomination management |
+| `/api/gbe-admin-safe/*` | Protected admin API endpoints |
+| `/api/auth/*` | Better Auth endpoints |
+
+Admin UI rules:
+
+- Use in-app dialogs, modals, and toasts for confirmations.
+- Do not use browser `alert`, `confirm`, or `prompt`.
+- Keep admin/auth routes `noindex`, `nofollow`, `noarchive`, and `nosnippet`.
+- Keep admin responses `Cache-Control: no-store`.
+
+## ⚙️ Tech Stack
+
+| Area | Technology |
+| --- | --- |
+| Framework | Astro 6 with `output: "server"` |
+| Islands | React 19 |
+| Styling | Tailwind CSS v4 via `@tailwindcss/vite` |
+| UI Motion | Motion |
+| Carousels | Swiper 12 |
+| Database | Neon Postgres |
+| ORM | Drizzle ORM |
+| Auth | Better Auth |
+| Media | Cloudflare R2 through AWS S3 SDK |
+| Rich Text | TipTap |
+| Validation | Zod |
+| Deployment Adapter | `@astrojs/vercel` |
+| Runtime | Node.js `>=22.12.0` |
+
+## 📁 Project Structure
+
+```text
+src/
+  components/              Shared Astro, React, admin, SEO, and layout components
+  components/admin/        Protected CMS interface components
+  data/home.ts             Brand assets, nav items, homepage copy, shared SEO copy
+  lib/admin/               Admin auth, content actions, and R2 upload helpers
+  lib/db/                  Drizzle client and database schema
+  lib/winners/             Winner story content, SEO, query, image, and slug logic
+  pages/                   Public pages, admin pages, API routes, and sitemap
+  styles/global.css        Tailwind v4 theme, utilities, animations, and overrides
+
+public/
+  assets/brand/            Logo, icons, trophy, favicon, and brand media
+  assets/journey/          Homepage journey visuals
+  assets/nominees/         Local nominee media assets
+  robots.txt
+  site.webmanifest
+
+scripts/
+  import-live-winners.ts   Imports real winners from the legacy WordPress source
+  migrate-images-to-r2.ts  Moves existing image URLs into R2
+  seed-admin.ts            Creates the controlled first admin account
 ```
 
-Useful project scripts:
+## 🗄️ Database Content Model
 
-```bash
-npm run seed:admin       # create/check the first admin user
-npm run import:winners   # import real previous winners from gbeaward.com
-npm run r2:migrate-images
-```
+Primary tables:
 
-Notes:
-- `npm run build` is the required verification command before shipping changes.
-- `npm run preview` is currently **not supported** with the configured Vercel adapter.
-
-## Environment
-
-Copy `.env.example` to `.env` and fill in the real values.
-
-Required:
-
-```env
-DATABASE_URL=
-BETTER_AUTH_SECRET=
-BETTER_AUTH_URL=
-ADMIN_EMAIL=
-ADMIN_PASSWORD=
-PUBLIC_SITE_URL=
-R2_BUCKET=
-R2_ENDPOINT=
-R2_ACCESS_KEY_ID=
-R2_SECRET_ACCESS_KEY=
-R2_PUBLIC_BASE_URL=
-```
-
-Optional:
-
-```env
-ALLOW_ADMIN_SIGNUP=false
-PUBLIC_GOOGLE_TAG_ID=GT-W6V9ZG59
-```
-
-Notes:
-- `BETTER_AUTH_URL` and `PUBLIC_SITE_URL` should match the environment you are running in.
-- `PUBLIC_GOOGLE_TAG_ID` is optional because the repo currently falls back to `GT-W6V9ZG59`.
-- `ALLOW_ADMIN_SIGNUP` should stay disabled outside controlled setup flows.
-
-## Architecture
-
-### Public content
-
-- `src/pages/index.astro`
-- `src/pages/nominees.astro`
-- `src/pages/previous-winners.astro`
-- `src/pages/previous-winners/[slug].astro`
-- `src/lib/public-content.ts`
-- `src/lib/winners/queries.ts`
-- `src/lib/winners/content.ts`
-- `src/lib/winners/seo.ts`
-
-Homepage structure and static brand data still live in `src/data/home.ts`, but nominee/winner cards shown publicly come from the database.
-Previous-winner cards link to canonical winner-story pages. Winner-story article copy, SEO metadata, indexing state, and public slugs are stored in `past_winners` and served from the database.
-
-### Admin CMS
-
-- `src/pages/gbe-admin-safe/index.astro`
-- `src/pages/gbe-admin-safe/overview.astro`
-- `src/pages/gbe-admin-safe/winners.astro`
-- `src/pages/gbe-admin-safe/nominations.astro`
-- `src/components/admin/ContentManager.tsx`
-- `src/components/admin/AdminForm.tsx`
-
-The admin uses in-app modals and toasts. Native browser `alert`/`confirm` popups have been removed from the current UI flow.
-
-### Database
-
-- `src/lib/db/schema.ts`
-- `src/lib/db/index.ts`
-
-Main tables:
 - `past_winners`
+- `winner_slug_aliases`
 - `nominations`
 - Better Auth tables: `user`, `session`, `account`, `verification`
 
-### Auth
+Winner-story content lives in `past_winners`, including headline, standfirst, rich-text body, source notes, SEO title, SEO description, social image, hero image, indexing status, and canonical slug. Old slugs are preserved in `winner_slug_aliases` so changed story URLs can redirect cleanly.
 
-- `src/lib/auth.ts`
-- `src/lib/admin/auth.ts`
-- `src/pages/api/auth/[...all].ts`
+## 📰 Winner Story Rules
 
-### Media storage
+Winner stories are editorial records, not generated JSON files committed to the repository.
+
+- Store article content in the database/admin workflow.
+- Keep `imageUrl` as the card/profile image.
+- Use `heroImageUrl` only for a separate wide story banner.
+- Preserve slug aliases when canonical slugs change.
+- Use `indexingStatus=index` only for quality-approved, source-backed stories.
+- Keep weak-source, identity-risk, or wrong-image-risk stories as `noindex`.
+- Do not invent quotes, judge comments, audience numbers, rankings, or unsupported claims.
+- Do not use winner `market` values in story URLs, filters, labels, article copy, metadata, schema, or keyword strategy.
+- Do not commit generated `content/winner-stories/` or `content/winner-research/` exports.
+
+## 🖼️ Media and Assets
+
+Brand assets are stored under `public/assets/brand/` and referenced through `assetPaths` in `src/data/home.ts`.
+
+Uploaded/admin-managed media is stored in **Cloudflare R2** and served from `R2_PUBLIC_BASE_URL`, currently intended for `https://media.gbeaward.com`.
+
+R2-backed uploads are handled by:
 
 - `src/lib/admin/r2.ts`
 - `src/pages/api/gbe-admin-safe/upload.ts`
 
-Admin image uploads go to Cloudflare R2 and are served from `R2_PUBLIC_BASE_URL`.
+## 🔎 SEO and Analytics
 
-### SEO and analytics
+SEO infrastructure is centralized across:
 
 - `src/components/SeoHead.astro`
 - `src/lib/seo.ts`
-- `src/components/GoogleAnalytics.astro`
+- `src/lib/site.ts`
+- `src/lib/winners/seo.ts`
 - `src/pages/sitemap.xml.ts`
 - `src/middleware.ts`
 
-What is implemented:
-- canonical tags
-- robots directives
-- Open Graph and Twitter cards
+Implemented SEO features:
+
+- Canonical URLs
+- Meta descriptions
+- Open Graph tags
+- Twitter card tags
 - JSON-LD structured data
-- generated sitemap
-- protected-route `X-Robots-Tag`
-- Google Analytics on public pages only
+- Generated sitemap
+- Image sitemap entries for winner stories
+- Public-only Google Analytics
+- Protected-route `X-Robots-Tag` headers
 
-## Winner Import Workflow
+## 🎨 Design System
 
-Real previous winners are imported by:
+The visual system lives in `src/styles/global.css`.
 
-- `scripts/import-live-winners.ts`
+Use the existing utilities:
 
-What it does:
-- fetches real winner posts from the live WordPress API
-- reads the winner detail page heading to capture the actual award title
-- uploads remote winner images into the project R2 bucket
-- upserts source identity/media fields into `past_winners`
-- keeps winner `market` values cleared
-- does not overwrite human story fields, canonical story slugs, SEO story text, or article bodies
-- archives local winner rows only when `ALLOW_ARCHIVE_MISSING_WINNERS=true`
+- `container-gbe` for page width
+- `gold-text` for gold-gradient headings
+- `gold-fill` for gold-gradient filled elements
+- `btn-gold` and `btn-gold-hover` for primary CTAs
 
-This replaced the old fake content seeding path.
+Important styling conventions:
 
-## Winner Story Workflow
+- Tailwind v4 config is CSS-based through `@theme`; do not add `tailwind.config.js`.
+- Shared colours use `gbe-` tokens.
+- Swiper overrides must stay outside Tailwind layers so they beat bundled Swiper CSS.
+- Body copy should stay at normal readable weights; avoid heavy `700+` body text.
+- Keep dark and light themes intentional, accessible, and brand-consistent.
 
-Winner stories are DB-managed content, not committed JSON article packages. The live site reads article body, headline, standfirst, SEO fields, source notes, indexing state, links, and media fields from `past_winners`.
+## 🚀 Getting Started
 
-Rules:
-- edit winner-story content through the database/admin workflow
-- keep `imageUrl` as the winner profile/card image
-- use `heroImageUrl` only for a separate wide story banner image
-- if `heroImageUrl` is empty or duplicates `imageUrl`, the story page falls back to the contained profile-image hero layout instead of rendering a duplicated cover and circle
-- keep old slugs as aliases when canonical slugs change
-- only set `indexing_status=index` when article quality checks pass
-- keep weak-source, identity-risk, or wrong-image-risk records as `noindex`
-- do not add geography tags, filters, or keyword targeting for winner stories
-- do not invent quotes, judging comments, audience metrics, or unsupported ranking claims
-- do not commit generated `content/winner-stories/` or `content/winner-research/` exports; those paths are ignored for local scratch/export work
+### 1. Install dependencies
 
-## Styling Conventions
+```bash
+npm install
+```
 
-- Theme and shared utilities live in `src/styles/global.css`
-- Use `gold-text` for gold gradient typography
-- Use `btn-gold` and `btn-gold-hover` for shared CTA styling
-- Use `container-gbe` for standard content width
-- Swiper override rules must stay outside Tailwind layers
+### 2. Create environment file
 
-## Verification Checklist
+Copy `.env.example` to `.env` and fill in real values.
 
-Before marking work complete:
+```env
+DATABASE_URL="postgresql://user:password@host/database?sslmode=require&channel_binding=require"
+BETTER_AUTH_SECRET="replace-with-a-strong-random-secret"
+BETTER_AUTH_URL="http://127.0.0.1:4321"
+ADMIN_EMAIL="admin@gbeaward.com"
+ADMIN_PASSWORD="replace-before-production"
+PUBLIC_SITE_URL="http://127.0.0.1:4321"
+R2_BUCKET="gbeaward-web"
+R2_ENDPOINT="https://your-account-id.r2.cloudflarestorage.com"
+R2_ACCESS_KEY_ID="replace-with-r2-access-key"
+R2_SECRET_ACCESS_KEY="replace-with-r2-secret-key"
+R2_PUBLIC_BASE_URL="https://media.gbeaward.com"
+PUBLIC_GOOGLE_TAG_ID="GT-W6V9ZG59"
+ALLOW_ADMIN_SIGNUP="false"
+```
+
+### 3. Run locally
+
+```bash
+npm run dev
+```
+
+Astro starts on `http://localhost:4321` unless that port is already in use.
+
+### 4. Create the first admin user
+
+```bash
+npm run seed:admin
+```
+
+This script temporarily enables admin signup for the controlled seed flow. Keep `ALLOW_ADMIN_SIGNUP=false` outside setup.
+
+## 🧪 Commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start local Astro development server |
+| `npm run build` | Build the production server output |
+| `npm run test` | Run Vitest tests |
+| `npm run test:winners` | Run winner-specific tests |
+| `npm run test:e2e` | Run Playwright winner route tests |
+| `npm run seed:admin` | Create/check the first admin account |
+| `npm run import:winners` | Import real previous winners from the legacy live site |
+| `npm run r2:migrate-images` | Move winner/nomination images into R2 |
+| `npm run db:generate` | Generate Drizzle migrations |
+| `npm run db:migrate` | Run Drizzle migrations |
+| `npm run db:studio` | Open Drizzle Studio |
+
+`npm run preview` is not the supported verification path for this project because the Vercel adapter is configured for server output.
+
+## 🔁 Winner Import Workflow
+
+Real previous winners are imported with:
+
+```bash
+npm run import:winners
+```
+
+The importer:
+
+- Fetches winner records from the legacy WordPress API at `gbeaward.com`.
+- Reads winner detail pages to capture the actual award heading.
+- Uploads remote winner images into the project R2 bucket.
+- Upserts source identity and media fields into `past_winners`.
+- Keeps winner `market` values cleared.
+- Does not overwrite human-managed story body, headline, standfirst, canonical slug, SEO story fields, or article body.
+- Archives missing local winners only when `ALLOW_ARCHIVE_MISSING_WINNERS=true`.
+
+## ✅ Verification
+
+Before finishing any code or content-system change:
 
 ```bash
 npm run build
 ```
 
-Then verify:
-- public pages still render
-- admin routes still require auth
-- winners and nominees still load from DB
-- noindex remains on admin/auth routes
-- imported winner images resolve from the media domain
-- analytics tag appears on public routes only
+Recommended checks for larger changes:
 
-## Launch Notes
+- Public pages render without framework errors.
+- `/previous-winners` and `/nominees` read from the database.
+- Admin routes redirect unauthenticated users.
+- Admin/auth responses include `X-Robots-Tag`.
+- Public pages include SEO metadata and analytics only where intended.
+- Winner images resolve from the media CDN.
+- Sitemap includes public static routes and indexable winner stories.
 
-Before final domain cutover:
-- set final production values in `.env`
-- confirm `BETTER_AUTH_URL` and `PUBLIC_SITE_URL` use the production domain
-- optionally set `PUBLIC_GOOGLE_TAG_ID` explicitly in production env
-- run `npm run build`
-- verify homepage, nominees, previous winners, sitemap, robots, and admin login after deploy
+## 🚢 Deployment Notes
 
-## Repo Truths
+The Astro config is set for:
 
-- This is **not** a static-only site anymore.
-- This is **not** a Tailwind config file repo; Tailwind v4 theme lives in CSS.
-- `public/sitemap.xml` is no longer the source of truth; sitemap is generated from Astro.
-- `scripts/seed-content.ts` has been removed and should not be reintroduced.
+- Production site: `https://gbeaward.com`
+- Server output through `@astrojs/vercel`
+- Node.js `>=22.12.0`
+
+Before production deployment:
+
+- Set production `DATABASE_URL`.
+- Set production `BETTER_AUTH_URL`.
+- Set production `PUBLIC_SITE_URL`.
+- Set R2 bucket, endpoint, access key, secret key, and public base URL.
+- Keep `ALLOW_ADMIN_SIGNUP=false`.
+- Run `npm run build`.
+- Verify homepage, about, nominees, previous winners, winner story pages, sitemap, robots, contact, and admin login.
+
+## 🔒 Security and Indexing
+
+- Admin pages require a valid Better Auth session.
+- Admin API endpoints use protected route boundaries.
+- Admin/auth surfaces receive `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet`.
+- Admin/auth surfaces use `Cache-Control: no-store`.
+- Signup is disabled unless `ALLOW_ADMIN_SIGNUP=true`.
+- R2 upload configuration is read from environment variables.
+
+## 🤝 Credits
+
+**Global Business Excellence Awards 2026** is organised by **London Business Consultancy**, London, UK.
+
+Website development credit links to [Codezela Technologies](https://codezela.com).
+
+## 📌 Maintainer Notes
+
+- Treat imported previous winners as real production content.
+- Keep public nominees and winners database-backed.
+- Keep homepage brand data in `src/data/home.ts`.
+- Keep public SEO through shared helpers instead of page-by-page one-offs.
+- Do not reintroduce fake winner or nominee seeding.
+- Do not add the default Astro SVG favicon as the site favicon.
+- Do not add geography-driven winner-story URL or keyword strategies.
