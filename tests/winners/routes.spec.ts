@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "playwright/test";
 
 const canonicalPath = "/previous-winners/kavinga-perera-wins-most-popular-actor-of-the-year-2025";
 
