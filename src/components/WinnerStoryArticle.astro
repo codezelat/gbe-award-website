@@ -1,7 +1,7 @@
 ---
 import WinnerShareLinks from "./WinnerShareLinks.astro";
 import type { WinnerCardData } from "../lib/winners/queries";
-import { pickRealWinnerImage } from "../lib/winners/images";
+import { pickDistinctWinnerBannerImage, pickRealWinnerImage } from "../lib/winners/images";
 
 interface Props {
   winner: WinnerCardData;
@@ -16,8 +16,8 @@ const standfirst =
   winner.standfirst ||
   winner.awardCitation ||
   `${recipient} is recognised as a Global Business Excellence Awards winner for ${awardTitle}.`;
-const bannerImage = pickRealWinnerImage(winner.heroImageUrl);
 const profileImage = pickRealWinnerImage(winner.imageUrl);
+const bannerImage = pickDistinctWinnerBannerImage(winner.heroImageUrl, profileImage);
 const bannerAlt = winner.heroImageAlt || `${recipient} winner story banner for ${awardTitle}`;
 const profileAlt = `${recipient}, ${awardTitle}`;
 const updatedDate = winner.contentUpdatedAt ? new Date(winner.contentUpdatedAt) : null;
@@ -47,8 +47,8 @@ const showCategory = Boolean(winner.category && normalizedCategory && normalized
           <img class="absolute inset-0 h-full w-full object-cover" src={bannerImage} alt={bannerAlt} width="1600" height="900" loading="eager" decoding="async" />
           <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(13,11,8,0.58),rgba(13,11,8,0.12)_48%,rgba(13,11,8,0.48))]" aria-hidden="true"></div>
           {profileImage ? (
-            <div class="absolute left-8 top-8 grid size-[122px] place-items-center rounded-full border border-[rgba(255,176,1,0.55)] bg-gbe-card/90 p-2 shadow-[0_18px_48px_rgba(0,0,0,0.34)] backdrop-blur max-[560px]:left-5 max-[560px]:top-5 max-[560px]:size-[86px] max-[560px]:p-1.5">
-              <img class="h-full w-full rounded-full object-cover" src={profileImage} alt={profileAlt} width="240" height="240" loading="eager" decoding="async" />
+            <div class="absolute left-8 top-8 size-[122px] overflow-hidden rounded-full border-2 border-[rgba(255,176,1,0.72)] shadow-[0_18px_48px_rgba(0,0,0,0.34)] max-[560px]:left-5 max-[560px]:top-5 max-[560px]:size-[86px]">
+              <img class="h-full w-full object-cover object-center" src={profileImage} alt={profileAlt} width="240" height="240" loading="eager" decoding="async" />
             </div>
           ) : null}
         </div>

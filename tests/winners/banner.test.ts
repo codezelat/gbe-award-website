@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { winnerInputSchema } from "../../src/lib/admin/content";
+import { pickDistinctWinnerBannerImage } from "../../src/lib/winners/images";
 import { mapWinnerStory } from "../../src/lib/winners/queries";
 
 const baseWinnerRow = {
@@ -85,5 +86,21 @@ describe("winner banner media", () => {
     expect(story.imageUrl).toBe("https://cdn.example.com/winners/profile.webp");
     expect(story.heroImageUrl).toBe("https://cdn.example.com/winners/banner.webp");
     expect(story.heroImageAlt).toBe("Piyumali Edirisinghe winner banner");
+  });
+
+  it("treats the profile image as no separate banner when both URLs match", () => {
+    expect(
+      pickDistinctWinnerBannerImage(
+        "https://cdn.example.com/winners/profile.webp",
+        "https://cdn.example.com/winners/profile.webp",
+      ),
+    ).toBeNull();
+
+    expect(
+      pickDistinctWinnerBannerImage(
+        "https://cdn.example.com/winners/banner.webp",
+        "https://cdn.example.com/winners/profile.webp",
+      ),
+    ).toBe("https://cdn.example.com/winners/banner.webp");
   });
 });

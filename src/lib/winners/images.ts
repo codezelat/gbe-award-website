@@ -21,3 +21,27 @@ export function isRealWinnerImageUrl(value: string | null | undefined) {
 export function pickRealWinnerImage(...values: Array<string | null | undefined>) {
   return values.find(isRealWinnerImageUrl) || null;
 }
+
+function normalizeImageUrl(value: string | null | undefined) {
+  const imageUrl = value?.trim();
+  if (!imageUrl) return null;
+
+  try {
+    const url = new URL(imageUrl, "https://gbeaward.com");
+    url.hash = "";
+    url.search = "";
+    return url.href;
+  } catch {
+    return imageUrl;
+  }
+}
+
+export function pickDistinctWinnerBannerImage(heroImageUrl: string | null | undefined, profileImageUrl: string | null | undefined) {
+  const bannerImage = pickRealWinnerImage(heroImageUrl);
+  if (!bannerImage) return null;
+
+  const profileImage = pickRealWinnerImage(profileImageUrl);
+  if (!profileImage) return bannerImage;
+
+  return normalizeImageUrl(bannerImage) === normalizeImageUrl(profileImage) ? null : bannerImage;
+}
