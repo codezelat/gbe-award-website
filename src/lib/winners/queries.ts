@@ -1,9 +1,10 @@
 import { and, asc, count, desc, eq, ne, or, sql } from "drizzle-orm";
 import { db, schema } from "../db";
-import { renderWinnerRichText } from "./content";
+import { deriveDisplayAwardTitle, renderWinnerRichText } from "./content";
 import type { WinnerRichText, WinnerStoryRecord } from "./types";
 
 export type WinnerCardData = WinnerStoryRecord & {
+  displayAwardTitle: string;
   imageUrl?: string | null;
   storyPath: string;
   bodyHtml: string;
@@ -26,7 +27,7 @@ function storyPath(slug: string | null | undefined) {
 }
 
 export function mapWinnerStory(row: typeof schema.pastWinners.$inferSelect): WinnerCardData {
-  return {
+  const base = {
     id: row.id,
     awardTitle: row.awardTitle,
     recipientName: row.recipientName,
@@ -60,6 +61,11 @@ export function mapWinnerStory(row: typeof schema.pastWinners.$inferSelect): Win
     sourceNotes: row.sourceNotes,
     seoTitle: row.seoTitle,
     seoDescription: row.seoDescription,
+  };
+
+  return {
+    ...base,
+    displayAwardTitle: deriveDisplayAwardTitle(base),
     imageUrl: row.heroImageUrl || row.imageUrl,
     storyPath: storyPath(row.slug),
     bodyHtml: row.body ? renderWinnerRichText(row.body as WinnerRichText) : "",

@@ -22,7 +22,7 @@ const winners = directory.winners;
 const winnerSummary = winners
   .slice(0, 10)
   .map((winner) => ({
-    name: `${winner.recipientName} - ${winner.awardTitle}`,
+    name: `${winner.recipientName} - ${winner.displayAwardTitle || winner.awardTitle}`,
     image: winner.imageUrl || assetPaths.trophy,
     description: normalizeDescription(
       winner.standfirst?.trim() ||

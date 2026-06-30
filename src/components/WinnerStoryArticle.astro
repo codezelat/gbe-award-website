@@ -1,5 +1,4 @@
 ---
-import { assetPaths } from "../data/home";
 import WinnerShareLinks from "./WinnerShareLinks.astro";
 import type { WinnerCardData } from "../lib/winners/queries";
 
@@ -10,13 +9,13 @@ interface Props {
 
 const { winner, related = [] } = Astro.props;
 const recipient = winner.recipientName || "Award winner";
-const awardTitle = winner.awardTitle || "Global Business Excellence Awards";
+const awardTitle = winner.displayAwardTitle || winner.awardTitle || "Global Business Excellence Awards";
 const headline = winner.headline || `${recipient} wins ${awardTitle}`;
 const standfirst =
   winner.standfirst ||
   winner.awardCitation ||
   `${recipient} is recognised as a Global Business Excellence Awards winner for ${awardTitle}.`;
-const image = winner.heroImageUrl || winner.imageUrl || assetPaths.trophy;
+const image = winner.heroImageUrl || winner.imageUrl || null;
 const imageAlt = winner.heroImageAlt || `${recipient}, ${awardTitle}`;
 const updatedDate = winner.contentUpdatedAt ? new Date(winner.contentUpdatedAt) : null;
 const hasBody = Boolean(winner.bodyHtml?.trim());
@@ -35,20 +34,22 @@ const hasBody = Boolean(winner.bodyHtml?.trim());
     <p class="mx-auto mb-0 max-w-[760px] text-[clamp(17px,1.5vw,21px)] font-normal leading-[1.75] text-gbe-muted">{standfirst}</p>
   </header>
 
-  <div class="container-gbe mt-12 max-w-[1120px]">
-    <figure class="relative overflow-hidden rounded-[24px] border border-[rgba(255,176,1,0.28)] bg-gbe-card shadow-[var(--c-card-shadow)]">
-      <img class="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" src={image} alt="" loading="eager" decoding="async" aria-hidden="true" />
-      <div class="relative grid min-h-[420px] place-items-center bg-[radial-gradient(circle_at_50%_20%,rgba(255,176,1,0.13),transparent_320px)] p-10 max-[560px]:min-h-[300px] max-[560px]:p-5">
-        <img class="max-h-[340px] max-w-full rounded-[18px] object-contain shadow-[0_18px_60px_rgba(0,0,0,0.28)]" src={image} alt={imageAlt} width="1200" height="720" loading="eager" decoding="async" />
-      </div>
-      {winner.heroImageCaption ? (
-        <figcaption class="border-t border-gbe-text/10 px-6 py-4 text-center text-sm font-normal leading-[1.6] text-gbe-muted">
-          {winner.heroImageCaption}
-          {winner.heroImageCredit ? <span> Image: {winner.heroImageCredit}</span> : null}
-        </figcaption>
-      ) : null}
-    </figure>
-  </div>
+  {image ? (
+    <div class="container-gbe mt-12 max-w-[1120px]">
+      <figure class="relative overflow-hidden rounded-[24px] border border-[rgba(255,176,1,0.28)] bg-gbe-card shadow-[var(--c-card-shadow)]">
+        <img class="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" src={image} alt="" loading="eager" decoding="async" aria-hidden="true" />
+        <div class="relative grid min-h-[420px] place-items-center bg-[radial-gradient(circle_at_50%_20%,rgba(255,176,1,0.13),transparent_320px)] p-10 max-[560px]:min-h-[300px] max-[560px]:p-5">
+          <img class="max-h-[340px] max-w-full rounded-[18px] object-contain shadow-[0_18px_60px_rgba(0,0,0,0.28)]" src={image} alt={imageAlt} width="1200" height="720" loading="eager" decoding="async" />
+        </div>
+        {winner.heroImageCaption ? (
+          <figcaption class="border-t border-gbe-text/10 px-6 py-4 text-center text-sm font-normal leading-[1.6] text-gbe-muted">
+            {winner.heroImageCaption}
+            {winner.heroImageCredit ? <span> Image: {winner.heroImageCredit}</span> : null}
+          </figcaption>
+        ) : null}
+      </figure>
+    </div>
+  ) : null}
 
   <div class="container-gbe mt-12 grid max-w-[1120px] grid-cols-[minmax(0,1fr)_300px] gap-10 max-[1024px]:grid-cols-1">
     <div class="rounded-[22px] border border-[rgba(255,176,1,0.22)] bg-gbe-card px-10 py-11 shadow-[var(--c-card-shadow)] max-[560px]:rounded-[18px] max-[560px]:px-6 max-[560px]:py-8">
@@ -130,7 +131,7 @@ const hasBody = Boolean(winner.bodyHtml?.trim());
         {related.map((item) => (
           <a class="rounded-[16px] border border-[rgba(255,176,1,0.22)] bg-gbe-card p-5 text-left text-inherit no-underline shadow-[var(--c-card-shadow)] transition-all hover:-translate-y-1 hover:border-gbe-gold/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold" href={item.storyPath}>
             <p class="mb-2 text-xs font-black uppercase tracking-[0.14em] text-gbe-gold-soft">{item.year}</p>
-            <h3 class="m-0 text-base font-bold leading-[1.35] text-gbe-text">{item.awardTitle}</h3>
+            <h3 class="m-0 text-base font-bold leading-[1.35] text-gbe-text">{item.displayAwardTitle || item.awardTitle}</h3>
             <p class="mb-0 mt-2 text-sm leading-[1.5] text-gbe-muted">{item.recipientName}</p>
           </a>
         ))}

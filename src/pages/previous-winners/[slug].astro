@@ -33,12 +33,13 @@ if (redirect && winner.slug) {
 Astro.response.headers.set("cache-control", "public, s-maxage=300, stale-while-revalidate=86400");
 
 const related = await getRelatedWinners(winner, 3);
-const title = winner.seoTitle || winner.headline || `${winner.recipientName} wins ${winner.awardTitle}`;
+const awardTitle = winner.displayAwardTitle || winner.awardTitle;
+const title = winner.seoTitle || winner.headline || `${winner.recipientName} wins ${awardTitle}`;
 const description = normalizeDescription(
   winner.seoDescription ||
     winner.standfirst ||
     winner.awardCitation ||
-    `${winner.recipientName} is recognised as a Global Business Excellence Awards winner for ${winner.awardTitle}.`,
+    `${winner.recipientName} is recognised as a Global Business Excellence Awards winner for ${awardTitle}.`,
 );
 const path = `/previous-winners/${winner.slug}`;
 const image = winner.socialImageUrl || winner.heroImageUrl || winner.imageUrl || assetPaths.trophy;

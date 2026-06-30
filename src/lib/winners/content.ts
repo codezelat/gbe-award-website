@@ -148,6 +148,18 @@ export function buildWinnerSlug(recipient: string, award: string, year: number):
   return slugify(base);
 }
 
+export function deriveDisplayAwardTitle(winner: Pick<WinnerStoryRecord, "recipientName" | "awardTitle" | "headline">): string {
+  const fallback = normalizeWhitespace(winner.awardTitle || "Global Business Excellence Awards winner");
+  const headline = normalizeWhitespace(winner.headline || "");
+  const recipient = normalizeWhitespace(winner.recipientName || "");
+
+  if (!headline || !recipient) return fallback;
+
+  const escapedRecipient = recipient.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const cleaned = headline.replace(new RegExp(`^${escapedRecipient}\\s+wins\\s+`, "i"), "").trim();
+  return cleaned && cleaned !== headline ? cleaned : fallback;
+}
+
 export function sanitizeWinnerHtml(html: string): string {
   return sanitizeHtml(html, {
     allowedTags: ALLOWED_TAGS,

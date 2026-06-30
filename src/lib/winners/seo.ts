@@ -33,7 +33,7 @@ export function buildWinnerArticleSchema({
   const publishedAt = isoDate(winner.publishedAt);
   const updatedAt = isoDate(winner.contentUpdatedAt || winner.publishedAt);
   const recipientName = winner.recipientName || "Award winner";
-  const awardTitle = winner.awardTitle || "Global Business Excellence Awards winner";
+  const awardTitle = winner.displayAwardTitle || winner.awardTitle || "Global Business Excellence Awards winner";
 
   return [
     buildPageSchema({
