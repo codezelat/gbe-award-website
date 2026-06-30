@@ -47,19 +47,19 @@ const recipient = winner.recipientName || "Award winner";
 
       <div class="mt-4 rounded-[14px] border border-[rgba(255,176,1,0.18)] bg-gbe-surface-3/70 px-4 py-4">
         <p class="mb-2 mt-0 text-[10px] font-black uppercase tracking-[0.16em] text-gbe-gold-soft">Awarded for</p>
-        <p class="m-0 text-sm font-bold leading-[1.42] text-gbe-text">{awardTitle}</p>
+        <p class="m-0 text-sm font-bold leading-[1.42] text-gbe-text">
+          {awardTitle} <span class="text-gbe-gold-soft">- {winner.year} Winner</span>
+        </p>
       </div>
 
-      <p class="mb-5 mt-4 text-xs font-bold uppercase tracking-[0.12em] text-gbe-muted">{winner.year} Winner</p>
-
-      <div class="relative mb-4 mt-auto">
+      <div class="relative mb-3 mt-auto pt-5">
         <div class="h-[1px] bg-gradient-to-r from-transparent via-[rgba(255,176,1,0.2)] to-transparent"></div>
-        <div class="gold-fill absolute left-1/2 top-1/2 grid h-7 w-7 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[rgba(255,176,1,0.5)]">
+        <div class="gold-fill absolute left-1/2 top-[20px] grid h-7 w-7 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[rgba(255,176,1,0.5)] shadow-[0_8px_24px_rgba(255,176,1,0.18)]">
           <img class="h-4 w-4 object-contain" src={assetPaths.award} alt="" width="52" height="52" loading="lazy" decoding="async" />
         </div>
       </div>
 
-      <span class="inline-flex items-center justify-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-gbe-text/70 transition-all duration-300 group-hover:translate-x-1 group-hover:text-gbe-gold-soft">
+      <span class="inline-flex translate-y-1 items-center justify-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-gbe-gold-soft opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
         Read winner story
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="h-4 w-4" aria-hidden="true">
           <path d="M5 12h14"></path>
