@@ -1,4 +1,5 @@
 ---
+import { siFacebook, siLinkedin, siWhatsapp, siX } from "simple-icons";
 import { absoluteUrl } from "../lib/seo";
 
 interface Props {
@@ -11,28 +12,80 @@ const url = absoluteUrl(path);
 const encodedUrl = encodeURIComponent(url);
 const encodedTitle = encodeURIComponent(title);
 const links = [
-  { label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`, event: "linkedin" },
-  { label: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, event: "facebook" },
-  { label: "X", href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`, event: "x" },
-  { label: "WhatsApp", href: `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`, event: "whatsapp" },
-  { label: "Email", href: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`, event: "email" },
+  {
+    label: "LinkedIn",
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    event: "linkedin",
+    iconPath: siLinkedin.path,
+    accent: "#0A66C2",
+  },
+  {
+    label: "Facebook",
+    href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    event: "facebook",
+    iconPath: siFacebook.path,
+    accent: "#1877F2",
+  },
+  {
+    label: "X",
+    href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    event: "x",
+    iconPath: siX.path,
+    accent: "#E7E9EA",
+  },
+  {
+    label: "WhatsApp",
+    href: `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`,
+    event: "whatsapp",
+    iconPath: siWhatsapp.path,
+    accent: "#25D366",
+  },
+  {
+    label: "Email",
+    href: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`,
+    event: "email",
+    iconPath: null,
+    accent: "#FFB001",
+  },
 ];
 ---
 
 <section class="rounded-[18px] border border-[rgba(255,176,1,0.22)] bg-gbe-card p-6 shadow-[var(--c-card-shadow)]">
-  <h2 class="mb-4 mt-0 text-sm font-black uppercase tracking-[0.16em] text-gbe-gold-soft">Share Story</h2>
-  <div class="flex flex-wrap gap-2">
+  <div class="mb-5 flex items-center justify-between gap-3">
+    <h2 class="m-0 text-sm font-black uppercase tracking-[0.16em] text-gbe-gold-soft">Share Story</h2>
+    <span class="h-px flex-1 bg-gradient-to-r from-gbe-gold/25 to-transparent"></span>
+  </div>
+
+  <div class="grid grid-cols-5 gap-2.5">
     {links.map((link) => (
       <a
-        class="rounded-full border border-[rgba(255,176,1,0.24)] px-3 py-2 text-xs font-bold text-gbe-text no-underline transition-colors hover:border-gbe-gold hover:text-gbe-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gbe-gold"
+        class="group/share grid aspect-square place-items-center rounded-[14px] border border-[rgba(255,176,1,0.2)] bg-gbe-surface-3/70 text-gbe-text no-underline shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[color:var(--share-accent)] hover:bg-[color:var(--share-bg)] hover:text-[color:var(--share-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-gbe-gold"
         href={link.href}
         rel="noopener noreferrer"
+        style={`--share-accent:${link.accent};--share-bg:${link.accent}18`}
         target={link.href.startsWith("mailto:") ? undefined : "_blank"}
         data-ga-event="winner_story_share"
         data-ga-share-channel={link.event}
+        aria-label={`Share this winner story on ${link.label}`}
+        title={`Share on ${link.label}`}
       >
-        {link.label}
+        <span class="grid h-8 w-8 place-items-center rounded-full bg-gbe-card/70 transition-transform duration-300 group-hover/share:scale-105">
+          {link.iconPath ? (
+            <svg class="h-[17px] w-[17px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d={link.iconPath}></path>
+            </svg>
+          ) : (
+            <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+              <path d="m4 7 8 6 8-6"></path>
+            </svg>
+          )}
+        </span>
       </a>
     ))}
   </div>
+
+  <p class="mb-0 mt-4 text-xs font-normal leading-[1.6] text-gbe-muted">
+    Share the official winner profile using the channel that fits your audience.
+  </p>
 </section>
