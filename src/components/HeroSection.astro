@@ -25,7 +25,7 @@ import { assetPaths } from "../data/home";
   </script>
 
   <!-- Background layers -->
-  <HeroBackgroundSlider client:load />
+  <HeroBackgroundSlider client:idle />
   <div class="pointer-events-none absolute inset-0 z-0 bg-[var(--c-hero-glow)]" aria-hidden="true"></div>
   <div class="hero-orbs pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
     <div class="hero-orb hero-orb--1"></div>
@@ -33,7 +33,7 @@ import { assetPaths } from "../data/home";
     <div class="hero-orb hero-orb--3"></div>
   </div>
   <div class="hero-pattern pointer-events-none absolute inset-0 z-0" aria-hidden="true"></div>
-  <HeroLiveBackground client:load />
+  <HeroLiveBackground client:idle />
   <div class="pointer-events-none absolute inset-0 z-[1] bg-[var(--c-hero-overlay)]" aria-hidden="true"></div>
 
   <!-- DARK MODE LAYOUT (original) -->

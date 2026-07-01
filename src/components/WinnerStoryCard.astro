@@ -17,7 +17,6 @@ const recipient = winner.recipientName || "Award winner";
   class="winner-story-card group block h-full overflow-hidden rounded-[16px] border border-[rgba(255,176,1,0.3)] bg-gbe-card text-inherit no-underline shadow-[var(--c-card-shadow)] transition-all duration-500 hover:-translate-y-1.5 hover:border-gbe-gold hover:shadow-[0_20px_60px_rgba(255,176,1,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold"
   href={winner.storyPath}
   style={`animation-delay:${index * 60}ms`}
-  aria-label={`Read winner story for ${recipient}`}
 >
   <article class="relative flex h-full flex-col overflow-hidden">
     <div class="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-transparent via-[rgba(255,176,1,0.07)] to-transparent opacity-0 transition-all duration-700 group-hover:translate-x-full group-hover:opacity-100"></div>
