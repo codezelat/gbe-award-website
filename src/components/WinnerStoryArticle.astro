@@ -44,11 +44,11 @@ const showCategory = Boolean(winner.category && normalizedCategory && normalized
     <div class="container-gbe mt-12 max-w-[1120px]">
       <figure class="relative overflow-hidden rounded-[24px] border border-[rgba(255,176,1,0.28)] bg-gbe-card shadow-[var(--c-card-shadow)]">
         <div class="relative min-h-[460px] overflow-hidden bg-gbe-surface-3 max-[1024px]:min-h-[390px] max-[560px]:min-h-[300px]">
-          <img class="absolute inset-0 h-full w-full object-cover" src={bannerImage} alt={bannerAlt} width="1600" height="900" loading="eager" decoding="async" />
+          <img class="absolute inset-0 h-full w-full object-cover" src={bannerImage} alt={bannerAlt} width="1600" height="900" loading="eager" decoding="async" fetchpriority="high" />
           <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(13,11,8,0.58),rgba(13,11,8,0.12)_48%,rgba(13,11,8,0.48))]" aria-hidden="true"></div>
           {profileImage ? (
             <div class="absolute left-8 top-8 size-[122px] overflow-hidden rounded-full border-2 border-[rgba(255,176,1,0.72)] shadow-[0_18px_48px_rgba(0,0,0,0.34)] max-[560px]:left-5 max-[560px]:top-5 max-[560px]:size-[86px]">
-              <img class="h-full w-full object-cover object-center" src={profileImage} alt={profileAlt} width="240" height="240" loading="eager" decoding="async" />
+              <img class="h-full w-full object-cover object-center" src={profileImage} alt={profileAlt} width="240" height="240" loading="lazy" decoding="async" fetchpriority="low" />
             </div>
           ) : null}
         </div>
@@ -63,9 +63,9 @@ const showCategory = Boolean(winner.category && normalizedCategory && normalized
   ) : profileImage ? (
     <div class="container-gbe mt-12 max-w-[1120px]">
       <figure class="relative overflow-hidden rounded-[24px] border border-[rgba(255,176,1,0.28)] bg-gbe-card shadow-[var(--c-card-shadow)]">
-        <img class="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" src={profileImage} alt="" loading="eager" decoding="async" aria-hidden="true" />
+        <img class="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" src={profileImage} alt="" width="1200" height="720" loading="lazy" decoding="async" fetchpriority="low" aria-hidden="true" />
         <div class="relative grid min-h-[420px] place-items-center bg-[radial-gradient(circle_at_50%_20%,rgba(255,176,1,0.13),transparent_320px)] p-10 max-[560px]:min-h-[300px] max-[560px]:p-5">
-          <img class="max-h-[340px] max-w-full rounded-[18px] object-contain shadow-[0_18px_60px_rgba(0,0,0,0.28)]" src={profileImage} alt={profileAlt} width="1200" height="720" loading="eager" decoding="async" />
+          <img class="max-h-[340px] max-w-full rounded-[18px] object-contain shadow-[0_18px_60px_rgba(0,0,0,0.28)]" src={profileImage} alt={profileAlt} width="1200" height="720" loading="eager" decoding="async" fetchpriority="high" />
         </div>
       </figure>
     </div>

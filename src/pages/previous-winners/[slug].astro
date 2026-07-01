@@ -6,7 +6,7 @@ import Header from "../../components/Header.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import WinnerStoryArticle from "../../components/WinnerStoryArticle.astro";
 import { assetPaths } from "../../data/home";
-import { normalizeDescription } from "../../lib/seo";
+import { assetUrl, normalizeDescription } from "../../lib/seo";
 import { pickRealWinnerImage } from "../../lib/winners/images";
 import { getRelatedWinners, resolveWinnerSlug } from "../../lib/winners/queries";
 import { buildWinnerArticleSchema } from "../../lib/winners/seo";
@@ -31,7 +31,7 @@ if (redirect && winner.slug) {
   return Astro.redirect(`/previous-winners/${winner.slug}`, 301);
 }
 
-Astro.response.headers.set("cache-control", "public, s-maxage=300, stale-while-revalidate=86400");
+Astro.response.headers.set("cache-control", "public, s-maxage=3600, stale-while-revalidate=86400");
 
 const related = await getRelatedWinners(winner, 3);
 const awardTitle = winner.displayAwardTitle || winner.awardTitle;
@@ -45,6 +45,9 @@ const description = normalizeDescription(
 const path = `/previous-winners/${winner.slug}`;
 const realWinnerImage = pickRealWinnerImage(winner.heroImageUrl, winner.imageUrl);
 const image = winner.socialImageUrl || realWinnerImage || assetPaths.trophy;
+const preloadWinnerImage = realWinnerImage ? assetUrl(realWinnerImage) : null;
+const preloadWinnerImageOrigin = preloadWinnerImage ? new URL(preloadWinnerImage).origin : null;
+const shouldPreconnectWinnerImage = Boolean(preloadWinnerImageOrigin && preloadWinnerImageOrigin !== assetUrl("/").replace(/\/$/, ""));
 const noindex = winner.indexingStatus !== "index";
 
 if (noindex) {
@@ -68,6 +71,8 @@ if (noindex) {
       authorName={winner.authorName || undefined}
       schema={buildWinnerArticleSchema({ winner, path, title, description, image })}
     />
+    {shouldPreconnectWinnerImage ? <link rel="preconnect" href={preloadWinnerImageOrigin} /> : null}
+    {preloadWinnerImage ? <link rel="preload" as="image" href={preloadWinnerImage} fetchpriority="high" /> : null}
   </head>
   <body>
     <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">

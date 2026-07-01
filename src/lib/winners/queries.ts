@@ -150,7 +150,16 @@ export async function getRelatedWinners(winner: WinnerStoryRecord, limit = 3): P
 
   try {
     const rows = await db
-      .select()
+      .select({
+        id: schema.pastWinners.id,
+        awardTitle: schema.pastWinners.awardTitle,
+        recipientName: schema.pastWinners.recipientName,
+        category: schema.pastWinners.category,
+        year: schema.pastWinners.year,
+        slug: schema.pastWinners.slug,
+        status: schema.pastWinners.status,
+        headline: schema.pastWinners.headline,
+      })
       .from(schema.pastWinners)
       .where(
         and(
@@ -162,7 +171,12 @@ export async function getRelatedWinners(winner: WinnerStoryRecord, limit = 3): P
       .orderBy(desc(sql`case when ${schema.pastWinners.category} = ${winner.category ?? ""} then 1 else 0 end`), asc(schema.pastWinners.sortOrder), desc(schema.pastWinners.updatedAt))
       .limit(Math.max(0, limit));
 
-    return rows.map(mapWinnerStory);
+    return rows.map((row) => ({
+      ...row,
+      displayAwardTitle: deriveDisplayAwardTitle(row),
+      storyPath: storyPath(row.slug),
+      bodyHtml: "",
+    }));
   } catch (error) {
     console.error("[winner-queries] getRelatedWinners failed", error);
     return [];
