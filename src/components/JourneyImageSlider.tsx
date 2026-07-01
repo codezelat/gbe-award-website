@@ -35,7 +35,7 @@ export default function JourneyImageSlider({ images }: { images: JourneyImage[] 
         <SwiperSlide key={`${image.src}-${index}`}>
           <figure className="relative m-0 overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.24)] bg-gbe-bg shadow-[0_12px_32px_rgba(26,26,46,0.12)]">
             <img
-              className="aspect-[16/10] w-full object-cover object-center"
+              className="aspect-[16/10] w-full object-cover object-top"
               src={image.src}
               srcSet={image.srcSet}
               sizes="(max-width: 560px) 92vw, (max-width: 1024px) 62vw, 30vw"
@@ -48,7 +48,7 @@ export default function JourneyImageSlider({ images }: { images: JourneyImage[] 
               data-preview-src={image.src}
               data-preview-srcset={image.srcSet}
               data-preview-alt={image.alt}
-              data-preview-position="50% 44%"
+              data-preview-position="50% 0%"
             />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_62%,rgba(0,0,0,0.46))]" aria-hidden="true"></div>
           </figure>
