@@ -123,12 +123,25 @@ import { assetPaths, navItems } from "../data/home";
 </nav>
 
 <script>
+  const themeStorageKey = "gbe-theme";
+  const themeDurationMs = 2 * 24 * 60 * 60 * 1000;
+
   window.__toggleTheme = function () {
     const html = document.documentElement;
-    const current = html.getAttribute("data-theme");
+    const current = html.getAttribute("data-theme") === "light" ? "light" : "dark";
     const next = current === "dark" ? "light" : "dark";
     html.setAttribute("data-theme", next);
-    localStorage.setItem("gbe-theme", next);
+    try {
+      localStorage.setItem(
+        themeStorageKey,
+        JSON.stringify({
+          theme: next,
+          expiresAt: Date.now() + themeDurationMs,
+        }),
+      );
+    } catch (_) {
+      // Theme still changes for this page view when storage is unavailable.
+    }
   };
 </script>
 

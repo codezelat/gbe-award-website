@@ -1,8 +1,26 @@
 <script is:inline>
   (function () {
-    const stored = localStorage.getItem("gbe-theme");
-    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-    const theme = stored || (prefersLight ? "light" : "dark");
+    const themeStorageKey = "gbe-theme";
+    const themeDurationMs = 2 * 24 * 60 * 60 * 1000;
+    let theme = "dark";
+
+    try {
+      const raw = localStorage.getItem(themeStorageKey);
+      const stored = raw ? JSON.parse(raw) : null;
+      const expiresAt = Number(stored && stored.expiresAt);
+      const storedTheme = stored && stored.theme;
+
+      if ((storedTheme === "light" || storedTheme === "dark") && expiresAt > Date.now()) {
+        theme = storedTheme;
+      } else if (raw) {
+        localStorage.removeItem(themeStorageKey);
+      }
+    } catch (_) {
+      try {
+        localStorage.removeItem(themeStorageKey);
+      } catch (_) {}
+    }
+
     document.documentElement.setAttribute("data-theme", theme);
   })();
 </script>
