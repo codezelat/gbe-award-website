@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   ImagePlus,
+  ChevronDown,
   Loader2,
   Save,
   Search as SearchIcon,
@@ -27,11 +28,37 @@ type ImageField = "imageUrl" | "heroImageUrl";
 function sectionTitle(title: string, desc: string) {
   return (
     <div>
-      <p className="text-[13px] font-semibold uppercase tracking-wide text-zinc-500">
-        {title}
-      </p>
+      <p className="text-[13px] font-semibold uppercase tracking-wide text-zinc-500">{title}</p>
       <p className="mt-0.5 text-xs text-zinc-600">{desc}</p>
     </div>
+  );
+}
+
+function CollapsibleFormSection({
+  title,
+  description,
+  open = false,
+  children,
+}: {
+  title: string;
+  description?: string;
+  open?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <details
+      className="group rounded-xl border border-white/[0.06] bg-white/[0.015] px-4 transition open:border-white/[0.1] open:bg-white/[0.025]"
+      defaultOpen={open}
+    >
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">
+        <div>
+          <h3 className="text-sm font-semibold text-zinc-200">{title}</h3>
+          {description ? <p className="mt-0.5 text-[13px] text-zinc-500">{description}</p> : null}
+        </div>
+        <ChevronDown className="size-4 shrink-0 text-zinc-500 transition-transform duration-200 group-open:rotate-180" />
+      </summary>
+      <div className="border-t border-white/[0.06] py-4">{children}</div>
+    </details>
   );
 }
 
@@ -206,22 +233,19 @@ export default function AdminForm({
 
   return (
     <Modal open onClose={onClose} labelledBy="form-title">
-      <form
-        className="flex max-h-[calc(100vh-4rem)] flex-col"
-        onSubmit={handleSubmit}
-      >
+      <form className="flex max-h-[calc(100dvh-2rem)] min-h-[min(720px,calc(100dvh-2rem))] flex-col sm:max-h-[calc(100dvh-4rem)]" onSubmit={handleSubmit}>
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/[0.06] px-6 py-5">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[#ffd05a]">
-              {form.id ? "Edit" : "New"} {isWinner ? "winner" : "nomination"}
+        <div className="flex items-center justify-between gap-4 border-b border-white/[0.06] px-5 py-4 sm:px-7 sm:py-5">
+          <div className="min-w-0">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#ffd05a]">
+              {form.id ? "Editing" : "New"} {isWinner ? "winner" : "nomination"}
             </p>
-            <h2 id="form-title" className="mt-1 text-lg font-bold text-zinc-50">
-              {form.awardTitle || (isWinner ? "Past winner" : "Nomination")}
+            <h2 id="form-title" className="mt-1 truncate text-lg font-bold tracking-tight text-zinc-50 sm:text-xl">
+              {form.personName || form.awardTitle || (isWinner ? "Past winner" : "Nomination")}
             </h2>
           </div>
           <button
-            className="grid size-8 shrink-0 place-items-center rounded-lg text-zinc-500 transition hover:bg-white/[0.06] hover:text-zinc-200"
+            className="grid size-9 shrink-0 place-items-center rounded-lg text-zinc-500 transition hover:bg-white/[0.06] hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb001]/40"
             onClick={onClose}
             type="button"
             aria-label="Close"
@@ -231,10 +255,11 @@ export default function AdminForm({
         </div>
 
         {/* Body */}
-        <div className="flex-1 space-y-7 overflow-y-auto px-6 py-6">
+        <div className="flex-1 overflow-y-auto px-5 py-5 sm:px-7 sm:py-6">
+          <div className="mx-auto max-w-4xl space-y-6">
           {/* Details */}
           <section className="space-y-4">
-            {sectionTitle("Details", "Core information shown on public cards.")}
+            {sectionTitle("Essentials", "The details people see first.")}
             <div className="grid gap-4 sm:grid-cols-2">
               <TextField
                 label="Award title"
@@ -242,6 +267,7 @@ export default function AdminForm({
                 onChange={(v) => set("awardTitle", v)}
                 required
                 placeholder="e.g. Entrepreneur of the Year"
+                autoFocus
               />
               <TextField
                 label={isWinner ? "Winner name" : "Nominee name"}
@@ -281,12 +307,31 @@ export default function AdminForm({
             </div>
           </section>
 
-          {/* Status & ordering */}
           <section className="space-y-4 border-t border-white/[0.05] pt-6">
-            {sectionTitle(
-              "Status & ordering",
-              "Control visibility and display order on the site.",
-            )}
+            {sectionTitle("Summary", "A short public-facing description.")}
+            <TextArea
+              label="Summary"
+              value={form.summary}
+              onChange={(v) => set("summary", v)}
+              rows={4}
+              placeholder="What should people know about this recognition?"
+            />
+            {!isWinner ? (
+              <TextArea
+                label="Internal notes"
+                value={form.notes}
+                onChange={(v) => set("notes", v)}
+                rows={3}
+                placeholder="Private notes, not shown publicly"
+              />
+            ) : null}
+          </section>
+
+          {/* Status & ordering */}
+          <CollapsibleFormSection
+            title="Publishing"
+            description={`Currently ${form.status}. Visibility, order and URL settings.`}
+          >
             <div className="grid gap-4 sm:grid-cols-3">
               <SelectField
                 label="Status"
@@ -327,27 +372,25 @@ export default function AdminForm({
                   value={form.indexingStatus}
                   onChange={(v) => set("indexingStatus", v as "index" | "noindex")}
                   options={[
-                    { value: "noindex", label: "Noindex — private review" },
-                    { value: "index", label: "Index — quality approved" },
+                    { value: "noindex", label: "Noindex — review" },
+                    { value: "index", label: "Index — approved" },
                   ]}
                 />
               ) : null}
             </div>
             {isWinner ? (
               <p className="text-xs leading-relaxed text-zinc-600">
-                Indexing is allowed only for a published, source-backed story with complete editorial fields and no newly introduced reused copy.
+                Only index a published, source-backed story with complete editorial fields.
               </p>
             ) : null}
-          </section>
+          </CollapsibleFormSection>
 
           {/* Profile image */}
-          <section className="space-y-4 border-t border-white/[0.05] pt-6">
-            {sectionTitle(
-              "Profile image",
-              isWinner
-                ? "Used for cards, profile logo, and as the story image when no banner is uploaded."
-                : "Stored in Cloudflare R2, delivered from the media CDN.",
-            )}
+          <CollapsibleFormSection
+            title="Profile image"
+            description={form.imageUrl ? "Image ready" : "Add an image for public cards"}
+            open={!form.imageUrl}
+          >
             <div className="grid gap-4 sm:grid-cols-[120px_1fr]">
               <div className="grid aspect-square place-items-center overflow-hidden rounded-xl border border-white/[0.08] bg-[#0e0e11]">
                 {form.imageUrl ? (
@@ -419,14 +462,14 @@ export default function AdminForm({
                 ) : null}
               </div>
             </div>
-          </section>
+          </CollapsibleFormSection>
 
           {isWinner ? (
-            <section className="space-y-4 border-t border-white/[0.05] pt-6">
-              {sectionTitle(
-                "Story banner image",
-                "Optional wide image for the winner story hero. Leave empty to keep the current profile-image layout.",
-              )}
+            <CollapsibleFormSection
+              title="Story banner"
+              description={form.heroImageUrl ? "Banner ready" : "Optional wide image for the story page"}
+              open={Boolean(form.heroImageUrl)}
+            >
               <div className="grid gap-4">
                 <div className="overflow-hidden rounded-xl border border-white/[0.08] bg-[#0e0e11]">
                   <div className="grid aspect-[16/7] min-h-[180px] place-items-center">
@@ -529,36 +572,15 @@ export default function AdminForm({
                   </div>
                 </div>
               </div>
-            </section>
+            </CollapsibleFormSection>
           ) : null}
 
-          {/* Summary */}
-          <section className="space-y-4 border-t border-white/[0.05] pt-6">
-            {sectionTitle("Content", "Descriptions and notes.")}
-            <TextArea
-              label="Summary"
-              value={form.summary}
-              onChange={(v) => set("summary", v)}
-              rows={4}
-              placeholder="Short public-facing summary..."
-            />
-            {!isWinner ? (
-              <TextArea
-                label="Internal notes"
-                value={form.notes}
-                onChange={(v) => set("notes", v)}
-                rows={3}
-                placeholder="Private notes (not shown publicly)..."
-              />
-            ) : null}
-          </section>
-
           {isWinner ? (
-            <section className="space-y-5 border-t border-white/[0.05] pt-6">
-              {sectionTitle(
-                "Editorial story",
-                "This is the source-backed article Google and readers see. Keep the wording specific to this winner; do not reuse generic copy from another story.",
-              )}
+            <CollapsibleFormSection
+              title="Winner story"
+              description={form.body ? "Story content added" : "Add the public article when it is ready"}
+              open={Boolean(form.body || form.headline || form.standfirst)}
+            >
               <div className="grid gap-4 sm:grid-cols-2">
                 <TextField label="Public headline" value={form.headline} onChange={(v) => set("headline", v)} placeholder="Describe this specific award win" />
                 <SelectField
@@ -598,12 +620,14 @@ export default function AdminForm({
                   <TextField label="Quote author role" value={form.quoteAuthorRole} onChange={(v) => set("quoteAuthorRole", v)} placeholder="Optional" />
                 </div>
               </div>
-            </section>
+            </CollapsibleFormSection>
           ) : null}
 
           {isWinner ? (
-            <section className="space-y-5 border-t border-white/[0.05] pt-6">
-              {sectionTitle("Trust, links & verification", "Give readers a clear author, evidence trail, and accurate recipient links.")}
+            <CollapsibleFormSection
+              title="Verification & links"
+              description="Sources, author, dates and public links."
+            >
               <div className="grid gap-4 sm:grid-cols-2">
                 <TextField label="Author / reviewer" value={form.authorName} onChange={(v) => set("authorName", v)} placeholder="e.g. London Business Consultancy editorial team" />
                 <TextField label="Official website" value={form.officialWebsiteUrl} onChange={(v) => set("officialWebsiteUrl", v)} type="url" placeholder="https://..." />
@@ -618,12 +642,14 @@ export default function AdminForm({
                   <TextArea label="Source notes" value={form.sourceNotes} onChange={(v) => set("sourceNotes", v)} rows={5} placeholder="One supporting source URL or citation per line. These appear on the public story as its evidence trail." />
                 </div>
               </div>
-            </section>
+            </CollapsibleFormSection>
           ) : null}
 
           {/* SEO */}
-          <section className="space-y-4 border-t border-white/[0.05] pt-6">
-            {sectionTitle("SEO", "Optional overrides for search and social.")}
+          <CollapsibleFormSection
+            title="Search preview"
+            description="Optional title and description overrides."
+          >
             <div className="grid gap-4 sm:grid-cols-2">
               <TextField
                 label="SEO title"
@@ -638,7 +664,7 @@ export default function AdminForm({
                 placeholder="Optional"
               />
             </div>
-          </section>
+          </CollapsibleFormSection>
 
           {formError ? (
             <div className="flex items-center gap-2 rounded-lg border border-rose-400/25 bg-rose-400/[0.07] px-3.5 py-2.5 text-[13px] font-medium text-rose-300">
@@ -646,13 +672,14 @@ export default function AdminForm({
               {formError}
             </div>
           ) : null}
+          </div>
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between gap-3 border-t border-white/[0.06] bg-[#0c0c0f] px-6 py-4">
+        <div className="flex items-center justify-between gap-3 border-t border-white/[0.06] bg-[#0c0c0f]/95 px-5 py-3.5 backdrop-blur sm:px-7 sm:py-4">
           <p className="hidden items-center gap-1.5 text-xs text-zinc-600 sm:flex">
             <SearchIcon size={13} />
-            Changes go live on the public site instantly
+            Saved changes publish immediately
           </p>
           <div className="flex w-full gap-2.5 sm:w-auto">
             <Button variant="ghost" size="md" onClick={onClose} type="button">

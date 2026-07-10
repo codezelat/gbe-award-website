@@ -630,7 +630,7 @@ export function Modal({
             transition={{ duration: 0.2 }}
             onClick={onClose}
           />
-          <div className="flex min-h-full items-start justify-center p-4 py-8">
+          <div className="flex min-h-full items-start justify-center p-3 sm:p-4 sm:py-8">
             <motion.div
               ref={containerRef}
               role="dialog"
@@ -641,7 +641,7 @@ export function Modal({
               exit={{ opacity: 0, y: 16, scale: 0.98 }}
               transition={{ type: "spring", stiffness: 320, damping: 30 }}
               className={cn(
-                "relative w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-[#101013] shadow-[0_30px_90px_-20px_rgba(0,0,0,0.9)]",
+                "relative w-full max-w-5xl overflow-hidden rounded-2xl border border-white/[0.08] bg-[#101013] shadow-[0_30px_90px_-20px_rgba(0,0,0,0.9)]",
               )}
               onClick={(e) => e.stopPropagation()}
             >
