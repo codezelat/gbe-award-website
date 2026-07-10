@@ -131,9 +131,12 @@ Winner-story content lives in `past_winners`, including headline, standfirst, ri
 Winner stories are editorial records, not generated JSON files committed to the repository.
 
 - Store article content in the database/admin workflow.
+- Manage the complete article record from `/gbe-admin-safe/winners`: headline, standfirst, rich-text body, byline, dates, source notes, links, media, and SEO controls are all editable there.
+- Set `indexingStatus=index` only after the story is published, fact-checked, source-backed, and specific to that winner. The CMS blocks incomplete stories and newly introduced substantial copy reused from another indexed story.
+- Source notes are shown publicly on winner articles as a transparent evidence trail. Use accurate source URLs or precise citations only.
 - Keep `imageUrl` as the card/profile image.
 - Use `heroImageUrl` only for a separate wide story banner.
-- Preserve slug aliases when canonical slugs change.
+- Preserve slug aliases when canonical slugs change. The CMS automatically retains the previous canonical slug as a permanent redirect and refuses URLs owned by another winner or alias.
 - Use `indexingStatus=index` only for quality-approved, source-backed stories.
 - Keep weak-source, identity-risk, or wrong-image-risk stories as `noindex`.
 - Do not invent quotes, judge comments, audience numbers, rankings, or unsupported claims.

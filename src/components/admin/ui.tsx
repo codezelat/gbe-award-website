@@ -20,6 +20,7 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
+import type { WinnerArticleType, WinnerIndexingStatus, WinnerRecipientType, WinnerRichText } from "../../lib/winners/types";
 
 export { clsx, twMerge };
 
@@ -45,6 +46,29 @@ export type WinnerRow = {
   heroImageAlt: string | null;
   heroImageCaption: string | null;
   heroImageCredit: string | null;
+  socialImageUrl: string | null;
+  recipientType: WinnerRecipientType | null;
+  articleType: WinnerArticleType;
+  headline: string | null;
+  standfirst: string | null;
+  body: WinnerRichText | null;
+  industry: string | null;
+  officialWebsiteUrl: string | null;
+  linkedinUrl: string | null;
+  facebookUrl: string | null;
+  instagramUrl: string | null;
+  ceremonyDate: string | null;
+  awardCitation: string | null;
+  achievementHighlights: string[] | null;
+  quoteText: string | null;
+  quoteAuthor: string | null;
+  quoteAuthorRole: string | null;
+  authorName: string | null;
+  publishedAt: string | null;
+  contentUpdatedAt: string | null;
+  factCheckedAt: string | null;
+  indexingStatus: WinnerIndexingStatus;
+  sourceNotes: string[] | null;
   slug: string;
   status: "draft" | "published" | "archived";
   sortOrder: number;
@@ -102,6 +126,28 @@ export type FormState = {
   heroImageAlt: string;
   heroImageCaption: string;
   heroImageCredit: string;
+  socialImageUrl: string;
+  recipientType: WinnerRecipientType;
+  articleType: WinnerArticleType;
+  headline: string;
+  standfirst: string;
+  body: WinnerRichText | null;
+  industry: string;
+  officialWebsiteUrl: string;
+  linkedinUrl: string;
+  facebookUrl: string;
+  instagramUrl: string;
+  ceremonyDate: string;
+  awardCitation: string;
+  achievementHighlights: string;
+  quoteText: string;
+  quoteAuthor: string;
+  quoteAuthorRole: string;
+  authorName: string;
+  publishedAt: string;
+  factCheckedAt: string;
+  indexingStatus: WinnerIndexingStatus;
+  sourceNotes: string;
   slug: string;
   status: string;
   sortOrder: string;

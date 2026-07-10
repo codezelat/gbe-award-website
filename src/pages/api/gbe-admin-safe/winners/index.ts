@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { noStoreJson, requireAdmin } from "../../../../lib/admin/auth";
-import { createWinner, listWinners, winnerInputSchema } from "../../../../lib/admin/content";
+import { createWinner, listWinners, WinnerContentError, winnerInputSchema } from "../../../../lib/admin/content";
 
 export const prerender = false;
 
@@ -22,7 +22,10 @@ export const POST: APIRoute = async (context) => {
 
   try {
     return noStoreJson({ row: await createWinner(parsed.data) }, { status: 201 });
-  } catch {
+  } catch (error) {
+    if (error instanceof WinnerContentError) {
+      return noStoreJson({ error: error.message }, { status: 422 });
+    }
     return noStoreJson({ error: "Could not save winner. Check that the slug is unique." }, { status: 409 });
   }
 };

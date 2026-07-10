@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { noStoreJson, requireAdmin } from "../../../../lib/admin/auth";
-import { deleteWinner, updateWinner, winnerInputSchema } from "../../../../lib/admin/content";
+import { deleteWinner, updateWinner, WinnerContentError, winnerInputSchema } from "../../../../lib/admin/content";
 
 export const prerender = false;
 
@@ -20,7 +20,10 @@ export const PUT: APIRoute = async (context) => {
     const row = await updateWinner(id, parsed.data);
     if (!row) return noStoreJson({ error: "Winner not found" }, { status: 404 });
     return noStoreJson({ row });
-  } catch {
+  } catch (error) {
+    if (error instanceof WinnerContentError) {
+      return noStoreJson({ error: error.message }, { status: 422 });
+    }
     return noStoreJson({ error: "Could not update winner. Check that the slug is unique." }, { status: 409 });
   }
 };

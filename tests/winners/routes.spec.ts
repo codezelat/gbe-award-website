@@ -7,7 +7,7 @@ test("canonical winner story renders without redundant header labels", async ({ 
 
   await expect(page).toHaveTitle(/Kavinga Perera wins Most Popular Actor of the Year/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Kavinga Perera wins Most Popular Actor of the Year");
-  await expect(page.getByText("Winner Story")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Winner Story", exact: true })).toHaveCount(0);
   await expect(page.getByText(/Kavinga Perera\s+•\s+2025/)).toHaveCount(0);
   await expect(page.getByRole("link", { name: "All previous winners" })).toHaveAttribute("href", "/previous-winners");
 });

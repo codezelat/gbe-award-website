@@ -64,6 +64,28 @@ describe("winner banner media", () => {
       heroImageAlt: "Piyumali Edirisinghe winner banner",
       heroImageCaption: "",
       heroImageCredit: "GBE Awards",
+      recipientType: "person",
+      articleType: "article",
+      headline: "Piyumali Edirisinghe wins a major award for television performance.",
+      standfirst: "A source-backed summary with enough context for readers and search engines to understand the achievement.",
+      body: { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: "A complete source-backed winner story with enough meaningful context to be edited safely." }] }] },
+      industry: "Television",
+      officialWebsiteUrl: "https://example.com",
+      linkedinUrl: "",
+      facebookUrl: "",
+      instagramUrl: "",
+      ceremonyDate: "2025-12-01",
+      awardCitation: "A verified award citation.",
+      achievementHighlights: ["Verified achievement"],
+      quoteText: "",
+      quoteAuthor: "",
+      quoteAuthorRole: "",
+      socialImageUrl: "https://cdn.example.com/winners/social.webp",
+      authorName: "GBE Editorial Team",
+      publishedAt: "2025-12-01",
+      factCheckedAt: "2026-01-01",
+      indexingStatus: "noindex",
+      sourceNotes: ["https://example.com/source"],
       slug: "",
       status: "published",
       sortOrder: "1",
@@ -86,6 +108,16 @@ describe("winner banner media", () => {
     expect(story.imageUrl).toBe("https://cdn.example.com/winners/profile.webp");
     expect(story.heroImageUrl).toBe("https://cdn.example.com/winners/banner.webp");
     expect(story.heroImageAlt).toBe("Piyumali Edirisinghe winner banner");
+  });
+
+  it("rejects unsafe outbound URLs and unattributed public quotes", () => {
+    expect(() => winnerInputSchema.parse({
+      awardTitle: "A valid award title",
+      recipientName: "A valid recipient",
+      category: "A valid category",
+      officialWebsiteUrl: "javascript:alert(1)",
+      quoteText: "An unverified quote.",
+    })).toThrow();
   });
 
   it("treats the profile image as no separate banner when both URLs match", () => {

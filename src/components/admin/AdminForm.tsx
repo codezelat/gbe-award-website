@@ -19,6 +19,7 @@ import {
   type FormState,
   type RowRecord,
 } from "./ui";
+import WinnerRichTextEditor from "./WinnerRichTextEditor";
 
 const MARKETS = ["International", "United Kingdom", "Sri Lanka", "Europe", "Asia", "North America", "Middle East", "Africa"];
 type ImageField = "imageUrl" | "heroImageUrl";
@@ -32,6 +33,17 @@ function sectionTitle(title: string, desc: string) {
       <p className="mt-0.5 text-xs text-zinc-600">{desc}</p>
     </div>
   );
+}
+
+function toLineItems(value: string) {
+  return value
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function dateInputValue(value: string | null | undefined) {
+  return value ? value.slice(0, 10) : "";
 }
 
 export default function AdminForm({
@@ -115,6 +127,28 @@ export default function AdminForm({
           heroImageAlt: form.heroImageAlt,
           heroImageCaption: form.heroImageCaption,
           heroImageCredit: form.heroImageCredit,
+          socialImageUrl: form.socialImageUrl,
+          recipientType: form.recipientType,
+          articleType: form.articleType,
+          headline: form.headline,
+          standfirst: form.standfirst,
+          body: form.body,
+          industry: form.industry,
+          officialWebsiteUrl: form.officialWebsiteUrl,
+          linkedinUrl: form.linkedinUrl,
+          facebookUrl: form.facebookUrl,
+          instagramUrl: form.instagramUrl,
+          ceremonyDate: form.ceremonyDate,
+          awardCitation: form.awardCitation,
+          achievementHighlights: toLineItems(form.achievementHighlights),
+          quoteText: form.quoteText,
+          quoteAuthor: form.quoteAuthor,
+          quoteAuthorRole: form.quoteAuthorRole,
+          authorName: form.authorName,
+          publishedAt: form.publishedAt,
+          factCheckedAt: form.factCheckedAt,
+          indexingStatus: form.indexingStatus,
+          sourceNotes: toLineItems(form.sourceNotes),
           seoTitle: form.seoTitle,
           seoDescription: form.seoDescription,
         }
@@ -287,7 +321,23 @@ export default function AdminForm({
                 onChange={(v) => set("slug", v)}
                 placeholder="Auto-generated"
               />
+              {isWinner ? (
+                <SelectField
+                  label="Search indexing"
+                  value={form.indexingStatus}
+                  onChange={(v) => set("indexingStatus", v as "index" | "noindex")}
+                  options={[
+                    { value: "noindex", label: "Noindex — private review" },
+                    { value: "index", label: "Index — quality approved" },
+                  ]}
+                />
+              ) : null}
             </div>
+            {isWinner ? (
+              <p className="text-xs leading-relaxed text-zinc-600">
+                Indexing is allowed only for a published, source-backed story with complete editorial fields and no newly introduced reused copy.
+              </p>
+            ) : null}
           </section>
 
           {/* Profile image */}
@@ -503,6 +553,74 @@ export default function AdminForm({
             ) : null}
           </section>
 
+          {isWinner ? (
+            <section className="space-y-5 border-t border-white/[0.05] pt-6">
+              {sectionTitle(
+                "Editorial story",
+                "This is the source-backed article Google and readers see. Keep the wording specific to this winner; do not reuse generic copy from another story.",
+              )}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <TextField label="Public headline" value={form.headline} onChange={(v) => set("headline", v)} placeholder="Describe this specific award win" />
+                <SelectField
+                  label="Recipient type"
+                  value={form.recipientType}
+                  onChange={(v) => set("recipientType", v as "person" | "organization" | "creative_work")}
+                  options={[
+                    { value: "organization", label: "Organization" },
+                    { value: "person", label: "Person" },
+                    { value: "creative_work", label: "Creative work" },
+                  ]}
+                />
+                <div className="sm:col-span-2">
+                  <TextArea label="Standfirst" value={form.standfirst} onChange={(v) => set("standfirst", v)} rows={3} placeholder="A factual 1–2 sentence summary of the recognition and why it matters." />
+                </div>
+                <TextField label="Industry" value={form.industry} onChange={(v) => set("industry", v)} placeholder="e.g. Acting and television" />
+                <SelectField
+                  label="Structured-data type"
+                  value={form.articleType}
+                  onChange={(v) => set("articleType", v as "article" | "news")}
+                  options={[
+                    { value: "article", label: "Article" },
+                    { value: "news", label: "News article" },
+                  ]}
+                />
+              </div>
+              <div>
+                <p className="mb-1.5 text-[13px] font-medium text-zinc-300">Article body</p>
+                <WinnerRichTextEditor value={form.body} onChange={(value) => set("body", value)} />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <TextArea label="Award citation" value={form.awardCitation} onChange={(v) => set("awardCitation", v)} rows={3} placeholder="Optional factual award citation." />
+                <TextArea label="Achievement highlights" value={form.achievementHighlights} onChange={(v) => set("achievementHighlights", v)} rows={3} placeholder="One factual, source-supported highlight per line." />
+                <TextArea label="Quote" value={form.quoteText} onChange={(v) => set("quoteText", v)} rows={3} placeholder="Optional verified quote only." />
+                <div className="grid gap-4">
+                  <TextField label="Quote author" value={form.quoteAuthor} onChange={(v) => set("quoteAuthor", v)} placeholder="Required when using a quote" />
+                  <TextField label="Quote author role" value={form.quoteAuthorRole} onChange={(v) => set("quoteAuthorRole", v)} placeholder="Optional" />
+                </div>
+              </div>
+            </section>
+          ) : null}
+
+          {isWinner ? (
+            <section className="space-y-5 border-t border-white/[0.05] pt-6">
+              {sectionTitle("Trust, links & verification", "Give readers a clear author, evidence trail, and accurate recipient links.")}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <TextField label="Author / reviewer" value={form.authorName} onChange={(v) => set("authorName", v)} placeholder="e.g. London Business Consultancy editorial team" />
+                <TextField label="Official website" value={form.officialWebsiteUrl} onChange={(v) => set("officialWebsiteUrl", v)} type="url" placeholder="https://..." />
+                <TextField label="LinkedIn URL" value={form.linkedinUrl} onChange={(v) => set("linkedinUrl", v)} type="url" placeholder="https://..." />
+                <TextField label="Facebook URL" value={form.facebookUrl} onChange={(v) => set("facebookUrl", v)} type="url" placeholder="https://..." />
+                <TextField label="Instagram URL" value={form.instagramUrl} onChange={(v) => set("instagramUrl", v)} type="url" placeholder="https://..." />
+                <TextField label="Social sharing image URL" value={form.socialImageUrl} onChange={(v) => set("socialImageUrl", v)} type="url" placeholder="Optional; use an approved R2 image URL" />
+                <TextField label="Ceremony date" value={form.ceremonyDate} onChange={(v) => set("ceremonyDate", v)} type="date" />
+                <TextField label="Published date" value={form.publishedAt} onChange={(v) => set("publishedAt", v)} type="date" hint="Set the original publication date; it is set automatically on first publish." />
+                <TextField label="Fact-check date" value={form.factCheckedAt} onChange={(v) => set("factCheckedAt", v)} type="date" hint="Required before a story can be indexed." />
+                <div className="sm:col-span-2">
+                  <TextArea label="Source notes" value={form.sourceNotes} onChange={(v) => set("sourceNotes", v)} rows={5} placeholder="One supporting source URL or citation per line. These appear on the public story as its evidence trail." />
+                </div>
+              </div>
+            </section>
+          ) : null}
+
           {/* SEO */}
           <section className="space-y-4 border-t border-white/[0.05] pt-6">
             {sectionTitle("SEO", "Optional overrides for search and social.")}
@@ -572,6 +690,28 @@ export function blankForm(kind: ContentKind): FormState {
     heroImageAlt: "",
     heroImageCaption: "",
     heroImageCredit: "",
+    socialImageUrl: "",
+    recipientType: "organization",
+    articleType: "article",
+    headline: "",
+    standfirst: "",
+    body: null,
+    industry: "",
+    officialWebsiteUrl: "",
+    linkedinUrl: "",
+    facebookUrl: "",
+    instagramUrl: "",
+    ceremonyDate: "",
+    awardCitation: "",
+    achievementHighlights: "",
+    quoteText: "",
+    quoteAuthor: "",
+    quoteAuthorRole: "",
+    authorName: "",
+    publishedAt: "",
+    factCheckedAt: "",
+    indexingStatus: "noindex",
+    sourceNotes: "",
     slug: "",
     status: kind === "winners" ? "draft" : "submitted",
     sortOrder: "0",
@@ -585,12 +725,7 @@ export function rowToForm(kind: ContentKind, row: RowRecord): FormState {
     kind === "winners"
       ? (row as RowRecord & { recipientName: string }).recipientName
       : (row as RowRecord & { nomineeName: string }).nomineeName;
-  const winnerRow = kind === "winners" ? (row as RowRecord & {
-    heroImageUrl?: string | null;
-    heroImageAlt?: string | null;
-    heroImageCaption?: string | null;
-    heroImageCredit?: string | null;
-  }) : null;
+  const winnerRow = kind === "winners" ? (row as Extract<RowRecord, { recipientName: string }>) : null;
 
   return {
     id: row.id,
@@ -607,6 +742,28 @@ export function rowToForm(kind: ContentKind, row: RowRecord): FormState {
     heroImageAlt: winnerRow?.heroImageAlt ?? "",
     heroImageCaption: winnerRow?.heroImageCaption ?? "",
     heroImageCredit: winnerRow?.heroImageCredit ?? "",
+    socialImageUrl: winnerRow?.socialImageUrl ?? "",
+    recipientType: winnerRow?.recipientType ?? "organization",
+    articleType: winnerRow?.articleType ?? "article",
+    headline: winnerRow?.headline ?? "",
+    standfirst: winnerRow?.standfirst ?? "",
+    body: winnerRow?.body ?? null,
+    industry: winnerRow?.industry ?? "",
+    officialWebsiteUrl: winnerRow?.officialWebsiteUrl ?? "",
+    linkedinUrl: winnerRow?.linkedinUrl ?? "",
+    facebookUrl: winnerRow?.facebookUrl ?? "",
+    instagramUrl: winnerRow?.instagramUrl ?? "",
+    ceremonyDate: dateInputValue(winnerRow?.ceremonyDate),
+    awardCitation: winnerRow?.awardCitation ?? "",
+    achievementHighlights: winnerRow?.achievementHighlights?.join("\n") ?? "",
+    quoteText: winnerRow?.quoteText ?? "",
+    quoteAuthor: winnerRow?.quoteAuthor ?? "",
+    quoteAuthorRole: winnerRow?.quoteAuthorRole ?? "",
+    authorName: winnerRow?.authorName ?? "",
+    publishedAt: dateInputValue(winnerRow?.publishedAt),
+    factCheckedAt: dateInputValue(winnerRow?.factCheckedAt),
+    indexingStatus: winnerRow?.indexingStatus ?? "noindex",
+    sourceNotes: winnerRow?.sourceNotes?.join("\n") ?? "",
     slug: row.slug,
     status: row.status,
     sortOrder: String(row.sortOrder),

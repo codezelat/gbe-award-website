@@ -2,6 +2,10 @@ import sanitizeHtml from "sanitize-html";
 import type { WinnerQualityIssue, WinnerQualityReport, WinnerRichText, WinnerRichTextMark, WinnerRichTextNode, WinnerStoryRecord } from "./types";
 
 const MIN_INDEXABLE_WORDS = 250;
+const MAX_RICH_TEXT_BYTES = 180_000;
+const MAX_RICH_TEXT_DEPTH = 12;
+const ALLOWED_RICH_TEXT_NODES = new Set(["doc", "paragraph", "heading", "bulletList", "orderedList", "listItem", "blockquote", "text"]);
+const ALLOWED_RICH_TEXT_MARKS = new Set(["bold", "italic", "link"]);
 
 const ALLOWED_TAGS = ["p", "h2", "h3", "ul", "ol", "li", "strong", "em", "blockquote", "a"];
 const ALLOWED_SCHEMES = ["http", "https", "mailto"];
@@ -36,6 +40,50 @@ function slugify(value: string) {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function hasSafeRichTextAttributes(value: unknown, depth = 0): boolean {
+  if (depth > 4) return false;
+  if (value === undefined || value === null || typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+    return true;
+  }
+  if (Array.isArray(value)) return value.every((item) => hasSafeRichTextAttributes(item, depth + 1));
+  if (!isRecord(value)) return false;
+  return Object.values(value).every((item) => hasSafeRichTextAttributes(item, depth + 1));
+}
+
+function isValidRichTextNode(value: unknown, depth = 0): value is WinnerRichTextNode {
+  if (!isRecord(value) || depth > MAX_RICH_TEXT_DEPTH || typeof value.type !== "string" || !ALLOWED_RICH_TEXT_NODES.has(value.type)) {
+    return false;
+  }
+
+  if (value.text !== undefined && (typeof value.text !== "string" || value.text.length > 20_000)) return false;
+  if (value.attrs !== undefined && !hasSafeRichTextAttributes(value.attrs)) return false;
+
+  if (value.marks !== undefined) {
+    if (!Array.isArray(value.marks)) return false;
+    if (!value.marks.every((mark) => isRecord(mark) && typeof mark.type === "string" && ALLOWED_RICH_TEXT_MARKS.has(mark.type) && hasSafeRichTextAttributes(mark.attrs))) {
+      return false;
+    }
+  }
+
+  if (value.content !== undefined) {
+    if (!Array.isArray(value.content) || value.content.length > 2_500) return false;
+    return value.content.every((node) => isValidRichTextNode(node, depth + 1));
+  }
+
+  return value.type === "text" || value.type === "doc" || value.type === "paragraph" || value.type === "heading";
+}
+
+/** Ensures the JSON stored from the admin editor is a bounded, renderable document. */
+export function isValidWinnerRichText(value: unknown): value is WinnerRichText {
+  if (!isValidRichTextNode(value) || value.type !== "doc") return false;
+
+  try {
+    return JSON.stringify(value).length <= MAX_RICH_TEXT_BYTES;
+  } catch {
+    return false;
+  }
 }
 
 function renderMarks(text: string, marks?: WinnerRichTextMark[]) {
@@ -128,6 +176,73 @@ function countWords(value: string) {
   return text.split(/\s+/).filter(Boolean).length;
 }
 
+function textFromNode(node: WinnerRichTextNode): string {
+  if (node.type === "text") return node.text ?? "";
+  return (node.content ?? []).map(textFromNode).join(" ");
+}
+
+function collectParagraphs(node: WinnerRichTextNode, output: string[]) {
+  if (node.type === "paragraph") {
+    const text = normalizeWhitespace(textFromNode(node));
+    if (text) output.push(text);
+  }
+
+  for (const child of node.content ?? []) collectParagraphs(child, output);
+}
+
+/** Returns substantial body paragraphs for editorial reuse checks. */
+export function getWinnerBodyParagraphs(body: WinnerStoryRecord["body"]): string[] {
+  if (!body) return [];
+
+  if (typeof body === "string") {
+    return sanitizeWinnerHtml(body)
+      .split(/<\/p>/i)
+      .map((paragraph) => normalizeWhitespace(stripHtml(paragraph)))
+      .filter(Boolean);
+  }
+
+  if (!isValidWinnerRichText(body)) return [];
+  const paragraphs: string[] = [];
+  collectParagraphs(body, paragraphs);
+  return paragraphs;
+}
+
+function paragraphFingerprint(value: string) {
+  return normalizeWhitespace(value).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+export type WinnerParagraphReuse = {
+  paragraph: string;
+  matchingWinnerIds: string[];
+};
+
+/** Finds verbatim substantial paragraphs reused between a candidate and other winner stories. */
+export function findWinnerParagraphReuse(
+  candidate: WinnerStoryRecord,
+  existing: WinnerStoryRecord[],
+  minCharacters = 140,
+): WinnerParagraphReuse[] {
+  const candidateParagraphs = getWinnerBodyParagraphs(candidate.body)
+    .filter((paragraph) => paragraph.length >= minCharacters);
+  const existingByParagraph = new Map<string, Set<string>>();
+
+  for (const winner of existing) {
+    if (!winner.id || winner.id === candidate.id) continue;
+    for (const paragraph of getWinnerBodyParagraphs(winner.body).filter((item) => item.length >= minCharacters)) {
+      const fingerprint = paragraphFingerprint(paragraph);
+      if (!fingerprint) continue;
+      const ids = existingByParagraph.get(fingerprint) ?? new Set<string>();
+      ids.add(winner.id);
+      existingByParagraph.set(fingerprint, ids);
+    }
+  }
+
+  return candidateParagraphs.flatMap((paragraph) => {
+    const matchingWinnerIds = [...(existingByParagraph.get(paragraphFingerprint(paragraph)) ?? [])];
+    return matchingWinnerIds.length > 0 ? [{ paragraph, matchingWinnerIds }] : [];
+  });
+}
+
 function hasUsableText(value: unknown, minLength = 1) {
   return typeof value === "string" && normalizeWhitespace(value).length >= minLength;
 }
@@ -200,6 +315,7 @@ export function evaluateWinnerQuality(winner: WinnerStoryRecord): WinnerQualityR
   if (!hasUsableText(winner.standfirst, 80)) addIssue(issues, "standfirst", "Standfirst must summarize the story in enough detail.");
   if (!hasUsableText(winner.seoTitle, 35)) addIssue(issues, "seoTitle", "SEO title is required.");
   if (!hasUsableText(winner.seoDescription, 80)) addIssue(issues, "seoDescription", "SEO description is required.");
+  if (!hasUsableText(winner.authorName, 3)) addIssue(issues, "authorName", "A named author or editorial team is required.");
   if (!hasUsableText(winner.heroImageAlt, 20)) addIssue(issues, "heroImageAlt", "Hero image alt text is required.");
   if (!Array.isArray(winner.sourceNotes) || winner.sourceNotes.filter((source) => hasUsableText(source, 8)).length === 0) {
     addIssue(issues, "sourceNotes", "At least one source note is required.");
