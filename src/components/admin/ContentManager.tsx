@@ -71,7 +71,7 @@ function SkeletonRows() {
           </td>
           <td className="px-4 py-4">
             <div className="flex justify-end gap-2">
-              <div className="size-8 animate-pulse rounded-lg bg-white/[0.04]" />
+              <div className="h-8 w-14 animate-pulse rounded-lg bg-white/[0.04]" />
               <div className="size-8 animate-pulse rounded-lg bg-white/[0.04]" />
             </div>
           </td>
@@ -346,16 +346,19 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
                         </Badge>
                       </td>
                       <td className="px-4 py-3.5">
-                        <div className="flex justify-end gap-1.5">
-                          <button
-                            className="grid size-8 place-items-center rounded-lg text-zinc-500 transition hover:bg-white/[0.06] hover:text-zinc-100"
+                        <div className="flex justify-end gap-1">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            icon={Edit3}
+                            className="h-8 px-2.5 text-xs text-zinc-300 hover:text-zinc-100"
                             onClick={() => setEditing(rowToForm(kind, row))}
                             aria-label={`Edit ${name}`}
                             title={`Edit ${name}`}
                             type="button"
                           >
-                            <Edit3 size={15} />
-                          </button>
+                            Edit
+                          </Button>
                           <button
                             className="grid size-8 place-items-center rounded-lg text-zinc-500 transition hover:bg-rose-500/10 hover:text-rose-300"
                             onClick={() => setPendingDelete(row)}

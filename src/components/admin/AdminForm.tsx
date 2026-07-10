@@ -4,7 +4,6 @@ import {
   ChevronDown,
   Loader2,
   Save,
-  Search as SearchIcon,
   Trash2,
   UploadCloud,
   X,
@@ -693,9 +692,10 @@ export default function AdminForm({
 
         {/* Footer */}
         <div className="flex items-center justify-between gap-3 border-t border-white/[0.06] bg-[#0c0c0f]/95 px-5 py-3.5 backdrop-blur sm:px-7 sm:py-4">
-          <p className="hidden items-center gap-1.5 text-xs text-zinc-600 sm:flex">
-            <SearchIcon size={13} />
-            Saved changes publish immediately
+          <p className="hidden text-xs text-zinc-500 sm:block">
+            {form.status === "published"
+              ? "Published changes are visible on the public site."
+              : "This record stays private until published."}
           </p>
           <div className="flex w-full gap-2.5 sm:w-auto">
             <Button variant="ghost" size="md" onClick={requestClose} type="button">
