@@ -263,6 +263,11 @@ export function buildWinnerSlug(recipient: string, award: string, year: number):
   return slugify(base);
 }
 
+/** Matches the root-level URL shape used by the legacy WordPress winner pages. */
+export function buildLegacyWinnerRootSlug(recipient: string, award: string): string {
+  return slugify(`${recipient} ${award}`);
+}
+
 export function deriveDisplayAwardTitle(winner: Pick<WinnerStoryRecord, "recipientName" | "awardTitle" | "headline">): string {
   const fallback = normalizeWhitespace(winner.awardTitle || "Global Business Excellence Awards winner");
   const headline = normalizeWhitespace(winner.headline || "");

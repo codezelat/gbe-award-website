@@ -1,0 +1,51 @@
+---
+import "../styles/global.css";
+import ThemeInit from "../components/ThemeInit.astro";
+import SeoHead from "../components/SeoHead.astro";
+import Header from "../components/Header.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { resolveLegacyWinnerRootSlug } from "../lib/winners/queries";
+
+export const prerender = false;
+
+const legacySlug = Astro.params.legacy;
+const winner = legacySlug ? await resolveLegacyWinnerRootSlug(legacySlug) : null;
+
+if (winner?.slug) {
+  return Astro.redirect(`/previous-winners/${winner.slug}`, 301);
+}
+
+Astro.response.status = 404;
+Astro.response.headers.set("x-robots-tag", "noindex, nofollow, noarchive, nosnippet");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <ThemeInit />
+    <SeoHead
+      title="Page Not Found | Global Business Excellence Awards"
+      description="The page you are looking for could not be found. Explore the Global Business Excellence Awards 2026."
+      path="/404"
+      noindex={true}
+      canonical={false}
+      schema={[]}
+    />
+  </head>
+  <body>
+    <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">
+      <Header />
+      <main class="flex min-h-screen flex-col items-center justify-center px-6 text-center">
+        <div class="animate-[revealUp_760ms_both_ease]">
+          <h1 class="gold-text m-0 text-[clamp(80px,18vw,200px)] font-black leading-none">404</h1>
+          <h2 class="gold-text mb-6 mt-4 text-[clamp(24px,4vw,36px)] font-black leading-[1.15]">Page Not Found</h2>
+          <p class="mx-auto mb-10 max-w-[480px] text-[clamp(15px,1.3vw,17px)] font-normal leading-[1.7] text-gbe-muted">
+            The page you are looking for may have been moved, renamed, or no longer exists. Let's get you back on track.
+          </p>
+          <a class="btn-gold btn-gold-hover" href="/">Return Home</a>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

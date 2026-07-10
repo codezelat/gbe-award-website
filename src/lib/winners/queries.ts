@@ -1,6 +1,6 @@
 import { and, asc, count, desc, eq, ne, or, sql } from "drizzle-orm";
 import { db, schema } from "../db";
-import { deriveDisplayAwardTitle, renderWinnerRichText } from "./content";
+import { buildLegacyWinnerRootSlug, deriveDisplayAwardTitle, renderWinnerRichText } from "./content";
 import { pickRealWinnerImage } from "./images";
 import type { WinnerRichText, WinnerStoryRecord } from "./types";
 
@@ -141,6 +141,48 @@ export async function resolveWinnerSlug(slug: string): Promise<{ winner: WinnerC
     return aliasRow?.winner ? { winner: mapWinnerStory(aliasRow.winner), redirect: true } : null;
   } catch (error) {
     console.error("[winner-queries] resolveWinnerSlug failed", error);
+    return null;
+  }
+}
+
+function legacyRootSlugFromSource(value: string) {
+  try {
+    const url = new URL(value);
+    if (url.hostname !== "gbeaward.com" && url.hostname !== "www.gbeaward.com") return null;
+    const segments = url.pathname.split("/").filter(Boolean);
+    return segments.length === 1 ? segments[0] : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Resolves the single-segment winner URLs published by the retired WordPress
+ * site. Canonical and alias slugs are checked first, then the historical
+ * recipient-plus-award slug pattern and exact legacy source URLs.
+ */
+export async function resolveLegacyWinnerRootSlug(slug: string): Promise<WinnerCardData | null> {
+  const existing = await resolveWinnerSlug(slug);
+  if (existing) return existing.winner;
+
+  try {
+    const rows = await db
+      .select({
+        slug: schema.pastWinners.slug,
+        recipientName: schema.pastWinners.recipientName,
+        awardTitle: schema.pastWinners.awardTitle,
+        sourceNotes: schema.pastWinners.sourceNotes,
+      })
+      .from(schema.pastWinners)
+      .where(eq(schema.pastWinners.status, "published"));
+    const matched = rows.find((row) =>
+      buildLegacyWinnerRootSlug(row.recipientName, row.awardTitle) === slug ||
+      (row.sourceNotes ?? []).some((source) => legacyRootSlugFromSource(source) === slug),
+    );
+
+    return matched ? getPublishedWinnerBySlug(matched.slug) : null;
+  } catch (error) {
+    console.error("[winner-queries] resolveLegacyWinnerRootSlug failed", error);
     return null;
   }
 }

@@ -18,3 +18,10 @@ test("legacy winner slug redirects to canonical story slug", async ({ page }) =>
   expect(response?.status()).toBe(200);
   expect(new URL(page.url()).pathname).toBe(canonicalPath);
 });
+
+test("legacy root winner URL redirects to the canonical story", async ({ page }) => {
+  const response = await page.goto("/chamara-samarawickrama-most-popular-teledrama-producer-of-the-year/");
+
+  expect(response?.status()).toBe(200);
+  expect(new URL(page.url()).pathname).toBe("/previous-winners/chamara-samarawickrama-wins-most-popular-teledrama-producer-of-the-year-2025");
+});
