@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   ImagePlus,
   ChevronDown,
@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import {
   Button,
+  ConfirmDialog,
   Modal,
   SelectField,
   TextArea,
@@ -90,13 +91,27 @@ export default function AdminForm({
   const [saving, setSaving] = useState(false);
   const [uploadingField, setUploadingField] = useState<ImageField | null>(null);
   const [formError, setFormError] = useState("");
+  const [discardDialogOpen, setDiscardDialogOpen] = useState(false);
 
   const isWinner = kind === "winners";
   const uploadingProfile = uploadingField === "imageUrl";
   const uploadingBanner = uploadingField === "heroImageUrl";
+  const isDirty = useMemo(
+    () => JSON.stringify(form) !== JSON.stringify(editing),
+    [editing, form],
+  );
 
   function set<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function requestClose() {
+    if (saving || uploadingField) return;
+    if (isDirty) {
+      setDiscardDialogOpen(true);
+      return;
+    }
+    onClose();
   }
 
   async function uploadImage(file: File | null, field: ImageField) {
@@ -232,7 +247,8 @@ export default function AdminForm({
   }
 
   return (
-    <Modal open onClose={onClose} labelledBy="form-title">
+    <>
+    <Modal open onClose={discardDialogOpen ? () => {} : requestClose} labelledBy="form-title">
       <form className="flex max-h-[calc(100dvh-2rem)] min-h-[min(720px,calc(100dvh-2rem))] flex-col sm:max-h-[calc(100dvh-4rem)]" onSubmit={handleSubmit}>
         {/* Header */}
         <div className="flex items-center justify-between gap-4 border-b border-white/[0.06] px-5 py-4 sm:px-7 sm:py-5">
@@ -246,7 +262,7 @@ export default function AdminForm({
           </div>
           <button
             className="grid size-9 shrink-0 place-items-center rounded-lg text-zinc-500 transition hover:bg-white/[0.06] hover:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb001]/40"
-            onClick={onClose}
+            onClick={requestClose}
             type="button"
             aria-label="Close"
           >
@@ -682,7 +698,7 @@ export default function AdminForm({
             Saved changes publish immediately
           </p>
           <div className="flex w-full gap-2.5 sm:w-auto">
-            <Button variant="ghost" size="md" onClick={onClose} type="button">
+            <Button variant="ghost" size="md" onClick={requestClose} type="button">
               Cancel
             </Button>
             <Button
@@ -699,6 +715,17 @@ export default function AdminForm({
         </div>
       </form>
     </Modal>
+    <ConfirmDialog
+      open={discardDialogOpen}
+      title="Discard unsaved changes?"
+      description="Your edits have not been saved."
+      confirmLabel="Discard changes"
+      cancelLabel="Keep editing"
+      tone="danger"
+      onClose={() => setDiscardDialogOpen(false)}
+      onConfirm={onClose}
+    />
+    </>
   );
 }
 

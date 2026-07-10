@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import {
   Award as AwardIcon,
@@ -32,15 +32,18 @@ import {
 
 type Row = RowRecord;
 
-function useDebounced<T>(fn: (value: string) => void, delay = 240) {
-  const ref = useMemo(() => {
-    let timer: number | undefined;
-    return (value: string) => {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(() => fn(value), delay);
-    };
-  }, [fn, delay]);
-  return ref;
+function useDebounced(fn: (value: string) => void, delay = 240) {
+  const timerRef = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => window.clearTimeout(timerRef.current), []);
+
+  return useCallback(
+    (value: string) => {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(() => fn(value), delay);
+    },
+    [delay, fn],
+  );
 }
 
 function SkeletonRows() {
@@ -103,6 +106,7 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
   const [editing, setEditing] = useState<FormState | null>(null);
   const [pendingDelete, setPendingDelete] = useState<Row | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const requestRef = useRef<AbortController | null>(null);
 
   const statusOptions = isWinner
     ? [
@@ -121,6 +125,9 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
       ];
 
   const load = useCallback(async () => {
+    requestRef.current?.abort();
+    const controller = new AbortController();
+    requestRef.current = controller;
     setLoading(true);
     const params = new URLSearchParams({
       page: String(page),
@@ -131,29 +138,34 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
     try {
       const res = await fetch(
         `/api/gbe-admin-safe/${kind}?${params.toString()}`,
-        { cache: "no-store" },
+        { cache: "no-store", signal: controller.signal },
       );
+      if (controller.signal.aborted) return;
       if (res.status === 401) {
         window.location.reload();
         return;
       }
       if (!res.ok) throw new Error("Failed to load records.");
       const data = (await res.json()) as ApiList<Row>;
+      if (controller.signal.aborted) return;
       setList(data);
     } catch (err) {
+      if (controller.signal.aborted) return;
       showToast({
         title: "Could not load records",
         description: err instanceof Error ? err.message : undefined,
         variant: "error",
       });
     } finally {
-      setLoading(false);
+      if (requestRef.current === controller) setLoading(false);
     }
   }, [kind, page, q, status, showToast]);
 
   useEffect(() => {
     void load();
   }, [load]);
+
+  useEffect(() => () => requestRef.current?.abort(), []);
 
   const debouncedSearch = useDebounced((value: string) => {
     setQ(value);
@@ -241,11 +253,11 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
 
       {/* Table */}
       <div className="overflow-hidden rounded-2xl border border-white/[0.06] bg-[#101013]">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" role="region" aria-label="Scrollable results table" tabIndex={0}>
           <table className="w-full min-w-[860px] border-collapse">
             <thead>
               <tr className="border-b border-white/[0.06] text-left text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
-                <th className="px-4 py-3.5">Recipient</th>
+                <th className="sticky left-0 z-10 bg-[#101013] px-4 py-3.5">Recipient</th>
                 <th className="px-4 py-3.5">Category</th>
                 <th className="px-4 py-3.5">Year</th>
                 <th className="px-4 py-3.5">Updated</th>
@@ -290,7 +302,7 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
                       key={row.id}
                       className="group transition-colors hover:bg-white/[0.025]"
                     >
-                      <td className="px-4 py-3.5">
+                      <td className="sticky left-0 z-[1] bg-[#101013] px-4 py-3.5 transition-colors group-hover:bg-[#111114]">
                         <div className="flex items-center gap-3">
                           <div className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-[#1a1a1e] ring-1 ring-inset ring-white/[0.06]">
                             {row.imageUrl ? (
@@ -339,6 +351,7 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
                             className="grid size-8 place-items-center rounded-lg text-zinc-500 transition hover:bg-white/[0.06] hover:text-zinc-100"
                             onClick={() => setEditing(rowToForm(kind, row))}
                             aria-label={`Edit ${name}`}
+                            title={`Edit ${name}`}
                             type="button"
                           >
                             <Edit3 size={15} />
@@ -347,6 +360,7 @@ function ContentManagerInner({ kind }: { kind: ContentKind }) {
                             className="grid size-8 place-items-center rounded-lg text-zinc-500 transition hover:bg-rose-500/10 hover:text-rose-300"
                             onClick={() => setPendingDelete(row)}
                             aria-label={`Delete ${name}`}
+                            title={`Delete ${name}`}
                             type="button"
                           >
                             <Trash2 size={15} />

@@ -64,13 +64,11 @@ export default function AdminLogin() {
             <br />
             Excellence Awards
           </p>
-          <p className="mt-4 text-[15px] font-medium text-[#ffd05a]">
-            2026 &middot; Admin Console
-          </p>
+          <p className="mt-4 text-[15px] font-medium text-[#ffd05a]">Admin Console</p>
         </motion.div>
 
         <p className="relative mt-16 text-xs text-zinc-600">
-          &copy; 2026 London Business Consultancy
+          &copy; London Business Consultancy
         </p>
       </section>
 
