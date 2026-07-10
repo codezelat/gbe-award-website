@@ -43,9 +43,22 @@ function sourceLink(value: string) {
   }
 }
 
-const sources = (winner.sourceNotes ?? [])
+function isHistoricalGbeStory(url: URL | null) {
+  if (!url || (url.hostname !== "gbeaward.com" && url.hostname !== "www.gbeaward.com")) return false;
+  const segments = url.pathname.split("/").filter(Boolean);
+  return segments.length === 1 && segments[0] !== "previous-winners";
+}
+
+function sourceLabel(source: { note: string; url: URL | null }) {
+  if (!source.url) return source.note;
+  const isGbeArchive = (source.url.hostname === "gbeaward.com" || source.url.hostname === "www.gbeaward.com") && source.url.pathname === "/previous-winners/";
+  if (source.note === winner.officialWebsiteUrl) return `Official website: ${source.url.hostname.replace(/^www\./, "")}`;
+  return isGbeArchive ? "GBE Awards previous-winners archive" : source.url.hostname.replace(/^www\./, "");
+}
+
+const sources = [...new Set([winner.officialWebsiteUrl, ...(winner.sourceNotes ?? [])].filter((source): source is string => Boolean(source?.trim())))]
   .map((note) => ({ note, url: sourceLink(note) }))
-  .filter((source) => source.note.trim());
+  .filter((source) => source.note.trim() && !isHistoricalGbeStory(source.url));
 ---
 
 <article class="winner-article">
@@ -127,13 +140,13 @@ const sources = (winner.sourceNotes ?? [])
       {sources.length > 0 ? (
         <section class="mt-10 border-t border-gbe-text/10 pt-8" aria-labelledby="story-sources-title">
           <h2 id="story-sources-title" class="m-0 text-xl font-black text-gbe-text">Sources and verification</h2>
-          <p class="mb-4 mt-2 text-sm leading-[1.65] text-gbe-muted">This story is supported by the references reviewed by the GBE Awards editorial team.</p>
+          <p class="mb-4 mt-2 text-sm leading-[1.65] text-gbe-muted">This record is supported by the award archive and public references reviewed for this entry. Historical URLs that now redirect here are kept out of this list to avoid circular citations.</p>
           <ul class="m-0 space-y-2 pl-5 text-sm leading-[1.6] text-gbe-muted">
             {sources.map((source) => (
               <li>
                 {source.url ? (
                   <a class="text-gbe-text underline decoration-gbe-gold/45 underline-offset-4 transition-colors hover:text-gbe-gold" href={source.url.href} rel="noopener noreferrer" target="_blank">
-                    {source.url.hostname.replace(/^www\./, "")}
+                    {sourceLabel(source)}
                   </a>
                 ) : source.note}
               </li>
@@ -155,6 +168,12 @@ const sources = (winner.sourceNotes ?? [])
             <dt class="font-bold text-gbe-text">Award</dt>
             <dd class="mt-1 text-gbe-muted">{awardTitle}</dd>
           </div>
+          {winner.year ? (
+            <div>
+              <dt class="font-bold text-gbe-text">Award year</dt>
+              <dd class="mt-1 text-gbe-muted">{winner.year}</dd>
+            </div>
+          ) : null}
           {showCategory ? (
             <div>
               <dt class="font-bold text-gbe-text">Category</dt>

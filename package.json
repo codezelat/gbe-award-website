@@ -20,6 +20,8 @@
     "db:studio": "drizzle-kit studio",
     "seed:admin": "ALLOW_ADMIN_SIGNUP=true tsx scripts/seed-admin.ts",
     "import:winners": "tsx scripts/import-live-winners.ts",
+    "audit:winner-sources": "tsx scripts/audit-winner-sources.ts",
+    "refresh:winner-editorial": "tsx scripts/refresh-winner-editorial.ts",
     "r2:migrate-images": "tsx scripts/migrate-images-to-r2.ts"
   },
   "overrides": {
