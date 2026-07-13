@@ -302,6 +302,10 @@
   transition: opacity 0.5s ease;
 }
 
+.hero-mobile-moment {
+  display: none;
+}
+
 [data-theme="light"] .hero-section canvas {
   opacity: 0.2;
 }
@@ -532,12 +536,40 @@
   }
 
   /*
-   * A landscape ceremony photograph cannot retain useful context once it is
-   * cropped into a portrait hero. On phones, let the award itself lead the
-   * composition and keep the existing light-mode atmosphere as the backdrop.
+   * The landscape ceremony photographs become a framed, 4:3-ish moment behind
+   * the award rather than a full-bleed portrait crop. This keeps the people
+   * and ceremony visible while preserving a calm reading surface for the copy.
    */
   [data-theme="light"] .hero-background-slider {
+    z-index: 1;
+    overflow: visible;
+  }
+
+  [data-theme="light"] .hero-background-slide,
+  [data-theme="light"] .hero-background-scrim,
+  [data-theme="light"] .hero-background-tint {
     display: none;
+  }
+
+  [data-theme="light"] .hero-mobile-moment {
+    position: absolute;
+    top: 112px;
+    right: 24px;
+    left: 24px;
+    display: block;
+    height: 254px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 140, 30, 0.28);
+    border-radius: 36% 36% 22px 22px / 22% 22% 18px 18px;
+    background: #f1ead9;
+    box-shadow: 0 20px 44px rgba(90, 66, 18, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  }
+
+  [data-theme="light"] .hero-mobile-moment::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 252, 244, 0.08) 0%, rgba(250, 248, 243, 0.08) 45%, rgba(250, 248, 243, 0.76) 100%);
   }
 
   [data-theme="light"] .hero-light-visual {
@@ -548,11 +580,12 @@
     content: "";
     position: absolute;
     inset: 12px 10% 0;
+    z-index: 0;
     border: 1px solid rgba(180, 140, 30, 0.18);
     border-radius: 50% 50% 42% 42% / 34% 34% 18% 18%;
     background:
-      radial-gradient(circle at 50% 30%, rgba(255, 208, 90, 0.22), transparent 48%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+      radial-gradient(circle at 50% 30%, rgba(255, 208, 90, 0.16), transparent 48%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0));
   }
 }
 

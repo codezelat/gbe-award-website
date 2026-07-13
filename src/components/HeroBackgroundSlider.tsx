@@ -71,7 +71,7 @@ export default function HeroBackgroundSlider() {
         return (
           <div
             key={slide.src}
-            className="absolute inset-0 transition-opacity"
+            className="hero-background-slide absolute inset-0 transition-opacity"
             style={{
               opacity: isActive ? 1 : 0,
               transitionDuration: `${FADE_DURATION}ms`,
@@ -100,9 +100,29 @@ export default function HeroBackgroundSlider() {
         );
       })}
 
+      <div className="hero-mobile-moment" aria-hidden="true">
+        {slides.map((slide, index) => (
+          <img
+            key={`mobile-${slide.src}`}
+            src={slide.src}
+            alt=""
+            width={slide.w}
+            height={slide.h}
+            className="absolute inset-0 h-full w-full object-cover transition-opacity"
+            style={{
+              opacity: index === activeIndex ? 1 : 0,
+              transitionDuration: `${FADE_DURATION}ms`,
+              transitionTimingFunction: "ease-in-out",
+            }}
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </div>
+
       {/* Strong gradient overlay: left side clean for text, right side atmospheric */}
       <div
-        className="absolute inset-0"
+        className="hero-background-scrim absolute inset-0"
         style={{
           background: `
             linear-gradient(90deg, 
@@ -125,7 +145,7 @@ export default function HeroBackgroundSlider() {
 
       {/* Warm tint overlay to unify image color temperature with the design */}
       <div
-        className="absolute inset-0"
+        className="hero-background-tint absolute inset-0"
         style={{
           background:
             "rgba(255, 200, 80, 0.04)",
