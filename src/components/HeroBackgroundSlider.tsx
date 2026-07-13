@@ -59,7 +59,7 @@ export default function HeroBackgroundSlider() {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="hero-background-slider pointer-events-none absolute inset-0 z-0 overflow-hidden"
       aria-hidden="true"
     >
       {slides.map((slide, index) => {

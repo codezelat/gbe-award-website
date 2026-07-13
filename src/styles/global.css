@@ -530,6 +530,30 @@
     width: 280px;
     height: 280px;
   }
+
+  /*
+   * A landscape ceremony photograph cannot retain useful context once it is
+   * cropped into a portrait hero. On phones, let the award itself lead the
+   * composition and keep the existing light-mode atmosphere as the backdrop.
+   */
+  [data-theme="light"] .hero-background-slider {
+    display: none;
+  }
+
+  [data-theme="light"] .hero-light-visual {
+    min-height: 270px;
+  }
+
+  [data-theme="light"] .hero-light-visual::before {
+    content: "";
+    position: absolute;
+    inset: 12px 10% 0;
+    border: 1px solid rgba(180, 140, 30, 0.18);
+    border-radius: 50% 50% 42% 42% / 34% 34% 18% 18%;
+    background:
+      radial-gradient(circle at 50% 30%, rgba(255, 208, 90, 0.22), transparent 48%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  }
 }
 
 /* Header scroll border */
