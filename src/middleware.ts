@@ -1,5 +1,4 @@
 import { defineMiddleware } from "astro:middleware";
-import { getAdminSession } from "./lib/admin/auth";
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
@@ -18,6 +17,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return response;
   }
 
+  // Keep Better Auth, Drizzle, and Neon out of every public-page execution.
+  // This branch only runs for the protected admin HTML surface.
+  const { getAdminSession } = await import("./lib/admin/auth");
   const session = await getAdminSession(context.request.headers);
 
   if (url.pathname === "/gbe-admin-safe/") {

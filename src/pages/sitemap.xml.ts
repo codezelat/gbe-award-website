@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { setPublicResponseCache } from "../lib/http-cache";
 import { PUBLIC_SITE_PAGE_IMAGES, PUBLIC_SITE_PAGES, SITE_URL } from "../lib/site";
 import { getIndexableWinnerUrls } from "../lib/winners/queries";
 
@@ -48,10 +49,12 @@ export const GET: APIRoute = async () => {
 ${[...staticUrls, ...winnerEntries].join("\n")}
 </urlset>`;
 
-  return new Response(body, {
-    headers: {
-      "content-type": "application/xml; charset=utf-8",
-      "cache-control": "public, max-age=3600, s-maxage=3600",
-    },
+  const headers = new Headers({ "content-type": "application/xml; charset=utf-8" });
+  setPublicResponseCache(headers, {
+    browserMaxAge: 3600,
+    cdnMaxAge: 3600,
+    staleWhileRevalidate: 86400,
   });
+
+  return new Response(body, { headers });
 };

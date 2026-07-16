@@ -7,6 +7,8 @@ import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths } from "../data/home";
 import { buildBreadcrumbSchema, buildPageSchema } from "../lib/seo";
 
+export const prerender = true;
+
 const title = "Privacy Policy | Global Business Excellence Awards";
 const description =
   "Privacy Policy for Global Business Excellence Awards, explaining what information we collect, how we use it, and how to contact us.";

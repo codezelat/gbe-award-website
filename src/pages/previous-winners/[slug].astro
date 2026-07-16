@@ -6,6 +6,7 @@ import Header from "../../components/Header.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import WinnerStoryArticle from "../../components/WinnerStoryArticle.astro";
 import { assetPaths } from "../../data/home";
+import { setPublicResponseCache } from "../../lib/http-cache";
 import { assetUrl, normalizeDescription } from "../../lib/seo";
 import { pickRealWinnerImage } from "../../lib/winners/images";
 import { getRelatedWinners, resolveWinnerSlug } from "../../lib/winners/queries";
@@ -31,7 +32,11 @@ if (redirect && winner.slug) {
   return Astro.redirect(`/previous-winners/${winner.slug}`, 301);
 }
 
-Astro.response.headers.set("cache-control", "public, s-maxage=3600, stale-while-revalidate=86400");
+setPublicResponseCache(Astro.response.headers, {
+  browserMaxAge: 300,
+  cdnMaxAge: 3600,
+  staleWhileRevalidate: 86400,
+});
 
 const related = await getRelatedWinners(winner, 3);
 const awardTitle = winner.displayAwardTitle || winner.awardTitle;

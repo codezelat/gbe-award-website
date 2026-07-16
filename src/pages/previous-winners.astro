@@ -6,6 +6,7 @@ import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import WinnerStoryCard from "../components/WinnerStoryCard.astro";
 import { assetPaths } from "../data/home";
+import { setPublicResponseCache } from "../lib/http-cache";
 import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, normalizeDescription } from "../lib/seo";
 import { getWinnerDirectory } from "../lib/winners/queries";
 
@@ -15,7 +16,7 @@ const title = "Previous Winners | Global Business Excellence Awards";
 const description =
   "Celebrating the past winners of the Global Business Excellence Awards. Discover the companies and leaders who set the benchmark for excellence across industries.";
 
-Astro.response.headers.set("cache-control", "public, s-maxage=60, stale-while-revalidate=300");
+setPublicResponseCache(Astro.response.headers);
 const page = Number(Astro.url.searchParams.get("page") || "1");
 const directory = await getWinnerDirectory({ page, limit: 24 });
 const winners = directory.winners;

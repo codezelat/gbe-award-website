@@ -12,7 +12,10 @@ import MagazineSection from "../components/MagazineSection.astro";
 import NomineesSection from "../components/NomineesSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths, seo } from "../data/home";
+import { setPublicResponseCache } from "../lib/http-cache";
 import { buildAwardProgramSchema, buildPageSchema } from "../lib/seo";
+
+setPublicResponseCache(Astro.response.headers);
 ---
 
 <!doctype html>
