@@ -4,19 +4,37 @@ import ThemeInit from "../components/ThemeInit.astro";
 import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import {
+  publicCachedRedirect,
+  publicCacheTags,
+  setPublicResponseCache,
+} from "../lib/http-cache";
 import { resolveLegacyWinnerRootSlug } from "../lib/winners/queries";
 
 export const prerender = false;
 
 const legacySlug = Astro.params.legacy;
-const winner = legacySlug ? await resolveLegacyWinnerRootSlug(legacySlug) : null;
+const winnerCacheTags = publicCacheTags("winners");
+const looksLikeLegacyWinnerSlug =
+  Boolean(legacySlug) &&
+  /^[a-z0-9]+(?:-[a-z0-9]+){2,}$/.test(legacySlug!) &&
+  legacySlug!.length <= 180;
+const winner = looksLikeLegacyWinnerSlug
+  ? await resolveLegacyWinnerRootSlug(legacySlug!)
+  : null;
 
 if (winner?.slug) {
-  return Astro.redirect(`/previous-winners/${winner.slug}`, 301);
+  return publicCachedRedirect(
+    `/previous-winners/${winner.slug}`,
+    winnerCacheTags,
+  );
 }
 
 Astro.response.status = 404;
 Astro.response.headers.set("x-robots-tag", "noindex, nofollow, noarchive, nosnippet");
+setPublicResponseCache(Astro.response.headers, {
+  tags: winnerCacheTags,
+});
 ---
 
 <!doctype html>

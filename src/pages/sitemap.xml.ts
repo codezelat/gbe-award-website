@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { setPublicResponseCache } from "../lib/http-cache";
+import { publicCacheTags, setPublicResponseCache } from "../lib/http-cache";
 import { PUBLIC_SITE_PAGE_IMAGES, PUBLIC_SITE_PAGES, SITE_URL } from "../lib/site";
 import { getIndexableWinnerUrls } from "../lib/winners/queries";
 
@@ -51,9 +51,7 @@ ${[...staticUrls, ...winnerEntries].join("\n")}
 
   const headers = new Headers({ "content-type": "application/xml; charset=utf-8" });
   setPublicResponseCache(headers, {
-    browserMaxAge: 3600,
-    cdnMaxAge: 3600,
-    staleWhileRevalidate: 86400,
+    tags: publicCacheTags("winners"),
   });
 
   return new Response(body, { headers });

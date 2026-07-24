@@ -6,7 +6,12 @@ import Header from "../../components/Header.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import WinnerStoryArticle from "../../components/WinnerStoryArticle.astro";
 import { assetPaths } from "../../data/home";
-import { setPublicResponseCache } from "../../lib/http-cache";
+import {
+  publicCachedRedirect,
+  publicCachedResponse,
+  publicCacheTags,
+  setPublicResponseCache,
+} from "../../lib/http-cache";
 import { assetUrl, normalizeDescription } from "../../lib/seo";
 import { pickRealWinnerImage } from "../../lib/winners/images";
 import { getRelatedWinners, resolveWinnerSlug } from "../../lib/winners/queries";
@@ -15,27 +20,32 @@ import { buildWinnerArticleSchema } from "../../lib/winners/seo";
 export const prerender = false;
 
 const slug = Astro.params.slug;
+const winnerCacheTags = publicCacheTags("winners");
 
 if (!slug) {
-  return Astro.redirect("/previous-winners", 302);
+  return publicCachedRedirect("/previous-winners", winnerCacheTags, 302);
 }
 
 const resolved = await resolveWinnerSlug(slug);
 
 if (!resolved) {
-  return new Response(null, { status: 404 });
+  return publicCachedResponse(null, {
+    status: 404,
+    cacheTags: winnerCacheTags,
+  });
 }
 
 const { winner, redirect } = resolved;
 
 if (redirect && winner.slug) {
-  return Astro.redirect(`/previous-winners/${winner.slug}`, 301);
+  return publicCachedRedirect(
+    `/previous-winners/${winner.slug}`,
+    winnerCacheTags,
+  );
 }
 
 setPublicResponseCache(Astro.response.headers, {
-  browserMaxAge: 300,
-  cdnMaxAge: 3600,
-  staleWhileRevalidate: 86400,
+  tags: winnerCacheTags,
 });
 
 const related = await getRelatedWinners(winner, 3);

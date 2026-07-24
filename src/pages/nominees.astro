@@ -5,7 +5,7 @@ import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { assetPaths } from "../data/home";
-import { setPublicResponseCache } from "../lib/http-cache";
+import { publicCacheTags, setPublicResponseCache } from "../lib/http-cache";
 import { getPublicNominees } from "../lib/public-content";
 import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema, normalizeDescription } from "../lib/seo";
 
@@ -14,7 +14,9 @@ export const prerender = false;
 const title = "Nominees | Global Business Excellence Awards 2026";
 const description =
   "Meet the outstanding nominees of the Global Business Excellence Awards 2026. Companies, entrepreneurs, and leaders recognised for their excellence across the UK, Sri Lanka, and beyond.";
-setPublicResponseCache(Astro.response.headers);
+setPublicResponseCache(Astro.response.headers, {
+  tags: publicCacheTags("nominations"),
+});
 const allNominees = await getPublicNominees();
 const nomineeSummary = allNominees
   .slice(0, 10)

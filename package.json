@@ -22,6 +22,7 @@
     "import:winners": "tsx scripts/import-live-winners.ts",
     "audit:winner-sources": "tsx scripts/audit-winner-sources.ts",
     "refresh:winner-editorial": "tsx scripts/refresh-winner-editorial.ts",
+    "backfill:winner-aliases": "tsx scripts/backfill-winner-aliases.ts",
     "r2:migrate-images": "tsx scripts/migrate-images-to-r2.ts"
   },
   "overrides": {

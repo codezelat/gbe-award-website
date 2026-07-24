@@ -1,6 +1,6 @@
-import { and, asc, count, desc, eq, ne, or, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, exists, ne, or, sql } from "drizzle-orm";
 import { db, schema } from "../db";
-import { buildLegacyWinnerRootSlug, deriveDisplayAwardTitle, renderWinnerRichText } from "./content";
+import { deriveDisplayAwardTitle, renderWinnerRichText } from "./content";
 import { pickRealWinnerImage } from "./images";
 import type { WinnerRichText, WinnerStoryRecord } from "./types";
 
@@ -127,64 +127,43 @@ export async function getPublishedWinnerBySlug(slug: string): Promise<WinnerCard
 }
 
 export async function resolveWinnerSlug(slug: string): Promise<{ winner: WinnerCardData; redirect: boolean } | null> {
-  const canonical = await getPublishedWinnerBySlug(slug);
-  if (canonical) return { winner: canonical, redirect: false };
-
   try {
-    const [aliasRow] = await db
-      .select({ winner: schema.pastWinners })
+    const aliasMatch = db
+      .select({ value: sql<number>`1` })
       .from(schema.winnerSlugAliases)
-      .innerJoin(schema.pastWinners, eq(schema.winnerSlugAliases.winnerId, schema.pastWinners.id))
-      .where(and(eq(schema.winnerSlugAliases.alias, slug), eq(schema.pastWinners.status, "published")))
+      .where(
+        and(
+          eq(schema.winnerSlugAliases.winnerId, schema.pastWinners.id),
+          eq(schema.winnerSlugAliases.alias, slug),
+        ),
+      );
+    const [row] = await db
+      .select()
+      .from(schema.pastWinners)
+      .where(
+        and(
+          eq(schema.pastWinners.status, "published"),
+          or(eq(schema.pastWinners.slug, slug), exists(aliasMatch)),
+        ),
+      )
       .limit(1);
 
-    return aliasRow?.winner ? { winner: mapWinnerStory(aliasRow.winner), redirect: true } : null;
+    return row
+      ? { winner: mapWinnerStory(row), redirect: row.slug !== slug }
+      : null;
   } catch (error) {
     console.error("[winner-queries] resolveWinnerSlug failed", error);
     return null;
   }
 }
 
-function legacyRootSlugFromSource(value: string) {
-  try {
-    const url = new URL(value);
-    if (url.hostname !== "gbeaward.com" && url.hostname !== "www.gbeaward.com") return null;
-    const segments = url.pathname.split("/").filter(Boolean);
-    return segments.length === 1 ? segments[0] : null;
-  } catch {
-    return null;
-  }
-}
-
 /**
  * Resolves the single-segment winner URLs published by the retired WordPress
- * site. Canonical and alias slugs are checked first, then the historical
- * recipient-plus-award slug pattern and exact legacy source URLs.
+ * site. Historical root slugs are stored in the indexed alias table so an
+ * arbitrary bot path never causes a full published-winner table scan.
  */
 export async function resolveLegacyWinnerRootSlug(slug: string): Promise<WinnerCardData | null> {
-  const existing = await resolveWinnerSlug(slug);
-  if (existing) return existing.winner;
-
-  try {
-    const rows = await db
-      .select({
-        slug: schema.pastWinners.slug,
-        recipientName: schema.pastWinners.recipientName,
-        awardTitle: schema.pastWinners.awardTitle,
-        sourceNotes: schema.pastWinners.sourceNotes,
-      })
-      .from(schema.pastWinners)
-      .where(eq(schema.pastWinners.status, "published"));
-    const matched = rows.find((row) =>
-      buildLegacyWinnerRootSlug(row.recipientName, row.awardTitle) === slug ||
-      (row.sourceNotes ?? []).some((source) => legacyRootSlugFromSource(source) === slug),
-    );
-
-    return matched ? getPublishedWinnerBySlug(matched.slug) : null;
-  } catch (error) {
-    console.error("[winner-queries] resolveLegacyWinnerRootSlug failed", error);
-    return null;
-  }
+  return (await resolveWinnerSlug(slug))?.winner ?? null;
 }
 
 export async function getRelatedWinners(winner: WinnerStoryRecord, limit = 3): Promise<WinnerCardData[]> {

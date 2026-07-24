@@ -251,12 +251,28 @@ This script temporarily enables admin signup for the controlled seed flow. Keep 
 | `npm run test:e2e` | Run Playwright winner route tests |
 | `npm run seed:admin` | Create/check the first admin account |
 | `npm run import:winners` | Import real previous winners from the legacy live site |
+| `npm run backfill:winner-aliases` | Store legacy winner URLs as indexed redirect aliases |
 | `npm run r2:migrate-images` | Move winner/nomination images into R2 |
 | `npm run db:generate` | Generate Drizzle migrations |
 | `npm run db:migrate` | Run Drizzle migrations |
 | `npm run db:studio` | Open Drizzle Studio |
 
 `npm run preview` is not the supported verification path for this project because the Vercel adapter is configured for server output.
+
+## Public caching
+
+Public DB-backed pages send a one-day browser cache lifetime and a one-year
+Vercel/downstream CDN lifetime with stale-while-revalidate. Winner and
+nomination responses also carry scoped Vercel cache tags. Provider caches are
+cleared manually when public content changes. Admin and auth responses remain
+`no-store`.
+
+Before deploying the indexed legacy-redirect query for the first time, run:
+
+```bash
+DRY_RUN=true npm run backfill:winner-aliases
+npm run backfill:winner-aliases
+```
 
 ## 🔁 Winner Import Workflow
 

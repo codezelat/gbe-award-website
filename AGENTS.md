@@ -36,6 +36,7 @@ Always run `npm run build` before finishing. Public pages, admin routes, and ser
 
 - `src/data/home.ts` is the source of truth for brand assets, nav items, static homepage content, and shared SEO copy.
 - `src/lib/public-content.ts` is the public data layer for nominees and previous winners. Public nominee and winner cards are DB-backed, not hardcoded.
+- `src/lib/http-cache.ts` defines public browser/CDN cache policy and Vercel cache tags.
 - `src/lib/winners/*` owns winner-story slugs, sanitization, quality checks, public queries, and article SEO.
 - `src/lib/db/schema.ts` defines the app tables, including `past_winners`, `nominations`, and Better Auth tables.
 - `src/components/SeoHead.astro` is the shared public SEO head path.
