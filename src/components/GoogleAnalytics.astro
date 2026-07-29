@@ -8,9 +8,7 @@ const hostname = new URL(SITE_URL).hostname;
 {
   googleTagId ? (
     <>
-      <link rel="preconnect" href="https://www.googletagmanager.com" />
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`}></script>
       <script
         is:inline
         define:vars={{ googleTagId, hostname }}
@@ -22,6 +20,25 @@ const hostname = new URL(SITE_URL).hostname;
           gtag('js', new Date());
           gtag('set', 'linker', { domains: [hostname] });
           gtag('config', googleTagId);
+
+          let googleTagLoaded = false;
+          const loadGoogleTag = () => {
+            if (googleTagLoaded) return;
+            googleTagLoaded = true;
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(googleTagId);
+            document.head.appendChild(script);
+          };
+
+          const interactionEvents = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
+          interactionEvents.forEach((eventName) => {
+            window.addEventListener(eventName, loadGoogleTag, { once: true, passive: true });
+          });
+
+          window.addEventListener('load', () => {
+            window.setTimeout(loadGoogleTag, 5000);
+          }, { once: true });
         `}
       </script>
     </>

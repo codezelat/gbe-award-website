@@ -10,6 +10,7 @@ export const SITE_ORGANIZER_EMAIL = "info@gbeaward.com";
 export const SITE_WHATSAPP_URL = "https://wa.link/4f21fy";
 export const SITE_DEFAULT_OG_IMAGE = "/assets/brand/hero-award-2026.webp";
 export const SITE_LAST_UPDATED = "2026-06-30";
+export const SITE_RECOGNITION_LAST_UPDATED = "2026-07-29";
 
 export const SITE_SOCIAL_LINKS = [
   "https://www.facebook.com/gbeaward/",
@@ -20,8 +21,9 @@ export const SITE_SOCIAL_LINKS = [
 ];
 
 export const PUBLIC_SITE_PAGES = [
-  { path: "/", changefreq: "weekly", priority: "1.0", lastmod: SITE_LAST_UPDATED },
-  { path: "/about", changefreq: "monthly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
+  { path: "/", changefreq: "weekly", priority: "1.0", lastmod: SITE_RECOGNITION_LAST_UPDATED },
+  { path: "/about", changefreq: "monthly", priority: "0.8", lastmod: SITE_RECOGNITION_LAST_UPDATED },
+  { path: "/recognition", changefreq: "monthly", priority: "0.8", lastmod: SITE_RECOGNITION_LAST_UPDATED },
   { path: "/nominees", changefreq: "weekly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
   { path: "/previous-winners", changefreq: "weekly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
   { path: "/contact", changefreq: "monthly", priority: "0.7", lastmod: SITE_LAST_UPDATED },
@@ -56,6 +58,18 @@ export const PUBLIC_SITE_PAGE_IMAGES: Record<string, Array<{ loc: string; title:
       loc: "/assets/journey/about-stage-winners.webp",
       title: "GBE Awards winners and presenters on stage",
       caption: "Award recipients and presenters at the Global Business Excellence Awards.",
+    },
+  ],
+  "/recognition": [
+    {
+      loc: "/assets/recognition/dec-logo.webp",
+      title: "Distance Education Council Sri Lanka",
+      caption: "Institutional recognition organisation presented within the GBE Awards recognition framework.",
+    },
+    {
+      loc: "/assets/recognition/sitc-campus-logo.webp",
+      title: "SITC Campus",
+      caption: "Business-faculty research and academic review organisation presented within the GBE Awards recognition framework.",
     },
   ],
   "/nominees": [

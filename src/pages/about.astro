@@ -5,6 +5,7 @@ import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import AboutGallerySlider from "../components/AboutGallerySlider";
+import RecognitionSummary from "../components/RecognitionSummary.astro";
 import { assetPaths, categories } from "../data/home";
 import { aboutGalleryImages } from "../data/aboutGallery";
 import { buildBreadcrumbSchema, buildPageSchema } from "../lib/seo";
@@ -78,7 +79,7 @@ const processSteps = [
     />
   </head>
   <body>
-    <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">
+    <div class="min-h-screen bg-[var(--c-page-glow)]">
       <Header />
       <main class="bg-[radial-gradient(circle_at_50%_0%,rgba(224,176,60,0.08),transparent_420px),var(--c-bg)] pb-24 pt-[210px] max-[1024px]:pt-[160px] max-[560px]:pb-14 max-[560px]:pt-[130px]">
         <section class="container-gbe mb-14 max-w-[1120px] max-[560px]:mb-10">
@@ -94,7 +95,7 @@ const processSteps = [
             </div>
 
             <figure class="m-0 overflow-hidden rounded-[18px] border border-[rgba(255,176,1,0.32)] bg-gbe-card shadow-[var(--c-card-shadow)]">
-              <img class="h-[320px] w-full object-cover max-[560px]:h-[230px]" src="/assets/gallery/award-presentation.webp" srcset="/assets/gallery/award-presentation.webp 900w, /assets/gallery/award-presentation-large.webp 1440w" sizes="(max-width: 1024px) 92vw, 420px" alt="GBE Awards stage award presentation with guests" width="900" height="750" loading="eager" decoding="async" data-preview-image data-preview-src="/assets/gallery/award-presentation.webp" data-preview-srcset="/assets/gallery/award-presentation.webp 900w, /assets/gallery/award-presentation-large.webp 1440w" data-preview-alt="GBE Awards stage award presentation with guests" data-preview-position="50% 43%" />
+              <img class="h-[320px] w-full object-cover max-[560px]:h-[230px]" src="/assets/gallery/award-presentation.webp" srcset="/assets/gallery/award-presentation.webp 900w, /assets/gallery/award-presentation-large.webp 1440w" sizes="(max-width: 1024px) 92vw, 420px" alt="GBE Awards stage award presentation with guests" width="900" height="750" loading="eager" decoding="async" fetchpriority="high" data-preview-image data-preview-src="/assets/gallery/award-presentation.webp" data-preview-srcset="/assets/gallery/award-presentation.webp 900w, /assets/gallery/award-presentation-large.webp 1440w" data-preview-alt="GBE Awards stage award presentation with guests" data-preview-position="50% 43%" />
             </figure>
           </div>
         </section>
@@ -109,6 +110,8 @@ const processSteps = [
             ))}
           </div>
         </section>
+
+        <RecognitionSummary />
 
         <section class="mb-16 max-[560px]:mb-12" aria-label="GBE Awards ceremony gallery">
           <AboutGallerySlider images={aboutGalleryImages} client:visible />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Swiper as SwiperInstance } from "swiper";
 import { Autoplay, Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +11,42 @@ type Props = {
 
 export default function AboutGallerySlider({ images }: Props) {
   const [swiper, setSwiper] = useState<SwiperInstance | null>(null);
+  const [interactive, setInteractive] = useState(false);
+  const previewImage = images[0];
+
+  useEffect(() => {
+    setInteractive(true);
+  }, []);
+
+  if (!interactive && previewImage) {
+    return (
+      <div className="relative mx-auto w-[min(82vw,510px)] overflow-hidden rounded-[16px] border border-[rgba(255,176,1,0.2)] bg-gbe-card shadow-[0_18px_46px_rgba(0,0,0,0.2)]">
+        <button
+          className="block w-full border-0 bg-transparent p-0"
+          type="button"
+          data-preview-image
+          data-preview-src={previewImage.src}
+          data-preview-srcset={previewImage.srcSet}
+          data-preview-alt={previewImage.alt}
+          data-preview-position={previewImage.position}
+          aria-label={`Preview ${previewImage.alt}`}
+        >
+          <img
+            className="h-[340px] w-full object-cover max-[1024px]:h-[310px] max-[560px]:h-[260px]"
+            src={previewImage.src}
+            srcSet={previewImage.srcSet}
+            sizes="(max-width: 560px) 82vw, 510px"
+            alt={previewImage.alt}
+            width="900"
+            height={previewImage.portrait ? "1200" : "600"}
+            loading="lazy"
+            decoding="async"
+            style={{ objectPosition: previewImage.position ?? "50% 44%" }}
+          />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="relative overflow-hidden">

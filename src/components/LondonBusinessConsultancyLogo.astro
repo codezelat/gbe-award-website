@@ -1,14 +1,26 @@
+---
+interface Props {
+  class?: string;
+  maskId?: string;
+}
+
+const {
+  class: className = "footer-organiser-logo",
+  maskId = "lbc-footer-logo-mask",
+} = Astro.props;
+---
+
 <svg
-  class="footer-organiser-logo"
+  class={className}
   viewBox="0 0 6636 1868"
   role="img"
-  aria-labelledby="lbc-logo-title"
+  aria-labelledby={`${maskId}-title`}
 >
-  <title id="lbc-logo-title">London Business Consultancy</title>
+  <title id={`${maskId}-title`}>London Business Consultancy</title>
   <defs>
-    <mask id="lbc-logo-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="6636" height="1868">
+    <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="6636" height="1868">
       <image
-        href="/assets/brand/london-business-consultancy-logo-mask.png"
+        href="/assets/brand/london-business-consultancy-logo-mask.webp"
         x="0"
         y="0"
         width="6636"
@@ -17,5 +29,5 @@
       />
     </mask>
   </defs>
-  <rect width="6636" height="1868" fill="currentColor" mask="url(#lbc-logo-mask)" />
+  <rect width="6636" height="1868" fill="currentColor" mask={`url(#${maskId})`} />
 </svg>

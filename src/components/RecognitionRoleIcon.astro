@@ -1,0 +1,24 @@
+---
+interface Props {
+  type: "dec" | "sitc" | "lbc";
+}
+
+const { type } = Astro.props;
+---
+
+<span class="grid size-11 shrink-0 place-items-center rounded-full border border-gbe-gold/35 bg-gbe-gold/[0.07] text-gbe-gold" aria-hidden="true">
+  {type === "dec" ? (
+    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 10h18M5 10V8l7-4 7 4v2M6 10v8m4-8v8m4-8v8m4-8v8M4 20h16" />
+    </svg>
+  ) : type === "sitc" ? (
+    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m3 9 9-5 9 5-9 5-9-5Z" />
+      <path d="M7 12v4.5c2.7 2 7.3 2 10 0V12M21 9v6" />
+    </svg>
+  ) : (
+    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 21V7l8-4 8 4v14M8 10h2m4 0h2M8 14h2m4 0h2M9 21v-3h6v3" />
+    </svg>
+  )}
+</span>

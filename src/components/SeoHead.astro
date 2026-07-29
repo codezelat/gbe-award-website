@@ -1,6 +1,10 @@
 ---
 import GoogleAnalytics from "./GoogleAnalytics.astro";
 import { absoluteUrl, assetUrl, buildOrganizationSchema, buildWebsiteSchema, seoDefaults, type JsonLd } from "../lib/seo";
+import tajawal400Url from "@fontsource/tajawal/files/tajawal-latin-400-normal.woff2?url";
+import tajawal500Url from "@fontsource/tajawal/files/tajawal-latin-500-normal.woff2?url";
+import tajawal700Url from "@fontsource/tajawal/files/tajawal-latin-700-normal.woff2?url";
+import tajawal900Url from "@fontsource/tajawal/files/tajawal-latin-900-normal.woff2?url";
 
 interface Props {
   title: string;
@@ -62,6 +66,10 @@ const schemaDocument = {
 <meta name="theme-color" content="#000000" />
 <meta name="generator" content={Astro.generator} />
 {keywords ? <meta name="keywords" content={keywords} /> : null}
+<link rel="preload" href={tajawal400Url} as="font" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" href={tajawal500Url} as="font" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" href={tajawal700Url} as="font" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" href={tajawal900Url} as="font" type="font/woff2" crossorigin="anonymous" />
 <GoogleAnalytics />
 
 {canonical ? <link rel="canonical" href={canonicalUrl} /> : null}

@@ -1,0 +1,33 @@
+---
+import { recognitionPartners } from "../data/recognition";
+import RecognitionPartnerLogo from "./RecognitionPartnerLogo.astro";
+---
+
+<section class="container-gbe mb-16 max-w-[1120px] max-[560px]:mb-12" aria-labelledby="about-recognition-title">
+  <div class="mb-8 grid grid-cols-[0.68fr_1fr] items-end gap-8 max-[760px]:grid-cols-1">
+    <div>
+      <p class="mb-3 mt-0 text-xs font-black uppercase tracking-[0.2em] text-gbe-gold-soft">Recognition and governance</p>
+      <h2 id="about-recognition-title" class="gold-text m-0 text-[clamp(28px,3vw,42px)] font-black leading-tight">
+        The roles behind the programme
+      </h2>
+    </div>
+    <p class="m-0 text-[clamp(15px,1.15vw,17px)] font-normal leading-[1.72] text-gbe-muted">
+      Institutional recognition, research input, and programme administration are different responsibilities.
+      GBE Awards presents each role clearly so recipients and partners can understand who does what.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-3 gap-5 max-[900px]:grid-cols-1">
+    {recognitionPartners.map((partner, index) => (
+      <article class="flex flex-col rounded-[18px] border border-gbe-gold/25 bg-gbe-card p-5 shadow-[var(--c-card-shadow)]">
+        <RecognitionPartnerLogo partner={partner} compact maskId={`lbc-about-${index}-mask`} />
+        <p class="mb-1 mt-5 text-[11px] font-black uppercase tracking-[0.16em] text-gbe-gold-soft">{partner.eyebrow}</p>
+        <h3 class="mb-2 mt-0 text-xl font-black leading-tight text-gbe-text">{partner.name}</h3>
+        <p class="mb-5 mt-0 flex-1 text-sm font-normal leading-[1.65] text-gbe-muted">{partner.summary}</p>
+        <a class="text-sm font-black text-gbe-gold underline decoration-gbe-gold/40 underline-offset-4 hover:text-gbe-gold-bright" href="/recognition">
+          Read the full recognition framework
+        </a>
+      </article>
+    ))}
+  </div>
+</section>

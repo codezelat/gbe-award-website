@@ -92,6 +92,13 @@ export function buildOrganizationSchema(): JsonLd {
     parentOrganization: {
       "@type": "Organization",
       name: SITE_ORGANIZER_NAME,
+      legalName: "LBC Group of Companies Ltd",
+      identifier: {
+        "@type": "PropertyValue",
+        propertyID: "Companies House",
+        value: "15216645",
+      },
+      url: "https://find-and-update.company-information.service.gov.uk/company/15216645",
       address: {
         "@type": "PostalAddress",
         addressLocality: "London",

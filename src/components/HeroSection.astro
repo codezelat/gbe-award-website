@@ -25,7 +25,8 @@ import { assetPaths } from "../data/home";
   </script>
 
   <!-- Background layers -->
-  <HeroBackgroundSlider client:idle />
+  <HeroBackgroundSlider client:media="(min-width: 1025px)" />
+  <div class="hero-mobile-static-moment pointer-events-none absolute" aria-hidden="true"></div>
   <div class="pointer-events-none absolute inset-0 z-0 bg-[var(--c-hero-glow)]" aria-hidden="true"></div>
   <div class="hero-orbs pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
     <div class="hero-orb hero-orb--1"></div>
@@ -33,14 +34,16 @@ import { assetPaths } from "../data/home";
     <div class="hero-orb hero-orb--3"></div>
   </div>
   <div class="hero-pattern pointer-events-none absolute inset-0 z-0" aria-hidden="true"></div>
-  <HeroLiveBackground client:idle />
+  <HeroLiveBackground client:media="(min-width: 1025px)" />
   <div class="pointer-events-none absolute inset-0 z-[1] bg-[var(--c-hero-overlay)]" aria-hidden="true"></div>
 
   <!-- DARK MODE LAYOUT (original) -->
   <div class="hero-dark-layout container-gbe relative z-[2] grid min-h-[530px] grid-cols-[250px_minmax(0,650px)_250px] items-center justify-center gap-[55px] max-[1024px]:flex max-[1024px]:min-h-0 max-[1024px]:flex-col max-[1024px]:gap-[22px]">
     <img
-      class="hero-trophy-shadow h-[390px] w-[240px] justify-self-start object-contain animate-[mediaFade_480ms_ease_both,trophyFloat_5.8s_ease-in-out_infinite] max-[1024px]:h-[364px] max-[1024px]:w-[224px] max-[560px]:h-[286px] max-[560px]:w-[176px]"
-      src={assetPaths.trophy}
+      class="hero-trophy-shadow h-[390px] w-[240px] justify-self-start object-contain animate-[trophyFloat_5.8s_ease-in-out_infinite] max-[1024px]:h-[364px] max-[1024px]:w-[224px] max-[560px]:h-[286px] max-[560px]:w-[176px]"
+      src={assetPaths.trophySmall}
+      srcset={`${assetPaths.trophySmall} 400w, ${assetPaths.trophyMedium} 600w, ${assetPaths.trophy} 800w`}
+      sizes="(max-width: 560px) 176px, (max-width: 1024px) 224px, 240px"
       alt=""
       width="800"
       height="1300"
@@ -59,8 +62,10 @@ import { assetPaths } from "../data/home";
       <a class="btn-gold btn-gold-hover max-[1024px]:hidden" href="https://access.gbeaward.com/apply" target="_blank">Apply Now</a>
     </div>
     <img
-      class="hero-trophy-shadow h-[390px] w-[240px] justify-self-end object-contain animate-[mediaFade_480ms_ease_both,trophyFloat_5.8s_ease-in-out_infinite] [animation-delay:-2.2s] max-[1024px]:hidden"
-      src={assetPaths.trophy}
+      class="hero-trophy-shadow h-[390px] w-[240px] justify-self-end object-contain animate-[trophyFloat_5.8s_ease-in-out_infinite] [animation-delay:-2.2s] max-[1024px]:hidden"
+      src={assetPaths.trophySmall}
+      srcset={`${assetPaths.trophySmall} 400w, ${assetPaths.trophyMedium} 600w, ${assetPaths.trophy} 800w`}
+      sizes="240px"
       alt=""
       width="800"
       height="1300"
@@ -89,8 +94,10 @@ import { assetPaths } from "../data/home";
     <div class="hero-light-visual relative flex flex-1 items-center justify-center max-[1024px]:order-first max-[1024px]:w-full">
       <div class="hero-light-glow pointer-events-none absolute" aria-hidden="true"></div>
       <img
-        class="hero-light-trophy relative z-[1] h-[480px] w-auto object-contain animate-[mediaFade_600ms_ease_both,trophyFloat_6s_ease-in-out_infinite] drop-shadow-[0_32px_64px_rgba(139,105,20,0.22)] max-[1024px]:h-[340px] max-[560px]:h-[260px]"
-        src={assetPaths.trophy}
+        class="hero-light-trophy relative z-[1] h-[480px] w-auto object-contain animate-[trophyFloat_6s_ease-in-out_infinite] drop-shadow-[0_32px_64px_rgba(139,105,20,0.22)] max-[1024px]:h-[340px] max-[560px]:h-[260px]"
+        src={assetPaths.trophySmall}
+        srcset={`${assetPaths.trophySmall} 400w, ${assetPaths.trophyMedium} 600w, ${assetPaths.trophy} 800w`}
+        sizes="(max-width: 560px) 160px, (max-width: 1024px) 210px, 295px"
         alt=""
         width="800"
         height="1300"

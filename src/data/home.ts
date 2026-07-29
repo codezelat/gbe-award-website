@@ -4,6 +4,8 @@ export const assetPaths = {
   sriLankaFlag: "/assets/brand/flag-sri-lanka.svg",
   favicon: "/assets/brand/favicon-192.png",
   trophy: "/assets/brand/hero-award-2026.webp",
+  trophySmall: "/assets/brand/hero-award-2026-small.webp",
+  trophyMedium: "/assets/brand/hero-award-2026-medium.webp",
   award: "/assets/brand/award-icon.webp",
   journeyWinners: "/assets/journey/journey-winners.webp",
   journeyWinnersLarge: "/assets/journey/journey-winners-large.webp",
@@ -19,6 +21,8 @@ export const assetPaths = {
   aboutLeadershipLarge: "/assets/journey/about-leadership-large.webp",
   magazineMockup: "/assets/magazine/gbe-awards-magazine-2025-mockup.webp",
   magazineMockupLarge: "/assets/magazine/gbe-awards-magazine-2025-mockup-large.webp",
+  decLogo: "/assets/recognition/dec-logo.webp",
+  sitcLogo: "/assets/recognition/sitc-campus-logo.webp",
 };
 
 export const magazineFeature = {
@@ -32,6 +36,7 @@ export const navItems = [
   { label: "HOME", href: "/" },
   { label: "PREVIOUS WINNERS", href: "/previous-winners" },
   { label: "ABOUT", href: "/about" },
+  { label: "RECOGNITION", href: "/recognition" },
   { label: "CONTACT", href: "/contact" },
 ];
 
@@ -40,6 +45,7 @@ export const footerItems = [
   { label: "Nominees", href: "/nominees" },
   { label: "Previous Winners", href: "/previous-winners" },
   { label: "About", href: "/about" },
+  { label: "Recognition", href: "/recognition" },
   { label: "Contact", href: "/contact" },
 ];
 

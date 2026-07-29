@@ -527,6 +527,30 @@
     width: 380px;
     height: 380px;
   }
+
+  .hero-mobile-static-moment {
+    display: none;
+  }
+
+  [data-theme="light"] .hero-mobile-static-moment {
+    inset: 0;
+    z-index: 0;
+    display: block;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(250, 248, 243, 0.34), rgba(250, 248, 243, 0.9)),
+      linear-gradient(90deg, rgba(250, 248, 243, 0.8), rgba(250, 248, 243, 0.3)),
+      url("/assets/journey/hero-banner-1.webp") center / cover no-repeat;
+  }
+
+  [data-theme="light"] .hero-mobile-static-moment::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(250, 248, 243, 0.34), rgba(250, 248, 243, 0.9)),
+      linear-gradient(90deg, rgba(250, 248, 243, 0.8), rgba(250, 248, 243, 0.3));
+  }
 }
 
 @media (max-width: 560px) {
@@ -563,6 +587,23 @@
     border-radius: 36% 36% 22px 22px / 22% 22% 18px 18px;
     background: #f1ead9;
     box-shadow: 0 20px 44px rgba(90, 66, 18, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  }
+
+  [data-theme="light"] .hero-mobile-static-moment {
+    top: 112px;
+    right: 24px;
+    bottom: auto;
+    left: 24px;
+    height: 254px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 140, 30, 0.28);
+    border-radius: 36% 36% 22px 22px / 22% 22% 18px 18px;
+    background: #f1ead9;
+    box-shadow: 0 20px 44px rgba(90, 66, 18, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  }
+
+  [data-theme="light"] .hero-mobile-static-moment::after {
+    background: linear-gradient(180deg, rgba(255, 252, 244, 0.08) 0%, rgba(250, 248, 243, 0.08) 45%, rgba(250, 248, 243, 0.76) 100%);
   }
 
   [data-theme="light"] .hero-mobile-moment::after {
@@ -884,11 +925,6 @@
 @keyframes revealUp {
   from { transform: translateY(28px); }
   to { transform: translateY(0); }
-}
-
-@keyframes pageFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 @keyframes mediaFade {

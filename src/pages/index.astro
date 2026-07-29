@@ -5,6 +5,7 @@ import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import HeroSection from "../components/HeroSection.astro";
 import AboutSection from "../components/AboutSection.astro";
+import RecognitionSection from "../components/RecognitionSection.astro";
 import CategoriesSection from "../components/CategoriesSection.astro";
 import EventGallerySection from "../components/EventGallerySection.astro";
 import JourneySection from "../components/JourneySection.astro";
@@ -42,11 +43,12 @@ setPublicResponseCache(Astro.response.headers, {
     />
   </head>
   <body>
-    <div class="min-h-screen animate-[pageFade_420ms_ease_both] bg-[var(--c-page-glow)]">
+    <div class="min-h-screen bg-[var(--c-page-glow)]">
       <Header />
       <main>
         <HeroSection />
         <AboutSection />
+        <RecognitionSection />
         <EventGallerySection />
         <CategoriesSection />
         <MagazineSection />
