@@ -63,7 +63,7 @@ export const PUBLIC_SITE_PAGE_IMAGES: Record<string, Array<{ loc: string; title:
   "/recognition": [
     {
       loc: "/assets/recognition/dec-logo.webp",
-      title: "Distance Education Council Sri Lanka",
+      title: "DEC Sri Lanka",
       caption: "Sri Lankan institutional recognition organisation identified under Ministry of Industry Gazette No. 2387/25 and presented within the GBE Awards recognition framework.",
     },
     {

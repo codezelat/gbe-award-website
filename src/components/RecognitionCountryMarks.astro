@@ -1,0 +1,40 @@
+---
+import { assetPaths } from "../data/home";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    "inline-flex flex-wrap items-center gap-3 rounded-[16px] border border-gbe-gold/28 bg-gbe-gold/[0.055] shadow-[0_14px_34px_rgba(0,0,0,0.12)]",
+    compact ? "px-4 py-3" : "px-5 py-4 max-[560px]:w-full max-[560px]:items-stretch max-[560px]:justify-between max-[560px]:px-4",
+  ]}
+  role="group"
+  aria-label="Sri Lanka recognition and United Kingdom programme administration"
+>
+  <div class="flex items-center gap-3">
+    <span class="grid size-10 shrink-0 place-items-center rounded-full border border-gbe-gold/25 bg-white/95 shadow-sm">
+      <img class="size-7 object-contain" src={assetPaths.sriLankaFlag} alt="" width="64" height="64" loading="lazy" decoding="async" />
+    </span>
+    <span>
+      <span class="block text-[10px] font-black uppercase tracking-[0.16em] text-gbe-gold-soft">Sri Lanka</span>
+      <span class="block text-xs font-bold text-gbe-text">Institutional recognition</span>
+    </span>
+  </div>
+
+  <span class="h-8 w-px bg-gbe-gold/25 max-[390px]:hidden" aria-hidden="true"></span>
+
+  <div class="flex items-center gap-3">
+    <span class="grid size-10 shrink-0 place-items-center rounded-full border border-gbe-gold/25 bg-white/95 shadow-sm">
+      <img class="size-7 object-contain" src={assetPaths.unitedKingdomFlag} alt="" width="64" height="64" loading="lazy" decoding="async" />
+    </span>
+    <span>
+      <span class="block text-[10px] font-black uppercase tracking-[0.16em] text-gbe-gold-soft">United Kingdom</span>
+      <span class="block text-xs font-bold text-gbe-text">Programme administration</span>
+    </span>
+  </div>
+</div>

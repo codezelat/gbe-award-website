@@ -4,9 +4,12 @@ import ThemeInit from "../components/ThemeInit.astro";
 import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import AboutGallerySlider from "../components/AboutGallerySlider";
+import RecognitionCountryMarks from "../components/RecognitionCountryMarks.astro";
 import RecognitionPartnerLogo from "../components/RecognitionPartnerLogo.astro";
 import RecognitionRoleIcon from "../components/RecognitionRoleIcon.astro";
 import { assetPaths } from "../data/home";
+import { aboutGalleryImages } from "../data/aboutGallery";
 import { certificateAuthenticitySteps, recognitionPartners } from "../data/recognition";
 import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema } from "../lib/seo";
 
@@ -14,7 +17,7 @@ export const prerender = true;
 
 const title = "Recognition and Certificate Authenticity | GBE Awards 2026";
 const description =
-  "Understand the distinct roles of the Distance Education Council, SITC Campus Business Faculty, and London Business Consultancy in GBE Awards recognition, research, administration, and certificate authenticity.";
+  "Understand the distinct roles of DEC, SITC Campus Business Faculty, and London Business Consultancy in GBE Awards recognition, research, administration, and certificate authenticity.";
 ---
 
 <!doctype html>
@@ -24,7 +27,7 @@ const description =
     <SeoHead
       title={title}
       description={description}
-      keywords="GBE Awards recognition, GBE Awards certificate authenticity, Distance Education Council Sri Lanka, SITC Campus Business Faculty, London Business Consultancy UK"
+      keywords="GBE Awards recognition, GBE Awards certificate authenticity, DEC Sri Lanka, SITC Campus Business Faculty, London Business Consultancy UK"
       path="/recognition"
       image={assetPaths.trophy}
       schema={[
@@ -62,11 +65,13 @@ const description =
               Recognition, research and certificate authenticity
             </h1>
             <p class="mb-0 max-w-[820px] text-[clamp(17px,1.45vw,21px)] font-normal leading-[1.72] text-gbe-muted">
-              GBE Awards brings together three distinct responsibilities: Sri Lankan institutional recognition through
-              a council identified under the Ministry of Industry Gazette,
+              GBE Awards brings together three distinct responsibilities: Sri Lankan institutional recognition through DEC,
               business-faculty research and academic review, and programme administration by the London-based UK
               organiser. This page explains those roles without blurring the difference between them.
             </p>
+            <div class="mt-8">
+              <RecognitionCountryMarks />
+            </div>
           </div>
         </section>
 
@@ -87,13 +92,33 @@ const description =
                     <p class="mb-1 mt-0 text-[11px] font-black uppercase tracking-[0.18em] text-gbe-gold-soft">{partner.eyebrow}</p>
                     <h3 class="mb-2 mt-0 text-[clamp(22px,2.4vw,31px)] font-black leading-tight text-gbe-text">{partner.name}</h3>
                     <p class="mb-3 mt-0 text-[16px] font-normal leading-[1.7] text-gbe-muted">{partner.summary}</p>
-                    <p class="mb-5 mt-0 text-[15px] font-normal leading-[1.68] text-gbe-muted">{partner.detail}</p>
+                    {partner.highlight ? (
+                      <p class="mb-4 mt-0 rounded-r-[12px] border-l-2 border-gbe-gold bg-gbe-gold/[0.07] px-4 py-3 text-[15px] font-medium leading-[1.65] text-gbe-text">
+                        {partner.highlight}
+                      </p>
+                    ) : null}
+                    <p class="m-0 text-[15px] font-normal leading-[1.68] text-gbe-muted">{partner.detail}</p>
                   </div>
                 </div>
                 <RecognitionPartnerLogo partner={partner} maskId={`lbc-page-${index}-mask`} />
               </article>
             ))}
           </div>
+        </section>
+
+        <section class="mb-20 max-[560px]:mb-14" aria-labelledby="recognition-gallery-title">
+          <div class="container-gbe mb-8 max-w-[1120px]">
+            <p class="mb-3 mt-0 text-xs font-black uppercase tracking-[0.2em] text-gbe-gold-soft">Real event moments</p>
+            <div class="grid grid-cols-[0.65fr_1fr] items-end gap-10 max-[760px]:grid-cols-1 max-[760px]:gap-4">
+              <h2 id="recognition-gallery-title" class="gold-text m-0 text-[clamp(30px,3.4vw,46px)] font-black leading-tight">
+                Recognition in action
+              </h2>
+              <p class="m-0 text-[16px] font-normal leading-[1.7] text-gbe-muted">
+                Real photographs from GBE Awards ceremonies, showing recipients, presenters, and award moments from the programme.
+              </p>
+            </div>
+          </div>
+          <AboutGallerySlider images={aboutGalleryImages} client:visible />
         </section>
 
         <section

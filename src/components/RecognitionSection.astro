@@ -1,5 +1,6 @@
 ---
 import { certificateAuthenticitySteps, recognitionPartners } from "../data/recognition";
+import RecognitionCountryMarks from "./RecognitionCountryMarks.astro";
 import RecognitionPartnerLogo from "./RecognitionPartnerLogo.astro";
 import RecognitionRoleIcon from "./RecognitionRoleIcon.astro";
 ---
@@ -19,13 +20,15 @@ import RecognitionRoleIcon from "./RecognitionRoleIcon.astro";
         <h2 id="recognition-home-title" class="gold-text mb-6 mt-0 text-[clamp(38px,5vw,64px)] font-black leading-[0.98]">
           Recognition with substance
         </h2>
-        <p class="mb-7 mt-0 text-[clamp(16px,1.3vw,19px)] font-normal leading-[1.72] text-gbe-muted">
-          GBE Awards is institutionally recognised in Sri Lanka by the Distance Education Council (DEC), identified
-          under Ministry of Industry Gazette No. 2387/25, with business research from SITC Campus and programme
-          administration by the UK organiser.
+        <p class="mb-4 mt-0 text-[clamp(16px,1.3vw,19px)] font-normal leading-[1.72] text-gbe-muted">
+          The GBE Awards programme is <strong class="font-black text-gbe-gold">institutionally recognised in Sri Lanka through DEC</strong>.
         </p>
+        <p class="mb-6 mt-0 rounded-r-[12px] border-l-2 border-gbe-gold bg-gbe-gold/[0.07] px-4 py-3 text-[15px] font-medium leading-[1.6] text-gbe-text">
+          DEC is identified under Sri Lanka's <strong class="font-black text-gbe-gold-bright">Ministry of Industry</strong>.
+        </p>
+        <RecognitionCountryMarks compact />
         <a
-          class="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.13em] text-gbe-gold underline decoration-gbe-gold/45 underline-offset-[6px] transition-colors hover:text-gbe-gold-bright"
+          class="mt-7 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.13em] text-gbe-gold underline decoration-gbe-gold/45 underline-offset-[6px] transition-colors hover:text-gbe-gold-bright"
           href="/recognition"
         >
           Explore recognition

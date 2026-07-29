@@ -5,6 +5,7 @@ export type RecognitionPartner = {
   role: string;
   summary: string;
   detail: string;
+  highlight?: string;
   logo: string;
   logoSmall?: string;
   logoAlt: string;
@@ -14,15 +15,17 @@ export const recognitionPartners: RecognitionPartner[] = [
   {
     key: "dec",
     eyebrow: "Sri Lankan institutional recognition",
-    name: "Distance Education Council",
+    name: "DEC",
     role: "Sri Lankan recognition",
     summary:
-      "The GBE Awards programme is institutionally recognised in Sri Lanka through the Distance Education Council (DEC).",
+      "The GBE Awards programme is institutionally recognised in Sri Lanka through DEC.",
     detail:
-      "DEC is identified under Ministry of Industry Gazette No. 2387/25 in the Democratic Socialist Republic of Sri Lanka. Its role here is institutional recognition of the awards programme in Sri Lanka; DEC is not presented as the programme's education provider, awarding body, or academic accreditor.",
+      "DEC's role here is institutional recognition of the awards programme in Sri Lanka; DEC is not presented as the programme's education provider, awarding body, or academic accreditor.",
+    highlight:
+      "DEC is identified under the Ministry of Industry of the Democratic Socialist Republic of Sri Lanka, Gazette No. 2387/25.",
     logo: "/assets/recognition/dec-logo.webp",
     logoSmall: "/assets/recognition/dec-logo-small.webp",
-    logoAlt: "Distance Education Council Sri Lanka",
+    logoAlt: "DEC Sri Lanka",
   },
   {
     key: "sitc",

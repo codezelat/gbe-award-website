@@ -5,12 +5,12 @@ test("recognition page explains each role and certificate authenticity", async (
 
   await expect(page).toHaveTitle(/Recognition and Certificate Authenticity/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Recognition, research and certificate authenticity");
-  await expect(page.getByRole("heading", { name: "Distance Education Council" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "DEC", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "SITC Campus Business Faculty" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "London Business Consultancy" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "A certificate connected to a real award record" })).toBeVisible();
   await expect(page.getByText("it is not a certificate issued by the UK Government")).toBeVisible();
-  await expect(page.getByText("Ministry of Industry Gazette No. 2387/25")).toBeVisible();
+  await expect(page.getByText(new RegExp("Ministry of Industry.*Gazette No\\. 2387/25"))).toBeVisible();
   await expect(page.getByText(/education provider, awarding body, or academic accreditor/)).toBeVisible();
   await expect(page.locator('section[aria-labelledby="roles-title"] a')).toHaveCount(0);
   await expect(page.getByRole("textbox")).toHaveCount(0);
@@ -19,6 +19,12 @@ test("recognition page explains each role and certificate authenticity", async (
 test("home and about pages expose the recognition framework", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Recognition with substance" })).toBeVisible();
+  await expect(page.getByText(/institutionally recognised in Sri Lanka through DEC/).first()).toBeVisible();
+  await expect(page.getByText("Ministry of Industry", { exact: true })).toBeVisible();
+  await expect(page.getByText("Gazette No. 2387/25")).toHaveCount(0);
+  const countryMarks = page.getByRole("group", { name: "Sri Lanka recognition and United Kingdom programme administration" });
+  await expect(countryMarks).toBeVisible();
+  await expect(countryMarks.locator("img")).toHaveCount(2);
   await expect(page.getByRole("link", { name: /Explore recognition/ })).toHaveAttribute("href", "/recognition");
 
   await page.goto("/about");
@@ -37,7 +43,7 @@ test("recognition remains readable without horizontal overflow on mobile", async
 
   expect(dimensions.scrollWidth).toBe(dimensions.clientWidth);
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await expect(page.getByAltText("Distance Education Council Sri Lanka")).toBeVisible();
+  await expect(page.getByAltText("DEC Sri Lanka")).toBeVisible();
   await expect(page.getByAltText("SITC Campus")).toBeVisible();
   await expect(page.getByRole("img", { name: "London Business Consultancy" }).first()).toBeVisible();
 });
@@ -51,4 +57,34 @@ test("about gallery hydrates only when visible and keeps working controls", asyn
   await expect(page.locator(".about-gallery-slider")).toBeVisible();
   await expect(page.getByRole("button", { name: "Next gallery image" })).toBeEnabled();
   await page.getByRole("button", { name: "Next gallery image" }).click();
+});
+
+test("recognition event gallery hydrates below the organisation roles", async ({ page }) => {
+  await page.goto("/recognition");
+
+  const gallery = page.getByRole("region", { name: "Recognition in action" });
+  await gallery.scrollIntoViewIfNeeded();
+  await expect(page.locator(".about-gallery-slider")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Next gallery image" })).toBeEnabled();
+});
+
+test("contact content uses the same bounded page width as about", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/contact");
+
+  const width = await page.locator("main > section").first().evaluate((element) => element.getBoundingClientRect().width);
+  expect(width).toBeLessThanOrEqual(1120);
+});
+
+test("updated homepage and contact layouts do not overflow on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+
+  for (const path of ["/", "/contact"]) {
+    await page.goto(path);
+    const dimensions = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(dimensions.scrollWidth).toBe(dimensions.clientWidth);
+  }
 });
