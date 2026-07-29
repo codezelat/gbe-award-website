@@ -62,9 +62,10 @@ const description =
               Recognition, research and certificate authenticity
             </h1>
             <p class="mb-0 max-w-[820px] text-[clamp(17px,1.45vw,21px)] font-normal leading-[1.72] text-gbe-muted">
-              GBE Awards brings together three distinct responsibilities: institutional recognition in Sri Lanka,
-              business-faculty research and academic review, and administration by a registered company in the
-              United Kingdom. This page explains those roles without blurring the difference between them.
+              GBE Awards brings together three distinct responsibilities: Sri Lankan institutional recognition through
+              a council identified under the Ministry of Industry Gazette,
+              business-faculty research and academic review, and programme administration by the London-based UK
+              organiser. This page explains those roles without blurring the difference between them.
             </p>
           </div>
         </section>
@@ -87,15 +88,6 @@ const description =
                     <h3 class="mb-2 mt-0 text-[clamp(22px,2.4vw,31px)] font-black leading-tight text-gbe-text">{partner.name}</h3>
                     <p class="mb-3 mt-0 text-[16px] font-normal leading-[1.7] text-gbe-muted">{partner.summary}</p>
                     <p class="mb-5 mt-0 text-[15px] font-normal leading-[1.68] text-gbe-muted">{partner.detail}</p>
-                    <a
-                      class="text-sm font-black text-gbe-gold underline decoration-gbe-gold/45 underline-offset-4 transition-colors hover:text-gbe-gold-bright"
-                      href={partner.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {partner.sourceLabel}
-                      <span aria-hidden="true"> ↗</span>
-                    </a>
                   </div>
                 </div>
                 <RecognitionPartnerLogo partner={partner} maskId={`lbc-page-${index}-mask`} />

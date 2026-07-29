@@ -10,6 +10,9 @@ test("recognition page explains each role and certificate authenticity", async (
   await expect(page.getByRole("heading", { name: "London Business Consultancy" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "A certificate connected to a real award record" })).toBeVisible();
   await expect(page.getByText("it is not a certificate issued by the UK Government")).toBeVisible();
+  await expect(page.getByText("Ministry of Industry Gazette No. 2387/25")).toBeVisible();
+  await expect(page.getByText(/education provider, awarding body, or academic accreditor/)).toBeVisible();
+  await expect(page.locator('section[aria-labelledby="roles-title"] a')).toHaveCount(0);
   await expect(page.getByRole("textbox")).toHaveCount(0);
 });
 

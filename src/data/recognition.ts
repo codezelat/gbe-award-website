@@ -5,8 +5,6 @@ export type RecognitionPartner = {
   role: string;
   summary: string;
   detail: string;
-  sourceUrl: string;
-  sourceLabel: string;
   logo: string;
   logoSmall?: string;
   logoAlt: string;
@@ -15,15 +13,13 @@ export type RecognitionPartner = {
 export const recognitionPartners: RecognitionPartner[] = [
   {
     key: "dec",
-    eyebrow: "Institutional recognition",
+    eyebrow: "Sri Lankan institutional recognition",
     name: "Distance Education Council",
-    role: "Sri Lanka recognition",
+    role: "Sri Lankan recognition",
     summary:
-      "The Distance Education Council provides institutional recognition for the GBE Awards programme in Sri Lanka.",
+      "The GBE Awards programme is institutionally recognised in Sri Lanka through the Distance Education Council (DEC).",
     detail:
-      "The Distance Education Council identifies itself as registered under Sri Lanka's Ministry of Industry under Gazette No. 2387/25.",
-    sourceUrl: "https://decsl.lk/about-us/",
-    sourceLabel: "View DEC information",
+      "DEC is identified under Ministry of Industry Gazette No. 2387/25 in the Democratic Socialist Republic of Sri Lanka. Its role here is institutional recognition of the awards programme in Sri Lanka; DEC is not presented as the programme's education provider, awarding body, or academic accreditor.",
     logo: "/assets/recognition/dec-logo.webp",
     logoSmall: "/assets/recognition/dec-logo-small.webp",
     logoAlt: "Distance Education Council Sri Lanka",
@@ -37,8 +33,6 @@ export const recognitionPartners: RecognitionPartner[] = [
       "SITC Campus Business Faculty contributes business-focused research and academic review to the recognition framework.",
     detail:
       "Its role supports informed review by bringing an academic and business-research perspective to the awards programme.",
-    sourceUrl: "https://sitc.lk/",
-    sourceLabel: "Visit SITC Campus",
     logo: "/assets/recognition/sitc-campus-logo.webp",
     logoSmall: "/assets/recognition/sitc-campus-logo-small.webp",
     logoAlt: "SITC Campus",
@@ -51,9 +45,7 @@ export const recognitionPartners: RecognitionPartner[] = [
     summary:
       "London Business Consultancy organises and administers the Global Business Excellence Awards from London, UK.",
     detail:
-      "London Business Consultancy is a trading name of LBC Group of Companies Ltd, registered in England and Wales under company number 15216645.",
-    sourceUrl: "https://find-and-update.company-information.service.gov.uk/company/15216645",
-    sourceLabel: "View Companies House record",
+      "As the UK organiser, London Business Consultancy manages programme administration, award records, and authorised certificate issuance from London.",
     logo: "/assets/brand/london-business-consultancy-logo-mask.webp",
     logoAlt: "London Business Consultancy",
   },
