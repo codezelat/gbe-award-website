@@ -5,6 +5,7 @@ import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SocialLinks from "../components/SocialLinks";
 import SiteFooter from "../components/SiteFooter.astro";
+import BestWebsiteAwardsFeature from "../components/BestWebsiteAwardsFeature.astro";
 import { assetPaths } from "../data/home";
 import { buildBreadcrumbSchema, buildPageSchema } from "../lib/seo";
 
@@ -96,6 +97,8 @@ const reasons = [
             ))}
           </div>
         </section>
+
+        <BestWebsiteAwardsFeature compact />
 
         <!-- Main grid: form + info -->
         <section class="container-gbe mb-16 max-w-[1120px] max-[560px]:mb-10">

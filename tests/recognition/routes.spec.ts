@@ -19,6 +19,8 @@ test("recognition page explains each role and certificate authenticity", async (
 test("home and about pages expose the recognition framework", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Recognition with substance" })).toBeVisible();
+  await expect(page.getByText("Recognition framework", { exact: true })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "A clear chain of authenticity" })).toHaveCount(0);
   await expect(page.getByText(/institutionally recognised in Sri Lanka through DEC/).first()).toBeVisible();
   await expect(page.getByText("Ministry of Industry", { exact: true })).toBeVisible();
   await expect(page.getByText("Gazette No. 2387/25")).toHaveCount(0);
@@ -87,4 +89,54 @@ test("updated homepage and contact layouts do not overflow on mobile", async ({ 
     }));
     expect(dimensions.scrollWidth).toBe(dimensions.clientWidth);
   }
+});
+
+test("Best Website Awards applications feature is correctly placed and linked", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+
+  const categories = page.getByRole("heading", { name: "Awards Across Diverse Categories" });
+  const feature = page.getByRole("heading", { name: "Best Website Awards 2026" });
+  await expect(feature).toBeVisible();
+  await expect(page.getByText("Applications open")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Apply", exact: true })).toHaveAttribute(
+    "href",
+    "https://bestwebsiteaward.com/",
+  );
+  await expect(page.getByRole("link", { name: "Explore Best Website Awards 2026" })).toHaveAttribute(
+    "href",
+    "https://bestwebsiteaward.com/",
+  );
+
+  const immediatelyAfterCategories = await page.evaluate(() => {
+    const categoriesHeading = [...document.querySelectorAll("h2")].find((element) =>
+      element.textContent?.includes("Awards Across Diverse Categories"),
+    );
+    const featureHeading = [...document.querySelectorAll("h2")].find((element) =>
+      element.textContent?.includes("Best Website Awards 2026"),
+    );
+    return (
+      categoriesHeading?.closest("section")?.nextElementSibling ===
+      featureHeading?.closest("section")
+    );
+  });
+  expect(immediatelyAfterCategories).toBe(true);
+  await expect(categories).toBeVisible();
+
+  const featureWidth = await page
+    .getByRole("region", { name: "Best Website Awards 2026" })
+    .locator(":scope > .container-gbe")
+    .evaluate((element) => element.getBoundingClientRect().width);
+  const magazineWidth = await page
+    .getByRole("region", { name: "Read the GBE Awards 2025 Magazine" })
+    .locator(":scope > .container-gbe")
+    .evaluate((element) => element.getBoundingClientRect().width);
+  expect(featureWidth).toBe(magazineWidth);
+
+  await page.goto("/contact");
+  await expect(page.getByRole("heading", { name: "Best Website Awards 2026" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Apply", exact: true })).toHaveAttribute(
+    "href",
+    "https://bestwebsiteaward.com/",
+  );
 });

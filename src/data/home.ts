@@ -32,6 +32,13 @@ export const magazineFeature = {
     "Browse the Global Business Excellence Awards 2025 magazine, featuring event highlights, award moments, and editorial coverage from the ceremony.",
 };
 
+export const bestWebsiteAwardsFeature = {
+  url: "https://bestwebsiteaward.com/",
+  applyUrl: "https://bestwebsiteaward.com/",
+  status: "Applications open",
+  image: "/assets/best-website-awards/editorial-desk.webp",
+};
+
 export const navItems = [
   { label: "HOME", href: "/" },
   { label: "PREVIOUS WINNERS", href: "/previous-winners" },
