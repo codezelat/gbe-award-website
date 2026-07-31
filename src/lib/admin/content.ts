@@ -131,7 +131,14 @@ function withWinnerDefaults(input: WinnerInput): WinnerInput {
 }
 
 function mergeWinnerInput(existing: typeof schema.pastWinners.$inferSelect, input: WinnerInput): WinnerInput {
-  const provided = Object.fromEntries(Object.entries(input).filter(([, value]) => value !== undefined));
+  const provided = Object.fromEntries(
+    Object.entries(input).filter(([, value]) => value !== undefined),
+  );
+  // Preserve the existing slug when the user hasn't provided a new one.
+  // An empty input slug means "keep whatever is already in the database".
+  if (!input.slug) {
+    provided.slug = existing.slug;
+  }
   return withWinnerDefaults({ ...existing, ...provided } as WinnerInput);
 }
 
@@ -328,7 +335,9 @@ export async function updateWinner(id: string, input: WinnerInput) {
   const bodyChanged = !jsonEquals(existing.body, completeInput.body);
 
   await ensureSlugAvailable(slug, id);
-  await ensureSlugAvailable(existing.slug, id);
+  if (slug !== existing.slug) {
+    await ensureSlugAvailable(existing.slug, id);
+  }
   await enforceIndexingQuality(completeInput, id, bodyChanged, publishedAt);
 
   const values = {
@@ -365,9 +374,19 @@ export async function deleteWinner(id: string) {
 }
 
 export async function createNomination(input: NominationInput) {
+  const slug = input.slug ? slugify(input.slug) : slugify(`${input.nomineeName}-${input.awardTitle}-${input.year}`);
+  const [existing] = await db
+    .select({ id: schema.nominations.id })
+    .from(schema.nominations)
+    .where(eq(schema.nominations.slug, slug))
+    .limit(1);
+  if (existing) {
+    throw new WinnerContentError("That slug is already used by another nomination.");
+  }
+
   const values = {
     ...input,
-    slug: input.slug ? slugify(input.slug) : slugify(`${input.nomineeName}-${input.awardTitle}-${input.year}`),
+    slug,
     updatedAt: new Date(),
   };
 
@@ -376,9 +395,24 @@ export async function createNomination(input: NominationInput) {
 }
 
 export async function updateNomination(id: string, input: NominationInput) {
+  const [existing] = await db.select().from(schema.nominations).where(eq(schema.nominations.id, id)).limit(1);
+  if (!existing) return undefined;
+
+  const slug = input.slug ? slugify(input.slug) : existing.slug;
+  if (slug !== existing.slug) {
+    const [conflict] = await db
+      .select({ id: schema.nominations.id })
+      .from(schema.nominations)
+      .where(eq(schema.nominations.slug, slug))
+      .limit(1);
+    if (conflict) {
+      throw new WinnerContentError("That slug is already used by another nomination.");
+    }
+  }
+
   const values = {
     ...input,
-    slug: input.slug ? slugify(input.slug) : slugify(`${input.nomineeName}-${input.awardTitle}-${input.year}`),
+    slug,
     updatedAt: new Date(),
   };
 

@@ -229,6 +229,24 @@ export default function AdminForm({
 
       if (!res.ok) {
         const body = await res.json().catch(() => null);
+        const issues = body?.issues as
+          | { fieldErrors: Record<string, string[]>; formErrors: string[] }
+          | undefined;
+        if (issues) {
+          const messages: string[] = [];
+          const fieldErrors = issues.fieldErrors ?? {};
+          for (const [field, msgs] of Object.entries(fieldErrors)) {
+            if (msgs && msgs.length > 0) {
+              messages.push(`${field}: ${msgs.join("; ")}`);
+            }
+          }
+          for (const msg of issues.formErrors ?? []) {
+            messages.push(msg);
+          }
+          if (messages.length > 0) {
+            throw new Error(messages.join("\n"));
+          }
+        }
         throw new Error(body?.error ?? "Could not save. Check the fields.");
       }
 
@@ -682,9 +700,9 @@ export default function AdminForm({
           </CollapsibleFormSection>
 
           {formError ? (
-            <div className="flex items-center gap-2 rounded-lg border border-rose-400/25 bg-rose-400/[0.07] px-3.5 py-2.5 text-[13px] font-medium text-rose-300">
-              <X size={15} />
-              {formError}
+            <div className="flex items-start gap-2 rounded-lg border border-rose-400/25 bg-rose-400/[0.07] px-3.5 py-2.5 text-[13px] font-medium leading-relaxed text-rose-300">
+              <X size={15} className="mt-0.5 shrink-0" />
+              <span className="whitespace-pre-wrap">{formError}</span>
             </div>
           ) : null}
           </div>

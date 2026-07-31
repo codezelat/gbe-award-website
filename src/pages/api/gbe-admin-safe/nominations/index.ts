@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { noStoreJson, requireAdmin } from "../../../../lib/admin/auth";
-import { createNomination, listNominations, nominationInputSchema } from "../../../../lib/admin/content";
+import { createNomination, listNominations, nominationInputSchema, WinnerContentError } from "../../../../lib/admin/content";
 
 export const prerender = false;
 
@@ -22,7 +22,11 @@ export const POST: APIRoute = async (context) => {
 
   try {
     return noStoreJson({ row: await createNomination(parsed.data) }, { status: 201 });
-  } catch {
-    return noStoreJson({ error: "Could not save nomination. Check that the slug is unique." }, { status: 409 });
+  } catch (error) {
+    if (error instanceof WinnerContentError) {
+      return noStoreJson({ error: error.message }, { status: 422 });
+    }
+    const cause = error instanceof Error ? error.message : "Please try again.";
+    return noStoreJson({ error: `Could not save nomination. ${cause}` }, { status: 409 });
   }
 };

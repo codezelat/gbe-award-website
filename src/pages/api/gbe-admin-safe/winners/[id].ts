@@ -24,7 +24,8 @@ export const PUT: APIRoute = async (context) => {
     if (error instanceof WinnerContentError) {
       return noStoreJson({ error: error.message }, { status: 422 });
     }
-    return noStoreJson({ error: "Could not update winner. Check that the slug is unique." }, { status: 409 });
+    const cause = error instanceof Error ? error.message : "Please try again.";
+    return noStoreJson({ error: `Could not update winner. ${cause}` }, { status: 409 });
   }
 };
 
