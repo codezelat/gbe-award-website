@@ -349,24 +349,24 @@ export async function updateWinner(id: string, input: WinnerInput) {
     updatedAt: now,
   };
 
-  return db.transaction(async (tx) => {
-    // A current canonical URL must always take precedence over an old alias. If an
-    // editor deliberately restores a former slug, remove that self-alias first.
-    if (slug !== existing.slug) {
-      await tx.delete(schema.winnerSlugAliases).where(and(eq(schema.winnerSlugAliases.winnerId, id), eq(schema.winnerSlugAliases.alias, slug)));
-    }
+  // When the slug changes, the new slug must become the canonical URL. Remove any
+  // self-alias that would conflict, update the row, and retain the old slug as an alias.
+  if (slug !== existing.slug) {
+    await db
+      .delete(schema.winnerSlugAliases)
+      .where(and(eq(schema.winnerSlugAliases.winnerId, id), eq(schema.winnerSlugAliases.alias, slug)));
+  }
 
-    const [row] = await tx.update(schema.pastWinners).set(values).where(eq(schema.pastWinners.id, id)).returning();
+  const [row] = await db.update(schema.pastWinners).set(values).where(eq(schema.pastWinners.id, id)).returning();
 
-    if (slug !== existing.slug) {
-      await tx
-        .insert(schema.winnerSlugAliases)
-        .values({ winnerId: id, alias: existing.slug })
-        .onConflictDoNothing();
-    }
+  if (slug !== existing.slug) {
+    await db
+      .insert(schema.winnerSlugAliases)
+      .values({ winnerId: id, alias: existing.slug })
+      .onConflictDoNothing();
+  }
 
-    return row;
-  });
+  return row;
 }
 
 export async function deleteWinner(id: string) {
