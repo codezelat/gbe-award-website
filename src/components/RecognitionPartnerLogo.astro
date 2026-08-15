@@ -26,14 +26,14 @@ const { partner, compact = false, maskId = `lbc-${partner.key}-logo-mask` } = As
     <img
       class:list={[
         "h-full w-full object-contain",
-        partner.key === "dec" ? "max-h-[78px]" : "max-h-[70px]",
+        partner.key === "dec" ? "max-h-[78px]" : partner.key === "codezela" ? "max-h-[54px]" : "max-h-[70px]",
       ]}
       src={partner.logo}
       srcset={partner.logoSmall ? `${partner.logoSmall} 400w, ${partner.logo} 720w` : undefined}
       sizes={compact ? "190px" : "(max-width: 560px) 320px, 190px"}
       alt={partner.logoAlt}
-      width="720"
-      height={partner.key === "dec" ? 325 : 344}
+      width={partner.key === "codezela" ? 708 : 720}
+      height={partner.key === "dec" ? 325 : partner.key === "codezela" ? 192 : 344}
       loading="lazy"
       decoding="async"
     />

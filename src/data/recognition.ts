@@ -1,5 +1,5 @@
 export type RecognitionPartner = {
-  key: "dec" | "sitc" | "lbc";
+  key: "dec" | "sitc" | "lbc" | "codezela";
   eyebrow: string;
   name: string;
   role: string;
@@ -9,6 +9,12 @@ export type RecognitionPartner = {
   logo: string;
   logoSmall?: string;
   logoAlt: string;
+  addresses?: RecognitionAddress[];
+};
+
+export type RecognitionAddress = {
+  label: string;
+  address: string;
 };
 
 export const recognitionPartners: RecognitionPartner[] = [
@@ -26,6 +32,12 @@ export const recognitionPartners: RecognitionPartner[] = [
     logo: "/assets/recognition/dec-logo.webp",
     logoSmall: "/assets/recognition/dec-logo-small.webp",
     logoAlt: "DEC Sri Lanka",
+    addresses: [
+      {
+        label: "Office",
+        address: "No. 03, Pansala Asala, Agala Oya, Giradurukotte, Sri Lanka",
+      },
+    ],
   },
   {
     key: "sitc",
@@ -39,6 +51,16 @@ export const recognitionPartners: RecognitionPartner[] = [
     logo: "/assets/recognition/sitc-campus-logo.webp",
     logoSmall: "/assets/recognition/sitc-campus-logo-small.webp",
     logoAlt: "SITC Campus",
+    addresses: [
+      {
+        label: "Head office",
+        address: "Level 26, East Tower, World Trade Center, Colombo 01, Sri Lanka",
+      },
+      {
+        label: "Gampola office",
+        address: "No. 285, Hospital Road, Gampola, Sri Lanka",
+      },
+    ],
   },
   {
     key: "lbc",
@@ -51,6 +73,42 @@ export const recognitionPartners: RecognitionPartner[] = [
       "As the UK organiser, London Business Consultancy manages programme administration, award records, and authorised certificate issuance from London.",
     logo: "/assets/brand/london-business-consultancy-logo-mask.webp",
     logoAlt: "London Business Consultancy",
+    addresses: [
+      {
+        label: "HQ Address",
+        address: "20 Wenlock Road, London, N1 7GU, United Kingdom",
+      },
+    ],
+  },
+];
+
+export const recognitionPagePartners: RecognitionPartner[] = [
+  ...recognitionPartners,
+  {
+    key: "codezela",
+    eyebrow: "Event management",
+    name: "Codezela Technologies",
+    role: "Event delivery",
+    summary:
+      "Codezela Technologies supports event management and delivery for the GBE Awards programme.",
+    detail:
+      "Its role covers the practical coordination and digital support required to deliver the awards event alongside the programme organiser.",
+    logo: "/assets/recognition/codezela-technologies-logo.webp",
+    logoAlt: "Codezela Technologies",
+    addresses: [
+      {
+        label: "UK office",
+        address: "71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom",
+      },
+      {
+        label: "Sri Lanka head office",
+        address: "Level 12, Parkland Building, 33 Park Street, Colombo 02, Sri Lanka",
+      },
+      {
+        label: "Borella office",
+        address: "345/35, R. I. T. Alles Mawatha, Borella, Colombo 08, Sri Lanka",
+      },
+    ],
   },
 ];
 

@@ -18,12 +18,30 @@ import { assetPaths, footerItems } from "../data/home";
     </p>
     <div class="footer-affiliation-row" aria-label="London Business Consultancy with United Kingdom and Sri Lanka presence">
       <img class="footer-country-flag" src={assetPaths.unitedKingdomFlag} alt="United Kingdom" width="64" height="64" loading="lazy" decoding="async" />
-      <LondonBusinessConsultancyLogo />
+      <a class="inline-flex" href="/" aria-label="Global Business Excellence Awards home">
+        <LondonBusinessConsultancyLogo />
+      </a>
       <img class="footer-country-flag" src={assetPaths.sriLankaFlag} alt="Sri Lanka" width="64" height="64" loading="lazy" decoding="async" />
     </div>
     <SocialLinks compact />
-    <a class="mt-7 block text-sm font-normal text-gbe-muted" href="/privacy-policy">Privacy Policy</a>
-    <small class="mt-[52px] block text-sm font-normal text-gbe-muted">© 2026 Global Business Excellence Awards</small>
+    <div class="mt-10">
+      <p class="mb-3 mt-0 text-sm font-normal leading-[1.65] text-gbe-muted">
+        Questions about nominations, partnerships or the awards?
+      </p>
+      <a
+        class="gold-text inline-block text-[clamp(27px,4.8vw,54px)] font-black leading-none tracking-[-0.025em] transition-[filter] duration-200 hover:brightness-125 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gbe-gold"
+        href="mailto:info@gbeaward.com"
+      >
+        info@gbeaward.com
+      </a>
+    </div>
+    <a class="mt-8 block text-sm font-normal text-gbe-muted" href="/privacy-policy">Privacy Policy</a>
+    <address class="mx-auto mt-9 max-w-[900px] text-sm font-normal not-italic leading-[1.75] text-gbe-muted">
+      <span class="block"><strong class="font-medium text-gbe-text">UK HQ:</strong> 20 Wenlock Road, London, N1 7GU, United Kingdom</span>
+      <span class="block"><strong class="font-medium text-gbe-text">LK LBC:</strong> Level 26, East Tower, World Trade Center, Colombo 01, Sri Lanka</span>
+      <span class="block"><strong class="font-medium text-gbe-text">LK CODEZELA:</strong> 345/35, R. I. T. Alles Mawatha, Borella, Colombo 08, Sri Lanka</span>
+    </address>
+    <small class="mt-4 block text-sm font-normal text-gbe-muted">© 2026 Global Business Excellence Awards</small>
     <small class="mt-3.5 block text-sm font-normal text-gbe-muted">Website Developed by <a class="font-bold text-gbe-gold-soft transition-colors duration-200 hover:text-gbe-gold" href="https://codezela.com" target="_blank" rel="noopener noreferrer">Codezela Technologies</a></small>
   </div>
 </footer>

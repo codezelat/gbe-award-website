@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type: "dec" | "sitc" | "lbc";
+  type: "dec" | "sitc" | "lbc" | "codezela";
 }
 
 const { type } = Astro.props;
@@ -16,9 +16,14 @@ const { type } = Astro.props;
       <path d="m3 9 9-5 9 5-9 5-9-5Z" />
       <path d="M7 12v4.5c2.7 2 7.3 2 10 0V12M21 9v6" />
     </svg>
-  ) : (
+  ) : type === "lbc" ? (
     <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M4 21V7l8-4 8 4v14M8 10h2m4 0h2M8 14h2m4 0h2M9 21v-3h6v3" />
+    </svg>
+  ) : (
+    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+      <path d="m12 12 .7 1.45 1.6.23-1.15 1.12.27 1.59L12 15.64l-1.42.75.27-1.59-1.15-1.12 1.6-.23L12 12Z" />
     </svg>
   )}
 </span>

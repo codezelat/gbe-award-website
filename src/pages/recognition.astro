@@ -10,14 +10,14 @@ import RecognitionPartnerLogo from "../components/RecognitionPartnerLogo.astro";
 import RecognitionRoleIcon from "../components/RecognitionRoleIcon.astro";
 import { assetPaths } from "../data/home";
 import { aboutGalleryImages } from "../data/aboutGallery";
-import { certificateAuthenticitySteps, recognitionPartners } from "../data/recognition";
+import { certificateAuthenticitySteps, recognitionPagePartners } from "../data/recognition";
 import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema } from "../lib/seo";
 
 export const prerender = true;
 
 const title = "Recognition and Certificate Authenticity | GBE Awards 2026";
 const description =
-  "Understand the distinct roles of DEC, SITC Campus Business Faculty, and London Business Consultancy in GBE Awards recognition, research, administration, and certificate authenticity.";
+  "Understand the distinct roles of DEC, SITC Campus Business Faculty, London Business Consultancy, and Codezela Technologies in GBE Awards recognition, research, administration, event management, and certificate authenticity.";
 ---
 
 <!doctype html>
@@ -27,7 +27,7 @@ const description =
     <SeoHead
       title={title}
       description={description}
-      keywords="GBE Awards recognition, GBE Awards certificate authenticity, DEC Sri Lanka, SITC Campus Business Faculty, London Business Consultancy UK"
+      keywords="GBE Awards recognition, GBE Awards certificate authenticity, DEC Sri Lanka, SITC Campus Business Faculty, London Business Consultancy UK, Codezela Technologies event management"
       path="/recognition"
       image={assetPaths.trophy}
       schema={[
@@ -44,7 +44,7 @@ const description =
         buildItemListSchema({
           path: "/recognition",
           title: "GBE Awards recognition framework",
-          items: recognitionPartners.map((partner) => ({
+          items: recognitionPagePartners.map((partner) => ({
             name: partner.name,
             image: partner.key === "lbc" ? undefined : partner.logo,
             description: partner.summary,
@@ -65,9 +65,9 @@ const description =
               Recognition, research and certificate authenticity
             </h1>
             <p class="mb-0 max-w-[820px] text-[clamp(17px,1.45vw,21px)] font-normal leading-[1.72] text-gbe-muted">
-              GBE Awards brings together three distinct responsibilities: Sri Lankan institutional recognition through DEC,
-              business-faculty research and academic review, and programme administration by the London-based UK
-              organiser. This page explains those roles without blurring the difference between them.
+              GBE Awards brings together four distinct responsibilities: Sri Lankan institutional recognition through DEC,
+              business-faculty research and academic review, programme administration by the London-based UK organiser,
+              and event management by Codezela Technologies. This page explains those roles without blurring the difference between them.
             </p>
             <div class="mt-8">
               <RecognitionCountryMarks />
@@ -84,7 +84,7 @@ const description =
           </div>
 
           <div class="border-t border-gbe-gold/25">
-            {recognitionPartners.map((partner, index) => (
+            {recognitionPagePartners.map((partner, index) => (
               <article class="grid grid-cols-[minmax(0,1fr)_260px] items-center gap-12 border-b border-gbe-gold/20 py-9 max-[760px]:grid-cols-1 max-[760px]:gap-6">
                 <div class="flex gap-5 max-[560px]:gap-4">
                   <RecognitionRoleIcon type={partner.key} />
@@ -98,6 +98,24 @@ const description =
                       </p>
                     ) : null}
                     <p class="m-0 text-[15px] font-normal leading-[1.68] text-gbe-muted">{partner.detail}</p>
+                    {partner.addresses?.length ? (
+                      <div
+                        class:list={[
+                          "mt-5 grid gap-3",
+                          partner.addresses.length === 1 ? "grid-cols-1" : "grid-cols-2 max-[900px]:grid-cols-1",
+                        ]}
+                        aria-label={`${partner.name} addresses`}
+                      >
+                        {partner.addresses.map((location) => (
+                          <div class="rounded-[12px] border border-gbe-gold/20 bg-gbe-gold/[0.045] px-4 py-3.5">
+                            <p class="mb-1.5 mt-0 text-[10px] font-black uppercase tracking-[0.16em] text-gbe-gold-soft">{location.label}</p>
+                            <address class="m-0 text-[16px] font-normal not-italic leading-[1.65] text-gbe-muted">
+                              {location.address}
+                            </address>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
                 <RecognitionPartnerLogo partner={partner} maskId={`lbc-page-${index}-mask`} />

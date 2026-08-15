@@ -8,6 +8,17 @@ test("recognition page explains each role and certificate authenticity", async (
   await expect(page.getByRole("heading", { name: "DEC", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "SITC Campus Business Faculty" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "London Business Consultancy" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Codezela Technologies" })).toBeVisible();
+  const roles = page.locator('section[aria-labelledby="roles-title"]');
+  await expect(roles.getByText("No. 03, Pansala Asala, Agala Oya, Giradurukotte, Sri Lanka")).toBeVisible();
+  await expect(roles.getByText("Level 26, East Tower, World Trade Center, Colombo 01, Sri Lanka")).toBeVisible();
+  await expect(roles.getByText("No. 285, Hospital Road, Gampola, Sri Lanka")).toBeVisible();
+  await expect(roles.getByText("20 Wenlock Road, London, N1 7GU, United Kingdom")).toBeVisible();
+  await expect(roles.getByText("HQ Address", { exact: true })).toBeVisible();
+  await expect(roles.getByText("71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom")).toBeVisible();
+  await expect(roles.getByText("Level 12, Parkland Building, 33 Park Street, Colombo 02, Sri Lanka")).toBeVisible();
+  await expect(roles.getByText("345/35, R. I. T. Alles Mawatha, Borella, Colombo 08, Sri Lanka")).toBeVisible();
+  await expect(page.getByText(/Colombo 00200|Colombo 00800/)).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "A certificate connected to a real award record" })).toBeVisible();
   await expect(page.getByText("it is not a certificate issued by the UK Government")).toBeVisible();
   await expect(page.getByText(new RegExp("Ministry of Industry.*Gazette No\\. 2387/25"))).toBeVisible();
@@ -48,6 +59,20 @@ test("recognition remains readable without horizontal overflow on mobile", async
   await expect(page.getByAltText("DEC Sri Lanka")).toBeVisible();
   await expect(page.getByAltText("SITC Campus")).toBeVisible();
   await expect(page.getByRole("img", { name: "London Business Consultancy" }).first()).toBeVisible();
+  await expect(page.getByAltText("Codezela Technologies")).toBeVisible();
+});
+
+test("footer shows the three requested address lines", async ({ page }) => {
+  await page.goto("/");
+
+  const footer = page.locator("footer");
+  await expect(footer.getByText("Questions about nominations, partnerships or the awards?", { exact: true })).toBeVisible();
+  await expect(footer.getByRole("link", { name: "info@gbeaward.com" })).toHaveAttribute("href", "mailto:info@gbeaward.com");
+  await expect(footer.getByText(/UK HQ: 20 Wenlock Road, London, N1 7GU, United Kingdom/)).toBeVisible();
+  await expect(footer.getByText(/LK LBC: Level 26, East Tower, World Trade Center, Colombo 01, Sri Lanka/)).toBeVisible();
+  await expect(footer.getByText(/LK CODEZELA: 345\/35, R\. I\. T\. Alles Mawatha, Borella, Colombo 08, Sri Lanka/)).toBeVisible();
+  await expect(footer.locator("address > span")).toHaveCount(3);
+  await expect(footer.getByRole("link", { name: "Global Business Excellence Awards home" })).toHaveAttribute("href", "/");
 });
 
 test("about gallery hydrates only when visible and keeps working controls", async ({ page }) => {
