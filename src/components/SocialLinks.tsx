@@ -64,7 +64,7 @@ export default function SocialLinks({ compact = false }: SocialLinksProps) {
     >
       {socialLinks.map(({ label, href, Icon }) => (
         <a
-          className="grid h-8 w-8 place-items-center text-[17px] font-black text-gbe-text transition-[color,transform] duration-200 hover:-translate-y-[3px] hover:text-gbe-gold max-[1024px]:h-7 max-[1024px]:w-7 max-[1024px]:drop-shadow-[0_0_7px_rgba(255,255,255,0.42)] max-[560px]:h-6 max-[560px]:w-6 [&_svg]:h-[26px] [&_svg]:w-[26px] max-[1024px]:[&_svg]:h-[22px] max-[1024px]:[&_svg]:w-[22px] max-[560px]:[&_svg]:h-[19px] max-[560px]:[&_svg]:w-[19px]"
+          className={`grid h-8 w-8 place-items-center text-[17px] font-black text-gbe-text transition-[color,transform] duration-200 hover:-translate-y-[3px] hover:text-gbe-gold max-[1024px]:h-7 max-[1024px]:w-7 max-[560px]:h-6 max-[560px]:w-6 [&_svg]:h-[26px] [&_svg]:w-[26px] max-[1024px]:[&_svg]:h-[22px] max-[1024px]:[&_svg]:w-[22px] max-[560px]:[&_svg]:h-[19px] max-[560px]:[&_svg]:w-[19px]${compact ? "" : " max-[1024px]:drop-shadow-[0_0_7px_rgba(255,255,255,0.42)]"}`}
           key={label}
           href={href}
           aria-label={label}

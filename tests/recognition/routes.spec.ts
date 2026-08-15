@@ -73,6 +73,7 @@ test("footer shows the three requested address lines", async ({ page }) => {
   await expect(footer.getByText(/LK CODEZELA: 345\/35, R\. I\. T\. Alles Mawatha, Borella, Colombo 08, Sri Lanka/)).toBeVisible();
   await expect(footer.locator("address > span")).toHaveCount(3);
   await expect(footer.getByRole("link", { name: "Global Business Excellence Awards home" })).toHaveAttribute("href", "/");
+  await expect(footer.getByRole("navigation", { name: "Social links" }).getByRole("link").first()).not.toHaveClass(/drop-shadow/);
 });
 
 test("about gallery hydrates only when visible and keeps working controls", async ({ page }) => {
