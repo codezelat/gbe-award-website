@@ -220,7 +220,6 @@ R2_ENDPOINT="https://your-account-id.r2.cloudflarestorage.com"
 R2_ACCESS_KEY_ID="replace-with-r2-access-key"
 R2_SECRET_ACCESS_KEY="replace-with-r2-secret-key"
 R2_PUBLIC_BASE_URL="https://media.gbeaward.com"
-PUBLIC_GOOGLE_TAG_ID="GT-W6V9ZG59"
 ALLOW_ADMIN_SIGNUP="false"
 ```
 

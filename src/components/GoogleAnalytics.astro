@@ -1,46 +1,16 @@
 ---
-import { SITE_GOOGLE_TAG_ID, SITE_URL } from "../lib/site";
+import { SITE_GOOGLE_TAG_ID } from "../lib/site";
 
-const googleTagId = SITE_GOOGLE_TAG_ID?.trim();
-const hostname = new URL(SITE_URL).hostname;
+const googleTagId = SITE_GOOGLE_TAG_ID;
+const googleTagSrc = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(googleTagId)}`;
 ---
 
-{
-  googleTagId ? (
-    <>
-      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      <script
-        is:inline
-        define:vars={{ googleTagId, hostname }}
-      >
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          window.gtag = window.gtag || gtag;
-          gtag('js', new Date());
-          gtag('set', 'linker', { domains: [hostname] });
-          gtag('config', googleTagId);
-
-          let googleTagLoaded = false;
-          const loadGoogleTag = () => {
-            if (googleTagLoaded) return;
-            googleTagLoaded = true;
-            const script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(googleTagId);
-            document.head.appendChild(script);
-          };
-
-          const interactionEvents = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
-          interactionEvents.forEach((eventName) => {
-            window.addEventListener(eventName, loadGoogleTag, { once: true, passive: true });
-          });
-
-          window.addEventListener('load', () => {
-            window.setTimeout(loadGoogleTag, 5000);
-          }, { once: true });
-        `}
-      </script>
-    </>
-  ) : null
-}
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+<script is:inline async src={googleTagSrc} data-google-tag-id={googleTagId}></script>
+<script is:inline define:vars={{ googleTagId }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){window.dataLayer.push(arguments);}
+  window.gtag = window.gtag || gtag;
+  window.gtag('js', new Date());
+  window.gtag('config', googleTagId);
+</script>
