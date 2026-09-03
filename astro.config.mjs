@@ -11,6 +11,9 @@ export default defineConfig({
   output: 'server',
   adapter: vercel(),
   integrations: [react()],
+  redirects: {
+    '/pdf': 'https://drive.google.com/file/d/1rJ1JfccI57Yyr928QCoCr_1UqjmU9z3c/view?usp=sharing'
+  },
   vite: {
     plugins: [tailwindcss()]
   }
