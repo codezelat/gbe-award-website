@@ -10,14 +10,18 @@ import RecognitionPartnerLogo from "../components/RecognitionPartnerLogo.astro";
 import RecognitionRoleIcon from "../components/RecognitionRoleIcon.astro";
 import { assetPaths } from "../data/home";
 import { aboutGalleryImages } from "../data/aboutGallery";
-import { certificateAuthenticitySteps, recognitionPagePartners } from "../data/recognition";
+import {
+  certificateAuthenticitySteps,
+  recognitionPagePartners,
+  ukqabQualityApproval,
+} from "../data/recognition";
 import { buildBreadcrumbSchema, buildItemListSchema, buildPageSchema } from "../lib/seo";
 
 export const prerender = true;
 
 const title = "Recognition and Certificate Authenticity | GBE Awards 2026";
 const description =
-  "Understand the distinct roles of DEC, SITC Campus Business Faculty, London Business Consultancy, and Codezela Technologies in GBE Awards recognition, research, administration, event management, and certificate authenticity.";
+  "Explore GBE Awards recognition, UKQAB Quality Approved certification, organisational roles, and certificate authenticity.";
 ---
 
 <!doctype html>
@@ -27,7 +31,7 @@ const description =
     <SeoHead
       title={title}
       description={description}
-      keywords="GBE Awards recognition, GBE Awards certificate authenticity, DEC Sri Lanka, SITC Campus Business Faculty, London Business Consultancy UK, Codezela Technologies event management"
+      keywords="GBE Awards recognition, UKQAB Quality Approved, independently assessed awards programme, GBE Awards certificate authenticity, DEC Sri Lanka, SITC Campus Business Faculty, London Business Consultancy UK, Codezela Technologies event management"
       path="/recognition"
       image={assetPaths.trophy}
       schema={[
@@ -44,11 +48,18 @@ const description =
         buildItemListSchema({
           path: "/recognition",
           title: "GBE Awards recognition framework",
-          items: recognitionPagePartners.map((partner) => ({
-            name: partner.name,
-            image: partner.key === "lbc" ? undefined : partner.logo,
-            description: partner.summary,
-          })),
+          items: [
+            ...recognitionPagePartners.map((partner) => ({
+              name: partner.name,
+              image: partner.key === "lbc" ? undefined : partner.logo,
+              description: partner.summary,
+            })),
+            {
+              name: ukqabQualityApproval.name,
+              image: ukqabQualityApproval.logo,
+              description: ukqabQualityApproval.summary,
+            },
+          ],
         }),
       ]}
     />
@@ -121,6 +132,53 @@ const description =
                 <RecognitionPartnerLogo partner={partner} maskId={`lbc-page-${index}-mask`} />
               </article>
             ))}
+          </div>
+        </section>
+
+        <section class="container-gbe mb-20 max-w-[1120px] max-[560px]:mb-14" aria-labelledby="ukqab-title">
+          <div class="relative overflow-hidden rounded-[24px] border border-[#c9b473]/55 bg-[#082b42] shadow-[0_24px_70px_rgba(0,0,0,0.28)]">
+            <div class="pointer-events-none absolute -left-24 -top-28 size-72 rounded-full bg-[#c9b473]/10 blur-3xl" aria-hidden="true"></div>
+            <div class="relative grid grid-cols-[minmax(0,1fr)_minmax(260px,360px)] items-center gap-14 p-[clamp(28px,5vw,58px)] max-[760px]:grid-cols-1 max-[760px]:gap-8">
+              <div class="max-w-[620px]">
+                <p class="mb-3 mt-0 text-[11px] font-black uppercase tracking-[0.2em] text-[#d8c57f]">
+                  {ukqabQualityApproval.eyebrow}
+                </p>
+                <h2 id="ukqab-title" class="mb-5 mt-0 text-[clamp(30px,4vw,48px)] font-black leading-[1.04] text-white">
+                  {ukqabQualityApproval.name}
+                </h2>
+                <p class="mb-4 mt-0 text-[clamp(17px,1.5vw,20px)] font-normal leading-[1.7] text-white/86">
+                  {ukqabQualityApproval.summary}
+                </p>
+                <p class="mb-7 mt-0 max-w-[570px] text-[15px] font-normal leading-[1.7] text-white/66">
+                  {ukqabQualityApproval.scopeNote}
+                </p>
+                <a
+                  class="group inline-flex items-center gap-3 border-b border-[#d8c57f]/70 pb-1.5 text-[15px] font-bold text-[#f0dfa1] transition-colors hover:border-white hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f0dfa1]"
+                  href={ukqabQualityApproval.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit UKQAB
+                  <svg class="size-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </a>
+              </div>
+
+              <div class="mx-auto w-full max-w-[340px] rounded-[18px] border border-[#d8c57f]/45 bg-[#061f31] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.32)] max-[760px]:max-w-[310px]">
+                <img
+                  class="aspect-square h-auto w-full rounded-[10px] object-cover"
+                  src={ukqabQualityApproval.logo}
+                  srcset={`${ukqabQualityApproval.logoSmall} 480w, ${ukqabQualityApproval.logo} 900w`}
+                  sizes="(max-width: 760px) 278px, 316px"
+                  alt={ukqabQualityApproval.logoAlt}
+                  width="900"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
           </div>
         </section>
 

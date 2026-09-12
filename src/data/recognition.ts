@@ -17,6 +17,17 @@ export type RecognitionAddress = {
   address: string;
 };
 
+export type QualityApproval = {
+  eyebrow: string;
+  name: string;
+  summary: string;
+  scopeNote: string;
+  logo: string;
+  logoSmall: string;
+  logoAlt: string;
+  url: string;
+};
+
 export const recognitionPartners: RecognitionPartner[] = [
   {
     key: "dec",
@@ -111,6 +122,19 @@ export const recognitionPagePartners: RecognitionPartner[] = [
     ],
   },
 ];
+
+export const ukqabQualityApproval: QualityApproval = {
+  eyebrow: "Independent quality assessment",
+  name: "UKQAB Quality Approved",
+  summary:
+    "The GBE Awards programme has received UKQAB Quality Approved certification following independent assessment.",
+  scopeNote:
+    "The approval applies to the scope and validity period stated on the UKQAB certificate.",
+  logo: "/assets/recognition/ukqab-quality-approved-badge.webp",
+  logoSmall: "/assets/recognition/ukqab-quality-approved-badge-small.webp",
+  logoAlt: "UKQAB Quality Approved, Independently Assessed",
+  url: "https://ukqab.org.uk/",
+};
 
 export const certificateAuthenticitySteps = [
   {

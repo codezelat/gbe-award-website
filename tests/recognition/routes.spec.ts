@@ -24,6 +24,16 @@ test("recognition page explains each role and certificate authenticity", async (
   await expect(page.getByText(new RegExp("Ministry of Industry.*Gazette No\\. 2387/25"))).toBeVisible();
   await expect(page.getByText(/education provider, awarding body, or academic accreditor/)).toBeVisible();
   await expect(page.locator('section[aria-labelledby="roles-title"] a')).toHaveCount(0);
+  const ukqab = page.locator('section[aria-labelledby="ukqab-title"]');
+  await expect(ukqab.getByRole("heading", { name: "UKQAB Quality Approved" })).toBeVisible();
+  await expect(ukqab.getByText("following independent assessment", { exact: false })).toBeVisible();
+  await expect(ukqab.getByText(/scope and validity period stated on the UKQAB certificate/)).toBeVisible();
+  await expect(ukqab.getByAltText("UKQAB Quality Approved, Independently Assessed")).toBeVisible();
+  const ukqabLinks = ukqab.getByRole("link", { name: "Visit UKQAB" });
+  await expect(ukqabLinks).toHaveCount(1);
+  await expect(ukqabLinks).toHaveAttribute("href", "https://ukqab.org.uk/");
+  await expect(ukqabLinks).toHaveAttribute("target", "_blank");
+  await expect(ukqabLinks).toHaveAttribute("rel", "noopener noreferrer");
   await expect(page.getByRole("textbox")).toHaveCount(0);
 });
 
@@ -60,6 +70,7 @@ test("recognition remains readable without horizontal overflow on mobile", async
   await expect(page.getByAltText("SITC Campus")).toBeVisible();
   await expect(page.getByRole("img", { name: "London Business Consultancy" }).first()).toBeVisible();
   await expect(page.getByAltText("Codezela Technologies")).toBeVisible();
+  await expect(page.getByAltText("UKQAB Quality Approved, Independently Assessed")).toBeVisible();
 });
 
 test("footer shows the three requested address lines", async ({ page }) => {
