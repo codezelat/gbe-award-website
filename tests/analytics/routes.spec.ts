@@ -8,6 +8,7 @@ test("public pages emit the requested Google Analytics tag exactly once", async 
     "/",
     "/about",
     "/recognition",
+    "/women-in-excellence",
     "/contact",
     "/privacy-policy",
     "/nominees",

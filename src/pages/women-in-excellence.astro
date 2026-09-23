@@ -1,0 +1,557 @@
+---
+import "../styles/global.css";
+import ThemeInit from "../components/ThemeInit.astro";
+import SeoHead from "../components/SeoHead.astro";
+import Header from "../components/Header.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { buildBreadcrumbSchema, buildPageSchema } from "../lib/seo";
+import { SITE_ORGANIZER_NAME, SITE_URL, SITE_WHATSAPP_URL } from "../lib/site";
+
+export const prerender = true;
+
+const title = "Women in Excellence Awards 2026 | GBE Awards";
+const description =
+  "Apply for the Women in Excellence Awards 2026, part of GBE Awards, recognising women whose leadership, work and impact deserve wider recognition.";
+const path = "/women-in-excellence";
+const applyUrl = "https://access.gbeaward.com/apply";
+
+const evidenceAreas = [
+  {
+    number: "01",
+    title: "Leadership and responsibility",
+    text: "Show how you have led people, decisions, services or change, and explain the responsibility you carried.",
+  },
+  {
+    number: "02",
+    title: "Enterprise and growth",
+    text: "Describe the business, practice or initiative you have built, strengthened or taken into a new stage of development.",
+  },
+  {
+    number: "03",
+    title: "Innovation and problem-solving",
+    text: "Set out the problem you addressed, the thinking behind your approach and what improved as a result.",
+  },
+  {
+    number: "04",
+    title: "Professional or creative contribution",
+    text: "Share work that has raised standards, shaped an audience or made a distinctive contribution to your field.",
+  },
+  {
+    number: "05",
+    title: "Service and community impact",
+    text: "Explain who benefited from your work and the practical difference it made for a community, organisation or sector.",
+  },
+  {
+    number: "06",
+    title: "Resilience and progress",
+    text: "Give context to a difficult challenge and show the decisions, consistency and learning that moved the work forward.",
+  },
+];
+
+const applicationSteps = [
+  {
+    title: "Set the context",
+    text: "Introduce the organisation, field or community and the challenge or opportunity behind the work.",
+  },
+  {
+    title: "Explain your role",
+    text: "Be precise about what you led, created, changed or delivered, especially where the work involved a wider team.",
+  },
+  {
+    title: "Show the outcome",
+    text: "Use clear results, examples or milestones that help the reviewer understand what changed and why it matters.",
+  },
+  {
+    title: "Add supporting material",
+    text: "Include relevant documents, links, coverage, testimonials or other evidence that supports the central achievement.",
+  },
+  {
+    title: "Choose the closest fit",
+    text: "Select the GBE Awards category that most accurately reflects the work rather than trying to cover every possible area.",
+  },
+];
+
+const processSteps = [
+  {
+    number: "1",
+    title: "Submit the application",
+    text: "Complete the GBE Awards application with the nominee, contact and supporting information requested in the form.",
+  },
+  {
+    number: "2",
+    title: "Organiser review",
+    text: "The organiser reviews the information provided and may contact the applicant if clarification or further material is needed.",
+  },
+  {
+    number: "3",
+    title: "Recognition decision",
+    text: "Applicants are informed of the outcome through the official GBE Awards process and the relevant award record is prepared for selected recipients.",
+  },
+];
+
+const faqs = [
+  {
+    question: "What is Women in Excellence?",
+    answer:
+      "Women in Excellence is a focused part of the Global Business Excellence Awards 2026. It recognises women whose leadership, professional work, enterprise, creativity or service has produced a meaningful result.",
+  },
+  {
+    question: "Who can apply for the Women in Excellence Awards?",
+    answer:
+      "Applications are welcome from women across different career stages, sectors and organisation sizes. This can include founders, executives, professionals, educators, researchers, creators, media figures and community leaders.",
+  },
+  {
+    question: "Is the programme only for business owners?",
+    answer:
+      "No. You do not need to be a founder or chief executive. A strong application can come from professional, creative, academic, public-facing, community or organisational work where your own contribution is clear.",
+  },
+  {
+    question: "Which sectors are included?",
+    answer:
+      "The wider GBE Awards programme covers fields including business, technology, finance, healthcare, media, education, retail, hospitality, manufacturing, sustainability and social impact. Applicants should choose the category that best matches their work.",
+  },
+  {
+    question: "What evidence makes an application stronger?",
+    answer:
+      "Useful evidence can include measurable outcomes, project examples, independent coverage, client or stakeholder feedback, published work, professional records and links that verify the achievement. The most important point is to connect the evidence to your own role.",
+  },
+  {
+    question: "Can women outside the UK and Sri Lanka apply?",
+    answer:
+      "Yes. GBE Awards recognises achievement across the UK, Sri Lanka and international markets. The application should clearly identify where the work took place and who benefited from it.",
+  },
+  {
+    question: "Can someone nominate another person?",
+    answer:
+      "Yes. A colleague, organisation or representative can put a woman forward, provided the application contains accurate information and the nominee can be contacted through the official process.",
+  },
+  {
+    question: "How do I apply?",
+    answer:
+      "Use the official GBE Awards application portal and complete each step of the form. If you need help before submitting, contact the awards team through the official WhatsApp link on this page.",
+  },
+];
+
+const gallery = [
+  {
+    src: "/assets/women-in-excellence/award-presentation.webp",
+    large: "/assets/women-in-excellence/award-presentation-large.webp",
+    width: 900,
+    height: 750,
+    largeWidth: 1600,
+    alt: "A woman receiving an award on stage at the Global Business Excellence Awards",
+    className: "col-span-7 row-span-2 max-[760px]:col-span-1 max-[760px]:row-span-1",
+  },
+  {
+    src: "/assets/women-in-excellence/certificate-recipient.webp",
+    large: "/assets/women-in-excellence/certificate-recipient-large.webp",
+    width: 900,
+    height: 750,
+    largeWidth: 1600,
+    alt: "A GBE Awards recipient holding her certificate and trophy",
+    className: "col-span-5 max-[760px]:col-span-1",
+  },
+  {
+    src: "/assets/women-in-excellence/recognition-group.webp",
+    large: "/assets/women-in-excellence/recognition-group-large.webp",
+    width: 900,
+    height: 750,
+    largeWidth: 1600,
+    alt: "Award recipient with colleagues at the GBE Awards ceremony",
+    className: "col-span-5 max-[760px]:col-span-1",
+  },
+  {
+    src: "/assets/women-in-excellence/women-recipient-group.webp",
+    large: "/assets/women-in-excellence/women-recipient-group-large.webp",
+    width: 900,
+    height: 750,
+    largeWidth: 1600,
+    alt: "Women pictured with a GBE Awards recipient, certificate and trophy",
+    className: "col-span-8 max-[760px]:col-span-1",
+  },
+  {
+    src: "/assets/women-in-excellence/award-conversation.webp",
+    large: "/assets/women-in-excellence/award-conversation-large.webp",
+    width: 900,
+    height: 600,
+    largeWidth: 1600,
+    alt: "An award recipient speaking with a guest during the GBE Awards event",
+    className: "col-span-4 max-[760px]:col-span-1",
+  },
+  {
+    src: "/assets/women-in-excellence/women-event-portrait.webp",
+    large: "/assets/women-in-excellence/women-event-portrait-large.webp",
+    width: 700,
+    height: 1050,
+    largeWidth: 1100,
+    alt: "Two women photographed at the Global Business Excellence Awards ceremony",
+    className: "col-span-4 row-span-2 max-[760px]:col-span-1 max-[760px]:row-span-1",
+  },
+  {
+    src: "/assets/women-in-excellence/woman-event-portrait.webp",
+    large: "/assets/women-in-excellence/woman-event-portrait-large.webp",
+    width: 700,
+    height: 1050,
+    largeWidth: 1100,
+    alt: "A woman photographed at the Global Business Excellence Awards ceremony",
+    className: "col-span-4 row-span-2 max-[760px]:col-span-1 max-[760px]:row-span-1",
+  },
+  {
+    src: "/assets/gallery/women-winners.webp",
+    large: "/assets/gallery/women-winners-large.webp",
+    width: 900,
+    height: 600,
+    largeWidth: 1440,
+    alt: "Women holding trophies and certificates at a GBE Awards ceremony",
+    className: "col-span-4 row-span-2 max-[760px]:col-span-1 max-[760px]:row-span-1",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${SITE_URL}${path}#faq`,
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+const programmeSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${SITE_URL}${path}#programme`,
+  name: "Women in Excellence Awards 2026",
+  serviceType: "Awards and recognition programme",
+  description,
+  url: `${SITE_URL}${path}`,
+  provider: {
+    "@type": "Organization",
+    name: SITE_ORGANIZER_NAME,
+    url: SITE_URL,
+  },
+  audience: {
+    "@type": "Audience",
+    audienceType: "Women leaders, founders, professionals, creators, researchers and community contributors",
+  },
+  areaServed: ["United Kingdom", "Sri Lanka", "International"],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <ThemeInit />
+    <SeoHead
+      title={title}
+      description={description}
+      path={path}
+      image="/assets/women-in-excellence/campaign-hero-large.webp"
+      keywords="Women in Excellence Awards, Women in Excellence 2026, women awards UK, women awards Sri Lanka, women leadership awards, female entrepreneur awards, women in business awards, GBE Awards"
+      modifiedTime="2026-09-23"
+      schema={[
+        buildPageSchema({
+          path,
+          title,
+          description,
+          image: "/assets/women-in-excellence/campaign-hero-large.webp",
+        }),
+        buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Women in Excellence", path },
+        ]),
+        programmeSchema,
+        faqSchema,
+      ]}
+    />
+  </head>
+  <body>
+    <div class="min-h-screen bg-[var(--c-page-glow)]">
+      <Header />
+      <main class="bg-gbe-bg">
+        <section class="wie-hero relative isolate overflow-hidden pt-[178px] max-[1024px]:flex max-[1024px]:flex-col max-[1024px]:pt-[145px] max-[560px]:pt-[112px]" aria-labelledby="wie-title">
+          <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_42%,rgba(34,91,198,0.34),transparent_28rem),radial-gradient(circle_at_22%_50%,rgba(255,176,1,0.10),transparent_22rem),linear-gradient(115deg,#03070f_0%,#071426_48%,#02101f_100%)]" aria-hidden="true"></div>
+          <img
+            class="absolute inset-0 h-full w-full object-cover object-center max-[1024px]:relative max-[1024px]:order-2 max-[1024px]:aspect-[1586/992] max-[1024px]:h-auto max-[1024px]:object-contain max-[560px]:aspect-[5/4] max-[560px]:object-cover max-[560px]:object-right"
+            src="/assets/women-in-excellence/campaign-hero.webp"
+            srcset="/assets/women-in-excellence/campaign-hero.webp 960w, /assets/women-in-excellence/campaign-hero-large.webp 1536w"
+            sizes="(max-width: 1024px) 100vw, 100vw"
+            alt="Women in Excellence campaign artwork showing four women and a blue and gold award"
+            width="1536"
+            height="960"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(3,8,18,0.58)_0%,rgba(3,8,18,0.32)_29%,transparent_49%),linear-gradient(0deg,rgba(3,8,18,0.28),transparent_28%)] max-[1024px]:hidden" aria-hidden="true"></div>
+
+          <div class="container-gbe relative z-10 flex min-h-[650px] max-w-[1260px] items-center pb-20 max-[1024px]:order-1 max-[1024px]:min-h-0 max-[1024px]:pb-9 max-[560px]:pb-7">
+            <div class="max-w-[570px] py-12 max-[1024px]:max-w-[760px] max-[560px]:py-7">
+              <p class="mb-5 mt-0 flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.24em] text-[#f4ca64]">
+                <span class="h-px w-10 bg-[#f4ca64]/70"></span>
+                Part of the Global Business Excellence Awards
+              </p>
+              <h1 id="wie-title" class="mb-7 mt-0 text-[clamp(52px,6.4vw,92px)] font-black leading-[0.88] tracking-[-0.045em] text-white max-[560px]:text-[42px]">
+                Women in <span class="block text-[#f4bd36]">Excellence</span>
+                <span class="mt-4 block text-[0.37em] font-bold uppercase tracking-[0.22em] text-white/78">Awards 2026</span>
+              </h1>
+              <p class="mb-8 mt-0 max-w-[450px] text-[clamp(18px,1.55vw,22px)] font-normal leading-[1.62] text-white/78">
+                Recognition for women whose work moves industries, organisations and communities forward.
+              </p>
+              <div class="flex flex-wrap items-center gap-4 max-[560px]:gap-2">
+                <a class="btn-gold btn-gold-hover" href={applyUrl} target="_blank" rel="noopener noreferrer">Apply now</a>
+                <a class="inline-flex min-h-[54px] items-center gap-2 rounded-full border border-white/25 px-7 text-[15px] font-bold uppercase tracking-[0.06em] text-white transition-colors hover:border-[#f4bd36] hover:text-[#f4bd36] max-[560px]:px-5" href="#who-can-apply">
+                  Who can apply
+                  <svg class="size-4" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="border-y border-gbe-gold/15 bg-gbe-surface-2 py-24 max-[560px]:py-16" aria-labelledby="focused-platform-title">
+          <div class="container-gbe grid max-w-[1120px] grid-cols-[0.95fr_1.05fr] items-center gap-20 max-[900px]:grid-cols-1 max-[900px]:gap-10">
+            <div>
+              <p class="mb-4 mt-0 text-xs font-black uppercase tracking-[0.22em] text-gbe-gold-soft">A focused GBE Awards platform</p>
+              <h2 id="focused-platform-title" class="gold-text mb-6 mt-0 text-[clamp(34px,4.2vw,56px)] font-black leading-[1.02]">
+                Meaningful work deserves a clear record
+              </h2>
+              <p class="mb-5 mt-0 text-[18px] font-normal leading-[1.75] text-gbe-muted">
+                Women in Excellence gives focused space within GBE Awards to the work women lead, create and sustain. It is designed for achievement with substance behind it, from building a company or changing a profession to strengthening a service, a creative field or a community.
+              </p>
+              <p class="m-0 text-[16px] font-normal leading-[1.75] text-gbe-muted">
+                The programme welcomes women at different career stages, in organisations of different sizes, across the UK, Sri Lanka and international markets. What matters is a clear contribution, credible evidence and an outcome worth understanding.
+              </p>
+            </div>
+            <figure class="relative m-0 overflow-hidden rounded-[28px] border border-gbe-gold/25 bg-gbe-card p-3 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
+              <img
+                class="aspect-[6/5] w-full rounded-[20px] object-cover"
+                src="/assets/women-in-excellence/campaign-achievement.webp"
+                srcset="/assets/women-in-excellence/campaign-achievement.webp 900w, /assets/women-in-excellence/campaign-achievement-large.webp 1448w"
+                sizes="(max-width: 900px) 92vw, 520px"
+                alt="Women in Excellence campaign artwork showing three women with awards"
+                width="1448"
+                height="1086"
+                loading="lazy"
+                decoding="async"
+                data-preview-image
+                data-preview-src="/assets/women-in-excellence/campaign-achievement-large.webp"
+                data-preview-alt="Women in Excellence campaign artwork showing three women with awards"
+              />
+              <figcaption class="absolute bottom-7 left-7 rounded-full border border-white/20 bg-black/65 px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white backdrop-blur-md">Campaign artwork</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="container-gbe max-w-[1120px] py-24 max-[560px]:py-16" aria-labelledby="evidence-title">
+          <div class="mb-12 grid grid-cols-[0.72fr_1fr] items-end gap-16 max-[760px]:grid-cols-1 max-[760px]:gap-5">
+            <div>
+              <p class="mb-3 mt-0 text-xs font-black uppercase tracking-[0.22em] text-gbe-gold-soft">What a strong entry can show</p>
+              <h2 id="evidence-title" class="gold-text m-0 text-[clamp(34px,4vw,52px)] font-black leading-[1.02]">Where excellence shows up</h2>
+            </div>
+            <p class="m-0 text-[17px] font-normal leading-[1.72] text-gbe-muted">
+              Excellence is not one job title or one kind of result. These are useful evidence areas, not a replacement for the official GBE Awards categories.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 border-l border-t border-gbe-gold/20 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
+            {evidenceAreas.map((item) => (
+              <article class="group min-h-[270px] border-b border-r border-gbe-gold/20 p-8 transition-colors duration-300 hover:bg-gbe-gold/[0.055] max-[560px]:min-h-0 max-[560px]:p-6">
+                <p class="mb-10 mt-0 text-xs font-black tracking-[0.2em] text-gbe-gold-soft max-[560px]:mb-6">{item.number}</p>
+                <h3 class="mb-3 mt-0 text-[23px] font-black leading-[1.15] text-gbe-text">{item.title}</h3>
+                <p class="m-0 text-[15px] font-normal leading-[1.7] text-gbe-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="who-can-apply" class="scroll-mt-[150px] overflow-hidden bg-[#06172a] py-24 text-white max-[560px]:py-16" aria-labelledby="who-title">
+          <div class="container-gbe grid max-w-[1120px] grid-cols-[0.92fr_1.08fr] items-center gap-20 max-[900px]:grid-cols-1 max-[900px]:gap-10">
+            <figure class="relative m-0 order-1 max-[900px]:order-2">
+              <div class="absolute -inset-5 rounded-[34px] border border-[#e7b840]/15" aria-hidden="true"></div>
+              <img
+                class="relative aspect-[3/2] w-full rounded-[24px] object-cover shadow-[0_30px_80px_rgba(0,0,0,0.4)]"
+                src="/assets/women-in-excellence/women-recipient-group.webp"
+                srcset="/assets/women-in-excellence/women-recipient-group.webp 900w, /assets/women-in-excellence/women-recipient-group-large.webp 1600w"
+                sizes="(max-width: 900px) 92vw, 500px"
+                alt="Women pictured with a GBE Awards recipient, certificate and trophy"
+                width="1600"
+                height="1067"
+                loading="lazy"
+                decoding="async"
+                data-preview-image
+                data-preview-src="/assets/women-in-excellence/women-recipient-group-large.webp"
+                data-preview-alt="Women pictured with a GBE Awards recipient, certificate and trophy"
+              />
+            </figure>
+            <div class="order-2 max-[900px]:order-1">
+              <p class="mb-4 mt-0 text-xs font-black uppercase tracking-[0.22em] text-[#e7b840]">Inclusive by career, sector and scale</p>
+              <h2 id="who-title" class="mb-6 mt-0 text-[clamp(36px,4.5vw,58px)] font-black leading-[1.01] text-white">Who should apply?</h2>
+              <p class="mb-7 mt-0 text-[18px] font-normal leading-[1.72] text-white/75">
+                You do not need to be a founder, a chief executive or a public figure. The strongest reason to apply is that you can explain the work you were responsible for and the difference it made.
+              </p>
+              <ul class="m-0 grid list-none grid-cols-2 gap-x-8 gap-y-4 p-0 text-[16px] font-medium text-white/88 max-[560px]:grid-cols-1">
+                {[
+                  "Founders and entrepreneurs",
+                  "Executives and team leaders",
+                  "Professionals and specialists",
+                  "Educators and researchers",
+                  "Creators and media figures",
+                  "Community and social-impact leaders",
+                ].map((item) => (
+                  <li class="flex items-start gap-3 border-t border-white/12 pt-4">
+                    <span class="mt-2 block size-1.5 shrink-0 rounded-full bg-[#e7b840]"></span>{item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="container-gbe max-w-[1120px] py-24 max-[560px]:py-16" aria-labelledby="application-title">
+          <div class="grid grid-cols-[0.82fr_1.18fr] gap-20 max-[900px]:grid-cols-1 max-[900px]:gap-10">
+            <div class="max-w-[440px] max-[900px]:max-w-[720px]">
+              <p class="mb-4 mt-0 text-xs font-black uppercase tracking-[0.22em] text-gbe-gold-soft">Make the work easy to understand</p>
+              <h2 id="application-title" class="gold-text mb-6 mt-0 text-[clamp(34px,4vw,52px)] font-black leading-[1.02]">Build an application around evidence</h2>
+              <p class="m-0 text-[17px] font-normal leading-[1.72] text-gbe-muted">
+                A strong application is not a long list of adjectives. It gives the reviewer enough context to understand the work, your part in it and the result.
+              </p>
+            </div>
+            <ol class="m-0 list-none border-t border-gbe-gold/25 p-0">
+              {applicationSteps.map((step, index) => (
+                <li class="grid grid-cols-[52px_0.7fr_1.3fr] gap-6 border-b border-gbe-gold/20 py-7 max-[640px]:grid-cols-[42px_1fr] max-[640px]:gap-4">
+                  <span class="text-sm font-black text-gbe-gold-soft">{String(index + 1).padStart(2, "0")}</span>
+                  <h3 class="m-0 text-[21px] font-black leading-tight text-gbe-text">{step.title}</h3>
+                  <p class="m-0 text-[15px] font-normal leading-[1.7] text-gbe-muted max-[640px]:col-start-2">{step.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section class="border-y border-gbe-gold/15 bg-gbe-surface-2 py-24 max-[560px]:py-16" aria-labelledby="process-title">
+          <div class="container-gbe max-w-[1120px]">
+            <div class="mb-12 max-w-[760px]">
+              <p class="mb-4 mt-0 text-xs font-black uppercase tracking-[0.22em] text-gbe-gold-soft">A straightforward route</p>
+              <h2 id="process-title" class="gold-text mb-5 mt-0 text-[clamp(34px,4vw,52px)] font-black leading-[1.02]">How applications move forward</h2>
+              <p class="m-0 text-[17px] font-normal leading-[1.72] text-gbe-muted">Use the official application portal, provide accurate information and keep the supporting material relevant to the achievement you want considered.</p>
+            </div>
+            <div class="grid grid-cols-3 gap-5 max-[760px]:grid-cols-1">
+              {processSteps.map((step) => (
+                <article class="relative overflow-hidden rounded-[22px] border border-gbe-gold/25 bg-gbe-card p-8 shadow-[var(--c-card-shadow)]">
+                  <span class="gold-text mb-10 block text-[64px] font-black leading-none opacity-70">{step.number}</span>
+                  <h3 class="mb-3 mt-0 text-[24px] font-black leading-tight text-gbe-text">{step.title}</h3>
+                  <p class="m-0 text-[15px] font-normal leading-[1.7] text-gbe-muted">{step.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="container-gbe max-w-[1120px] py-24 max-[560px]:py-16" aria-labelledby="gallery-title">
+          <div class="mb-10 grid grid-cols-[0.75fr_1fr] items-end gap-16 max-[760px]:grid-cols-1 max-[760px]:gap-5">
+            <div>
+              <p class="mb-3 mt-0 text-xs font-black uppercase tracking-[0.22em] text-gbe-gold-soft">Real event moments</p>
+              <h2 id="gallery-title" class="gold-text m-0 text-[clamp(34px,4vw,52px)] font-black leading-[1.02]">Recognition in the room</h2>
+            </div>
+            <p class="m-0 text-[17px] font-normal leading-[1.72] text-gbe-muted">Photographs from the Global Business Excellence Awards ceremony, featuring recipients, guests and moments of recognition.</p>
+          </div>
+          <div class="grid auto-rows-[260px] grid-cols-12 gap-4 max-[760px]:auto-rows-auto max-[760px]:grid-cols-1">
+            {gallery.map((image) => (
+              <figure class:list={["group relative m-0 overflow-hidden rounded-[20px] border border-gbe-gold/20 bg-gbe-card", image.className]}>
+                <img
+                  class:list={[
+                    "h-full w-full cursor-zoom-in object-cover transition-transform duration-700 group-hover:scale-[1.025] max-[760px]:h-auto",
+                    image.height > image.width
+                      ? "max-[760px]:aspect-[2/3] max-[760px]:object-contain"
+                      : "max-[760px]:aspect-[4/3] max-[760px]:object-cover",
+                  ]}
+                  src={image.src}
+                  srcset={`${image.src} ${image.width}w, ${image.large} ${image.largeWidth}w`}
+                  sizes="(max-width: 760px) 92vw, 55vw"
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  loading="lazy"
+                  decoding="async"
+                  data-preview-image
+                  data-preview-src={image.large}
+                  data-preview-alt={image.alt}
+                />
+                <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.34),transparent_35%)] opacity-70" aria-hidden="true"></div>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section class="border-y border-gbe-gold/15 bg-gbe-surface-2 py-24 max-[560px]:py-16" aria-labelledby="faq-title">
+          <div class="container-gbe grid max-w-[1120px] grid-cols-[0.62fr_1.38fr] gap-20 max-[900px]:grid-cols-1 max-[900px]:gap-8">
+            <div>
+              <p class="mb-4 mt-0 text-xs font-black uppercase tracking-[0.22em] text-gbe-gold-soft">Before you apply</p>
+              <h2 id="faq-title" class="gold-text mb-5 mt-0 text-[clamp(36px,4vw,52px)] font-black leading-[1.02]">Women in Excellence FAQs</h2>
+              <p class="m-0 text-[16px] font-normal leading-[1.72] text-gbe-muted">Clear answers about eligibility, evidence and the application process.</p>
+            </div>
+            <div class="border-t border-gbe-gold/25">
+              {faqs.map((faq) => (
+                <details class="group border-b border-gbe-gold/20">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-[19px] font-black leading-tight text-gbe-text [&::-webkit-details-marker]:hidden">
+                    {faq.question}
+                    <span class="grid size-9 shrink-0 place-items-center rounded-full border border-gbe-gold/35 text-gbe-gold transition-transform duration-300 group-open:rotate-45" aria-hidden="true">
+                      <svg class="size-4" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+                    </span>
+                  </summary>
+                  <p class="mb-7 mt-0 max-w-[760px] pr-12 text-[16px] font-normal leading-[1.74] text-gbe-muted max-[560px]:pr-0">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section class="container-gbe max-w-[1120px] py-24 max-[560px]:py-16">
+          <div class="relative overflow-hidden rounded-[30px] border border-[#e7b840]/35 bg-[#06172a] px-[clamp(26px,6vw,74px)] py-[clamp(42px,7vw,78px)] text-white shadow-[0_30px_90px_rgba(0,0,0,0.34)]">
+            <div class="pointer-events-none absolute -right-24 -top-32 size-[420px] rounded-full border border-[#e7b840]/20" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute right-12 top-10 size-64 rounded-full bg-[#e7b840]/8 blur-3xl" aria-hidden="true"></div>
+            <div class="relative max-w-[820px]">
+              <p class="mb-4 mt-0 text-xs font-black uppercase tracking-[0.22em] text-[#e7b840]">Applications are open</p>
+              <h2 class="mb-5 mt-0 text-[clamp(38px,5vw,66px)] font-black leading-[0.98] tracking-[-0.025em] text-white">Bring your work forward</h2>
+              <p class="mb-8 mt-0 max-w-[700px] text-[18px] font-normal leading-[1.7] text-white/72">Tell the story with context, show your role clearly and support the achievement with evidence that can be reviewed.</p>
+              <div class="flex flex-wrap gap-4">
+                <a class="btn-gold btn-gold-hover" href={applyUrl} target="_blank" rel="noopener noreferrer">Apply now</a>
+                <a class="inline-flex min-h-[54px] items-center justify-center rounded-full border border-white/24 px-7 text-[15px] font-bold uppercase tracking-[0.06em] text-white transition-colors hover:border-[#e7b840] hover:text-[#e7b840]" href={SITE_WHATSAPP_URL} target="_blank" rel="noopener noreferrer">Ask on WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>
+
+<style>
+  .wie-hero {
+    background: #03070f;
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .wie-hero h1,
+    .wie-hero p,
+    .wie-hero a {
+      animation: wie-rise 720ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+    }
+
+    .wie-hero h1 { animation-delay: 80ms; }
+    .wie-hero p:not(:first-child) { animation-delay: 150ms; }
+    .wie-hero a { animation-delay: 220ms; }
+  }
+
+  @keyframes wie-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

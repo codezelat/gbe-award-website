@@ -11,6 +11,7 @@ export const SITE_WHATSAPP_URL = "https://wa.link/4f21fy";
 export const SITE_DEFAULT_OG_IMAGE = "/assets/brand/hero-award-2026.webp";
 export const SITE_LAST_UPDATED = "2026-06-30";
 export const SITE_RECOGNITION_LAST_UPDATED = "2026-07-29";
+export const SITE_WOMEN_IN_EXCELLENCE_LAST_UPDATED = "2026-09-23";
 
 export const SITE_SOCIAL_LINKS = [
   "https://www.facebook.com/gbeaward/",
@@ -24,6 +25,7 @@ export const PUBLIC_SITE_PAGES = [
   { path: "/", changefreq: "weekly", priority: "1.0", lastmod: SITE_RECOGNITION_LAST_UPDATED },
   { path: "/about", changefreq: "monthly", priority: "0.8", lastmod: SITE_RECOGNITION_LAST_UPDATED },
   { path: "/recognition", changefreq: "monthly", priority: "0.8", lastmod: SITE_RECOGNITION_LAST_UPDATED },
+  { path: "/women-in-excellence", changefreq: "weekly", priority: "0.9", lastmod: SITE_WOMEN_IN_EXCELLENCE_LAST_UPDATED },
   { path: "/nominees", changefreq: "weekly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
   { path: "/previous-winners", changefreq: "weekly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
   { path: "/contact", changefreq: "monthly", priority: "0.7", lastmod: SITE_LAST_UPDATED },
@@ -70,6 +72,33 @@ export const PUBLIC_SITE_PAGE_IMAGES: Record<string, Array<{ loc: string; title:
       loc: "/assets/recognition/sitc-campus-logo.webp",
       title: "SITC Campus",
       caption: "Business-faculty research and academic review organisation presented within the GBE Awards recognition framework.",
+    },
+  ],
+  "/women-in-excellence": [
+    {
+      loc: "/assets/women-in-excellence/campaign-hero-large.webp",
+      title: "Women in Excellence Awards 2026",
+      caption: "Women in Excellence Awards 2026 campaign artwork.",
+    },
+    {
+      loc: "/assets/women-in-excellence/campaign-achievement-large.webp",
+      title: "Women in Excellence Awards campaign artwork",
+      caption: "Campaign artwork for the Women in Excellence Awards 2026.",
+    },
+    {
+      loc: "/assets/women-in-excellence/award-presentation-large.webp",
+      title: "Woman receiving a Global Business Excellence Award",
+      caption: "A real award presentation from the Global Business Excellence Awards ceremony.",
+    },
+    {
+      loc: "/assets/women-in-excellence/certificate-recipient-large.webp",
+      title: "GBE Awards certificate and trophy recipient",
+      caption: "A recipient pictured with her GBE Awards certificate and trophy.",
+    },
+    {
+      loc: "/assets/women-in-excellence/women-recipient-group-large.webp",
+      title: "Women at the Global Business Excellence Awards",
+      caption: "Women pictured with a GBE Awards recipient, certificate and trophy.",
     },
   ],
   "/nominees": [

@@ -49,6 +49,7 @@ export const navItems = [
 
 export const footerItems = [
   { label: "Home", href: "/" },
+  { label: "Women in Excellence", href: "/women-in-excellence" },
   { label: "Nominees", href: "/nominees" },
   { label: "Previous Winners", href: "/previous-winners" },
   { label: "About", href: "/about" },

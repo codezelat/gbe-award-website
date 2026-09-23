@@ -12,7 +12,7 @@
     "build": "astro build",
     "test": "vitest run",
     "test:winners": "vitest run tests/winners",
-    "test:e2e": "playwright test tests/winners/routes.spec.ts tests/recognition/routes.spec.ts tests/analytics/routes.spec.ts",
+    "test:e2e": "playwright test tests/winners/routes.spec.ts tests/recognition/routes.spec.ts tests/women-in-excellence/routes.spec.ts tests/analytics/routes.spec.ts",
     "preview": "astro preview",
     "astro": "astro",
     "db:generate": "drizzle-kit generate",
