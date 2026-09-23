@@ -11,6 +11,11 @@ test.describe("Women in Excellence page", () => {
       "href",
       "https://access.gbeaward.com/apply",
     );
+    await expect(page.getByRole("link", { name: "Apply now", exact: true }).last()).toHaveAttribute(
+      "href",
+      "https://wa.link/jd4dlh",
+    );
+    await expect(page.getByRole("link", { name: "Ask on WhatsApp" })).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Where excellence shows up" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Who should apply?" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Build an application around evidence" })).toBeVisible();
