@@ -5,7 +5,7 @@ import SeoHead from "../components/SeoHead.astro";
 import Header from "../components/Header.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { buildBreadcrumbSchema, buildPageSchema } from "../lib/seo";
-import { SITE_ORGANIZER_NAME, SITE_URL, SITE_WHATSAPP_URL } from "../lib/site";
+import { SITE_ORGANIZER_NAME, SITE_URL } from "../lib/site";
 
 export const prerender = true;
 
@@ -161,12 +161,12 @@ const gallery = [
     className: "col-span-5 max-[760px]:col-span-1",
   },
   {
-    src: "/assets/women-in-excellence/women-recipient-group.webp",
-    large: "/assets/women-in-excellence/women-recipient-group-large.webp",
+    src: "/assets/gallery/cultural-welcome.webp",
+    large: "/assets/gallery/cultural-welcome-large.webp",
     width: 900,
     height: 750,
-    largeWidth: 1600,
-    alt: "Women pictured with a GBE Awards recipient, certificate and trophy",
+    largeWidth: 1440,
+    alt: "Women performing a traditional welcome at the GBE Awards ceremony",
     className: "col-span-8 max-[760px]:col-span-1",
   },
   {
@@ -188,12 +188,12 @@ const gallery = [
     className: "col-span-4 row-span-2 max-[760px]:col-span-1 max-[760px]:row-span-1",
   },
   {
-    src: "/assets/women-in-excellence/woman-event-portrait.webp",
-    large: "/assets/women-in-excellence/woman-event-portrait-large.webp",
+    src: "/assets/women-in-excellence/green-sari-guest.webp",
+    large: "/assets/women-in-excellence/green-sari-guest-large.webp",
     width: 700,
     height: 1050,
     largeWidth: 1100,
-    alt: "A woman photographed at the Global Business Excellence Awards ceremony",
+    alt: "A woman in a green and black sari at the Global Business Excellence Awards event",
     className: "col-span-4 row-span-2 max-[760px]:col-span-1 max-[760px]:row-span-1",
   },
   {
@@ -342,7 +342,6 @@ const programmeSchema = {
                 data-preview-src="/assets/women-in-excellence/campaign-achievement-large.webp"
                 data-preview-alt="Women in Excellence campaign artwork showing three women with awards"
               />
-              <figcaption class="absolute bottom-7 left-7 rounded-full border border-white/20 bg-black/65 px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white backdrop-blur-md">Campaign artwork</figcaption>
             </figure>
           </div>
         </section>
@@ -520,8 +519,7 @@ const programmeSchema = {
               <h2 class="mb-5 mt-0 text-[clamp(38px,5vw,66px)] font-black leading-[0.98] tracking-[-0.025em] text-white">Bring your work forward</h2>
               <p class="mb-8 mt-0 max-w-[700px] text-[18px] font-normal leading-[1.7] text-white/72">Tell the story with context, show your role clearly and support the achievement with evidence that can be reviewed.</p>
               <div class="flex flex-wrap gap-4">
-                <a class="btn-gold btn-gold-hover" href={applyUrl} target="_blank" rel="noopener noreferrer">Apply now</a>
-                <a class="inline-flex min-h-[54px] items-center justify-center rounded-full border border-white/24 px-7 text-[15px] font-bold uppercase tracking-[0.06em] text-white transition-colors hover:border-[#e7b840] hover:text-[#e7b840]" href={SITE_WHATSAPP_URL} target="_blank" rel="noopener noreferrer">Ask on WhatsApp</a>
+                <a class="btn-gold btn-gold-hover" href="https://wa.link/jd4dlh" target="_blank" rel="noopener noreferrer">Apply now</a>
               </div>
             </div>
           </div>
