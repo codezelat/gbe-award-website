@@ -2,6 +2,68 @@
 import { assetPaths, navItems } from "../data/home";
 ---
 
+<aside
+  id="registration-notice"
+  class="fixed inset-x-0 top-0 z-[70] border-b border-[#e9ae78]/45 bg-[linear-gradient(90deg,#7e1020,#ac1b2b_50%,#7e1020)] text-white shadow-[0_6px_24px_rgba(42,0,8,0.22)]"
+  aria-label="Registration deadline"
+  hidden
+>
+  <div class="container-gbe flex min-h-[44px] items-center justify-center gap-4 py-2 text-center max-[560px]:min-h-[58px] max-[560px]:gap-2.5">
+    <p class="m-0 text-[14px] font-bold leading-[1.25] tracking-[0.015em] max-[560px]:text-[12px]" aria-live="polite">
+      <span data-registration-message>Registration closes 27 Sep at 11:59 PM, Sri Lanka time</span>
+    </p>
+    <a
+      class="shrink-0 border-b border-white/70 pb-0.5 text-[12px] font-black uppercase tracking-[0.1em] text-white transition-colors hover:border-[#ffe3a2] hover:text-[#ffe3a2] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white max-[560px]:text-[11px]"
+      href="https://access.gbeaward.com/apply"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Register now
+    </a>
+  </div>
+</aside>
+
+<script is:inline>
+  (function () {
+    const notice = document.getElementById("registration-notice");
+    const message = notice?.querySelector("[data-registration-message]");
+    if (!notice || !message) return;
+
+    // The final day ends at midnight after 27 September in Sri Lanka (UTC+05:30).
+    const finalDayStartsAt = Date.parse("2026-09-26T18:30:00Z");
+    const closesAt = Date.parse("2026-09-27T18:30:00Z");
+    let nextUpdate;
+
+    const syncHeight = () => {
+      document.documentElement.style.setProperty(
+        "--registration-banner-height",
+        notice.hidden ? "0px" : `${notice.getBoundingClientRect().height}px`,
+      );
+    };
+
+    const updateNotice = () => {
+      window.clearTimeout(nextUpdate);
+      const now = Date.now();
+      notice.hidden = now >= closesAt;
+
+      if (!notice.hidden) {
+        message.textContent = now >= finalDayStartsAt
+          ? "Final 24 hours to register. Closes tonight at 11:59 PM, Sri Lanka time"
+          : "Registration closes 27 Sep at 11:59 PM, Sri Lanka time";
+        nextUpdate = window.setTimeout(updateNotice, (now < finalDayStartsAt ? finalDayStartsAt : closesAt) - now);
+      }
+
+      syncHeight();
+    };
+
+    updateNotice();
+    if ("ResizeObserver" in window) new ResizeObserver(syncHeight).observe(notice);
+    window.addEventListener("resize", syncHeight);
+    document.addEventListener("visibilitychange", updateNotice);
+    window.addEventListener("pageshow", updateNotice);
+  })();
+</script>
+
 <header
   id="site-header"
   class="site-header fixed left-1/2 top-0 z-50 grid h-[130px] w-[var(--container)] -translate-x-1/2 grid-cols-[1fr_auto_1fr] items-center rounded-b-[20px] max-[1024px]:grid-cols-[auto_1fr_auto] max-[560px]:h-[90px] max-[560px]:w-[calc(100vw-40px)]"
@@ -146,6 +208,30 @@ import { assetPaths, navItems } from "../data/home";
     }
   };
 </script>
+
+<style>
+  #registration-notice[hidden] {
+    display: none !important;
+  }
+
+  :global(body) {
+    padding-top: var(--registration-banner-height, 0px);
+  }
+
+  #site-header {
+    top: var(--registration-banner-height, 0px);
+  }
+
+  #mobile-menu {
+    top: calc(104px + var(--registration-banner-height, 0px));
+  }
+
+  @media (max-width: 560px) {
+    #mobile-menu {
+      top: calc(84px + var(--registration-banner-height, 0px));
+    }
+  }
+</style>
 
 <script>
   const header = document.getElementById("site-header");
