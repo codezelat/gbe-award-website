@@ -1,4 +1,4 @@
-import { and, asc, count, desc, eq, exists, ne, or, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, exists, getTableColumns, ne, or, sql } from "drizzle-orm";
 import { db, schema } from "../db";
 import { deriveDisplayAwardTitle, renderWinnerRichText } from "./content";
 import { pickRealWinnerImage } from "./images";
@@ -27,7 +27,14 @@ function storyPath(slug: string | null | undefined) {
   return `/previous-winners/${slug ?? ""}`;
 }
 
-export function mapWinnerStory(row: typeof schema.pastWinners.$inferSelect): WinnerCardData {
+type WinnerRow = typeof schema.pastWinners.$inferSelect;
+type WinnerCardRow = Omit<WinnerRow, "body"> & { body?: WinnerRow["body"] };
+
+// Directory cards never render article bodies. Avoid transferring and rendering
+// dozens of long-form articles on every directory request.
+const { body: _articleBody, ...winnerCardColumns } = getTableColumns(schema.pastWinners);
+
+export function mapWinnerStory(row: WinnerCardRow): WinnerCardData {
   const base = {
     id: row.id,
     awardTitle: row.awardTitle,
@@ -87,7 +94,7 @@ export async function getWinnerDirectory(input: { page?: number; limit?: number;
   try {
     const [rows, totalRows] = await Promise.all([
       db
-        .select()
+        .select(winnerCardColumns)
         .from(schema.pastWinners)
         .where(where)
         .orderBy(desc(schema.pastWinners.year), asc(schema.pastWinners.sortOrder), desc(schema.pastWinners.updatedAt))

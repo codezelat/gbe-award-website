@@ -110,6 +110,25 @@ describe("winner banner media", () => {
     expect(story.heroImageAlt).toBe("Piyumali Edirisinghe winner banner");
   });
 
+  it("maps directory rows without loading or rendering article bodies", () => {
+    const { body: _body, ...cardRow } = baseWinnerRow;
+    const card = mapWinnerStory(cardRow);
+
+    expect(card.body).toBeUndefined();
+    expect(card.bodyHtml).toBe("");
+    expect(card.storyPath).toBe(`/previous-winners/${baseWinnerRow.slug}`);
+    expect(card.imageUrl).toBe(baseWinnerRow.imageUrl);
+  });
+
+  it("still renders the full body on individual story pages", () => {
+    const story = mapWinnerStory({
+      ...baseWinnerRow,
+      body: { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: "The complete winner story remains available." }] }] },
+    });
+
+    expect(story.bodyHtml).toContain("The complete winner story remains available.");
+  });
+
   it("rejects unsafe outbound URLs and unattributed public quotes", () => {
     expect(() => winnerInputSchema.parse({
       awardTitle: "A valid award title",

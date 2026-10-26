@@ -29,14 +29,15 @@ function mapNomination(row: typeof schema.nominations.$inferSelect): PublicAward
   };
 }
 
-function mapWinner(row: typeof schema.pastWinners.$inferSelect): PublicAwardCard {
+type PublicWinnerRow = Pick<typeof schema.pastWinners.$inferSelect, "awardTitle" | "recipientName" | "imageUrl" | "summary" | "category" | "year">;
+
+function mapWinner(row: PublicWinnerRow): PublicAwardCard {
   return {
     title: row.awardTitle,
     name: row.recipientName,
     image: row.imageUrl || "/assets/brand/award-icon.webp",
     summary: row.summary,
     category: row.category,
-    market: row.market,
     year: row.year,
   };
 }
@@ -65,7 +66,15 @@ export async function getPublicNominees(limit = 60): Promise<PublicAwardCard[]> 
 export async function getPublicWinners(limit = 120): Promise<PublicAwardCard[]> {
   try {
     const rows = await db
-      .select()
+      // Homepage cards do not need the full editorial body or private review data.
+      .select({
+        awardTitle: schema.pastWinners.awardTitle,
+        recipientName: schema.pastWinners.recipientName,
+        imageUrl: schema.pastWinners.imageUrl,
+        summary: schema.pastWinners.summary,
+        category: schema.pastWinners.category,
+        year: schema.pastWinners.year,
+      })
       .from(schema.pastWinners)
       .where(eq(schema.pastWinners.status, "published"))
       .orderBy(desc(schema.pastWinners.year), asc(schema.pastWinners.sortOrder), desc(schema.pastWinners.updatedAt))
