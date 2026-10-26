@@ -10,7 +10,8 @@ export default defineConfig({
     baseURL: testUrl,
   },
   webServer: {
-    command: `npm run dev -- --host 127.0.0.1 --port ${testPort}`,
+    // Keep Astro 7's agent-aware dev server attached so Playwright owns cleanup.
+    command: `npm run dev -- --ignore-lock --host 127.0.0.1 --port ${testPort}`,
     url: testUrl,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
