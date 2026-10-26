@@ -9,6 +9,8 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://gbeaward.com',
   output: 'server',
+  // Preserve Astro 6's spacing between inline elements after the security upgrade.
+  compressHTML: true,
   adapter: vercel(),
   integrations: [react()],
   redirects: {

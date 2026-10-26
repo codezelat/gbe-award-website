@@ -6,7 +6,7 @@ GBE Awards website for the Global Business Excellence Awards 2026, organised by 
 
 ## Tech Stack
 
-- **Astro 6** (`output: "server"`) with **React 19** integration for interactive components
+- **Astro 7** (`output: "server"`) with **React 19** integration for interactive components
 - **Tailwind CSS v4** via `@tailwindcss/vite` (no `tailwind.config.js`; theme is in `global.css` via `@theme`)
 - **Swiper 12** for carousels (imported as React component, CSS imported in TSX)
 - **Fonts**: Tajawal (body/UI) and Tangerine (script headings), self-hosted via `@fontsource`
@@ -14,7 +14,7 @@ GBE Awards website for the Global Business Excellence Awards 2026, organised by 
 - **Better Auth** for protected admin login
 - **Cloudflare R2** for uploaded/media CDN assets
 - **TypeScript** strict mode (`astro/tsconfigs/strict`)
-- Node >= 22.12.0
+- Node >= 22.23.4
 
 ## Commands
 

@@ -75,7 +75,7 @@ Admin UI rules:
 
 | Area | Technology |
 | --- | --- |
-| Framework | Astro 6 with `output: "server"` |
+| Framework | Astro 7 with `output: "server"` |
 | Islands | React 19 |
 | Styling | Tailwind CSS v4 via `@tailwindcss/vite` |
 | UI Motion | Motion |
@@ -87,7 +87,7 @@ Admin UI rules:
 | Rich Text | TipTap |
 | Validation | Zod |
 | Deployment Adapter | `@astrojs/vercel` |
-| Runtime | Node.js `>=22.12.0` |
+| Runtime | Node.js `>=22.23.4` |
 
 ## 📁 Project Structure
 
@@ -315,7 +315,7 @@ The Astro config is set for:
 
 - Production site: `https://gbeaward.com`
 - Server output through `@astrojs/vercel`
-- Node.js `>=22.12.0`
+- Node.js `>=22.23.4`
 
 Before production deployment:
 
