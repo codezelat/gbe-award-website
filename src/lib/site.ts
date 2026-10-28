@@ -30,6 +30,8 @@ export const PUBLIC_SITE_PAGES = [
   { path: "/previous-winners", changefreq: "weekly", priority: "0.8", lastmod: SITE_LAST_UPDATED },
   { path: "/contact", changefreq: "monthly", priority: "0.7", lastmod: SITE_LAST_UPDATED },
   { path: "/privacy-policy", changefreq: "yearly", priority: "0.3", lastmod: SITE_LAST_UPDATED },
+  { path: "/terms-and-conditions", changefreq: "yearly", priority: "0.3", lastmod: "2026-10-28" },
+  { path: "/refund-policy", changefreq: "yearly", priority: "0.3", lastmod: "2026-10-28" },
 ] as const;
 
 export const PUBLIC_SITE_PAGE_IMAGES: Record<string, Array<{ loc: string; title: string; caption?: string }>> = {

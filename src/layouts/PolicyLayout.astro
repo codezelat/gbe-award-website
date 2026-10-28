@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+import ThemeInit from "../components/ThemeInit.astro";
+import SeoHead from "../components/SeoHead.astro";
+import Header from "../components/Header.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { assetPaths } from "../data/home";
+import { buildBreadcrumbSchema, buildPageSchema } from "../lib/seo";
+
+interface Props {
+  heading: string;
+  description: string;
+  path: string;
+}
+
+const { heading, description, path } = Astro.props;
+const title = `${heading} | Global Business Excellence Awards`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <ThemeInit />
+    <SeoHead
+      title={title}
+      description={description}
+      path={path}
+      image={assetPaths.trophy}
+      schema={[
+        buildPageSchema({ path, title, description, image: assetPaths.trophy }),
+        buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: heading, path }]),
+      ]}
+    />
+  </head>
+  <body>
+    <div class="min-h-screen bg-[var(--c-page-glow)]">
+      <Header />
+      <main class="bg-[radial-gradient(circle_at_50%_0%,rgba(224,176,60,0.08),transparent_420px),var(--c-bg)] pb-24 pt-[210px] max-[560px]:pb-14 max-[560px]:pt-[130px]">
+        <article class="container-gbe max-w-[920px] rounded-[18px] border border-[rgba(255,176,1,0.42)] bg-gbe-card p-12 text-gbe-text shadow-[var(--c-card-shadow)] max-[560px]:rounded-[14px] max-[560px]:px-[22px] max-[560px]:py-7">
+          <p class="mb-[18px] mt-0 text-sm font-medium text-gbe-gold-soft">Last updated: <time datetime="2026-10-28">28 October 2026</time></p>
+          <h1 class="gold-text mb-7 mt-0 text-[clamp(38px,5vw,64px)] font-black leading-none max-[560px]:text-[36px]">{heading}</h1>
+          <div class="space-y-8 text-[17px] font-normal leading-[1.75] text-gbe-text/90 [&_a]:text-gbe-gold-soft [&_a]:underline [&_a]:underline-offset-4 [&_h2]:mb-3 [&_h2]:mt-0 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-[1.2] [&_li]:mb-2 [&_p]:mb-4 [&_p]:mt-0 [&_ul]:my-4 [&_ul]:list-disc [&_ul]:pl-6 max-[560px]:text-base max-[560px]:[&_h2]:text-[21px]">
+            <slot />
+          </div>
+        </article>
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>
